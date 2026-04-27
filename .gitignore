@@ -40,3 +40,6 @@ Thumbs.db
 # Plugin secrets (API keys, license keys in plaintext)
 .obsidian/plugins/share-note/data.json
 .obsidian/plugins/copilot/data.json
+
+# Node modules in plugins (build artifacts, never commit)
+.obsidian/plugins/*/node_modules/
