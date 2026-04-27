@@ -1,7 +1,0 @@
-{
-  "source": "/mnt/d/0LOCAL/gitrepos/cybertemplate/scripts/audit_results/bloomberg_shortlist_extract_RUN009.json",
-  "dest": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Agent-Outbox/evidence/bloomberg_shortlist_extract_RUN009.json",
-  "content_type": "evidence",
-  "synced_at": "2026-03-22T23:52:42.585281+00:00",
-  "sha256": "04f6563cc233e4d6b3ef87c68ab79972f92ef56f35ac26e921506763736f30a6"
-}

@@ -1,0 +1,503 @@
+{
+  "type": "handoff-checkpoint",
+  "generated_at": "2026-04-03T00:56:44Z",
+  "generated_by": "emergency_handoff.py",
+  "queue": {
+    "high_queued": 28,
+    "med_queued": 29,
+    "running": 4,
+    "done": 0,
+    "top3": [
+      {
+        "id": "task-20260326-wire-008",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260328-020716-648b",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260328-033750-3164",
+        "goal": "?"
+      }
+    ],
+    "running_tasks": [
+      {
+        "id": "task-20260323-140250-2cea",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260323-140257-b985",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260325-235934-d743",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260323-140411-5a6f",
+        "goal": "?"
+      }
+    ]
+  },
+  "hypothesis_confidence": {},
+  "open_threads_count": 0,
+  "project_memories_collected": 113,
+  "scratch_high_flags": 162,
+  "scratch_mem_blocks": 447,
+  "snapshot_path": "/mnt/c/Users/amand/.claude/hooks/state/handoff-snapshot.json",
+  "project_memory_sources": [
+    {
+      "path": "/mnt/c/Users/amand:/claude",
+      "lines": 4
+    },
+    {
+      "path": "/mnt/c/Users/amand:/claude",
+      "lines": 9
+    },
+    {
+      "path": "/mnt/c/Users/amand:/claude",
+      "lines": 64
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 88
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 192
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 179
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 30
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 9
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 18
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 18
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 62
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 24
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 47
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 9
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 22
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 21
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 17
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 15
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 17
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 19
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 18
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 22
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 16
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 15
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 14
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 21
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 23
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 21
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 25
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 19
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 22
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 20
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 16
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 16
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 210
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 244
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 56
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 34
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 22
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 152
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 374
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 50
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 41
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 297
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 165
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 36
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 43
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 28
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 40
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 57
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 61
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 24
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 227
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 23
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 326
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 55
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 33
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 26
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 20
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 125
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 37
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 110
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 8
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 128
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 116
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 180
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 32
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 17
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 26
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 30
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 23
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 22
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 27
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 11
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 20
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 9
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 15
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 21
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 17
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 16
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 41
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 15
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 126
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 33
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 21
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 75
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 33
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 91
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 41
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/hustle",
+      "lines": 6
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/hustle",
+      "lines": 19
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/hustle",
+      "lines": 40
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/hustle",
+      "lines": 35
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/hustle",
+      "lines": 12
+    },
+    {
+      "path": "/mnt/d/0local",
+      "lines": 4
+    },
+    {
+      "path": "/mnt/d/0local",
+      "lines": 38
+    },
+    {
+      "path": "/mnt/d/0local",
+      "lines": 9
+    },
+    {
+      "path": "/mnt/d/0local/gitrepos/00/claude/faerie/cli/git",
+      "lines": 16
+    },
+    {
+      "path": "D:/0local/gitrepos/cybertemplate",
+      "lines": 22
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 7
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 16
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 53
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 36
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 34
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 32
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 34
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 19
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/mission/defend/democracy",
+      "lines": 27
+    }
+  ]
+}

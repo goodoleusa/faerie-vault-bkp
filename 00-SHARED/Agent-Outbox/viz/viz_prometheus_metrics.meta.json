@@ -1,7 +1,0 @@
-{
-  "source": "scripts/audit_results/viz_prometheus_metrics.json",
-  "dest": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Agent-Outbox/viz/viz_prometheus_metrics.json",
-  "content_type": "viz",
-  "synced_at": "2026-03-23T00:23:36.070499+00:00",
-  "sha256": "a4aeee6a110222acb2b7f94cb8b8b7e7eff80ace825fce97e86d4af19813984d"
-}

@@ -1,0 +1,89 @@
+{
+  "versions": [
+    {
+      "version": 1,
+      "folder": "v001",
+      "created": "2026-03-28T01:34:53.731443+00:00",
+      "label": "initial-pull",
+      "stack_sha256": "481287c56d0187d9e1611a293ed77cd63b4054261bb63fbdc6e6172a5f1ed3b6",
+      "prev_stack_sha256": null,
+      "files": [
+        {
+          "level": "global",
+          "slug": "HONEY-global.md",
+          "status": "ok",
+          "lines": 162,
+          "sha256": "45abbe172312440c00806b6458ab7dd34ded410d928a303947ce516511c53455",
+          "source": "/mnt/c/Users/amand/.claude/memory/HONEY.md"
+        },
+        {
+          "level": "faerie2",
+          "slug": "HONEY-faerie2.md",
+          "status": "ok",
+          "lines": 97,
+          "sha256": "4d64fd0f03de5b99bb9d244a994ffb121a32a3bc0f70b83e41e753a16cd406e7",
+          "source": "/mnt/d/0LOCAL/gitrepos/faerie2/.claude/memory/HONEY.md"
+        },
+        {
+          "level": "DAE",
+          "slug": "HONEY-DAE.md",
+          "status": "ok",
+          "lines": 152,
+          "sha256": "131da18ff97bfaa93c018d7c1d0360640dbe077567eab5194b2f0dc5e901f319",
+          "source": "/mnt/d/0LOCAL/gitrepos/data-analysis-engine/.claude/memory/HONEY.md"
+        },
+        {
+          "level": "cybertemplate",
+          "slug": "HONEY-cybertemplate.md",
+          "status": "ok",
+          "lines": 144,
+          "sha256": "de9f2e5e7f877baab6fdb8f6488d7cc50ed002f1bc94f77d90c5d6395a8d4180",
+          "source": "/mnt/d/0LOCAL/gitrepos/cybertemplate/.claude/memory/HONEY.md"
+        }
+      ]
+    },
+    {
+      "version": 2,
+      "folder": "v002",
+      "created": "2026-03-28T01:54:20.279095+00:00",
+      "label": "with-DAE-mirror",
+      "stack_sha256": "481287c56d0187d9e1611a293ed77cd63b4054261bb63fbdc6e6172a5f1ed3b6",
+      "prev_stack_sha256": "481287c56d0187d9e1611a293ed77cd63b4054261bb63fbdc6e6172a5f1ed3b6",
+      "files": [
+        {
+          "level": "global",
+          "slug": "HONEY-global.md",
+          "status": "ok",
+          "lines": 162,
+          "sha256": "45abbe172312440c00806b6458ab7dd34ded410d928a303947ce516511c53455",
+          "source": "/mnt/c/Users/amand/.claude/memory/HONEY.md"
+        },
+        {
+          "level": "faerie2",
+          "slug": "HONEY-faerie2.md",
+          "status": "ok",
+          "lines": 97,
+          "sha256": "4d64fd0f03de5b99bb9d244a994ffb121a32a3bc0f70b83e41e753a16cd406e7",
+          "source": "/mnt/d/0LOCAL/gitrepos/faerie2/.claude/memory/HONEY.md"
+        },
+        {
+          "level": "DAE",
+          "slug": "HONEY-DAE.md",
+          "status": "ok",
+          "lines": 152,
+          "sha256": "131da18ff97bfaa93c018d7c1d0360640dbe077567eab5194b2f0dc5e901f319",
+          "source": "/mnt/d/0LOCAL/gitrepos/data-analysis-engine/.claude/memory/HONEY.md"
+        },
+        {
+          "level": "cybertemplate",
+          "slug": "HONEY-cybertemplate.md",
+          "status": "ok",
+          "lines": 144,
+          "sha256": "de9f2e5e7f877baab6fdb8f6488d7cc50ed002f1bc94f77d90c5d6395a8d4180",
+          "source": "/mnt/d/0LOCAL/gitrepos/cybertemplate/.claude/memory/HONEY.md"
+        }
+      ]
+    }
+  ],
+  "active_dev": 2
+}

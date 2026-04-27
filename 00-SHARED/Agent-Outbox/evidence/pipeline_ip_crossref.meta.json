@@ -1,9 +1,0 @@
-{
-  "source": "scripts/audit_results/pipeline_ip_crossref.json",
-  "dest": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Agent-Outbox/evidence/pipeline_ip_crossref.json",
-  "content_type": "evidence",
-  "synced_at": "2026-03-29T18:51:54.161036+00:00",
-  "sha256": "c386d7395f565fa42b58fe4b86d7117388a247fa53ead1456b5e905481e2c3e2",
-  "last_enrichment": "task-20260323-140407-e027",
-  "enriched_date": "2026-03-29"
-}

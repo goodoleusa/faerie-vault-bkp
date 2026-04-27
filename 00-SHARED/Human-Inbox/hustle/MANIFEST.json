@@ -1,0 +1,140 @@
+{
+  "_run": {
+    "generated_by": "fullstack-agent",
+    "session_id": "hustle",
+    "created": "2026-04-01T00:00:00Z",
+    "project": "localweb",
+    "status": "final"
+  },
+  "folder": "00-SHARED/Human-Inbox/hustle/",
+  "purpose": "Self-contained sales and implementation narrative package for LocalWeb Studio pharmacy franchise vertical (RxReady). Ready to share with pharmacy network decision-makers.",
+  "total_files": 13,
+  "total_bytes": 91576,
+  "documents": [
+    {
+      "path": "README.md",
+      "title": "Entry point — what is this package and how to use it",
+      "type": "narrative-document",
+      "bytes": 3926,
+      "status": "final",
+      "audience": "anyone"
+    },
+    {
+      "path": "01-EXECUTIVE-SUMMARY.md",
+      "title": "1-page overview for decision makers",
+      "type": "narrative-document",
+      "bytes": 4236,
+      "status": "final",
+      "audience": "franchise owner, regional director, VP Operations"
+    },
+    {
+      "path": "02-HOW-IT-WORKS.md",
+      "title": "How LocalWeb operates — non-technical operations overview",
+      "type": "guide",
+      "bytes": 5034,
+      "status": "final",
+      "audience": "operations manager, IT director"
+    },
+    {
+      "path": "03-RXREADY-DEEP-DIVE.md",
+      "title": "RxReady system deep dive — features, data architecture, proof point",
+      "type": "narrative-document",
+      "bytes": 6560,
+      "status": "final",
+      "audience": "operations manager, compliance officer, franchise owner"
+    },
+    {
+      "path": "04-IMPLEMENTATION-ROADMAP.md",
+      "title": "4-week implementation timeline with split responsibilities",
+      "type": "guide",
+      "bytes": 6095,
+      "status": "final",
+      "audience": "project manager, IT director, compliance officer"
+    },
+    {
+      "path": "05-PRICING-PLAYBOOK.md",
+      "title": "Pricing tiers, ROI model, contract terms, negotiation notes",
+      "type": "playbook",
+      "bytes": 6534,
+      "status": "final",
+      "audience": "internal (LocalWeb) + shareable sections to prospects"
+    },
+    {
+      "path": "06-COMPLIANCE-BOUNDARIES.md",
+      "title": "HIPAA compliance story — what LocalWeb handles vs pharmacy handles",
+      "type": "guide",
+      "bytes": 8897,
+      "status": "final",
+      "audience": "compliance officer, pharmacy director, legal reviewer"
+    },
+    {
+      "path": "07-SALES-PITCH-SCRIPT.md",
+      "title": "15-minute structured sales script with full objection handling",
+      "type": "script",
+      "bytes": 9516,
+      "status": "final",
+      "audience": "LocalWeb operator (internal sales use)"
+    },
+    {
+      "path": "08-DEMO-SITE-CHECKLIST.md",
+      "title": "How to build and run the RxReady demo site for a prospect",
+      "type": "checklist",
+      "bytes": 8096,
+      "status": "final",
+      "audience": "LocalWeb operator (pre-pitch preparation)"
+    },
+    {
+      "path": "templates/CLIENT-INTAKE-FORM.md",
+      "title": "Structured intake form to collect everything needed from a new client",
+      "type": "checklist",
+      "bytes": 7259,
+      "status": "final",
+      "audience": "new pharmacy network clients"
+    },
+    {
+      "path": "templates/SERVICE-AGREEMENT-TEMPLATE.md",
+      "title": "Service agreement template covering scope, fees, IP, data, and termination",
+      "type": "guide",
+      "bytes": 10193,
+      "status": "final",
+      "audience": "contract signing — both parties",
+      "note": "Template only — have attorney review before use as binding contract"
+    },
+    {
+      "path": "templates/IMPLEMENTATION-CHECKLIST.md",
+      "title": "Full 4-week implementation checklist with owner per task",
+      "type": "checklist",
+      "bytes": 7686,
+      "status": "final",
+      "audience": "LocalWeb operator + client project manager"
+    },
+    {
+      "path": "templates/MONTHLY-RETAINER-SCOPE.md",
+      "title": "What is and is not included in the monthly retainer — no ambiguity",
+      "type": "guide",
+      "bytes": 7544,
+      "status": "final",
+      "audience": "active retainer clients + internal reference"
+    }
+  ],
+  "highlights": [
+    "03-RXREADY-DEEP-DIVE.md: compliance boundaries are architectural (Worker is stateless, no PHI ever stored) — not just policy assertions. Strongest compliance argument in the package.",
+    "06-COMPLIANCE-BOUNDARIES.md: full FAQ for compliance officers including BAA non-requirement rationale, Rx lookup privacy analysis, and incident response split. Ready to share with pharmacy legal teams.",
+    "07-SALES-PITCH-SCRIPT.md: complete 15-minute script with word-for-word objection handling for HIPAA, downtime, setup timeline, and existing website concerns. Includes close language.",
+    "08-DEMO-SITE-CHECKLIST.md: step-by-step demo setup with hardcoded test Rx numbers, demo queue data, Formspree live submission walkthrough, and fallback scripts for when the demo breaks.",
+    "templates/SERVICE-AGREEMENT-TEMPLATE.md: full contract template covering scope, IP ownership, data privacy representations, BAA non-requirement, limitation of liability, and handoff terms."
+  ],
+  "recommended_reading_order": [
+    "README.md",
+    "01-EXECUTIVE-SUMMARY.md",
+    "03-RXREADY-DEEP-DIVE.md",
+    "05-PRICING-PLAYBOOK.md",
+    "06-COMPLIANCE-BOUNDARIES.md",
+    "07-SALES-PITCH-SCRIPT.md"
+  ],
+  "first_client_call_kit": [
+    "07-SALES-PITCH-SCRIPT.md",
+    "08-DEMO-SITE-CHECKLIST.md",
+    "01-EXECUTIVE-SUMMARY.md (to email after call)"
+  ]
+}

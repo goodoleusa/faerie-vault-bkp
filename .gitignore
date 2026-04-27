@@ -1,23 +1,38 @@
-# Obsidian runtime & cache
+# Obsidian cache & temp files
 .obsidian/cache/
-.obsidian/plugins/node_modules/
-.obsidian/workspace*
+.obsidian/workspace
+.obsidian/*.json
+!.obsidian/app.json
+!.obsidian/appearance.json
+!.obsidian/core-plugins.json
+!.obsidian/community-plugins.json
+!.obsidian/hotkeys.json
+!.obsidian/command-palette.json
+!.obsidian/agent-config.json
+
+# Plugin node_modules (reinstalled on vault open)
+.obsidian/plugins/*/node_modules/
+.obsidian/plugins/**/package-lock.json
+.obsidian/plugins/hive-pdf/
+
+# Large cache files
+.obsidian/copilot-index-*.json
+
+# Generated files
+.obsidian/graph.json
+.obsidian/daily-notes.json
+.obsidian/switcher.json
+.obsidian/templates.json
+.obsidian/backlink.json
+
+# Theme files (users choose their own)
+.obsidian/themes/*/
+
+# System files
 .DS_Store
 Thumbs.db
+*.tmp
 
-# Editor
-.vscode/
-*.swp
-*.swo
-
-# Node & Python
-node_modules/
-__pycache__/
-*.pyc
-
-# OS
-.DS_Store
-.Thumbs.db
-
-# Keep vault structure & docs
-# (no patterns to exclude; vault/ directory is tracked)
+# Git files
+.git/
+.gitignore

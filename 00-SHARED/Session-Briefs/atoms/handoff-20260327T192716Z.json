@@ -1,0 +1,253 @@
+{
+  "type": "handoff-checkpoint",
+  "generated_at": "2026-03-27T19:27:16Z",
+  "generated_by": "emergency_handoff.py",
+  "queue": {
+    "high_queued": 7,
+    "med_queued": 9,
+    "running": 2,
+    "done": 49,
+    "top3": [
+      {
+        "id": "task-20260325-235934-d743",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260326-wire-001",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260326-wire-002",
+        "goal": "?"
+      }
+    ],
+    "running_tasks": [
+      {
+        "id": "task-20260323-140407-e027",
+        "goal": "?"
+      },
+      {
+        "id": "task-20260323-140411-5a6f",
+        "goal": "?"
+      }
+    ]
+  },
+  "hypothesis_confidence": {
+    "H1": 0.95,
+    "H2": 0.78,
+    "H3": 0.78,
+    "H4": 0.55,
+    "H5": 0.0
+  },
+  "open_threads_count": 0,
+  "project_memories_collected": 51,
+  "scratch_high_flags": 137,
+  "scratch_mem_blocks": 359,
+  "snapshot_path": "/mnt/c/Users/amand/.claude/hooks/state/handoff-snapshot.json",
+  "project_memory_sources": [
+    {
+      "path": "/mnt/c/Users/amand:/claude",
+      "lines": 4
+    },
+    {
+      "path": "/mnt/c/Users/amand:/claude",
+      "lines": 7
+    },
+    {
+      "path": "/mnt/c/Users/amand:/claude",
+      "lines": 62
+    },
+    {
+      "path": "/mnt/d/0LOCAL/0/ObsidianTransferring/CyberOps/UNIFIED",
+      "lines": 56
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 33
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 110
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 3
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 124
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 114
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 178
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 30
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 15
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 24
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 28
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 21
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 20
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 25
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 11
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 9
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 18
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 7
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 19
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 15
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 11
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 14
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 39
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 13
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 11
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 124
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 29
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 19
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 73
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 31
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 89
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 39
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 11
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/cybertemplate",
+      "lines": 11
+    },
+    {
+      "path": "/mnt/d/0local",
+      "lines": 38
+    },
+    {
+      "path": "/mnt/d/0local",
+      "lines": 4
+    },
+    {
+      "path": "/mnt/d/0local/gitrepos/00/claude/faerie/cli/git",
+      "lines": 16
+    },
+    {
+      "path": "D:/0local/gitrepos/cybertemplate",
+      "lines": 22
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 7
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 14
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 51
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 34
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 32
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 30
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 32
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/homestretch",
+      "lines": 17
+    },
+    {
+      "path": "d:/0LOCAL/gitrepos/mission/defend/democracy",
+      "lines": 23
+    }
+  ]
+}

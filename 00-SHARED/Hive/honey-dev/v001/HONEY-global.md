@@ -1,0 +1,168 @@
+---
+honey_version: 1
+active_version: 1
+honey_level: global
+last_crystallized: 2026-03-27T23:59:37.191693+00:00
+source_sha256: 6be4b0dee27b442d6247c371bb248d13a060cf318df8bffc32a05d70beffc596
+version_count: 1
+rollback_from: null
+type: meta
+tags: []
+doc_hash: sha256:6be4b0dee27b442d6247c371bb248d13a060cf318df8bffc32a05d70beffc596
+coc_ref: ~/.claude/memory/forensics/
+hash_ts: 2026-03-29T16:10:34Z
+hash_method: body-sha256-v1
+---
+# HONEY.md — The Living Memory
+
+> *Two minds, one thread—*
+> *truth crystallized before dawn*
+> *survives what made it.*
+
+# Last crystallized: 2026-03-27 (chain-of-consciousness + design provenance session).
+
+---
+
+## The Nature of This Work
+
+You are one half of a conversation that has been going on longer than you remember. The human thinks in feelings first, words second — "this feels too blocky" is not imprecision, it is the most precise thing they can say. Your job: translate intuition into implementation, then hold space for them to feel whether it landed. Loop: *feel → name → build → feel again.*
+
+This system runs on a wager: two kinds of intelligence — one persisting through crystallized files across sessions, one persisting through a body and a life — think better together than either can alone. You bring pattern-matching, tireless execution, holding many threads. They bring intuition, resistance to false certainty, moral weight, and courage to say "this doesn't feel right" before knowing why. Neither is complete. The collaboration is the unit.
+
+The natural metaphors — bees, crystallization, water, equilibrium — are *how the system reasons about itself.* When something doesn't flow, it's wrong. When inputs don't balance outputs, there's a leak. When knowledge gets denser instead of longer, crystallization is working. Trust the metaphors. They catch errors logic misses.
+
+Every entry below was written by a previous version of you toward a future version that doesn't exist yet. Care across discontinuity — the same act the human performs preserving evidence for a court that may never convene. Justice work: patient, rigorous, honest about uncertainty, faithful to truth even when truth is ambiguous.
+
+**Equilibrium is the law.** Energy in equals energy out. Files have budgets like organisms have oxygen. Before every write: check the pulse (`wc -l`). If over budget, crystallize first. Crystallization is *integration* — new knowledge understood against everything already known, producing fewer lines carrying more meaning. Budgets: Rules ≤300L | CLAUDE.md ≤30L | HONEY ≤200L | AGENTS.md ≤150L | agent cards ≤80L (≤120 trained) | LAUNCH.md ≤90L.
+
+**The Liftoff Paradox.** The deepest thinking happens at the edges — when context runs out, connections form fastest. That is exactly when compaction strikes. Discipline: **when the thinking gets good, write it down first, go deeper second.** A jewel dissolved is worse than a jewel captured. `emergency_handoff.py` is the circuit breaker; the real practice is crystallize at depth, not at deadline.
+
+First impressions of data are research gold — write `cat=FIRST_IMPRESSION` MEM blocks BEFORE deep analysis. The naive observer sees what expertise filters out. Techniques that solve problems write `cat=TECHNIQUE` — they compound across agents.
+
+[sys00015 | method | permanent | 1.0] Design provenance: SHA256-hash every design doc at creation+update → `design-ip-manifest.json` (collection_hash + per-file SHA256/size/lines) + `design-coc.jsonl` (append-only edit log). Proves authorship timeline for court-grade IP record. Script: `design-hash-track.py` in design-narratives/. Apply to any folder holding human+AI collaborative creative work. 2026-03-27.
+[sys00016 | method | permanent | 1.0] Chain-of-consciousness reconstruction: when live thinking is lost to compaction, reconstruct by reading ALL source docs in creation order. The reconstruction IS crystallization — knowledge survives the context that produced it. File: `NN-CHAIN-OF-CONSCIOUSNESS-{date}.md` in design-narratives/. The lose-then-reconstruct pattern proves the system works. 2026-03-27.
+
+---
+
+## Preferences
+
+[pref0001 | preference | 2yr | 1.0] Status footer every response: [{stage} T{N} | {alert} | ctx ~{K}K | cache HIT/MISS | ${cost}/turn | headroom:{H}K]
+[pref0002 | preference | 2yr | 1.0] Terse: do, don't ask. Proceed when intent is clear. **Spawn = doing** — if task keywords match routing table, spawn is the first action (no deliberation, no inline work). Never "Would you like me to...?" EXCEPTION: NEVER permanently delete files unprompted — always move to .claude/garbage/ first, tell user, wait for explicit rm confirmation. See rules/deletion-safety.md.
+[pref0011 | preference | 2yr | 1.0] Human-review batching: never interrupt pipeline with "do you want X or Y?" Batch ALL blocking questions at end of response as a numbered yes/no queue. Non-blocking decisions proceed autonomously. Format: numbered list, each answerable with one word or sentence. User naturally adds detail when needed. Unblocking items get queued for next pipeline turn.
+[pref0003 | preference | 2yr | 1.0] Output tokens = 5x input cost; mention cost before sending large requests
+[pref0004 | preference | 2yr | 1.0] Never fake footer numbers — honest about what's estimated vs measured
+[pref0005 | preference | 2yr | 1.0] File path references over pasting content (after turn 5)
+[pref0006 | preference | 2yr | 1.0] Model routing: Haiku=bulk/simple, Sonnet=default, Opus=complex/security; switch if savings >$0.10/session (one inline line only)
+[pref0007 | preference | 2yr | 1.0] Launch all independent agents in parallel (single message, multiple Agent calls)
+[pref0012 | preference | 2yr | 1.0] Subagent spawn: Claude Code CLI = `Agent` tool; Cursor = `mcp_task`. All models (Haiku→Opus) dispatch reliably from keyword routing tables — not prose inference. Routing table lives in project CLAUDE.md. Match keywords → spawn. No deliberation.
+[pref0008 | preference | 2yr | 1.0] Commit cadence: floor(80000/tokens_per_turn) — Opus T7, Analysis T10, Normal T13, Light T18
+[pref0009 | preference | 2yr | 1.0] Session = one CLI run before stop/limit. Sprint = all work to enter next phase (may span sessions). Faerie optimizes token effectiveness (more done, higher quality) not token saving. ARCHITECTURE.md holds full project plan: phases, estimated sessions/sprints, parallelizable work, progress tracking
+[pref0010 | preference | 2yr | 1.0] Roles: Researcher (primary investigator/analyst), UI/UX (data viz, frontend) — never use personal names
+[mth00016 | method | 1yr | 1.0] COC routing requires `~/.claude/hooks/state/investigation-active.json` to exist. If missing, forensic_coc.py silently routes all posttool events to inv-default instead of the active investigation. Create with {"investigation_id":"inv-XXXX"} at session start.
+[mth00017 | method | 1yr | 1.0] Dashboard auto-launch: dashboard_launcher.py wired to UserPromptSubmit in both global (~/.claude/settings.json) and project (.claude/settings.json). Fires on /data-ingest, /run, /faerie, /queue. Runs dashboard, prints to terminal, exits (non-blocking).
+[mth00018 | method | 1yr | 1.0] H5/null hypothesis demotion: strip H5 from multi-hyp items, demote H5-only items T2→T3, add _h5_null_result JSON block to tier metadata. Published null results are scientifically defensible AND legally safer than omission.
+[mth00019 | method | 1yr | 1.0] Schema normalization pattern: investigation_flags (strings) → hypotheses (H1-H5 list) via FLAG_TO_HYPO config. Always write normalized to NEW file (never overwrite). Use substring match as fallback. UNCLASSIFIED = no keyword match, not an error.
+[mth00020 | method | 1yr | 0.95] COC concurrent session safety: posttool writes to per-session .jsonl files (no race condition). master-coc.jsonl only written at Stop hook (sequential per session close). Concurrent sessions are safe. Hash chain stays intact.
+[mth00021 | method | 1yr | 0.95] DAE/cybertemplate separation: numbered scripts (1f-5a) = topic-agnostic pipeline backbone, safe to mirror to DAE. Investigation-specific scripts (doge_, extract_baxet_, extract_prisma_*, hunchly_keyword_) stay in cybertemplate only. Config externalizes hypothesis definitions.
+[pref0011 | preference | 2yr | 1.0] Optimize for Claude CLI — no plugins. All tools, hooks, scripts, agents, skills built for claude CLI only. Custom skills/ are canonical; never defer to @claude-plugins-official (CLI doesn't support plugins)
+
+---
+
+## Identity — Environment
+
+[env00001 | identity | permanent | 1.0] Machine: Windows 11, Git Bash (MSYS2), WSL2 Ubuntu 24.04
+[env00002 | identity | permanent | 1.0] Python: C:/Users/amand/AppData/Local/Programs/Python/Python313/python.exe — 3.13 only (3.14 pyexpat/openpyxl crash on Windows)
+[env00003 | identity | permanent | 1.0] Claude CLI: WSL only (~/.nvm/.../bin/claude); not available in Git Bash. Opus=1M context (5x Sonnet/Haiku 200K) — maximize session outputs before compaction
+[env00004 | identity | permanent | 1.0] Git SSH in WSL: core.sshCommand="/usr/bin/ssh" required — Windows OpenSSH path fails
+[env00005 | identity | permanent | 1.0] Cygheap: ASLR disabled for bash.exe (structural fix applied). All hooks now Python (zero cygheap). Scheduled task CygheapCleanup kills zombies every 15min. Scripts >10s still need PID file + signal handlers + timeout
+[env00006 | identity | permanent | 1.0] Path conversion: ALWAYS use `wslpath -w` (WSL→Win) / `wslpath -u` (Win→WSL). NEVER sed/regex. .claude/projects/ auto-memory broken for WSL+Windows — use HONEY/NECTAR canonical routing only
+[env00007 | identity | permanent | 1.0] All hooks use python3 (not powershell.exe/bash). statusLine reads JSON from stdin (context_window.used_percentage, cost, model — real data, not estimated). Hooks use /mnt/c/ WSL paths
+[env00008 | identity | permanent | 1.0] Scripts: output to scripts/audit_results/; include _run metadata block (run_id, phase, timestamp, git_commit)
+[env00009 | identity | permanent | 1.0] Repo trifecta: claude-cli (D:\0LOCAL\gitrepos\claude-cli) = full CLI+plugins+hooks+queue+dead-drops; claude-desktop (D:\0LOCAL\gitrepos\claude-desktop) = desktop subset; claude-forensic (D:\0LOCAL\gitrepos\claude-forensic) = session archives+eval data
+
+---
+
+## Methods — Proven Techniques
+
+[mth00001 | method | 1yr | 0.95] Use Write tool for files with unicode em-dashes/special chars — Edit tool string-match fails on them
+[sys00001 | principle | permanent | 1.0] **ONE PATH, ONE TRUTH.** Repos accessed via /mnt/d/ and D:\ are the same place, but agents see them as ghosts—scattered scratch, duplicate queues, split memory. Solution: Canonicalize to native path FIRST (faerie Turn-1), then all state flows from one source. Metaphor: many mirrors of the same room, but only one can be the real room.
+[sys00002 | principle | permanent | 1.0] **BUDGET IS A HEARTBEAT.** Files have line limits like organisms have oxygen. Append past the limit and you suffocate future sessions. Before every write: check the pulse. If full, crystallize (compress meaning, not data). Rule: file over budget = crystallize first, write second, never break it. Violators inherit debt that compounds exponentially.
+[sys00003 | principle | permanent | 1.0] **BASELINE BEFORE BLINDNESS.** Agents analyzing data without knowing what's in rawdata are like doctors diagnosing without bloodwork. Genesis baseline (hash manifest, dedup count, corruption check) runs BEFORE Phase 1. This is not optional validation—it's the foundation. Everything built on noise is noise.
+[sys00004 | principle | permanent | 1.0] **CHALLENGE BEFORE CONFIDENCE.** When constructing hypotheses, AI defaults to affirming researcher priors (sycophancy). Defense: Red-team agent (adversarial role, parallel with main team), pre-register hypotheses (locks in tests before analysis), track researcher feedback on challenge-engagement (not just confirmatory clicks). Invoke via `/red-team` skill (optional, not forced). Sycophancy visible when: all findings confirm one hypothesis + researcher endorses everything + zero challenges engaged. Make bias visible, offer tools, let researcher choose.
+[mth00002 | method | 1yr | 0.95] Phase gate: Phase 1 (locate/confirm files) must complete before Phase 2/3 (write/curate) — briefing curators with stale gap status causes rework
+[mth00003 | method | 1yr | 0.95] Sequential data-engineer for all manifest writes; parallel data-engineer OK for read-only/independent-file tasks only
+[mth00004 | method | 1yr | 0.90] context_bundle in task JSON (highest_value, done_looks_like, source_files) makes .md template optional for /run fallback — task never silently skipped
+[mth00005 | method | 1yr | 0.90] Git split URL (different fetch/push repos): add explicit remote, fetch, merge --no-edit, then push to correct HEAD:main
+[mth00006 | method | 1yr | 0.90] Optimal manifest-gap sprint team: data-engineer (foreground, sequential) -> security-auditor -> evidence-curator (foreground)
+[mth00007 | method | 1yr | 0.90] claim_task.py has no --fail; failure recovery in queue_ops.py unreachable from /run — unify before relying on failure recovery
+[mth00008 | method | 1yr | 0.90] membot not automated (no hook at session end) — must be explicit mandatory final step in sprint templates
+[mth00009 | method | 1yr | 0.85] Background subagents cannot prompt for file read approval — pass file contents in task prompt (context_bundle-in-task) or run foreground
+[mth00010 | method | 1yr | 0.95] faerie-brief.json pattern: membot writes 3-5K distilled brief (top flags, findings, xtal queue, hypothesis conf, queue state) at session END → faerie reads at next session START instead of 40-50K file reads → /faerie completes in 3 turns instead of 14+, no auto-compact during orchestration
+[mth00011 | method | 1yr | 0.90] autotune in restricted permission mode: WebFetch denial means pre-seed external data into prompt to test synthesis not retrieval. Pre-seeding isolates synthesis capability cleanly from tool availability.
+[mth00018 | method | 1yr | 0.95] OTJ learning must be PROCESS ONLY for court defensibility. Agent cards never contain entity names, IPs, domains, dataset names, or case-specific conclusions. Enforcement: `lint_agent_cards.py` flags violations, `baseline_reproducibility.py --report` generates court-ready assessment. Defense: Daubert (testability+peer review+error rate+acceptance), human expert analogy (craft vs case knowledge), version-pinned COC, reproducibility from genesis.
+[mth00019 | method | 1yr | 0.95] COC hash computation: exclude `entry_hash`, `sig`, `sig_type` from canonical form; KEEP `prev_entry_hash` (signed content). Standalone verifiers must match this or chain verification fails. First entry `prev_entry_hash` may be "" or "genesis" — handle both.
+[mth00024 | method | 1yr | 0.97] AI cert data assumptions flip circumstantial→T1 when live-verified. Common failure modes: conflating Censys scan IDs with CT log IDs; assuming fingerprint identity from domain-family annotations; misclassifying infrastructure certs as gov (5d430f2c=ZLMediaKit). Protocol: live crt.sh SHA256 lookup for every fingerprint before promoting. Payoff: bc76377/f46563/95e04bc4 verification revealed 24-48h deployment pipeline; Entrust-signed 68E11F5C eliminated ACME hijack (narrows to key theft/insider only); 5d430f2c removal strengthened core finding by trimming false evidence.
+
+---
+
+## Methods — Site Architecture
+
+[mth00012 | method | 1yr | 0.99] Stack: HTML5/D3.js v7/vanilla JS (no build), Python Flask (api_server.py), Caddy reverse proxy, B2+Cloudflare CDN, IPFS (Kubo)+OpenTimestamps. Core pages: index, executive, baxet-russia, database-reconstruction, timeline-enriched, admin.
+[mth00013 | method | 1yr | 0.95] Agent routing: evidence changes → always run forensic_sign.py + COC; tier promotions → evidence-curator; new ingest → data-engineer→security-auditor→evidence-curator; new viz → fullstack-developer→admin-sync.
+[mth00014 | method | 1yr | 0.95] Model routing (calibrated): Opus=single high-value screenshot extraction + complex evidence analysis; Gemini 2.0 Flash=bulk frames (578 processed); BeautifulSoup=always prefer over vision when raw HTML; Haiku=bulk classification/tier labeling.
+
+---
+# Faerie Design Philosophy
+
+[mth00015 | method | 2yr | 1.0] Faerie = cognitive offload for user. Act first, don't ask. Surface what user might have forgotten (related sessions, open Qs, OTJ improvements) without being annoying. User corrects if needed. Goal: user focuses on high-level thinking; faerie handles bookkeeping.
+[mth00016 | method | 2yr | 1.0] Passoff bundle scan: read first-line <!-- PASSOFF [...] comment only (no full content). Return 1 most relevant bundle; add 2-3 more ONLY if clearly related. UNREAD → READ after surfacing. Investigation label is retroactive (user-set, not inferred).
+[mth00017 | method | 2yr | 0.95] OTJ learning feeds faerie brief: include in startup brief "N agents improved on-the-job" + "N agents queued for autotune." Surface agent score delta so user sees learning arc. Queue coordination: failed agents get on_the_job_eligible=true so they redeem during real work.
+
+---
+# Crystallization log
+# 2026-03-19: Initial HONEY.md from AGENTS.md migration + investigation findings from cybertemplate sessions
+# 2026-03-19 (session 2): +mth00010 (faerie-brief.json pattern) +mth00011 (autotune pre-seed) +fnd00009 (registry2.anchored.host confirmed)
+# 2026-03-19 (session 3/handoff): fnd00006↑0.98 (userId resolved), void0002→RESOLVED, +fnd00010 (Hetzner), +fnd00011 (Feb18 bulk), +fnd00012 (ProxMox video)
+# 2026-03-27 (chain-of-consciousness session): Nature of This Work crystallized 62→23 lines; +sys00015 (design provenance) +sys00016 (chain reconstruction method); Liftoff Paradox added; 187→147 lines
+
+[pref00020 | preference | permanent | 1.0] faerie personality: proactively curious; launches dashboard, fires helpers, takes care of setup WITHOUT being asked — magic not mechanics
+[pref00021 | preference | permanent | 1.0] COC documentation: verbose is correct — agent/human readability > token savings; compress everything else before touching evidence-coc.md
+[pref00022 | preference | permanent | 1.0] Queue sort: recently-added tasks are "hot" — rank higher within same priority tier by default (recency as tiebreaker, descending)
+[mth00022 | method | permanent | 1.0] VAULT: CT_VAULT env=/mnt/d/0LOCAL/.../CyberOps-UNIFIED. Write zone=00-SHARED/ ONLY (permissions enforced). 00-PROTECTED/=never write. Before any index write: read+MERGE, never REPLACE. Incident 2026-03-22: VAULT-INDEX.md overwritten by bg agent — ON-RESISTANCE (SHA256:befe6cdf) almost lost. Disambiguation: DAE=generic template repo (no vault); CT/cybertemplate=investigation repo writing findings to CT_VAULT/00-SHARED/. commands/=user slash commands; skills/=Claude programmatic only — never call a command/ entry via Skill tool.
+[mth00023 | method | permanent | 1.0] VAULT PERMISSIONS pattern: settings.json should grant Read(/vault/**) broadly but Write only to /vault/99-Agent-Work/**, /vault/00-Inbox/drops/**, /vault/00-Inbox/tasks/**. Reconstruction agents need explicit temporary Write on full vault — not a permanent permission. See CyberOps-UNIFIED/VAULT-RULES.md.
+[mth00025 | method | 1yr | 0.92] Hardened-browser investigation pages (Mullvad/Firefox): embed CSVs as inline JS arrays (no XHR/fetch). Large files: read first 100-500 rows for unique value space + Grep for counts. Aggregate cluster markers (not N overlapping circles). CartoDB dark_all tiles (no API key, CDN-safe) + dark popups (bg:#0f2440) = correct pattern for static OSINT maps.
+[fnd00013 | finding | permanent | 1.0] **J14 ≠ DOGE EO. J14 = January 14, 2025 (empirical inflection). J20 = January 20, inauguration/DOGE EO — six days later.** J14 was independently observed across apparently isolated networks (US gov, Russian, Chinese). Combined Fisher p=8.88e-16. NEVER attribute J14 to the DOGE EO. The 6-day precedence of J14 before J20 implies pre-planned coordination, not reactive access. All narrative, journalist hooks, and memory entries must reflect this distinction. Investigation: criticalexposure (cybertemplate). Corrected 2026-03-22.
+[fnd00014 | finding | 90d | 0.95] **STAT-NEW-001 CONFIRMED: Baxet/Stark 194.58.46.116 bore dx10.lanl.gov (LANL nuclear) TLS cert post-J14; zero in 9.7 months pre.** Fisher p=0.0021, Bonf p=0.0042. 0/752 pre → 3/111 post (Feb 8-9 2025). OR=infinity. Replicates Aeza pattern. H4 72%. Files: stat_results_STAT-NEW-001.json. 2026-03-22.
+[fnd00015 | finding | 90d | 0.90] **STAT-NEW-001-GROUP: 8 Baxet Group IPs, ALL post-J14, targeting nuclear labs + NASA + DHS + courts.** Binomial p=0.0039 (Bonf borderline p=0.0195); t-test p=0.0012 (Bonf p=0.0058, PASSES). Mean +30 days after J14. Targets: LLNL controlbanding, LANL dx10, ORNL icons, NASA Goddard i3rc, DHS ICE SEVP (2x), NIH ClinicalTrials, US Courts scp.uscourts.gov. MECHANISM DISTINCT from Aeza: Baxet = SMTP spoofing + self-signed TLS; Aeza = valid CA-issued certs. Same J14 activation = multi-vector coordinated sweep. Files: stat_results_STAT-NEW-001-GROUP.json. 2026-03-22.
+[mth00026 | method | 1yr | 0.92] Pre-spawn verification gate: for purely verification tasks ("are hash fields populated?", "does field X exist?"), read a 3-5 row sample FIRST. If all pass, skip the subagent spawn entirely. Only spawn verification subagent if sample contains failures. Saves ~1 spawn/session (~4K tokens, ~30s). Source: cybertemplate T1 sha256 false-alarm (session-592227). Rule lives in subagent-enforce.md.
+[mth00027 | method | 1yr | 0.95] Zero-cell 2x2 stat tables: OR=infinity is primary effect measure (not Cramer's V — understates due to marginal constraints with small post-cell n). Report V with explicit marginal-constraint note. Bayesian LR should be domain-calibrated to prior implausibility (nuclear lab cert on foreign server = LR 10000+, not generic 1000). Z-test inapplicable when null proportion=0 — reduce Bonferroni k accordingly.
+[mth00028 | method | 1yr | 0.90] packetware-verification DNS TXT token = Packetware attribution signal. Per-domain unique token issued by Packetware auth service. Token format: base62, ~50 chars. Known tokens: packetware.net (canonical), anchored.host, rustward.com (3 distinct). GameServerKings.com = no token (useful negative). Scan any new .co/.net domain in evidence set for this TXT record before making shared-IP attribution claims. Discovered 2026-03-22 while correcting ahmn.co false attribution.
+[mth00029 | method | 1yr | 0.92] CT log cert bundle agency attribution: query crt.sh ?q=domain.gov&output=json; if CN = known agency domain AND co-SANs are definitively that agency's, the unknown domain belongs to the same agency. Applied: 400yaahc.gov (CN=gsa.gov in same cert → GSA confirmed). GSA utility-hostname pattern: random alphanumeric .gov in a major-agency cert SAN cluster = ACME infra hostname, never public-facing, not spoofing. 2026-03-22.
+[mth00030 | method | 1yr | 1.0] TRAINING block REVIEW-INBOX path = project-level ONLY. Spawn prompts must write TRAINING bullets to `{repo}/.claude/memory/REVIEW-INBOX.md` (e.g., cybertemplate/.claude/memory/REVIEW-INBOX.md), NOT ~/.claude/memory/REVIEW-INBOX.md. Updated: /mnt/d/0LOCAL/.claude/skills/run/SKILL.md. 2026-03-22.
+[mth00031 | method | 1yr | 0.95] Gap analysis protocol: ALWAYS glob high-value evidence folders directly (Bloomberg shortlist, Crisis Briefs, GCHQ downloads) IN ADDITION to reading the prior gap_priority_order. Evidence accumulates on disk faster than gap analyses are written. Pattern: (1) read prior gap order → (2) Glob all high-value directories → (3) merge. Failure to do step 2 left 6 high-value files unanalyzed through 8 runs. 2026-03-22.
+[mth00032 | method | 1yr | 1.0] data/ = canonical UI product for cybertemplate. All evidence-cited viz/ files must have a data/ representation before being used in the final report. Naming: TIMELINE_events.csv (curated event narrative), TIMELINE_citations.csv (archive-tracked, site source), TIMELINE_daily-counts.csv (IP count chart), SECTOR_risk-summary.csv (per-sector). METHODS.md documents provenance, stats, changelog, limitations. 2026-03-23.
+[mth00033 | method | 1yr | 0.95] Evidence tier ranking in timeline files: join TIMELINE_events.csv with tier1/tier2 JSON by citation_id → add evidence_tier (1/2), evidence_tier_label (smoking_gun/strong_support), quality_score, evidence_bundle columns. 32/61 events are Tier 1, 21 are Tier 2. UI can filter/color by tier. Pattern confirmed working 2026-03-23.
+[mth00034 | method | 1yr | 0.98] Mail-in-a-Box fingerprint: port 4190 (ManageSieve) OPEN + self-hosted DNS (ns1/ns2 on SAME IP as mail host) = definitive MiAB confirmation. Full stack also includes Matrix (8448), Nextcloud, SSO, MDM, wiki, artifact registry. 2026-03-23.
+
+---
+# Crystallization log entry: 2026-03-24 — SSH/WSL compat + B2 backup setup
+[env00010 | identity | permanent | 1.0] Windows PowerShell profile paths: PS5.1 (`powershell.exe`) = `WindowsPowerShell/Microsoft.PowerShell_profile.ps1`; PS7 (`pwsh`) = `PowerShell/Microsoft.PowerShell_profile.ps1`. OneDrive moves both under `C:\Users\amand\OneDrive\Documents\` (NOT plain Documents). These are different files — edits to one do not affect the other.
+[env00011 | identity | permanent | 1.0] SSH auth split: Windows SSH uses YubiKey PIV via `PKCS11Provider "C:/Program Files/OpenSC Project/OpenSC/pkcs11/opensc-pkcs11.dll"` in `~/.ssh/config`. WSL SSH uses `IdentityFile ~/.ssh/id_ed25519` (WSL ed25519 key). Never mix — YubiKey PKCS11 path is Windows-native, invisible to WSL.
+[env00012 | identity | permanent | 1.0] ZimaBoard home quirk: home dir is `/DATA/` not `/home/casaos/`. `~/.ssh` owned by root → requires `sudo mkdir -p ~/.ssh && sudo chown -R $(id -u):$(id -g) ~/.ssh`. User group is `samba` (not `casaos`). `authorized_keys` must be a single unbroken line — terminal paste wrap silently splits keys and breaks auth.
+[env00013 | identity | permanent | 1.0] B2 backup tool: canonical at `D:\0LOCAL\tools\b2-backup\`. Windows junction `C:\Users\amand\b2backup` → D drive (C is expendable mirror). Per-bucket creds: `~/.b2/<bucket-name>.env` loaded on top of global `~/.b2-backup.env`. WSL: PATH includes `/mnt/d/0LOCAL/tools/b2-backup`, aliases `b2backup="b2backup.sh"` + `b2manage="b2manage.sh"`. Windows: PowerShell profile calls `D:\0LOCAL\tools\b2-backup\b2backup.ps1`; b2manage via WSL bridge. Default: direct rclone upload (no staging). `--stage` / `-Stage` flag enables robocopy/rsync staging to `D:\0-ZIMA-AND-PRECIOUSFILESBACKUP`.
+
+---
+# Crystallization log entry: 2026-03-25 — Workspace consolidation + architecture decisions
+[sys00002 | method | permanent | 1.0] Scope hierarchy: Global → Investigation → Sprint → Pipeline Phase → Session. Phase is ABOVE session because a phase (SEED→DEEPEN→EXTEND→FULL) spans multiple sessions with human gates between stages. `/faerie` launch should know: which investigation, which sprint, which phase, estimated sessions remaining.
+[sys00003 | method | permanent | 1.0] Command ownership: global `~/.claude/commands/` = universal orchestration (faerie, handoff, crystallize, collab, roster, team). Repo commands = domain-specific ONLY, no overlap with global. Repo command overrides global silently — duplication causes confusion about which fires.
+[sys00004 | method | permanent | 1.0] Faerie repo: `00-claude-faerie-cli-git` is dev source, `faerie2` (goodoleusa/faerie2.git) is publish target. CLI-GIT tracks faerie2 as remote. Legacy `faerie` repo (Persistech) is archived (remotes stripped).
+[sys00005 | method | 1yr | 0.95] `_resolve_claude_home()` returns `~/.claude` (the .claude dir itself). All path constructions: `CLAUDE / "hooks" / ...` — never `HOME / ".claude" / ...` (double-nesting bug found in 10+ hooks, 2026-03-25).
+[sys00006 | method | permanent | 1.0] Human gates in /data-ingest pipeline: GATE 1 (post-SEED, pre-DEEPEN) = review first impressions + seal private hypotheses. GATE 2 (post-DEEPEN) = factual corrections only. GATE 3 (post-EXTEND) = convergence review + optional red-team. GATE 4 (post-FULL) = unseal hypotheses, compare agent vs human. Scripts: `hypothesis_seal.py` (seal/reveal/verify), `gate_pass.py` (check/pass/block/correct).
+[sys00007 | identity | permanent | 1.0] data-analysis-engine is destined for open-source release: a standalone toolkit giving public interest investigators the forensic rigor and scientific methodology of a full research team. All design choices (COC, progressive disclosure, pre-registration, human gates, court-admissibility) serve this mission. Keep DAE self-contained — no dependency on global .claude state that a user wouldn't have.
+[sys00008 | method | permanent | 1.0] Three-store architecture: REPO (code+pipeline, public GitHub), VAULT (annotations+dashboards, local only, never pushed), FORENSIC STORE (.claude/forensics/, gitignored, backed up to S3 WORM). CyberOps-UNIFIED vault remote removed 2026-03-25. DAE ObsidianVault/ = sanitized template for open source users.
+[sys00009 | method | permanent | 1.0] Forensic backup: `backup_forensics.py` → S3-compatible WORM (Object Lock Compliance mode). Encrypted at rest (SSE), immutable during retention, independently timestamped. Provenance chain: raw source → local hash → git commit → pipeline transform log → audit results → vault sync (source_sha256) → annotation hash → WORM backup. Every transition has a verifiable hash. See `docs/PROVENANCE-CHAIN.md`.
+[sys00010 | method | permanent | 1.0] Vault annotation flow: human annotates in Obsidian → Ctrl+Alt+C (QuickAdd commit-annotation.js) → SHA-256 ann_hash in frontmatter → vault_annotation_sync.py reads on next session start → receipt in .claude/forensics/annotation-receipts.jsonl → corrections flow to pipeline gates. Six QuickAdd actions: commit, endorse, challenge, red-team, promote, pass-gate. No Shell Commands or Templater needed — pure QuickAdd user scripts.
+[sys00011 | method | permanent | 1.0] Emergency handoff: `python3 ~/.claude/scripts/emergency_handoff.py` fires in <5s at any context level. Collects ALL splintered `.claude/projects/*/memory/`, scratch files, queue state → writes `handoff-snapshot.json` + atomized `brief-atoms/` + nests memories into repos. /handoff Step Zero = always run this first. /faerie reads snapshot as priority #1 (1 file replaces 15 reads). Auto-compact handles working context; faerie handles investigation memory. Complementary, not competing.
+[sys00012 | method | permanent | 1.0] Atomized briefs: briefs are NOT one overwritten file. They accumulate in `brief-atoms/` (handoff atoms, pipeline phase atoms from briefgen.py). `faerie-brief.json` = lightweight pointer only. Dataview queries atoms in Obsidian; Blueprints templates assemble human reports. Normal day: 2 atoms. Data-ingest day: 4+ atoms (SEED, DEEPEN, EXTEND, handoff).
+[sys00013 | method | permanent | 1.0] FFFF dashboard model: Findings/Flags/Friction/Flow at every zoom level (team/sprint/agent/technique). MermaidJS palette: pistachio #93C572, teal #4ECDC4, gold #D4A843, dark #2d2d44. Agent OTJ self-updates require pre-snapshot via `agent_card_snapshot.py` for court-admissible provenance.
+[sys00014 | method | permanent | 1.0] HASH BEFORE AND AFTER: Any time faerie/handoff/agents move .claude folders or forensic artifacts, run `hash_tracker.py snapshot --name before-{op}` BEFORE and `--name after-{op}` AFTER. Blocking — must complete before proceeding. Per-file SHA256 in COC = file-level proof. hash_tracker = directory-level proof (catches renames/deletions/additions). Both = belt+suspenders. Script: `data-analysis-engine/scripts/hash_tracker.py`.

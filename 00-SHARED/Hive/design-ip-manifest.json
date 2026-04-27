@@ -1,0 +1,149 @@
+{
+  "type": "design-ip-manifest",
+  "updated": "2026-03-27T21:31:12.519011+00:00",
+  "author": "amand (human) + faerie system (AI)",
+  "purpose": "IP provenance \u2014 SHA256 hashes tracking edits over time",
+  "collection_hash": "636b4d337e21817690cc51b381492d522659cb746e143eb83a05833c68485eb1",
+  "documents": [
+    {
+      "file": "00-DESIGN-NARRATIVE-2026-03-22.md",
+      "sha256": "469cfbc68c2cea4b2b3c98c1a158746c104b405ca270e83a71d19af6e628d72c",
+      "size_bytes": 17325,
+      "lines": 192,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "01-ARCHITECTURE.md",
+      "sha256": "2929151b033445f7cf0de7ac66c4c2dd8fe9a0590f5b003aedb78d25cb4e4da3",
+      "size_bytes": 36168,
+      "lines": 417,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "03-AGENT-HANDOFF-EXPLAINER.md",
+      "sha256": "5b65c1b2fbb664b6b1391dd64c2d0c4dc0f98d3a034bee90d77e49808424df77",
+      "size_bytes": 12198,
+      "lines": 150,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "08-AGENT-ADAPTIVE-CONTEXT-AND-EVOLVING-PROMPT.md",
+      "sha256": "2f60a59cd3c44eb5198610193147026942b775eaa3c23dd1208d126343d60029",
+      "size_bytes": 9025,
+      "lines": 128,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "09-HUMAN-PROMOTES-AI-EXECUTES.md",
+      "sha256": "255155e8176003463ee333cf2851aa35db8b6b29454dbc57621e3e77e0f9969e",
+      "size_bytes": 2123,
+      "lines": 23,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "10-TASK-LINEAGE-AND-HANDBACK.md",
+      "sha256": "62f31d10a832ac9356d226191a63609b8d5fc7bd45fe6d191b85121fd6452f21",
+      "size_bytes": 11195,
+      "lines": 160,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "11-FAERIE-IMPACT-AB.md",
+      "sha256": "1507a186340fdd2909d5557d68a2cac2a3b311bebdb5f6f2d7269aff9a10095b",
+      "size_bytes": 6141,
+      "lines": 98,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "12-ASYNC-HUMAN-AGENT-BRIDGE.md",
+      "sha256": "b1f8a5e2b6d1c051312a760b91f55346669ec95b4c538a79b1870d1f79ea5a57",
+      "size_bytes": 8263,
+      "lines": 172,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "13-CHAIN-OF-CONSCIOUSNESS-2026-03-27.md",
+      "sha256": "217ba6bec6bc226774e28293bb09d1d7fe1e7d38217622aadd45d0b29d941a28",
+      "size_bytes": 17610,
+      "lines": 379,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "AGENT-OBSIDIAN-INTEGRATION.md",
+      "sha256": "67614dc96a58f3aaba8ac12b144c0065bef10a017815744434036769822f0278",
+      "size_bytes": 242,
+      "lines": 9,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "AGENT-SYSTEM-ARCHITECTURE.md",
+      "sha256": "227d97a2e65eac42ea907a6a90610d9b7e16b262cf25c6a2a3d42b0013f2770b",
+      "size_bytes": 24120,
+      "lines": 427,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "BRIEFGEN-DESIGN.md",
+      "sha256": "760bffc134eb241070a7b46d5687a26e9a13e0f6f057770b61f15619c8a843a4",
+      "size_bytes": 12265,
+      "lines": 370,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "DAE-Evolution-Narrative.md",
+      "sha256": "3e21c26716a183bf5ebd8b2ffd844a8155489dca0df54453bbf445245c5d1898",
+      "size_bytes": 18187,
+      "lines": 254,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "FIRE CLAUDE HONEY.md",
+      "sha256": "2b70552a2d3d5150cb3c22c8098e29c38ab9894d3e1e936c69823193d9ad9248",
+      "size_bytes": 175,
+      "lines": 2,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "HOW-ANNOTATION-COC-WORKS.md",
+      "sha256": "0548e09d1f9a8cb47fbde4d978b578ed40565209b3ba5dce99c803365fc37fef",
+      "size_bytes": 6043,
+      "lines": 171,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "HOW-SYNC-WORKS.md",
+      "sha256": "7710671f8171e92953cf4d8b14956e78c0ce8537b9be6fbec1e11f73bc6ad2f2",
+      "size_bytes": 7850,
+      "lines": 168,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "KICKSTART-COLLAB.md",
+      "sha256": "cf6aaf73138760b4fe599a9f2d4d06d2007629bbf2f07f86c7ef1743cdd29db6",
+      "size_bytes": 4234,
+      "lines": 58,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "PIPELINE-DESIGN.md",
+      "sha256": "f858376f755999fd4e721540bcbd97c3c24e5bd9c93ea23b8334798820017801",
+      "size_bytes": 5463,
+      "lines": 133,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "VAULT-SCHEMA.md",
+      "sha256": "03ab215ab8101fcd436ef08ebeff9407b491a889cf68b34bdeb5c0794c0c2f04",
+      "size_bytes": 7828,
+      "lines": 253,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    },
+    {
+      "file": "_index.md",
+      "sha256": "ee5ce434db97a76410585ff6b5a0ef3de3a85691b292cbf32fc9cdfa8bae1439",
+      "size_bytes": 3336,
+      "lines": 84,
+      "timestamp_hashed": "2026-03-27T21:31:12.519011+00:00"
+    }
+  ]
+}

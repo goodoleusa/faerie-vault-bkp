@@ -1,0 +1,3 @@
+---
+blueprint: "[[Threat-Actor]]"
+---

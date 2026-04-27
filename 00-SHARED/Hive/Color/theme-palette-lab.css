@@ -1,0 +1,396 @@
+/* theme-palette-lab.css — Prism Extension Layer
+   Extends Prism theme with investigation-specific styling.
+   Does NOT override Prism core — uses Style Settings for palette.
+
+   WHAT THIS ADDS (Prism doesn't handle these):
+   - Investigation callouts (FFFF, evidence, pipeline, etc.)
+   - Evidence tier colors + tag colors
+   - Kanban column color-coding
+   - Mermaid diagram bold styling
+   - Dashboard card layout (wide-page, dashboard cssclasses)
+
+   PALETTE (reference — set via Prism Style Settings):
+   Pistachio #93C572 | Teal #4ECDC4 | Purple #6B3FA0 | Rose #E85D75
+*/
+
+
+/* ══════════════════════════════════════════════════════════════════
+   INVESTIGATION VARIABLES — colors Prism doesn't know about
+   ═══════════════════════════════════════════════════════════════ */
+
+.theme-light {
+  /* Status */
+  --lab-active:       #5FA052;
+  --lab-active-bg:    #e8f5e2;
+  --lab-warning:      #C67B28;
+  --lab-warning-bg:   #fef3e2;
+  --lab-critical:     #E85D75;
+  --lab-critical-bg:  #fde8ed;
+  --lab-info:         #4ECDC4;
+  --lab-info-bg:      #e2f5f3;
+  --lab-neutral:      #7a7a8e;
+  --lab-neutral-bg:   #f0f0f4;
+
+  /* Evidence tiers */
+  --lab-tier1:   #E85D75;
+  --lab-tier2:   #C67B28;
+  --lab-tier3:   #4ECDC4;
+  --lab-tier4:   #7a7a8e;
+
+  /* FFFF */
+  --lab-findings: #93C572;
+  --lab-flags:    #D4A843;
+  --lab-friction: #E85D75;
+  --lab-flow:     #4ECDC4;
+
+  /* Kanban */
+  --lab-kanban-high: #E85D75;
+  --lab-kanban-med:  #4ECDC4;
+  --lab-kanban-low:  #93C572;
+  --lab-kanban-done: #7a7a8e;
+
+  /* Dashboard cards */
+  --lab-card-bg:     var(--background-primary);
+  --lab-card-border: var(--background-modifier-border);
+  --lab-page-bg:     var(--background-primary-alt);
+  --lab-h2-bg:       linear-gradient(135deg, #2D1B69 0%, #1A3C40 100%);
+  --lab-h2-bg-flat:  #2D1B69;
+  --lab-h2-text:     #E8F5F0;
+}
+
+.theme-dark {
+  /* Status */
+  --lab-active:       #93C572;
+  --lab-active-bg:    #1a2a16;
+  --lab-warning:      #D4A843;
+  --lab-warning-bg:   #2a2216;
+  --lab-critical:     #E85D75;
+  --lab-critical-bg:  #2a161a;
+  --lab-info:         #4ECDC4;
+  --lab-info-bg:      #0D2A28;
+  --lab-neutral:      #6a6a7e;
+  --lab-neutral-bg:   #1a1a24;
+
+  /* Evidence tiers */
+  --lab-tier1:   #E85D75;
+  --lab-tier2:   #D4A843;
+  --lab-tier3:   #4ECDC4;
+  --lab-tier4:   #6a6a7e;
+
+  /* FFFF */
+  --lab-findings: #93C572;
+  --lab-flags:    #D4A843;
+  --lab-friction: #E85D75;
+  --lab-flow:     #4ECDC4;
+
+  /* Kanban */
+  --lab-kanban-high: #E85D75;
+  --lab-kanban-med:  #4ECDC4;
+  --lab-kanban-low:  #93C572;
+  --lab-kanban-done: #4a4a5e;
+
+  /* Dashboard cards */
+  --lab-card-bg:     var(--background-primary);
+  --lab-card-border: var(--background-modifier-border);
+  --lab-page-bg:     var(--background-primary-alt);
+  --lab-h2-bg:       linear-gradient(135deg, #1A3C40 0%, #2D1B69 100%);
+  --lab-h2-bg-flat:  #1A3C40;
+  --lab-h2-text:     #93C572;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   INVESTIGATION CALLOUTS — FFFF, evidence, pipeline, hypothesis
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Standard investigation callouts */
+.callout[data-callout="pipeline"]         { background: var(--lab-active-bg); }
+.callout[data-callout="insight"]          { background: var(--lab-info-bg); }
+.callout[data-callout="gap"]             { background: var(--lab-warning-bg); }
+.callout[data-callout="critical"]         { background: var(--lab-critical-bg); }
+.callout[data-callout="technique"]        { background: var(--lab-active-bg); }
+.callout[data-callout="first-impression"] { background: var(--lab-neutral-bg); }
+.callout[data-callout="hypothesis"]       { background: var(--lab-info-bg); }
+.callout[data-callout="null"]            { background: var(--lab-neutral-bg); opacity: 0.7; }
+.callout[data-callout="priority"]         { background: var(--lab-warning-bg); border-left: 4px solid var(--lab-warning); }
+.callout[data-callout="agent"]            { background: var(--lab-info-bg); border-left: 4px solid var(--lab-info); }
+.callout[data-callout="chain"]            { background: var(--lab-neutral-bg); border-left: 4px solid var(--lab-neutral); }
+
+/* FFFF callouts — distinct color identity */
+.callout[data-callout="findings"] {
+  --callout-color: 147, 197, 114;
+  background: color-mix(in srgb, var(--lab-findings) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-findings);
+  border-radius: 8px;
+}
+.callout[data-callout="flags"] {
+  --callout-color: 212, 168, 67;
+  background: color-mix(in srgb, var(--lab-flags) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-flags);
+  border-radius: 8px;
+}
+.callout[data-callout="friction"] {
+  --callout-color: 232, 93, 117;
+  background: color-mix(in srgb, var(--lab-friction) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-friction);
+  border-radius: 8px;
+}
+.callout[data-callout="flow"] {
+  --callout-color: 78, 205, 196;
+  background: color-mix(in srgb, var(--lab-flow) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-flow);
+  border-radius: 8px;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   INVESTIGATION TAGS — semantic color by project/role
+   ═══════════════════════════════════════════════════════════════ */
+
+.tag[href="#dashboard"]        { background: var(--lab-info-bg);     color: var(--lab-info); }
+.tag[href="#evidence"]         { background: var(--lab-warning-bg);  color: var(--lab-warning); }
+.tag[href="#task"]             { background: var(--lab-active-bg);   color: var(--lab-active); }
+.tag[href="#hypothesis"]       { background: var(--lab-critical-bg); color: var(--lab-critical); }
+.tag[href="#findings"]         { background: color-mix(in srgb, var(--lab-findings) 15%, var(--lab-card-bg)); color: var(--lab-findings); }
+.tag[href="#flags"]            { background: color-mix(in srgb, var(--lab-flags) 15%, var(--lab-card-bg));    color: var(--lab-flags); }
+.tag[href="#friction"]         { background: color-mix(in srgb, var(--lab-friction) 15%, var(--lab-card-bg)); color: var(--lab-friction); }
+.tag[href="#flow"]             { background: color-mix(in srgb, var(--lab-flow) 15%, var(--lab-card-bg));     color: var(--lab-flow); }
+.tag[href="#faerie"]           { background: color-mix(in srgb, #6B3FA0 15%, var(--lab-card-bg));            color: #6B3FA0; }
+.tag[href="#criticalexposure"] { background: color-mix(in srgb, var(--lab-critical) 15%, var(--lab-card-bg)); color: var(--lab-critical); }
+.tag[href="#queue"]            { background: color-mix(in srgb, var(--lab-info) 15%, var(--lab-card-bg));     color: var(--lab-info); }
+.tag[href="#kanban"]           { background: color-mix(in srgb, var(--lab-info) 15%, var(--lab-card-bg));     color: var(--lab-info); }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   DASHBOARD CARD LAYOUT — H2 header cards for wide-page/dashboard
+   ═══════════════════════════════════════════════════════════════ */
+
+/* H2 — gradient header cards on dashboard pages */
+.wide-page .markdown-preview-view h2,
+.dashboard-home .markdown-preview-view h2 {
+  background: var(--lab-h2-bg-flat);
+  background: var(--lab-h2-bg);
+  color: var(--lab-h2-text);
+  padding: 10px 16px;
+  border-radius: 8px 8px 0 0;
+  margin-top: 28px;
+  font-size: 0.95em;
+  letter-spacing: 0.03em;
+}
+
+/* Card body under H2 */
+.wide-page .markdown-preview-view h2 ~ *:not(h2):not(h1):not(hr),
+.dashboard-home .markdown-preview-view h2 ~ *:not(h2):not(h1):not(hr) {
+  background: var(--lab-card-bg);
+  border-left: 1px solid var(--lab-card-border);
+  border-right: 1px solid var(--lab-card-border);
+  padding: 4px 16px;
+}
+
+/* Card bottom — hr acts as card closer */
+.wide-page .markdown-preview-view hr,
+.dashboard-home .markdown-preview-view hr {
+  background: var(--lab-card-bg);
+  border-radius: 0 0 8px 8px;
+  border: none;
+  border-bottom: 1px solid var(--lab-card-border);
+}
+
+/* Dataview tables in dashboards */
+.wide-page .dataview.table-view-table thead tr,
+.dashboard-home .dataview.table-view-table thead tr {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   KANBAN BOARD — column headers color-coded by priority
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Kanban lane headers */
+.kanban-plugin__lane-header-wrapper {
+  border-radius: 8px 8px 0 0;
+  padding: 6px 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Color-code columns by position: HIGH, MED, LOW, DONE */
+.kanban-plugin__lane:nth-child(1) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-high) 25%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-high);
+}
+.kanban-plugin__lane:nth-child(2) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-med) 25%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-med);
+}
+.kanban-plugin__lane:nth-child(3) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-low) 25%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-low);
+}
+.kanban-plugin__lane:nth-child(4) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-done) 20%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-done);
+}
+
+/* Kanban cards */
+.kanban-plugin__item {
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.kanban-plugin__item:hover {
+  transform: translateY(-1px);
+}
+
+/* Kanban lanes */
+.kanban-plugin__lane {
+  border-radius: 8px;
+  margin: 0 4px;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   MERMAID DIAGRAMS — bold jewel-toned shapes + thick lines
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Mermaid container */
+.mermaid svg {
+  max-width: 100%;
+  border-radius: 12px;
+  padding: 24px;
+  border: 2px solid var(--lab-card-border);
+}
+
+/* Rectangles = processes/actions — TEAL */
+.mermaid .node rect {
+  fill: color-mix(in srgb, var(--lab-info) 20%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 3px;
+  rx: 12;
+  ry: 12;
+  filter: drop-shadow(0 3px 8px rgba(78, 205, 196, 0.25));
+}
+
+/* Circles = states/events — PISTACHIO */
+.mermaid .node circle {
+  fill: color-mix(in srgb, var(--lab-findings) 25%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+  stroke-width: 3px;
+  filter: drop-shadow(0 3px 8px rgba(147, 197, 114, 0.25));
+}
+
+/* Diamonds/polygons = decisions — PURPLE */
+.mermaid .node polygon {
+  fill: color-mix(in srgb, #6B3FA0 18%, var(--lab-card-bg));
+  stroke: #6B3FA0;
+  stroke-width: 3px;
+  filter: drop-shadow(0 3px 8px rgba(107, 63, 160, 0.25));
+}
+
+/* Node labels — bold + readable */
+.mermaid .nodeLabel {
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+/* Edge labels — pill badges */
+.mermaid .edgeLabel {
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 0.82em;
+  font-weight: 600;
+  border: 1px solid var(--lab-card-border);
+}
+
+/* Arrow lines — BOLD, unmistakable */
+.mermaid .flowchart-link {
+  stroke: var(--lab-info);
+  stroke-width: 3px;
+}
+.mermaid marker path {
+  fill: var(--lab-info);
+}
+
+/* Dotted links — purple */
+.mermaid path.flowchart-link[style*="dotted"],
+.mermaid .flowchart-link.dotted {
+  stroke: #6B3FA0;
+  stroke-width: 2.5px;
+}
+
+/* Subgraph clusters — purple dashed regions */
+.mermaid .cluster rect {
+  fill: color-mix(in srgb, #6B3FA0 8%, var(--lab-page-bg));
+  stroke: #6B3FA0;
+  stroke-width: 2.5px;
+  stroke-dasharray: 8, 4;
+  rx: 16;
+  ry: 16;
+}
+.mermaid .cluster span {
+  color: #6B3FA0;
+  font-weight: 700;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Sequence diagrams */
+.mermaid .actor {
+  fill: color-mix(in srgb, var(--lab-info) 12%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 2px;
+}
+.mermaid .activation0, .mermaid .activation1 {
+  fill: color-mix(in srgb, var(--lab-findings) 15%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+}
+.mermaid .messageLine0, .mermaid .messageLine1 {
+  stroke: var(--lab-info);
+}
+
+/* Gantt */
+.mermaid .task {
+  fill: color-mix(in srgb, var(--lab-info) 25%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+}
+.mermaid .done0, .mermaid .done1 {
+  fill: color-mix(in srgb, var(--lab-findings) 20%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+}
+.mermaid .crit0, .mermaid .crit1 {
+  fill: color-mix(in srgb, var(--lab-critical) 20%, var(--lab-card-bg));
+  stroke: var(--lab-critical);
+}
+
+/* State diagram */
+.mermaid .stateGroup rect {
+  fill: color-mix(in srgb, #6B3FA0 8%, var(--lab-card-bg));
+  stroke: #6B3FA0;
+  rx: 8;
+  ry: 8;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   NAV BAR — inline breadcrumb navigation for dashboard pages
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Style the nav-bar callout used in dashboard _index files */
+.callout[data-callout="nav"] {
+  background: color-mix(in srgb, var(--lab-info) 6%, var(--lab-card-bg));
+  border: 1px solid var(--lab-card-border);
+  border-left: 3px solid var(--lab-info);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.85em;
+}
+.callout[data-callout="nav"] .callout-title {
+  display: none;
+}
+.callout[data-callout="nav"] .callout-content p {
+  margin: 4px 0;
+}

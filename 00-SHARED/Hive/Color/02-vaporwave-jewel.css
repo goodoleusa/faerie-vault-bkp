@@ -1,0 +1,700 @@
+/* theme-palette-lab.css
+   Vaporwave Jewel Tones — pistachio + mermaid teal with deep purple shadows.
+   Light: soft pastels, pistachio/teal dominance, retro warmth.
+   Dark: saturated jewels, deep purple/teal shadows, neon accents.
+
+   HOW TO USE:
+   1. Enable in Settings > Appearance > CSS Snippets
+   2. Toggle light/dark in Obsidian to see both palettes
+   3. Change --lab-* variables below to tweak
+
+   PALETTE: Pistachio #93C572 | Teal #4ECDC4 | Purple #6B3FA0 | Rose #E85D75
+*/
+
+/* ══════════════════════════════════════════════════════════════════
+   LIGHT THEME — soft pistachio + teal, white surfaces, retro warmth
+   ═══════════════════════════════════════════════════════════════ */
+.theme-light {
+  /* A. STRUCTURE */
+  --lab-page-bg:         #f5f7f2;       /* warm off-white, hint of green */
+  --lab-card-bg:         #ffffff;
+  --lab-card-border:     #d4ddd0;       /* soft sage border */
+  --lab-card-shadow:     0 2px 8px rgba(45, 27, 105, 0.07);  /* purple-tinted shadow */
+  --lab-divider:         #d4ddd0;
+  --lab-sidebar-bg:      #eef3eb;       /* light pistachio sidebar */
+
+  /* B. TYPOGRAPHY */
+  --lab-h1-color:        #2D1B69;       /* deep purple titles */
+  --lab-h1-underline:    #4ECDC4;       /* teal underline */
+  --lab-h2-bg:           linear-gradient(135deg, #2D1B69 0%, #1A3C40 100%);
+  --lab-h2-bg-flat:      #2D1B69;       /* fallback for non-gradient contexts */
+  --lab-h2-text:         #E8F5F0;       /* mint white on dark headers */
+  --lab-h3-color:        #3D7A6E;       /* muted teal */
+  --lab-h3-accent:       #93C572;       /* pistachio bar */
+  --lab-body-text:       #2a2a3a;       /* dark ink */
+  --lab-link-color:      #4A8B7F;       /* teal links */
+  --lab-link-underline:  #93C572;       /* pistachio dots */
+  --lab-code-bg:         #eef5e8;       /* light pistachio */
+  --lab-code-text:       #2D1B69;       /* purple code */
+
+  /* C. STATUS */
+  --lab-active:          #5FA052;       /* pistachio success */
+  --lab-active-bg:       #e8f5e2;
+  --lab-warning:         #C67B28;       /* warm amber */
+  --lab-warning-bg:      #fef3e2;
+  --lab-critical:        #E85D75;       /* vaporwave rose */
+  --lab-critical-bg:     #fde8ed;
+  --lab-info:            #4ECDC4;       /* mermaid teal */
+  --lab-info-bg:         #e2f5f3;
+  --lab-neutral:         #7a7a8e;
+  --lab-neutral-bg:      #f0f0f4;
+
+  /* D. EVIDENCE TIERS */
+  --lab-tier1:           #E85D75;       /* rose — smoking gun */
+  --lab-tier2:           #C67B28;       /* amber — strong */
+  --lab-tier3:           #4ECDC4;       /* teal — contextual */
+  --lab-tier4:           #7a7a8e;       /* muted — catalog */
+
+  /* E. FFFF */
+  --lab-findings:        #93C572;       /* pistachio */
+  --lab-flags:           #D4A843;       /* gold */
+  --lab-friction:        #E85D75;       /* rose */
+  --lab-flow:            #4ECDC4;       /* teal */
+  --lab-ffff-dark:       #2D1B69;       /* deep purple bg */
+
+  /* F. ACCENTS */
+  --lab-gold:            #93C572;       /* pistachio as primary accent (replaces gold) */
+  --lab-gold-soft:       #e8f5e2;       /* soft pistachio bg */
+  --lab-accent-bar:      #4ECDC4;       /* teal blockquote bar */
+  --lab-tag-radius:      12px;
+  --lab-checkbox:        #4ECDC4;       /* teal checkboxes */
+
+  /* G. KANBAN */
+  --lab-kanban-high:     #E85D75;       /* rose HIGH column */
+  --lab-kanban-med:      #4ECDC4;       /* teal MED column */
+  --lab-kanban-low:      #93C572;       /* pistachio LOW column */
+  --lab-kanban-done:     #7a7a8e;       /* gray DONE column */
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   DARK THEME — deep purple/teal shadows, saturated jewel neons
+   ═══════════════════════════════════════════════════════════════ */
+.theme-dark {
+  /* A. STRUCTURE */
+  --lab-page-bg:         #0F0B1A;       /* near-black with purple undertone */
+  --lab-card-bg:         #1A1428;       /* dark purple card */
+  --lab-card-border:     #2D2245;       /* muted purple border */
+  --lab-card-shadow:     0 2px 12px rgba(78, 205, 196, 0.08);  /* teal glow shadow */
+  --lab-divider:         #2D2245;
+  --lab-sidebar-bg:      #120E1F;       /* deepest purple sidebar */
+
+  /* B. TYPOGRAPHY */
+  --lab-h1-color:        #93C572;       /* pistachio titles in dark */
+  --lab-h1-underline:    #6B3FA0;       /* purple underline */
+  --lab-h2-bg:           linear-gradient(135deg, #1A3C40 0%, #2D1B69 100%);
+  --lab-h2-bg-flat:      #1A3C40;       /* deep teal header */
+  --lab-h2-text:         #93C572;       /* pistachio on dark */
+  --lab-h3-color:        #4ECDC4;       /* bright teal */
+  --lab-h3-accent:       #6B3FA0;       /* purple bar */
+  --lab-body-text:       #d4ddd0;       /* soft sage text */
+  --lab-link-color:      #4ECDC4;       /* teal links */
+  --lab-link-underline:  #6B3FA0;       /* purple dots */
+  --lab-code-bg:         #1E1633;       /* dark purple code bg */
+  --lab-code-text:       #93C572;       /* pistachio code */
+
+  /* C. STATUS */
+  --lab-active:          #93C572;       /* pistachio */
+  --lab-active-bg:       #1a2a16;
+  --lab-warning:         #D4A843;       /* warm gold */
+  --lab-warning-bg:      #2a2216;
+  --lab-critical:        #E85D75;       /* rose */
+  --lab-critical-bg:     #2a161a;
+  --lab-info:            #4ECDC4;       /* teal */
+  --lab-info-bg:         #0D2A28;
+  --lab-neutral:         #6a6a7e;
+  --lab-neutral-bg:      #1a1a24;
+
+  /* D. EVIDENCE */
+  --lab-tier1:           #E85D75;
+  --lab-tier2:           #D4A843;
+  --lab-tier3:           #4ECDC4;
+  --lab-tier4:           #6a6a7e;
+
+  /* E. FFFF */
+  --lab-findings:        #93C572;
+  --lab-flags:           #D4A843;
+  --lab-friction:        #E85D75;
+  --lab-flow:            #4ECDC4;
+  --lab-ffff-dark:       #0F0B1A;
+
+  /* F. ACCENTS */
+  --lab-gold:            #4ECDC4;       /* teal as primary accent in dark */
+  --lab-gold-soft:       #0D2A28;       /* deep teal bg */
+  --lab-accent-bar:      #6B3FA0;       /* purple blockquote bar */
+  --lab-tag-radius:      12px;
+  --lab-checkbox:        #93C572;       /* pistachio checkboxes */
+
+  /* G. KANBAN */
+  --lab-kanban-high:     #E85D75;
+  --lab-kanban-med:      #4ECDC4;
+  --lab-kanban-low:      #93C572;
+  --lab-kanban-done:     #4a4a5e;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   WIRING — connects variables to actual Obsidian elements
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Page bg */
+.view-content { background-color: var(--lab-page-bg); }
+
+/* Sidebar */
+.workspace-leaf-content[data-type="file-explorer"] { background: var(--lab-sidebar-bg); }
+
+/* H1 */
+.markdown-preview-view h1,
+.markdown-rendered h1 {
+  color: var(--lab-h1-color);
+  border-bottom: 3px solid var(--lab-h1-underline);
+  padding-bottom: 8px;
+}
+
+/* H2 — gradient header cards */
+.wide-page .markdown-preview-view h2,
+.dashboard .markdown-preview-view h2,
+.markdown-rendered h2 {
+  background: var(--lab-h2-bg-flat);
+  background: var(--lab-h2-bg);
+  color: var(--lab-h2-text);
+  padding: 10px 16px;
+  border-radius: 8px 8px 0 0;
+  margin-top: 28px;
+  font-size: 0.95em;
+  letter-spacing: 0.03em;
+}
+
+/* H3 */
+.wide-page .markdown-preview-view h3,
+.dashboard .markdown-preview-view h3,
+.markdown-rendered h3 {
+  color: var(--lab-h3-color);
+  border-left: 3px solid var(--lab-h3-accent);
+  padding-left: 8px;
+  font-size: 0.9em;
+}
+
+/* Card body */
+.wide-page .markdown-preview-view h2 ~ *:not(h2):not(h1):not(hr),
+.dashboard .markdown-preview-view h2 ~ *:not(h2):not(h1):not(hr) {
+  background: var(--lab-card-bg);
+  border-left: 1px solid var(--lab-card-border);
+  border-right: 1px solid var(--lab-card-border);
+  padding: 4px 16px;
+}
+
+/* Card bottom */
+.wide-page .markdown-preview-view hr,
+.dashboard .markdown-preview-view hr {
+  background: var(--lab-card-bg);
+  border-radius: 0 0 8px 8px;
+  box-shadow: var(--lab-card-shadow);
+  border: none;
+  border-bottom: 1px solid var(--lab-divider);
+}
+
+/* Links */
+.internal-link {
+  color: var(--lab-link-color);
+  border-bottom: 1px dotted var(--lab-link-underline);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.internal-link:hover {
+  color: var(--lab-h1-color);
+  border-bottom-style: solid;
+}
+
+/* Blockquotes — retro accent bar */
+blockquote {
+  border-left: 4px solid var(--lab-accent-bar);
+  background: var(--lab-gold-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 16px;
+  color: var(--lab-body-text);
+}
+
+/* Inline code */
+code:not(pre code) {
+  background: var(--lab-code-bg);
+  color: var(--lab-code-text);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+/* Dataview tables */
+.dataview.table-view-table thead tr {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+}
+.dataview.table-view-table tbody tr { background: var(--lab-card-bg); }
+.dataview.table-view-table tbody tr:nth-child(even) { background: var(--lab-page-bg); }
+.dataview.table-view-table td { border-bottom: 1px solid var(--lab-card-border); }
+.dataview.table-view-table {
+  box-shadow: var(--lab-card-shadow);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Callouts */
+.callout[data-callout="pipeline"]         { background: var(--lab-active-bg); }
+.callout[data-callout="insight"]          { background: var(--lab-info-bg); }
+.callout[data-callout="gap"]             { background: var(--lab-warning-bg); }
+.callout[data-callout="critical"]         { background: var(--lab-critical-bg); }
+.callout[data-callout="technique"]        { background: var(--lab-active-bg); }
+.callout[data-callout="first-impression"] { background: var(--lab-gold-soft); }
+.callout[data-callout="hypothesis"]       { background: var(--lab-info-bg); }
+.callout[data-callout="null"]            { background: var(--lab-neutral-bg); opacity: 0.7; }
+
+/* FFFF callouts */
+.callout[data-callout="findings"] {
+  --callout-color: 147, 197, 114;
+  background: color-mix(in srgb, var(--lab-findings) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-findings);
+  border-radius: 8px;
+}
+.callout[data-callout="flags"] {
+  --callout-color: 212, 168, 67;
+  background: color-mix(in srgb, var(--lab-flags) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-flags);
+  border-radius: 8px;
+}
+.callout[data-callout="friction"] {
+  --callout-color: 232, 93, 117;
+  background: color-mix(in srgb, var(--lab-friction) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-friction);
+  border-radius: 8px;
+}
+.callout[data-callout="flow"] {
+  --callout-color: 78, 205, 196;
+  background: color-mix(in srgb, var(--lab-flow) 12%, var(--lab-card-bg));
+  border-left: 4px solid var(--lab-flow);
+  border-radius: 8px;
+}
+
+/* Tags — jewel pill colors */
+.tag {
+  border-radius: var(--lab-tag-radius);
+  padding: 2px 10px;
+  font-size: 0.82em;
+  transition: transform 0.1s ease;
+}
+.tag:hover { transform: scale(1.05); }
+.tag[href="#dashboard"]        { background: var(--lab-info-bg);     color: var(--lab-info); }
+.tag[href="#evidence"]         { background: var(--lab-warning-bg);  color: var(--lab-warning); }
+.tag[href="#task"]             { background: var(--lab-active-bg);   color: var(--lab-active); }
+.tag[href="#hypothesis"]       { background: var(--lab-critical-bg); color: var(--lab-critical); }
+.tag[href="#findings"]         { background: color-mix(in srgb, var(--lab-findings) 15%, var(--lab-card-bg)); color: var(--lab-findings); }
+.tag[href="#flags"]            { background: color-mix(in srgb, var(--lab-flags) 15%, var(--lab-card-bg));    color: var(--lab-flags); }
+.tag[href="#friction"]         { background: color-mix(in srgb, var(--lab-friction) 15%, var(--lab-card-bg)); color: var(--lab-friction); }
+.tag[href="#flow"]             { background: color-mix(in srgb, var(--lab-flow) 15%, var(--lab-card-bg));     color: var(--lab-flow); }
+.tag[href="#faerie"]           { background: color-mix(in srgb, #6B3FA0 15%, var(--lab-card-bg));            color: #6B3FA0; }
+.tag[href="#criticalexposure"] { background: color-mix(in srgb, var(--lab-critical) 15%, var(--lab-card-bg)); color: var(--lab-critical); }
+.tag[href="#queue"]            { background: color-mix(in srgb, var(--lab-info) 15%, var(--lab-card-bg));     color: var(--lab-info); }
+.tag[href="#kanban"]           { background: color-mix(in srgb, var(--lab-info) 15%, var(--lab-card-bg));     color: var(--lab-info); }
+
+/* Checkboxes */
+input[type="checkbox"] { accent-color: var(--lab-checkbox); }
+
+/* Scrollbar — slim teal */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--lab-page-bg); }
+::-webkit-scrollbar-thumb { background: var(--lab-card-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--lab-info); }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   KANBAN BOARD — column headers + card accents
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Kanban lane headers */
+.kanban-plugin__lane-header-wrapper {
+  border-radius: 8px 8px 0 0;
+  padding: 6px 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Color-code columns by priority — Kanban plugin uses lane titles */
+.kanban-plugin__lane:nth-child(1) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-high) 25%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-high);
+}
+.kanban-plugin__lane:nth-child(2) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-med) 25%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-med);
+}
+.kanban-plugin__lane:nth-child(3) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-low) 25%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-low);
+}
+.kanban-plugin__lane:nth-child(4) .kanban-plugin__lane-header-wrapper {
+  background: color-mix(in srgb, var(--lab-kanban-done) 20%, var(--lab-card-bg));
+  border-bottom: 3px solid var(--lab-kanban-done);
+}
+
+/* Kanban cards */
+.kanban-plugin__item {
+  background: var(--lab-card-bg);
+  border: 1px solid var(--lab-card-border);
+  border-radius: 8px;
+  box-shadow: var(--lab-card-shadow);
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.kanban-plugin__item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.12);
+}
+
+/* Kanban board background */
+.kanban-plugin__board {
+  background: var(--lab-page-bg);
+}
+.kanban-plugin__lane {
+  background: color-mix(in srgb, var(--lab-card-bg) 60%, var(--lab-page-bg));
+  border-radius: 8px;
+  margin: 0 4px;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SHADOWS & DEPTH — make everything pop, especially in light mode
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Layered shadow system */
+.theme-light {
+  --lab-shadow-sm:  0 1px 2px rgba(45, 27, 105, 0.06), 0 1px 3px rgba(26, 60, 64, 0.04);
+  --lab-shadow-md:  0 2px 8px rgba(45, 27, 105, 0.08), 0 4px 16px rgba(26, 60, 64, 0.05);
+  --lab-shadow-lg:  0 4px 16px rgba(45, 27, 105, 0.10), 0 8px 32px rgba(26, 60, 64, 0.06);
+  --lab-shadow-pop: 0 6px 24px rgba(45, 27, 105, 0.14), 0 2px 8px rgba(78, 205, 196, 0.08);
+  --lab-shadow-glow: 0 0 16px rgba(78, 205, 196, 0.15), 0 4px 12px rgba(45, 27, 105, 0.08);
+  --lab-shadow-inset: inset 0 1px 3px rgba(45, 27, 105, 0.06);
+}
+.theme-dark {
+  --lab-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(78, 205, 196, 0.03);
+  --lab-shadow-md:  0 2px 8px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(78, 205, 196, 0.04);
+  --lab-shadow-lg:  0 4px 16px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(107, 63, 160, 0.08);
+  --lab-shadow-pop: 0 6px 24px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(78, 205, 196, 0.1);
+  --lab-shadow-glow: 0 0 20px rgba(78, 205, 196, 0.12), 0 0 40px rgba(107, 63, 160, 0.06);
+  --lab-shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   BUTTONS & TOGGLES — deep jewel gradients that POP
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Primary CTA buttons */
+button.mod-cta {
+  background: linear-gradient(135deg, #1A3C40 0%, #2D1B69 100%);
+  color: #93C572;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: var(--lab-shadow-md), inset 0 1px 0 rgba(147, 197, 114, 0.15);
+  transition: all 0.2s ease;
+}
+button.mod-cta:hover {
+  background: linear-gradient(135deg, #4ECDC4 0%, #6B3FA0 100%);
+  color: #ffffff;
+  box-shadow: var(--lab-shadow-pop);
+  transform: translateY(-1px);
+}
+button.mod-cta:active {
+  transform: translateY(0);
+  box-shadow: var(--lab-shadow-sm), var(--lab-shadow-inset);
+}
+
+/* Secondary buttons */
+button:not(.mod-cta) {
+  background: var(--lab-card-bg);
+  border: 1px solid var(--lab-card-border);
+  border-radius: 6px;
+  box-shadow: var(--lab-shadow-sm);
+  transition: all 0.15s ease;
+}
+button:not(.mod-cta):hover {
+  box-shadow: var(--lab-shadow-md);
+  border-color: var(--lab-info);
+  transform: translateY(-1px);
+}
+
+/* Toggle switches */
+.checkbox-container {
+  box-shadow: var(--lab-shadow-inset);
+  border-radius: 14px;
+  transition: all 0.2s ease;
+}
+.checkbox-container.is-enabled {
+  background-color: var(--lab-info) !important;
+  box-shadow: var(--lab-shadow-sm), 0 0 8px rgba(78, 205, 196, 0.3);
+}
+.checkbox-container:hover {
+  box-shadow: var(--lab-shadow-md);
+}
+
+/* Setting item hover states */
+.setting-item {
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: background 0.15s ease;
+}
+.setting-item:hover {
+  background: color-mix(in srgb, var(--lab-info) 5%, var(--lab-card-bg));
+}
+
+/* Dropdown selects */
+select, .dropdown {
+  box-shadow: var(--lab-shadow-sm);
+  border-radius: 6px;
+  border: 1px solid var(--lab-card-border);
+  transition: all 0.15s ease;
+}
+select:hover, .dropdown:hover {
+  box-shadow: var(--lab-shadow-md);
+  border-color: var(--lab-info);
+}
+select:focus, .dropdown:focus {
+  box-shadow: var(--lab-shadow-glow);
+  border-color: var(--lab-info);
+  outline: none;
+}
+
+/* Text inputs */
+input[type="text"], input[type="search"], textarea {
+  box-shadow: var(--lab-shadow-inset);
+  border-radius: 6px;
+  border: 1px solid var(--lab-card-border);
+  transition: all 0.15s ease;
+}
+input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
+  box-shadow: var(--lab-shadow-glow);
+  border-color: var(--lab-info);
+  outline: none;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   RETRO POLISH — vaporwave atmospheric details
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Subtle gradient overlay on workspace */
+.workspace-leaf-content {
+  background: linear-gradient(180deg, var(--lab-page-bg) 0%, color-mix(in srgb, var(--lab-page-bg) 96%, #6B3FA0) 100%);
+}
+
+/* Workspace tabs */
+.workspace-tab-header {
+  transition: all 0.15s ease;
+}
+.workspace-tab-header.is-active {
+  box-shadow: var(--lab-shadow-sm);
+  border-bottom: 2px solid var(--lab-info);
+}
+
+/* File explorer items */
+.nav-file-title:hover, .nav-folder-title:hover {
+  background: color-mix(in srgb, var(--lab-info) 8%, transparent);
+  border-radius: 4px;
+}
+.nav-file-title.is-active {
+  background: color-mix(in srgb, var(--lab-info) 15%, transparent);
+  border-radius: 4px;
+  box-shadow: inset 3px 0 0 var(--lab-info);
+}
+
+/* Settings and modal backgrounds */
+.modal-container .modal {
+  background: var(--lab-card-bg);
+  border: 1px solid var(--lab-card-border);
+  border-radius: 12px;
+  box-shadow: var(--lab-shadow-lg);
+}
+
+/* Tooltip styling */
+.tooltip {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+  border-radius: 6px;
+  box-shadow: var(--lab-shadow-md);
+  padding: 4px 10px;
+}
+
+/* Graph view */
+.graph-view.color-fill { color: var(--lab-info); }
+.graph-view.color-circle { color: var(--lab-h3-accent); }
+.graph-view.color-line { color: var(--lab-card-border); }
+.graph-view.color-text { color: var(--lab-body-text); }
+.graph-view.color-fill-highlight { color: var(--lab-findings); }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   MERMAID DIAGRAMS — jewel-toned, shadowed, polished
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Mermaid container — bold framed canvas */
+.mermaid svg {
+  max-width: 100%;
+  border-radius: 12px;
+  background: var(--lab-card-bg);
+  padding: 24px;
+  box-shadow: var(--lab-shadow-lg);
+  border: 2px solid var(--lab-card-border);
+}
+/* Dark mode: slightly elevated mermaid canvas */
+.theme-dark .mermaid svg {
+  background: #1A1428;
+  border-color: #2D2245;
+}
+
+/* Node styling — BOLD jewel shapes, clear differentiation */
+/* Rectangles = processes/actions — TEAL */
+.mermaid .node rect {
+  fill: color-mix(in srgb, var(--lab-info) 20%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 3px;
+  rx: 12;
+  ry: 12;
+  filter: drop-shadow(0 3px 8px rgba(78, 205, 196, 0.25));
+}
+/* Circles = states/events — PISTACHIO */
+.mermaid .node circle {
+  fill: color-mix(in srgb, var(--lab-findings) 25%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+  stroke-width: 3px;
+  filter: drop-shadow(0 3px 8px rgba(147, 197, 114, 0.25));
+}
+/* Diamonds/polygons = decisions — PURPLE */
+.mermaid .node polygon {
+  fill: color-mix(in srgb, #6B3FA0 18%, var(--lab-card-bg));
+  stroke: #6B3FA0;
+  stroke-width: 3px;
+  filter: drop-shadow(0 3px 8px rgba(107, 63, 160, 0.25));
+}
+/* Stadium/pill shapes = data stores — ROSE */
+.mermaid .node .label-container {
+  stroke-width: 3px;
+}
+
+/* Mermaid text — bold, readable */
+.mermaid .nodeLabel {
+  color: var(--lab-body-text);
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+/* Edge labels — clear pill badges */
+.mermaid .edgeLabel {
+  background-color: var(--lab-page-bg);
+  color: var(--lab-body-text);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 0.82em;
+  font-weight: 600;
+  border: 1px solid var(--lab-card-border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Arrow/edge lines — BOLD, unmistakable */
+.mermaid .flowchart-link {
+  stroke: var(--lab-info);
+  stroke-width: 3px;
+}
+.mermaid marker path {
+  fill: var(--lab-info);
+}
+/* Dotted links */
+.mermaid path.flowchart-link[style*="dotted"],
+.mermaid .flowchart-link.dotted {
+  stroke: #6B3FA0;
+  stroke-width: 2.5px;
+}
+
+/* Subgraph clusters — distinct colored regions */
+.mermaid .cluster rect {
+  fill: color-mix(in srgb, #6B3FA0 8%, var(--lab-page-bg));
+  stroke: #6B3FA0;
+  stroke-width: 2.5px;
+  stroke-dasharray: 8, 4;
+  rx: 16;
+  ry: 16;
+  filter: drop-shadow(0 2px 6px rgba(107, 63, 160, 0.12));
+}
+.mermaid .cluster span {
+  color: #6B3FA0;
+  font-weight: 700;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Sequence diagram specifics */
+.mermaid .actor {
+  fill: color-mix(in srgb, var(--lab-info) 12%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 2px;
+}
+.mermaid .activation0, .mermaid .activation1 {
+  fill: color-mix(in srgb, var(--lab-findings) 15%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+}
+.mermaid .messageLine0, .mermaid .messageLine1 {
+  stroke: var(--lab-info);
+}
+.mermaid .messageText {
+  fill: var(--lab-body-text);
+  font-size: 0.85em;
+}
+
+/* Gantt chart specifics */
+.mermaid .section0, .mermaid .section1 {
+  fill: color-mix(in srgb, var(--lab-info) 8%, var(--lab-page-bg));
+}
+.mermaid .task {
+  fill: color-mix(in srgb, var(--lab-info) 25%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+}
+.mermaid .done0, .mermaid .done1 {
+  fill: color-mix(in srgb, var(--lab-findings) 20%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+}
+.mermaid .crit0, .mermaid .crit1 {
+  fill: color-mix(in srgb, var(--lab-critical) 20%, var(--lab-card-bg));
+  stroke: var(--lab-critical);
+}
+
+/* State diagram */
+.mermaid .stateGroup rect {
+  fill: color-mix(in srgb, #6B3FA0 8%, var(--lab-card-bg));
+  stroke: #6B3FA0;
+  rx: 8;
+  ry: 8;
+}
+
+/* Pie chart */
+.mermaid .pieCircle {
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   DEBUG TOOLS — uncomment to see element boundaries
+   ═══════════════════════════════════════════════════════════════ */
+/* * { outline: 1px solid rgba(147,197,114,0.1) !important; } */
+/* .kanban-plugin__lane { outline: 2px dashed var(--lab-info) !important; } */

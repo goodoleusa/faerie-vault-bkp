@@ -1,0 +1,11 @@
+{
+  "pinned": [
+    "app:open-settings",
+    "copilot:new-chat",
+    "obsidian-excalidraw-plugin:excalidraw-open-sidepanel",
+    "dataview:dataview-rebuild-current-view",
+    "file-explorer:move-file",
+    "workspace:edit-file-title",
+    "outline:open-for-current"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "task": "daily-brief-2026-04-06",
+  "generated_at": "2026-04-06T00:00:00Z",
+  "agent": "python-pro",
+  "output_path": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/2026-04-06-master-brief.md",
+  "dashboard_line": "2026-04-06: faerie hardening \u2014 eval 0.67, manifest schema, batch API, dead reckoning step-1",
+  "files_written": [
+    "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/2026-04-06-master-brief.md",
+    "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/by-project/2026-04-06-faerie.md",
+    "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/by-project/2026-04-06-faerie2.md",
+    "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/by-project/2026-04-06-cybertemplate.md",
+    "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/by-project/2026-04-06-hustle.md",
+    "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Hive/DAILY-BRIEFS/by-project/2026-04-06-data-analysis-engine.md"
+  ],
+  "per_project_briefs_written": 5,
+  "projects_covered": [
+    "faerie",
+    "faerie2",
+    "cybertemplate",
+    "hustle",
+    "data-analysis-engine"
+  ],
+  "project_key_normalization": {
+    "note": "sprint-queue.json NOT modified",
+    "CyberOps-UNIFIED": "cyberops-unified",
+    "cyberops-unified": "cyberops-unified (canonical)",
+    "criticalexposure": "treated as investigation sub-project of cybertemplate, not a top-level brief project"
+  },
+  "queue_snapshot": {
+    "total_tasks": 66,
+    "in_progress": 4,
+    "queued": 61,
+    "deferred": 1
+  },
+  "next": [
+    "Generate per-project briefs for prior dates that have content (2026-03-28 through 2026-04-02)",
+    "Wire brief generation into /handoff automation"
+  ]
+}
