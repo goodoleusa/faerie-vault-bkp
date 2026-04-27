@@ -1,0 +1,35 @@
+{
+  "type": "droplets-manifest",
+  "updated": "2026-03-29T19:00:00.000000+00:00",
+  "author": "amand (human) + faerie system (AI)",
+  "purpose": "IP provenance \u2014 SHA256 hashes for live droplets files",
+  "documents": [
+    {
+      "file": "LIVE-2026-03-27.md",
+      "sha256": "852eb163171354cdfb3ece58b80191b430056a8fbd13ecb2fe25c15f8f198fa6",
+      "size_bytes": 2809,
+      "lines": 58,
+      "timestamp_hashed": "2026-03-27T23:25:30.118007+00:00"
+    },
+    {
+      "file": "LIVE-2026-03-28.md",
+      "sha256": "0e33dc4181275526b04255567957e8eeb8f1b0fbef52d0d7b43752cb12982b9b",
+      "size_bytes": null,
+      "lines": 139,
+      "hash_method": "body-sha256-v1",
+      "timestamp_hashed": "2026-03-29T16:10:00Z",
+      "source": "agent-emission-stream",
+      "sealed_by": "context-manager F4-20260329-droplet-seal"
+    },
+    {
+      "file": "LIVE-2026-03-29.md",
+      "sha256": "ae233f56186b6d59e94f8ad06ef9820d68729871dbc1575e9253a4fd16687eef",
+      "size_bytes": null,
+      "lines": 306,
+      "hash_method": "body-sha256-v1",
+      "timestamp_hashed": "2026-03-29T16:10:00Z",
+      "source": "agent-emission-stream",
+      "sealed_by": "context-manager F4-20260329-droplet-seal"
+    }
+  ]
+}

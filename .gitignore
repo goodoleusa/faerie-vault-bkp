@@ -1,0 +1,23 @@
+# Obsidian runtime & cache
+.obsidian/cache/
+.obsidian/plugins/node_modules/
+.obsidian/workspace*
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Node & Python
+node_modules/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+.Thumbs.db
+
+# Keep vault structure & docs
+# (no patterns to exclude; vault/ directory is tracked)
