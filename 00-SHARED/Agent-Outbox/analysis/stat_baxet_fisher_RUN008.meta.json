@@ -1,0 +1,7 @@
+{
+  "source": "scripts/audit_results/stat_baxet_fisher_RUN008.json",
+  "dest": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Agent-Outbox/analysis/stat_baxet_fisher_RUN008.json",
+  "content_type": "analysis",
+  "synced_at": "2026-03-23T00:23:38.332872+00:00",
+  "sha256": "3339e77736599abafdc43403e682280aa55fb30e34406c190239196e6bba6ac7"
+}

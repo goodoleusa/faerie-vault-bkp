@@ -1,0 +1,7 @@
+{
+  "source": "scripts/audit_results/evidence_tiers/tier1_smoking_gun.json",
+  "dest": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Agent-Outbox/evidence/tier1_smoking_gun.json",
+  "content_type": "evidence",
+  "synced_at": "2026-03-23T00:29:30.273549+00:00",
+  "sha256": "4e7cc63645ac54e21957d35c119ce564dc580077146d5b3bf7bcbfe6f1318759"
+}

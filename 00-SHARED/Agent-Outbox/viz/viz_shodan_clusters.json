@@ -1,0 +1,4538 @@
+{
+  "_schema": "shodan_clusters_v1",
+  "_source_files": [
+    "data/OVERLAP_multi-group-ips.csv",
+    "data/A-B-C_all-combined.csv",
+    "data/NETWORK_d3-graph.json"
+  ],
+  "_generated": "2026-03-22T23:47:36Z",
+  "_git_commit": "fd353e3",
+  "_base_graph": {
+    "generated": "20260322T191931Z",
+    "git_commit": "52a6697",
+    "source_files": [
+      "viz/normalized/run008_master_normalized_20260322T185838Z.csv",
+      "viz/normalized/run008_asn_top50_20260322T185838Z.csv",
+      "viz/normalized/run008_ip_overlap_matrix_20260322T185838Z.csv"
+    ],
+    "node_count": 230,
+    "link_count": 172,
+    "description": "IP/ASN network graph for force-directed D3 visualization"
+  },
+  "nodes": [
+    {
+      "id": "ASN:26383",
+      "type": "asn",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "label": "Packetware / AS26383",
+      "observation_count": 2214,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "Packetware / AS26383",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:8070",
+      "type": "asn",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "label": "Microsoft (US-East)",
+      "observation_count": 12113,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "Microsoft (US-East)",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:14593",
+      "type": "asn",
+      "hypothesis": "H3",
+      "asn": "14593",
+      "label": "Pacific Internet (TW)",
+      "observation_count": 108,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "Pacific Internet (TW)",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:8075",
+      "type": "asn",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "label": "Microsoft Corp",
+      "observation_count": 1709,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "Microsoft Corp",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:395337",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "395337",
+      "label": "Unknown/Private",
+      "observation_count": 54,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Unknown/Private",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:5645",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "5645",
+      "label": "Tele2 Sweden",
+      "observation_count": 46,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Tele2 Sweden",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:51659",
+      "type": "asn",
+      "hypothesis": "H4",
+      "asn": "51659",
+      "label": "XO Comm",
+      "observation_count": 49,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "XO Comm",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:204601",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "204601",
+      "label": "Private Layer",
+      "observation_count": 43,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Private Layer",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:14061",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "14061",
+      "label": "DigitalOcean",
+      "observation_count": 77,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "DigitalOcean",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:132203",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "132203",
+      "label": "Tencent Cloud",
+      "observation_count": 52,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Tencent Cloud",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:51167",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "51167",
+      "label": "Contabo GmbH",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Contabo GmbH",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:8560",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "8560",
+      "label": "IONOS",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "IONOS",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:35042",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "35042",
+      "label": "VHosting",
+      "observation_count": 37,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "VHosting",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:4766",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "4766",
+      "label": "KT Corp (KR)",
+      "observation_count": 37,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "KT Corp (KR)",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:3215",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "3215",
+      "label": "Orange France",
+      "observation_count": 35,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Orange France",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:45903",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "45903",
+      "label": "Chunghwa Telecom",
+      "observation_count": 33,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Chunghwa Telecom",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:37963",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "37963",
+      "label": "Alibaba Cloud",
+      "observation_count": 50,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Alibaba Cloud",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:45102",
+      "type": "asn",
+      "hypothesis": "H4",
+      "asn": "45102",
+      "label": "Alibaba Cloud SG",
+      "observation_count": 32,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "Alibaba Cloud SG",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:20473",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "20473",
+      "label": "Choopa LLC",
+      "observation_count": 50,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Choopa LLC",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:36352",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "36352",
+      "label": "ColoCrossing",
+      "observation_count": 46,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "ColoCrossing",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:812",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "812",
+      "label": "Rogers Canada",
+      "observation_count": 30,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Rogers Canada",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:9009",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "9009",
+      "label": "M247",
+      "observation_count": 26,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "M247",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:63949",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "63949",
+      "label": "Linode",
+      "observation_count": 23,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Linode",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:6327",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "6327",
+      "label": "Shaw Cable",
+      "observation_count": 23,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Shaw Cable",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:31898",
+      "type": "asn",
+      "hypothesis": "H4",
+      "asn": "31898",
+      "label": "Oracle Cloud",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "Oracle Cloud",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:9443",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "9443",
+      "label": "Softlayer",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Softlayer",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:24940",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "24940",
+      "label": "Hetzner",
+      "observation_count": 32,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "Hetzner",
+      "is_overlap": false
+    },
+    {
+      "id": "ASN:16276",
+      "type": "asn",
+      "hypothesis": "H2",
+      "asn": "16276",
+      "label": "OVH",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H2",
+      "country": "",
+      "org": "OVH",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.33.35",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 154,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.55.225",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 148,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.55.224",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 145,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.12.57",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 141,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.0.14",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 134,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.1.32",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 128,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.33.34",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 124,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.41.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 121,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.33.32",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 116,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "193.124.41.201",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 115,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.159.179.121",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 114,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.57.32",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 112,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.140.88.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 107,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.201.33",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 107,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.141.212.29",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 106,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.200.3",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 103,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.201.32",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 95,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.141.187.112",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 91,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "193.124.41.77",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 82,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "66.9.177.12",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "14593",
+      "observation_count": 79,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "185.72.8.160",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 76,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.46.92",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 75,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.57.33",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 74,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "13.72.48.140",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 74,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.46.116",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 73,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "185.72.8.118",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 68,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "193.124.41.29",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 67,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.71",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 65,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.90.236.11",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 65,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.90.236.122",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 65,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.90.236.166",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 65,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "93.113.171.146",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 63,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.90.236.169",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 63,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.57.1",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 62,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.84",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 62,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.90.236.84",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 62,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.182.88.34",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 61,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.27",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 60,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.75",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 60,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.23",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 58,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.8.3",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 57,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.72",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 56,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 56,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.89",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 56,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.0.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 56,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.200.8",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 56,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.191.93",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 55,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.200.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 55,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.46.55",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 55,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "166.1.201.22",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 55,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.69",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 54,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.74",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 53,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.80",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 53,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.6",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 52,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.20",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 52,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.46.245",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 52,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.87.108.4",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 52,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.81",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 51,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.87.108.90",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 51,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.25",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 50,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.28",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 50,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.254.60.85",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "395337",
+      "observation_count": 49,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "MacStadium, Inc.",
+      "is_overlap": true
+    },
+    {
+      "id": "52.235.250.85",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 49,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.22",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 49,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "91.149.253.182",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 49,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.16",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 48,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.73",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 47,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.174.31.251",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 47,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "24.52.248.184",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "5645",
+      "observation_count": 46,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "TekSavvy Solutions Inc.",
+      "is_overlap": true
+    },
+    {
+      "id": "52.235.250.79",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 46,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.1",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 45,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.8.4",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 45,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "46.17.43.235",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "51659",
+      "observation_count": 45,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.158.8.248",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.200.5",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.5",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.33.1",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.83",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.15",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.87.108.168",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 44,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "92.119.113.36",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "204601",
+      "observation_count": 43,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Celeritas International LLC",
+      "is_overlap": true
+    },
+    {
+      "id": "52.235.250.91",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 43,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.88",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 43,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.66",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 43,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.57.0",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 42,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.90",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 42,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.82",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 42,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "146.190.212.250",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "14061",
+      "observation_count": 41,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "DigitalOcean, LLC",
+      "is_overlap": true
+    },
+    {
+      "id": "52.235.250.65",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 41,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.57.3",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 41,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.8.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 41,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.57.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 41,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "43.154.219.55",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "132203",
+      "observation_count": 40,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Asia Pacific Network Information Center, Pty. Ltd.",
+      "is_overlap": true
+    },
+    {
+      "id": "52.247.166.10",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 40,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.33.0",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 40,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.64",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 39,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.68",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 39,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.8.0",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 39,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.24",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 39,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.33.36",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 39,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.17.152",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "144.91.108.231",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "51167",
+      "observation_count": 38,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Contabo GmbH",
+      "is_overlap": true
+    },
+    {
+      "id": "212.132.66.71",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "8560",
+      "observation_count": 38,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "IONOS SE",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.8.5",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.67",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.78",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.7",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.44.190",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 38,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "185.55.241.233",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "35042",
+      "observation_count": 37,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Layer7 Networks GmbH",
+      "is_overlap": true
+    },
+    {
+      "id": "220.95.232.63",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "4766",
+      "observation_count": 37,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Korea Telecom",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.9.0",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 37,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.21",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 37,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.4",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 37,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.70",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 37,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.76",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 36,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.86",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 36,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.55.226",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 36,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.17",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 36,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.87.82.135",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 36,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "90.127.160.45",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "3215",
+      "observation_count": 35,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Orange S.A.",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.32.12",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 35,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.77",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 35,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.40.40",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 35,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.200.6",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 34,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.87.82.62",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 34,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.158.211.85",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 33,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "202.134.19.119",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "45903",
+      "observation_count": 33,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "CMC Telecom Infrastructure Company",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.32.1",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 33,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.9.3",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 33,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.174.30.248",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 33,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "120.26.57.76",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "37963",
+      "observation_count": 32,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Aliyun Computing Co., LTD",
+      "is_overlap": true
+    },
+    {
+      "id": "45.55.94.92",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "14061",
+      "observation_count": 31,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "DigitalOcean, LLC",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.1.33",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 31,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.44.176",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 31,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "8.218.53.202",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "45102",
+      "observation_count": 30,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Alibaba Cloud (Singapore) Private Limited",
+      "is_overlap": true
+    },
+    {
+      "id": "208.167.253.10",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "20473",
+      "observation_count": 30,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Vultr Holdings, LLC",
+      "is_overlap": true
+    },
+    {
+      "id": "23.94.137.228",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "36352",
+      "observation_count": 30,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "RackNerd LLC",
+      "is_overlap": true
+    },
+    {
+      "id": "99.213.71.135",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "812",
+      "observation_count": 30,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Rogers Cable Inc. FLFRD",
+      "is_overlap": true
+    },
+    {
+      "id": "194.87.82.86",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 30,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "193.124.49.187",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 30,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "129.222.114.153",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "14593",
+      "observation_count": 29,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.127.32.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 28,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.181.160.27",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 28,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "193.124.49.45",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 28,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "93.113.171.230",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 28,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.58.44.111",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 28,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.17.153",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 27,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "37.120.239.138",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "9009",
+      "observation_count": 26,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "M247 LTD Amsterdam Infrastructure",
+      "is_overlap": true
+    },
+    {
+      "id": "193.124.49.114",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 26,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "212.193.1.23",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 26,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.98.101",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 25,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.181.160.29",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 25,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "207.90.236.3",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 25,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.141.117.247",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 24,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.18.149",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 24,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.227.28.11",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 24,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "194.87.82.131",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 24,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "104.237.153.11",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "63949",
+      "observation_count": 23,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Linode",
+      "is_overlap": true
+    },
+    {
+      "id": "184.66.116.150",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "6327",
+      "observation_count": 23,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Shaw Communications Inc.",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.33.2",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 23,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.235.250.92",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8075",
+      "observation_count": 23,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.158.24.90",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 22,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "129.159.36.171",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "31898",
+      "observation_count": 22,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Oracle Corporation",
+      "is_overlap": true
+    },
+    {
+      "id": "194.87.105.165",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 22,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "93.113.171.243",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 22,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "93.113.171.13",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 22,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "103.146.119.172",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 22,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.158.1.191",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.60.126",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.178.146",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.25.84",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.183.187",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.27.213",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.30.51",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.42.113",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "38.135.55.94",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "103.146.119.247",
+      "type": "ip",
+      "hypothesis": "H4",
+      "asn": "26383",
+      "observation_count": 21,
+      "multi_group": false,
+      "groups": "H4",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.121.20",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.147.143",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.159.219.87",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.63.116",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.159.66.73",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.52.96",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "58.178.115.2",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "9443",
+      "observation_count": 20,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Vocus Australia",
+      "is_overlap": true
+    },
+    {
+      "id": "2001:19f0:6001:1409:5400:1ff:fe61:1558",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "20473",
+      "observation_count": 20,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Vultr Holdings, LLC",
+      "is_overlap": true
+    },
+    {
+      "id": "37.27.235.245",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "24940",
+      "observation_count": 20,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "Hetzner Online GmbH",
+      "is_overlap": true
+    },
+    {
+      "id": "52.127.33.3",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 20,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.159.200.89",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.103.188",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.49.116",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "52.126.38.72",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.65.214",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.141.174.141",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.60.179",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.10.74.42",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.101.220",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "51.89.121.248",
+      "type": "ip",
+      "hypothesis": "H2|H4",
+      "asn": "16276",
+      "observation_count": 19,
+      "multi_group": true,
+      "groups": "H2|H4",
+      "country": "",
+      "org": "OVH GmbH",
+      "is_overlap": true
+    },
+    {
+      "id": "62.11.97.49",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 19,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "20.159.219.145",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 18,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    },
+    {
+      "id": "62.11.44.114",
+      "type": "ip",
+      "hypothesis": "H3",
+      "asn": "8070",
+      "observation_count": 18,
+      "multi_group": false,
+      "groups": "H3",
+      "country": "",
+      "org": "",
+      "is_overlap": false
+    }
+  ],
+  "links": [
+    {
+      "source": "IP:193.124.41.201",
+      "target": "ASN:26383",
+      "weight": 115,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:20.159.179.121",
+      "target": "ASN:8070",
+      "weight": 114,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:20.141.212.29",
+      "target": "ASN:8070",
+      "weight": 106,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:20.141.187.112",
+      "target": "ASN:8070",
+      "weight": 91,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:193.124.41.77",
+      "target": "ASN:26383",
+      "weight": 82,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:66.9.177.12",
+      "target": "ASN:14593",
+      "weight": 79,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:185.72.8.160",
+      "target": "ASN:26383",
+      "weight": 76,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.46.92",
+      "target": "ASN:26383",
+      "weight": 75,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:13.72.48.140",
+      "target": "ASN:8075",
+      "weight": 74,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.46.116",
+      "target": "ASN:26383",
+      "weight": 73,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:185.72.8.118",
+      "target": "ASN:26383",
+      "weight": 68,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:193.124.41.29",
+      "target": "ASN:26383",
+      "weight": 67,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.71",
+      "target": "ASN:8075",
+      "weight": 65,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.90.236.11",
+      "target": "ASN:26383",
+      "weight": 65,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.90.236.122",
+      "target": "ASN:26383",
+      "weight": 65,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.90.236.166",
+      "target": "ASN:26383",
+      "weight": 65,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:93.113.171.146",
+      "target": "ASN:26383",
+      "weight": 63,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.90.236.169",
+      "target": "ASN:26383",
+      "weight": 63,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.57.1",
+      "target": "ASN:8070",
+      "weight": 62,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.84",
+      "target": "ASN:8075",
+      "weight": 62,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.90.236.84",
+      "target": "ASN:26383",
+      "weight": 62,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.182.88.34",
+      "target": "ASN:8075",
+      "weight": 61,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.27",
+      "target": "ASN:8070",
+      "weight": 60,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.75",
+      "target": "ASN:8075",
+      "weight": 60,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.23",
+      "target": "ASN:8070",
+      "weight": 58,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.8.3",
+      "target": "ASN:8070",
+      "weight": 57,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.72",
+      "target": "ASN:8075",
+      "weight": 56,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.2",
+      "target": "ASN:8070",
+      "weight": 56,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.89",
+      "target": "ASN:8075",
+      "weight": 56,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.0.2",
+      "target": "ASN:8070",
+      "weight": 56,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.126.200.8",
+      "target": "ASN:8070",
+      "weight": 56,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.126.200.2",
+      "target": "ASN:8070",
+      "weight": 55,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.46.55",
+      "target": "ASN:26383",
+      "weight": 55,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:166.1.201.22",
+      "target": "ASN:26383",
+      "weight": 55,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.69",
+      "target": "ASN:8075",
+      "weight": 54,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.74",
+      "target": "ASN:8075",
+      "weight": 53,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.80",
+      "target": "ASN:8075",
+      "weight": 53,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.6",
+      "target": "ASN:8070",
+      "weight": 52,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.20",
+      "target": "ASN:8070",
+      "weight": 52,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.46.245",
+      "target": "ASN:26383",
+      "weight": 52,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.108.4",
+      "target": "ASN:26383",
+      "weight": 52,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.81",
+      "target": "ASN:8075",
+      "weight": 51,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.108.90",
+      "target": "ASN:26383",
+      "weight": 51,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.25",
+      "target": "ASN:8070",
+      "weight": 50,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.28",
+      "target": "ASN:8070",
+      "weight": 50,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.254.60.85",
+      "target": "ASN:395337",
+      "weight": 49,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.85",
+      "target": "ASN:8075",
+      "weight": 49,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.22",
+      "target": "ASN:8070",
+      "weight": 49,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:91.149.253.182",
+      "target": "ASN:26383",
+      "weight": 49,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.16",
+      "target": "ASN:8070",
+      "weight": 48,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.73",
+      "target": "ASN:8075",
+      "weight": 47,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.174.31.251",
+      "target": "ASN:26383",
+      "weight": 47,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:24.52.248.184",
+      "target": "ASN:5645",
+      "weight": 46,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.79",
+      "target": "ASN:8075",
+      "weight": 46,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.1",
+      "target": "ASN:8070",
+      "weight": 45,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.8.4",
+      "target": "ASN:8070",
+      "weight": 45,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:46.17.43.235",
+      "target": "ASN:51659",
+      "weight": 45,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.126.200.5",
+      "target": "ASN:8070",
+      "weight": 44,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.5",
+      "target": "ASN:8070",
+      "weight": 44,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.33.1",
+      "target": "ASN:8070",
+      "weight": 44,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.83",
+      "target": "ASN:8075",
+      "weight": 44,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.15",
+      "target": "ASN:8070",
+      "weight": 44,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.108.168",
+      "target": "ASN:26383",
+      "weight": 44,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:92.119.113.36",
+      "target": "ASN:204601",
+      "weight": 43,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.91",
+      "target": "ASN:8075",
+      "weight": 43,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.88",
+      "target": "ASN:8075",
+      "weight": 43,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.66",
+      "target": "ASN:8075",
+      "weight": 43,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.57.0",
+      "target": "ASN:8070",
+      "weight": 42,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.90",
+      "target": "ASN:8075",
+      "weight": 42,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.82",
+      "target": "ASN:8075",
+      "weight": 42,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:146.190.212.250",
+      "target": "ASN:14061",
+      "weight": 41,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.65",
+      "target": "ASN:8075",
+      "weight": 41,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.57.3",
+      "target": "ASN:8070",
+      "weight": 41,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.8.2",
+      "target": "ASN:8070",
+      "weight": 41,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.57.2",
+      "target": "ASN:8070",
+      "weight": 41,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:43.154.219.55",
+      "target": "ASN:132203",
+      "weight": 40,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.247.166.10",
+      "target": "ASN:8075",
+      "weight": 40,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.33.0",
+      "target": "ASN:8070",
+      "weight": 40,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.64",
+      "target": "ASN:8075",
+      "weight": 39,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.68",
+      "target": "ASN:8075",
+      "weight": 39,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.8.0",
+      "target": "ASN:8070",
+      "weight": 39,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.24",
+      "target": "ASN:8070",
+      "weight": 39,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.33.36",
+      "target": "ASN:8070",
+      "weight": 39,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.17.152",
+      "target": "ASN:8070",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:144.91.108.231",
+      "target": "ASN:51167",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:212.132.66.71",
+      "target": "ASN:8560",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.8.5",
+      "target": "ASN:8070",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.67",
+      "target": "ASN:8075",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.78",
+      "target": "ASN:8075",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.7",
+      "target": "ASN:8070",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.44.190",
+      "target": "ASN:26383",
+      "weight": 38,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:185.55.241.233",
+      "target": "ASN:35042",
+      "weight": 37,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:220.95.232.63",
+      "target": "ASN:4766",
+      "weight": 37,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.0",
+      "target": "ASN:8070",
+      "weight": 37,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.21",
+      "target": "ASN:8070",
+      "weight": 37,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.4",
+      "target": "ASN:8070",
+      "weight": 37,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.70",
+      "target": "ASN:8075",
+      "weight": 37,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.76",
+      "target": "ASN:8075",
+      "weight": 36,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.86",
+      "target": "ASN:8075",
+      "weight": 36,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.55.226",
+      "target": "ASN:8070",
+      "weight": 36,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.17",
+      "target": "ASN:8070",
+      "weight": 36,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.82.135",
+      "target": "ASN:26383",
+      "weight": 36,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:90.127.160.45",
+      "target": "ASN:3215",
+      "weight": 35,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.12",
+      "target": "ASN:8070",
+      "weight": 35,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.77",
+      "target": "ASN:8075",
+      "weight": 35,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.40.40",
+      "target": "ASN:26383",
+      "weight": 35,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.126.200.6",
+      "target": "ASN:8070",
+      "weight": 34,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.82.62",
+      "target": "ASN:26383",
+      "weight": 34,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:20.158.211.85",
+      "target": "ASN:8070",
+      "weight": 33,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:202.134.19.119",
+      "target": "ASN:45903",
+      "weight": 33,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.1",
+      "target": "ASN:8070",
+      "weight": 33,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.9.3",
+      "target": "ASN:8070",
+      "weight": 33,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.174.30.248",
+      "target": "ASN:26383",
+      "weight": 33,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:120.26.57.76",
+      "target": "ASN:37963",
+      "weight": 32,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:45.55.94.92",
+      "target": "ASN:14061",
+      "weight": 31,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.1.33",
+      "target": "ASN:8070",
+      "weight": 31,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.44.176",
+      "target": "ASN:26383",
+      "weight": 31,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:8.218.53.202",
+      "target": "ASN:45102",
+      "weight": 30,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:208.167.253.10",
+      "target": "ASN:20473",
+      "weight": 30,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:23.94.137.228",
+      "target": "ASN:36352",
+      "weight": 30,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:99.213.71.135",
+      "target": "ASN:812",
+      "weight": 30,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.82.86",
+      "target": "ASN:26383",
+      "weight": 30,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:193.124.49.187",
+      "target": "ASN:26383",
+      "weight": 30,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:129.222.114.153",
+      "target": "ASN:14593",
+      "weight": 29,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.32.2",
+      "target": "ASN:8070",
+      "weight": 28,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.181.160.27",
+      "target": "ASN:8075",
+      "weight": 28,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:193.124.49.45",
+      "target": "ASN:26383",
+      "weight": 28,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:93.113.171.230",
+      "target": "ASN:26383",
+      "weight": 28,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.58.44.111",
+      "target": "ASN:26383",
+      "weight": 28,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.17.153",
+      "target": "ASN:8070",
+      "weight": 27,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:37.120.239.138",
+      "target": "ASN:9009",
+      "weight": 26,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:193.124.49.114",
+      "target": "ASN:26383",
+      "weight": 26,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:212.193.1.23",
+      "target": "ASN:26383",
+      "weight": 26,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.98.101",
+      "target": "ASN:8070",
+      "weight": 25,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.181.160.29",
+      "target": "ASN:8075",
+      "weight": 25,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:207.90.236.3",
+      "target": "ASN:26383",
+      "weight": 25,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:20.141.117.247",
+      "target": "ASN:8070",
+      "weight": 24,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.18.149",
+      "target": "ASN:8070",
+      "weight": 24,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.227.28.11",
+      "target": "ASN:8075",
+      "weight": 24,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.82.131",
+      "target": "ASN:26383",
+      "weight": 24,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:104.237.153.11",
+      "target": "ASN:63949",
+      "weight": 23,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:184.66.116.150",
+      "target": "ASN:6327",
+      "weight": 23,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.33.2",
+      "target": "ASN:8070",
+      "weight": 23,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.235.250.92",
+      "target": "ASN:8075",
+      "weight": 23,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:129.159.36.171",
+      "target": "ASN:31898",
+      "weight": 22,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:194.87.105.165",
+      "target": "ASN:26383",
+      "weight": 22,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:93.113.171.243",
+      "target": "ASN:26383",
+      "weight": 22,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:93.113.171.13",
+      "target": "ASN:26383",
+      "weight": 22,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:103.146.119.172",
+      "target": "ASN:26383",
+      "weight": 22,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.60.126",
+      "target": "ASN:8070",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.126.183.187",
+      "target": "ASN:8070",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.27.213",
+      "target": "ASN:8070",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.30.51",
+      "target": "ASN:8070",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.42.113",
+      "target": "ASN:8070",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:38.135.55.94",
+      "target": "ASN:26383",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:103.146.119.247",
+      "target": "ASN:26383",
+      "weight": 21,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.147.143",
+      "target": "ASN:8070",
+      "weight": 20,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:58.178.115.2",
+      "target": "ASN:9443",
+      "weight": 20,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:2001:19f0:6001:1409:5400:1ff:fe61:1558",
+      "target": "ASN:20473",
+      "weight": 20,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:37.27.235.245",
+      "target": "ASN:24940",
+      "weight": 20,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:52.127.33.3",
+      "target": "ASN:8070",
+      "weight": 20,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.103.188",
+      "target": "ASN:8070",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.49.116",
+      "target": "ASN:8070",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.65.214",
+      "target": "ASN:8070",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.60.179",
+      "target": "ASN:8070",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.10.74.42",
+      "target": "ASN:8070",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:51.89.121.248",
+      "target": "ASN:16276",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.97.49",
+      "target": "ASN:8070",
+      "weight": 19,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:20.159.219.145",
+      "target": "ASN:8070",
+      "weight": 18,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "IP:62.11.44.114",
+      "target": "ASN:8070",
+      "weight": 18,
+      "overlap_type": "asn",
+      "link_type": ""
+    },
+    {
+      "source": "HYP:H2",
+      "target": "HYP:H4",
+      "weight": 376,
+      "overlap_type": "asn",
+      "link_type": "ip_overlap"
+    },
+    {
+      "source": "HYP:H4",
+      "target": "HYP:H2",
+      "weight": 376,
+      "overlap_type": "asn",
+      "link_type": "ip_overlap"
+    }
+  ],
+  "clusters": [
+    {
+      "id": "packetware_doge_h2h4",
+      "label": "Packetware / DOGE Infrastructure (H2+H4)",
+      "hypothesis": "H2|H4",
+      "significance": "CRITICAL",
+      "note": "AS400495 Packetware/DOGE overlap cluster — 205GB TX anomaly, Prometheus exposure, Kubernetes predates DOGE",
+      "ip_count": 365,
+      "ips": [
+        "103.146.119.172",
+        "103.146.119.247",
+        "166.1.201.22",
+        "185.72.8.118",
+        "185.72.8.160",
+        "193.124.41.201",
+        "193.124.41.29",
+        "193.124.41.77",
+        "193.124.49.114",
+        "193.124.49.187",
+        "193.124.49.45",
+        "194.58.40.40",
+        "194.58.44.111",
+        "194.58.44.176",
+        "194.58.44.190",
+        "194.58.46.116",
+        "194.58.46.245",
+        "194.58.46.55",
+        "194.58.46.92",
+        "194.87.105.165",
+        "194.87.108.168",
+        "194.87.108.4",
+        "194.87.108.90",
+        "194.87.82.131",
+        "194.87.82.135",
+        "194.87.82.62",
+        "194.87.82.86",
+        "207.174.30.248",
+        "207.174.31.251",
+        "207.90.236.11",
+        "207.90.236.122",
+        "207.90.236.166",
+        "207.90.236.169",
+        "207.90.236.3",
+        "207.90.236.84",
+        "212.193.1.23",
+        "23.133.104.128",
+        "23.133.104.129",
+        "23.133.104.130",
+        "23.133.104.131",
+        "23.133.104.132",
+        "23.133.104.133",
+        "23.133.104.134",
+        "23.133.104.135",
+        "23.133.104.136",
+        "23.133.104.137",
+        "23.133.104.138",
+        "23.133.104.139",
+        "23.133.104.140",
+        "23.133.104.141"
+      ]
+    },
+    {
+      "id": "stark_aeza_russia",
+      "label": "Stark Industries / AEZA (Russian Infrastructure)",
+      "hypothesis": "C_foreign",
+      "significance": "CRITICAL",
+      "note": "138.124.123.3 (Stark): 0 pre-Jan14 to 29+ post-Jan14 .gov certs — T1 evidence; 5.180.24.192 new Stark IP (Mar 2026)",
+      "ip_count": 0,
+      "ips": []
+    },
+    {
+      "id": "oracle_alibaba_foreign",
+      "label": "Oracle Cloud / Alibaba (Foreign Cloud Crossover)",
+      "hypothesis": "H4",
+      "significance": "HIGH",
+      "note": "Foreign cloud IPs observed with Treasury certs; Oracle South Korea (AS31898) linked to yszfa.cn DNS pivot",
+      "ip_count": 3,
+      "ips": [
+        "120.26.57.76",
+        "8.218.53.202",
+        "129.159.36.171"
+      ]
+    },
+    {
+      "id": "microsoft_gov",
+      "label": "Microsoft Federal / GovCloud (H3)",
+      "hypothesis": "H3",
+      "significance": "MEDIUM",
+      "note": "MSFT federal cloud IPs — high observation counts, H3 hypothesis (federal infrastructure overlap)",
+      "ip_count": 100,
+      "ips": [
+        "20.159.179.121",
+        "20.141.212.29",
+        "20.141.187.112",
+        "13.72.48.140",
+        "52.235.250.71",
+        "52.127.57.1",
+        "52.235.250.84",
+        "52.182.88.34",
+        "52.127.32.27",
+        "52.235.250.75",
+        "52.127.32.23",
+        "52.127.8.3",
+        "52.235.250.72",
+        "52.127.9.2",
+        "52.235.250.89",
+        "52.127.0.2",
+        "52.126.200.8",
+        "52.126.200.2",
+        "52.235.250.69",
+        "52.235.250.74",
+        "52.235.250.80",
+        "52.127.9.6",
+        "52.127.32.20",
+        "52.235.250.81",
+        "52.127.32.25",
+        "52.127.32.28",
+        "52.235.250.85",
+        "52.127.32.22",
+        "52.127.32.16",
+        "52.235.250.73",
+        "52.235.250.79",
+        "52.127.9.1",
+        "52.127.8.4",
+        "52.126.200.5",
+        "52.127.9.5",
+        "52.127.33.1",
+        "52.235.250.83",
+        "52.127.32.15",
+        "52.235.250.91",
+        "52.235.250.88",
+        "52.235.250.66",
+        "52.127.57.0",
+        "52.235.250.90",
+        "52.235.250.82",
+        "52.235.250.65",
+        "52.127.57.3",
+        "52.127.8.2",
+        "52.127.57.2",
+        "52.247.166.10",
+        "52.127.33.0"
+      ]
+    }
+  ],
+  "multi_group_overlap": {
+    "total_overlap_ips": 376,
+    "group_combinations": {
+      "H2|H4": 376
+    },
+    "countries": {
+      "US": 253,
+      "DE": 70,
+      "Unknown": 45,
+      "China": 8
+    },
+    "key_overlap_ips": [
+      {
+        "ip": "104.237.153.11",
+        "groups": "H2|H4",
+        "org": "Linode",
+        "asn": "AS63949",
+        "country": ""
+      },
+      {
+        "ip": "106.81.144.248",
+        "groups": "H2|H4",
+        "org": "CHINANET Chongqing Province Network",
+        "asn": "AS4134",
+        "country": "China"
+      },
+      {
+        "ip": "106.81.33.158",
+        "groups": "H2|H4",
+        "org": "CHINANET Chongqing Province Network",
+        "asn": "AS4134",
+        "country": "China"
+      },
+      {
+        "ip": "106.81.40.15",
+        "groups": "H2|H4",
+        "org": "CHINANET Chongqing Province Network",
+        "asn": "AS4134",
+        "country": "China"
+      },
+      {
+        "ip": "111.172.11.18",
+        "groups": "H2|H4",
+        "org": "CHINANET HUBEI PROVINCE NETWORK",
+        "asn": "AS4134",
+        "country": ""
+      },
+      {
+        "ip": "111.172.8.240",
+        "groups": "H2|H4",
+        "org": "CHINANET HUBEI PROVINCE NETWORK",
+        "asn": "AS4134",
+        "country": "China"
+      },
+      {
+        "ip": "111.172.8.3",
+        "groups": "H2|H4",
+        "org": "CHINANET HUBEI PROVINCE NETWORK",
+        "asn": "AS4134",
+        "country": ""
+      },
+      {
+        "ip": "111.172.9.237",
+        "groups": "H2|H4",
+        "org": "CHINANET HUBEI PROVINCE NETWORK",
+        "asn": "AS4134",
+        "country": ""
+      },
+      {
+        "ip": "111.252.136.180",
+        "groups": "H2|H4",
+        "org": "Chunghwa Telecom Co.,Ltd.",
+        "asn": "AS3462",
+        "country": ""
+      },
+      {
+        "ip": "111.252.164.26",
+        "groups": "H2|H4",
+        "org": "Chunghwa Telecom Co.,Ltd.",
+        "asn": "AS3462",
+        "country": ""
+      },
+      {
+        "ip": "120.26.57.76",
+        "groups": "H2|H4",
+        "org": "Aliyun Computing Co., LTD",
+        "asn": "AS37963",
+        "country": ""
+      },
+      {
+        "ip": "121.43.149.127",
+        "groups": "H2|H4",
+        "org": "Aliyun Computing Co., LTD",
+        "asn": "AS37963",
+        "country": ""
+      },
+      {
+        "ip": "125.85.176.242",
+        "groups": "H2|H4",
+        "org": "CHINANET Chongqing province network",
+        "asn": "AS4134",
+        "country": "China"
+      },
+      {
+        "ip": "125.85.58.62",
+        "groups": "H2|H4",
+        "org": "CHINANET Chongqing province network",
+        "asn": "AS4134",
+        "country": ""
+      },
+      {
+        "ip": "129.159.36.171",
+        "groups": "H2|H4",
+        "org": "Oracle Corporation",
+        "asn": "AS31898",
+        "country": ""
+      },
+      {
+        "ip": "14.110.111.191",
+        "groups": "H2|H4",
+        "org": "CHINANET Chongqing Province Network",
+        "asn": "AS4134",
+        "country": ""
+      },
+      {
+        "ip": "144.91.108.231",
+        "groups": "H2|H4",
+        "org": "Contabo GmbH",
+        "asn": "AS51167",
+        "country": ""
+      },
+      {
+        "ip": "146.190.212.250",
+        "groups": "H2|H4",
+        "org": "DigitalOcean, LLC",
+        "asn": "AS14061",
+        "country": ""
+      },
+      {
+        "ip": "152.53.142.111",
+        "groups": "H2|H4",
+        "org": "ANX Holding GmbH",
+        "asn": "AS197540",
+        "country": ""
+      },
+      {
+        "ip": "161.81.246.26",
+        "groups": "H2|H4",
+        "org": "China Mobile Hong Kong Company Limited",
+        "asn": "AS137872",
+        "country": ""
+      },
+      {
+        "ip": "167.99.87.173",
+        "groups": "H2|H4",
+        "org": "DigitalOcean, LLC",
+        "asn": "AS14061",
+        "country": ""
+      },
+      {
+        "ip": "183.141.69.35",
+        "groups": "H2|H4",
+        "org": "CHINANET-ZJ Jiaxing node network",
+        "asn": "AS4134",
+        "country": "China"
+      },
+      {
+        "ip": "184.66.116.150",
+        "groups": "H2|H4",
+        "org": "Shaw Communications Inc.",
+        "asn": "AS6327",
+        "country": ""
+      },
+      {
+        "ip": "185.55.241.233",
+        "groups": "H2|H4",
+        "org": "Layer7 Networks GmbH",
+        "asn": "AS35042",
+        "country": ""
+      },
+      {
+        "ip": "192.9.236.255",
+        "groups": "H2|H4",
+        "org": "Oracle Corporation",
+        "asn": "AS31898",
+        "country": ""
+      },
+      {
+        "ip": "198.23.233.76",
+        "groups": "H2|H4",
+        "org": "RackNerd LLC",
+        "asn": "AS36352",
+        "country": ""
+      },
+      {
+        "ip": "2001:19f0:6001:1409:5400:1ff:fe61:1558",
+        "groups": "H2|H4",
+        "org": "Vultr Holdings, LLC",
+        "asn": "AS20473",
+        "country": ""
+      },
+      {
+        "ip": "202.134.19.119",
+        "groups": "H2|H4",
+        "org": "CMC Telecom Infrastructure Company",
+        "asn": "AS45903",
+        "country": ""
+      },
+      {
+        "ip": "207.254.38.174",
+        "groups": "H2|H4",
+        "org": "MacStadium, Inc.",
+        "asn": "AS395337",
+        "country": ""
+      },
+      {
+        "ip": "207.254.60.85",
+        "groups": "H2|H4",
+        "org": "MacStadium, Inc.",
+        "asn": "AS395337",
+        "country": ""
+      },
+      {
+        "ip": "208.113.200.225",
+        "groups": "H2|H4",
+        "org": "New Dream Network, LLC",
+        "asn": "AS26347",
+        "country": ""
+      },
+      {
+        "ip": "208.167.253.10",
+        "groups": "H2|H4",
+        "org": "Vultr Holdings, LLC",
+        "asn": "AS20473",
+        "country": ""
+      },
+      {
+        "ip": "212.132.66.71",
+        "groups": "H2|H4",
+        "org": "IONOS SE",
+        "asn": "AS8560",
+        "country": ""
+      },
+      {
+        "ip": "218.81.98.54",
+        "groups": "H2|H4",
+        "org": "CHINANET Shanghai province network",
+        "asn": "AS4812",
+        "country": ""
+      },
+      {
+        "ip": "218.81.98.61",
+        "groups": "H2|H4",
+        "org": "CHINANET Shanghai province network",
+        "asn": "AS4812",
+        "country": "China"
+      },
+      {
+        "ip": "220.95.232.63",
+        "groups": "H2|H4",
+        "org": "Korea Telecom",
+        "asn": "AS4766",
+        "country": ""
+      },
+      {
+        "ip": "23.133.104.128",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.129",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.130",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.131",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.132",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.133",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.134",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.135",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.136",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "US"
+      },
+      {
+        "ip": "23.133.104.137",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.138",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.139",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.140",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      },
+      {
+        "ip": "23.133.104.141",
+        "groups": "H2|H4",
+        "org": "Packetware",
+        "asn": "AS400495",
+        "country": "DE"
+      }
+    ]
+  },
+  "summary": {
+    "total_nodes": 228,
+    "total_links": 172,
+    "total_clusters": 4,
+    "overlap_ips": 376,
+    "cluster_sizes": {
+      "packetware_doge_h2h4": 365,
+      "stark_aeza_russia": 0,
+      "oracle_alibaba_foreign": 3,
+      "microsoft_gov": 100
+    },
+    "asn_top_overlap": {
+      "AS400495": 323,
+      "AS4134": 11,
+      "AS14061": 3,
+      "AS3462": 2,
+      "AS37963": 2,
+      "AS31898": 2,
+      "AS36352": 2,
+      "AS20473": 2,
+      "AS395337": 2,
+      "AS4812": 2,
+      "AS24940": 2,
+      "AS132203": 2,
+      "AS63949": 1,
+      "AS51167": 1,
+      "AS197540": 1
+    },
+    "significance_notes": [
+      "376 IPs appear in multiple hypothesis groups (H2+H4 overlap)",
+      "Packetware AS400495: 23.133.104.x/24 + 63.141.38.x/24 — 13+ IPs in H2+H4",
+      "Foreign cloud (Oracle AS31898, Alibaba AS45102) in both H2 and H4 — cert + network overlap",
+      "Stark/AEZA in C_foreign — links to Russia cert timeline (T1 evidence)",
+      "MacStadium AS395337 (207.254.38.174, 207.254.60.85) — anomalous for gov-adjacent presence"
+    ]
+  }
+}

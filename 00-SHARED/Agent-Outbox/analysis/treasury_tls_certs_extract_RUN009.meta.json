@@ -1,0 +1,7 @@
+{
+  "source": "/mnt/d/0LOCAL/gitrepos/cybertemplate/scripts/audit_results/treasury_tls_certs_extract_RUN009.json",
+  "dest": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Agent-Outbox/analysis/treasury_tls_certs_extract_RUN009.json",
+  "content_type": "analysis",
+  "synced_at": "2026-03-22T23:46:57.338071+00:00",
+  "sha256": "f83040a60985d389274fd55a237e9f86f8733b3d62b580b3021a7283cf433939"
+}
