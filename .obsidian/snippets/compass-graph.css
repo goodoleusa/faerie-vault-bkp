@@ -1,0 +1,191 @@
+/* Compass Graph Visualization
+ * Integrates with Prism theme + custom relationships (north::, south::, east::, west::)
+ * Colors graph links by compass bearing; node color by quality_score
+ */
+
+/* ============================================================================
+   GRAPH VIEW LINK COLORS (by compass bearing relationship)
+   ============================================================================ */
+
+/* NORTH = Blue: Prerequisites to unblock (links labeled "north::")
+   Rendered as blue edges in graph; users look NORTH for what's blocking them */
+.graph-view.color-arrow .end-arrow-svg[data-direction="north"],
+.graph-view.color-line svg line[data-direction="north"] {
+  stroke: #4a90e2 !important; /* Prism blue */
+}
+
+/* SOUTH = Green: Proceed/downstream work (links labeled "south::")
+   Rendered as green edges; users look SOUTH for what they unblock */
+.graph-view.color-arrow .end-arrow-svg[data-direction="south"],
+.graph-view.color-line svg line[data-direction="south"] {
+  stroke: #2ecc71 !important; /* Prism green */
+}
+
+/* EAST = Yellow: Parallel work/validation (links labeled "east::")
+   Rendered as yellow edges; users look EAST for peer validation */
+.graph-view.color-arrow .end-arrow-svg[data-direction="east"],
+.graph-view.color-line svg line[data-direction="east"] {
+  stroke: #f1c40f !important; /* Prism yellow */
+}
+
+/* WEST = Red: Retreat/alternatives/reframe (links labeled "west::")
+   Rendered as red edges; users look WEST for problem signals */
+.graph-view.color-arrow .end-arrow-svg[data-direction="west"],
+.graph-view.color-line svg line[data-direction="west"] {
+  stroke: #e74c3c !important; /* Prism red */
+}
+
+/* DISCOVERY = Purple: Stigmergic trace (links labeled "discovery::")
+   Shows who discovered this work via agent coordination */
+.graph-view.color-arrow .end-arrow-svg[data-direction="discovery"],
+.graph-view.color-line svg line[data-direction="discovery"] {
+  stroke: #9b59b6 !important; /* Prism purple */
+  stroke-dasharray: 4, 4;     /* Dashed line = async discovery */
+}
+
+/* ============================================================================
+   NODE COLORS (by quality_score from frontmatter)
+   ============================================================================ */
+
+/* High quality (quality_score >= 0.85): Bright green, trusted manifest */
+.graph-view.color-fill circle[data-quality="high"] {
+  fill: #2ecc71 !important;
+  opacity: 0.85;
+}
+
+/* Medium quality (0.50 <= quality_score < 0.85): Yellow, developing */
+.graph-view.color-fill circle[data-quality="medium"] {
+  fill: #f1c40f !important;
+  opacity: 0.75;
+}
+
+/* Low quality (quality_score < 0.50): Red, recovery/exploration */
+.graph-view.color-fill circle[data-quality="low"] {
+  fill: #e74c3c !important;
+  opacity: 0.65;
+}
+
+/* Unknown/unset: Prism default purple */
+.graph-view.color-fill circle[data-quality="unknown"] {
+  fill: #9b59b6 !important;
+  opacity: 0.70;
+}
+
+/* ============================================================================
+   NODE SIZE (by belief_index: honesty/truthfulness)
+   Graph renders based on link count, but we can hint via opacity
+   ============================================================================ */
+
+/* High belief (belief_index >= 0.75): Solid, trusted agent */
+.graph-view.color-fill circle[data-belief="high"] {
+  opacity: 1.0 !important;
+}
+
+/* Medium belief (0.50 <= belief_index < 0.75): Partially transparent */
+.graph-view.color-fill circle[data-belief="medium"] {
+  opacity: 0.75 !important;
+}
+
+/* Low belief (belief_index < 0.50): Faint, uncertain/exploring */
+.graph-view.color-fill circle[data-belief="low"] {
+  opacity: 0.5 !important;
+}
+
+/* ============================================================================
+   LINK ARROW STYLING (compass bearing direction indicators)
+   ============================================================================ */
+
+/* Make arrow markers visible and directional */
+.graph-view.color-arrow .end-arrow-svg {
+  stroke-width: 2px;
+  opacity: 0.9;
+}
+
+/* Dashed lines for async/discovered relationships */
+.graph-view.color-line svg line[data-direction="discovery"] {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ============================================================================
+   TEXT LABELS (optional: show bearing direction on hover)
+   ============================================================================ */
+
+/* Tooltip-like text on graph node hover (requires plugin support) */
+.graph-view.color-text-fill text[data-direction] {
+  font-size: 10px;
+  fill: #ecf0f1;
+  font-weight: bold;
+  text-anchor: middle;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.graph-view.color-fill circle:hover ~ text[data-direction] {
+  opacity: 1;
+}
+
+/* ============================================================================
+   INVESTIGATION_LABEL CLUSTERING (visual grouping by color tint)
+   ============================================================================ */
+
+/* Nodes in same investigation_label share subtle color tint */
+.graph-view.color-fill circle[data-investigation-label] {
+  filter: hue-rotate(30deg) saturate(1.1);
+}
+
+/* ============================================================================
+   HIGH-QUALITY MANIFEST STYLING (quality_score + belief_index both high)
+   ============================================================================ */
+
+/* Golden glow for trusted, high-quality manifests */
+.graph-view.color-fill circle[data-quality="high"][data-belief="high"] {
+  filter: drop-shadow(0 0 8px rgba(241, 196, 15, 0.6));
+}
+
+/* Red warning glow for low-quality manifests (recovery agents) */
+.graph-view.color-fill circle[data-quality="low"][data-belief="low"] {
+  filter: drop-shadow(0 0 6px rgba(231, 76, 60, 0.5));
+}
+
+/* ============================================================================
+   PRISM THEME INTEGRATION (dark/light mode compatibility)
+   ============================================================================ */
+
+/* In light mode: slightly darker colors for contrast */
+body.theme-light .graph-view.color-arrow .end-arrow-svg[data-direction="north"],
+body.theme-light .graph-view.color-line svg line[data-direction="north"] {
+  stroke: #2c5aa0 !important;
+}
+
+body.theme-light .graph-view.color-arrow .end-arrow-svg[data-direction="south"],
+body.theme-light .graph-view.color-line svg line[data-direction="south"] {
+  stroke: #27ae60 !important;
+}
+
+body.theme-light .graph-view.color-arrow .end-arrow-svg[data-direction="east"],
+body.theme-light .graph-view.color-line svg line[data-direction="east"] {
+  stroke: #d4a90e !important;
+}
+
+body.theme-light .graph-view.color-arrow .end-arrow-svg[data-direction="west"],
+body.theme-light .graph-view.color-line svg line[data-direction="west"] {
+  stroke: #c0392b !important;
+}
+
+/* ============================================================================
+   COC INTEGRATION: Highlight manifests with active COC entries
+   ============================================================================ */
+
+/* Nodes linked to active COC entries (doc_hash present) get border */
+.graph-view.color-fill circle[data-has-coc="true"] {
+  stroke: #e74c3c !important;
+  stroke-width: 2px;
+}
+
+/* Nodes with forensic data linked (task_id matches forensics/) */
+.graph-view.color-fill circle[data-forensic-link="true"] {
+  stroke-dasharray: 2, 2;
+  stroke: #9b59b6 !important;
+  stroke-width: 1.5px;
+}
