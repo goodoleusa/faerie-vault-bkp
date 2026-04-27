@@ -36,3 +36,7 @@ Thumbs.db
 # Git files
 .git/
 .gitignore
+
+# Plugin secrets (API keys, license keys in plaintext)
+.obsidian/plugins/share-note/data.json
+.obsidian/plugins/copilot/data.json
