@@ -1,0 +1,7 @@
+{
+  "format": "YYYY-MM-DD",
+  "description": false,
+  "root": "00-SHARED/Hive",
+  "useTemplate": false,
+  "template": ""
+}

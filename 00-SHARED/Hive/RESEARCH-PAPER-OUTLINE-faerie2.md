@@ -4,7 +4,7 @@ status: active
 created: 2026-04-27
 updated: 2026-04-27T21:46:13.371455+00:00
 tags: [research, faerie2, publication, arxiv, emergence, stigmergy, orchestration, novel-contributions]
-parent: ../Hive.md
+parent: "[[./Hive.md]]"
 compass_edge: S
 doc_hash: sha256:0e4c7af46a67023e407c1c891071539c80f1a5be1531d834a15f3fb172113089
 hash_ts: 2026-04-27T21:46:13.371455+00:00

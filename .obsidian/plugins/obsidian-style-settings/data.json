@@ -1,0 +1,18 @@
+{
+  "obsidian-prism-theme@@color-schemes-lt": "pt-color-scheme-pistachio-lt",
+  "obsidian-prism-theme@@highlight-text-accent-lt": "pt-highlight-text-dark-lt",
+  "obsidian-prism-theme@@graph-line-color-lt": "var(--color-cyan-tint)",
+  "obsidian-prism-theme@@graph-fill-color-lt": "var(--color-cyan-tint)",
+  "obsidian-prism-theme@@graph-fill-focused-color-lt": "var(--color-yellow-tint)",
+  "obsidian-prism-theme@@graph-tag-color-lt": "var(--color-mint-tint)",
+  "obsidian-prism-theme@@graph-attachment-color-lt": "var(--color-pink-tint)",
+  "obsidian-prism-theme@@graph-unresolved-color-lt": "var(--color-orange-tint)",
+  "obsidian-prism-theme@@graph-highlight-color-lt": "var(--color-yellow-tint)",
+  "obsidian-prism-theme@@pt-font-disable-ligatures": false,
+  "obsidian-prism-theme@@pt-file-explorer-folder-icon": true,
+  "obsidian-prism-theme@@pt-file-explorer-folder-icon-color": "pt-file-explorer-folder-icon-active",
+  "obsidian-prism-theme@@pt-colored-folders": true,
+  "obsidian-prism-theme@@pt-colored-folders-files-match": true,
+  "obsidian-prism-theme@@pt-status-bar-style": "pt-status-bar-position-hidden",
+  "obsidian-prism-theme@@pt-icons-accent": true
+}

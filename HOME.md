@@ -55,8 +55,8 @@ LIMIT 8
 ## 📬 Unread Drops
 
 ```dataview
-TABLE drop_type, from, priority, file.ctime AS "Received"
-FROM "00-Inbox/drops"
+TABLE drop_type, from, priority
+FROM "00-SHARED"
 WHERE read = false
 SORT priority ASC, file.ctime DESC
 ```
@@ -67,7 +67,7 @@ SORT priority ASC, file.ctime DESC
 
 ### Tasks Completed — Need Review
 ```dataview
-TABLE assignee AS "Agent", priority, completed_date
+TABLE priority, completed_date
 FROM "00-Inbox/tasks"
 WHERE status = "awaiting-human" OR status = "completed"
 SORT completed_date DESC

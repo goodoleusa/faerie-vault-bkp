@@ -3,7 +3,8 @@
   "theme": "moonstone",
   "cssTheme": "Prism",
   "enabledCssSnippets": [
-    "agent-formatting"
+    "agent-formatting",
+    "compass-graph"
   ],
   "interfaceFontFamily": "",
   "textFontFamily": "",

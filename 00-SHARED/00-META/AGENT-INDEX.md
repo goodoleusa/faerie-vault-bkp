@@ -21,7 +21,7 @@ Last 20 files written to Agent-Outbox, most recent first.
 
 ```dataview
 TABLE file.mtime as "Last Updated", file.size as "Size"
-FROM "00-SHARED/Agent-Outbox"
+FROM "03-Agents"
 WHERE file.name != "_index"
 SORT file.mtime DESC
 LIMIT 20
