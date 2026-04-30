@@ -77,11 +77,6 @@ LIMIT 10
 
 ```dataview
 TABLE WITHOUT ID
-  file.link AS "Finding",
-  cat AS "Cat",
-  priority AS "Pri",
-  confidence_level AS "Conf",
-  dateformat(date(ts), "MM-dd") AS "Date"
 FROM "00-SHARED/Human-Inbox" OR "00-SHARED/Agent-Outbox"
 WHERE contains(string(hypothesis_support), "H4") OR contains(string(tags), "H4")
 SORT priority ASC, ts DESC

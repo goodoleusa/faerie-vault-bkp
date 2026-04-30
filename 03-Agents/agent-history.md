@@ -29,10 +29,8 @@ hash_method: body-sha256-v1
 
 ```dataview
 TABLE WITHOUT ID
-  file.link AS "Agent",
   file.mtime AS "Last Modified"
-FROM "03-Agents/evolution"
-WHERE file.name != "agent-history"
+FROM "03-Agents"
 SORT file.name ASC
 ```
 
@@ -40,10 +38,6 @@ SORT file.name ASC
 
 ```dataview
 TABLE WITHOUT ID
-  file.link AS "Brief",
-  agent_author AS "Agent",
-  ts AS "When",
-  brief_type AS "Type"
 FROM "00-SHARED/Session-Briefs"
 WHERE type = "brief" AND contains(tags, "training")
 SORT ts DESC

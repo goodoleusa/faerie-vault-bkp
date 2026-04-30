@@ -47,7 +47,7 @@ This is not just an optimization. It changes the architecture's scaling properti
 
 The memory system has three tiers with explicit promotion rules:
 
-- **Scratch** — ephemeral working notes per session. Written by agents during a session, collected at handoff, then discarded. The raw material layer.
+- **POLLEN** — ephemeral working notes per session, equivalent to scratch or tmp outputs from Claude. Written by agents during a session, collected at handoff, then discarded. The raw material layer.
 - **NECTAR** — validated findings, append-only, never compressed or crystallized. The forensic layer. Everything goes here once validated; nothing leaves. Used for cross-session pattern detection and audit trail.
 - **HONEY** — crystallized preferences, methods, and system knowledge. Dense, expensive to earn, small by design (≤5K tokens). Entries must pass a multi-session gauntlet before promotion: recurrence across 3+ sessions, multi-agent validation, human review, proven impact. HONEY is what makes sessions start oriented — it is the pre-packaged context that arrives before the first prompt.
 
@@ -65,9 +65,11 @@ The piston model is the system's core throughput mechanism. Waves launch in sequ
 
 ### Equilibrium: Every Output Crystallizes Into Knowledge
 
-The system enforces a structural constraint called **equilibrium**: every durable file has a token budget, and writing to an over-budget file requires crystallization first. You cannot accumulate indefinitely. The system forces compression cycles by making accumulation structurally expensive.
+The system enforces a structural constraint called **equilibrium**: every durable file has a token budget, and writing to an over-budget file requires crystallization first. You cannot accumulate indefinitely. The system forces crystallizatio. (NOT compression) cycles by making accumulation structurally expensive.
 
-This sounds like an operational constraint. It is also a design principle with business implications. A system that enforces crystallization is a system where knowledge gets denser over time rather than larger. User value compounds: each session makes the next session cheaper and better, because the crystallization step integrates new knowledge against everything already known. This is distinct from accumulation — a vector store that grows without bound, retrieval that gets noisier as the corpus grows, a "memory" that eventually works against the user. Crystallized knowledge has better signal-to-noise at any size than accumulated storage.
+This sounds like an operational constraint. It is also a design principle with business implications. A system that enforces crystallization is a system where knowledge gets denser over time rather than larger. User value compounds: each session makes the next session cheaper and better, because the **crystallization step integrates new knowledge against everything already known.** 
+
+This is distinct from accumulation — a vector store that grows without bound, retrieval that gets noisier as the corpus grows, a "memory" that eventually works against the user. Crystallized knowledge has better signal-to-noise at any size than accumulated storage.
 
 ---
 
@@ -129,15 +131,24 @@ The comparison is dry-run validated — the harness runs, the arms are defined, 
 
 ### The Margin Is In the Gap
 
-The Hive system's revenue model is not token resale. Buying tokens from Anthropic and reselling them at markup is a race to zero — the frontier labs will always have better direct pricing, and commodity infrastructure arbitrage disappears when the next pricing round hits. The margin comes from somewhere structurally different: **the gap between what a cheap model can do cold versus what it can do with pre-packaged context.**
+The Hive system's revenue model is not token resale. Buying tokens from Anthropic and reselling them at markup is a race to zero — the frontier labs will always have better direct pricing, and commodity infrastructure arbitrage disappears when the next pricing round hits. 
+
+> [!info] The profit margin comes from somewhere structurally different: **the gap between what a cheap model can do cold versus what it can do with pre-packaged context.**
 
 That gap is measurable. Vanilla Haiku cold-starting on a complex multi-session task will spend a large fraction of its context window reorienting. System-haiku with 4,663 tokens of pre-loaded HONEY and NECTAR starts the session already oriented. The model is the same. The capability is the same. The context allocation is radically different. The value we sell is the pre-packaging — not the model underneath it.
 
-This means our COGS are primarily compute for the synthesis pipeline (W3 batch, membot, eval harness) — not the primary session tokens. We run lightweight synthesis at session-end using Batch API pricing (50% discount on standard) and deliver that value as orientation tokens at session-start. The margin is the difference between what it costs to synthesize context and what it costs the user to regenerate it cold.
+This means our COGS are primarily compute for the synthesis pipeline (W3 batch, membot, eval harness) — not the primary session tokens. 
+
+> [!faq] 
+> We run lightweight synthesis at session-end using Batch API pricing (50% discount on standard) and deliver that value as orientation tokens at session-start. The margin is the difference between what it costs to synthesize context and what it costs the user to regenerate it cold.
 
 ### We Sell Infrastructure, Not Tokens
 
-The pricing model is subscription-based, not consumption-based. Users pay for access to the infrastructure layer — the crystallization pipeline, the piston orchestration, the provenance chain, the overnight synthesis — not per-token. This is intentional. Per-token pricing creates adversarial incentives: users want fewer tokens, system wants more. Infrastructure pricing aligns incentives: we want sessions to be efficient (because efficiency = lower COGS), users want sessions to be effective (because effectiveness = value delivered). Both are served by the same optimization.
+The pricing model is subscription-based, not consumption-based. Users pay for access to the infrastructure layer — the crystallization pipeline, the piston orchestration, the provenance chain, the overnight synthesis — not per-token. This is intentional. 
+
+>[!info] **Per-token pricing creates adversarial incentives: users want fewer tokens, system wants more. **
+
+> Infrastructure pricing aligns incentives: we want sessions to be efficient (because efficiency = lower COGS), users want sessions to be effective (because effectiveness = value delivered). Both are served by the same optimization.
 
 The free tier runs W1 (Haiku blocker-clearing) and W2 (Sonnet substantive work) with standard HONEY depth. This is fast, cheap, and good enough for most individual use. The paid tier adds W3 synthesis (overnight batch, morning dashboard), deeper HONEY (more sessions of crystallization history), more parallelism (higher wave counts), and priority surfacing. The economic theory: free tier demonstrates the value of the orientation layer; paid tier delivers the compounding value that only accumulates over many sessions.
 
@@ -145,7 +156,11 @@ The free tier runs W1 (Haiku blocker-clearing) and W2 (Sonnet substantive work) 
 
 The Batch API runs at 50% of standard pricing with 24-hour completion windows. This is Anthropic's pricing signal for asynchronous, non-latency-sensitive work — exactly the profile of W3 synthesis. Crystallizing NECTAR → HONEY, running model comparisons, generating morning dashboards, archiving session streams, updating agent training cards — none of this needs to complete in real time. All of it is more valuable when done overnight while the user sleeps.
 
-The W3 batch pipeline is not just a cost optimization. It is a capability unlock. Synthesis tasks that would consume 30K tokens of live context (expensive, blocking, competing with active work) run overnight at 15K effective tokens. The user's morning dashboard contains work that would have taken two sessions to produce live. This is the "morning magic" experience: you left last night with a problem half-solved; you arrive this morning with the synthesis done, a brief ready, and the next session pre-oriented.
+> The W3 batch pipeline is not just a cost optimization. It is a capability unlock. 
+
+Synthesis tasks that would consume 30K tokens of live context (expensive, blocking, competing with active work) run overnight at 15K effective tokens. The user's morning dashboard contains work that would have taken two sessions to produce live. 
+
+> This is the "morning magic" experience: you left last night with a problem half-solved; you arrive this morning with the synthesis done, a brief ready, and the next session pre-oriented.
 
 ### The Moat: Crystallized Context
 

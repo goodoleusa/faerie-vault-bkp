@@ -1,6 +1,7 @@
 {
   "pinned": [
     "app:open-settings",
+    "obsidian-daily-named-folder:open-daily-folder",
     "copilot:new-chat",
     "obsidian-excalidraw-plugin:excalidraw-open-sidepanel",
     "dataview:dataview-rebuild-current-view",

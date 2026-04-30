@@ -24,5 +24,26 @@
     "margin": "0",
     "downscalePercent": 100
   },
-  "useMarkdownLinks": true
+  "useMarkdownLinks": true,
+  "mobilePullAction": "obsidian-daily-named-folder:open-daily-folder",
+  "mobileToolbarCommands": [
+    "cardify:generate-file-cards",
+    "editor:insert-embed",
+    "editor:toggle-code",
+    "editor:toggle-blockquote",
+    "editor:toggle-highlight",
+    "editor:toggle-numbered-list",
+    "editor:toggle-checklist-status",
+    "editor:indent-list",
+    "editor:unindent-list",
+    "editor:toggle-bullet-list",
+    "editor:undo",
+    "obsidian-linter:lint-file",
+    "editor:redo",
+    "editor:insert-wikilink",
+    "editor:configure-toolbar",
+    "cardify:insert-internal-link",
+    "editor:insert-tag",
+    "editor:attach-file"
+  ]
 }
