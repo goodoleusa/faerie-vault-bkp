@@ -1,0 +1,296 @@
+{
+  "version": "2026-04-28",
+  "description": "Faerie2 system formulas with semantic variable names for mutation→eval cycles",
+  "mutation_discipline": "MEASURE (baseline) → AUDIT (type) → FIX (adjust formula) → MEASURE (post) → PUBLISH",
+
+  "MUTABLE_PARAMETERS": {
+    "wave_thresholds": {
+      "WAVE_1_SPAWN_MAX_CONTEXT_PCT": {
+        "current": 70,
+        "baseline": 70,
+        "min": 50,
+        "max": 90,
+        "unit": "%",
+        "description": "Max context% to trigger W1 (LIFTOFF) spawn. Lower=conservative, Higher=aggressive (cache TTL)",
+        "metric": "cache_hit_rate, agents_parallelism, compact_frequency",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "WAVE_2_SPAWN_MAX_CONTEXT_PCT": {
+        "current": 80,
+        "baseline": 80,
+        "min": 70,
+        "max": 88,
+        "unit": "%",
+        "description": "Max context% to trigger W2 (CRUISE) spawn. Tuning: precision vs speed",
+        "metric": "agent_quality_score, synthesis_depth, manifest_chains",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "WAVE_3_SPAWN_MAX_CONTEXT_PCT": {
+        "current": 87,
+        "baseline": 87,
+        "min": 80,
+        "max": 92,
+        "unit": "%",
+        "description": "Max context% to trigger W3 background spawn. Squeeze residual context",
+        "metric": "discovery_finds, background_synthesis_quality, manifest_stability",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "RED_ALERT_CONTEXT_PCT": {
+        "current": 93,
+        "baseline": 93,
+        "min": 85,
+        "max": 93.4,
+        "unit": "%",
+        "description": "Above this = RED ALERT. Prevents blind spawning into compact zone",
+        "metric": "safety_violations_per_session, false_positive_alerts",
+        "last_eval": "2026-04-28T00:00:00Z"
+      }
+    },
+
+    "compass_quality_gates": {
+      "COMPASS_GATE_SEED_QUALITY_MIN": {
+        "current": 0.50,
+        "baseline": 0.50,
+        "min": 0.30,
+        "max": 0.70,
+        "unit": "score_0_to_1",
+        "description": "Min quality to exit SEED phase. Low=fast hypothesis, High=rigorous baseline",
+        "metric": "hypothesis_formation_speed, baseline_soundness, reframing_rate",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "COMPASS_GATE_DEEPEN_QUALITY_MIN": {
+        "current": 0.70,
+        "baseline": 0.70,
+        "min": 0.60,
+        "max": 0.85,
+        "unit": "score_0_to_1",
+        "description": "Min quality to exit DEEPEN phase (focused ingest)",
+        "metric": "investigation_depth, surface_level_rejections, evidence_strength",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "COMPASS_GATE_EXTEND_QUALITY_MIN": {
+        "current": 0.80,
+        "baseline": 0.80,
+        "min": 0.70,
+        "max": 0.90,
+        "unit": "score_0_to_1",
+        "description": "Min quality to exit EXTEND phase (cross-validation). Requires high-confidence before edge cases",
+        "metric": "edge_case_discovery_rate, validation_coverage, regression_count",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "COMPASS_GATE_FULL_QUALITY_MIN": {
+        "current": 0.85,
+        "baseline": 0.85,
+        "min": 0.80,
+        "max": 0.95,
+        "unit": "score_0_to_1",
+        "description": "Min quality for production-ready artifact. Highest bar.",
+        "metric": "production_failure_rate, rework_count, user_satisfaction",
+        "last_eval": "2026-04-28T00:00:00Z"
+      }
+    },
+
+    "compass_belief_gates": {
+      "COMPASS_GATE_DEEPEN_BELIEF_MIN": {
+        "current": 0.50,
+        "baseline": 0.50,
+        "min": 0.30,
+        "max": 0.70,
+        "unit": "score_0_to_1",
+        "description": "Min honesty/self-awareness in DEEPEN phase. Low=accept confidence-hiding, High=demand transparency",
+        "metric": "manifest_truthfulness, contradiction_caught_rate, false_confidence_incidents",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "COMPASS_GATE_EXTEND_BELIEF_MIN": {
+        "current": 0.75,
+        "baseline": 0.75,
+        "min": 0.65,
+        "max": 0.90,
+        "unit": "score_0_to_1",
+        "description": "Min honesty required for edge case exploration. Safety gate: agents must know limits",
+        "metric": "edge_case_safety_incidents, overconfidence_rejections, agent_calibration",
+        "last_eval": "2026-04-28T00:00:00Z"
+      }
+    },
+
+    "reputation_system": {
+      "REPUTATION_WEIGHT_TRUTHFULNESS": {
+        "current": 0.35,
+        "baseline": 0.35,
+        "min": 0.20,
+        "max": 0.50,
+        "unit": "proportion_of_composite",
+        "description": "Weight of truthfulness in composite_score. Higher=reward honest self-reporting",
+        "metric": "agent_honesty_trend, recovery_rate, gaming_incidents",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "REPUTATION_WEIGHT_KNOWLEDGE_DEPTH": {
+        "current": 0.30,
+        "baseline": 0.30,
+        "min": 0.20,
+        "max": 0.40,
+        "unit": "proportion_of_composite",
+        "description": "Weight of deep knowledge in composite_score",
+        "metric": "root_cause_identification_rate, surface_level_work_rejections",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "REPUTATION_WEIGHT_WISDOM": {
+        "current": 0.20,
+        "baseline": 0.20,
+        "min": 0.10,
+        "max": 0.35,
+        "unit": "proportion_of_composite",
+        "description": "Weight of collaboration/cross-citation in composite_score",
+        "metric": "cross_citation_count, monkeybranching_depth, knowledge_sharing",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "REPUTATION_WEIGHT_EFFICIENCY": {
+        "current": 0.15,
+        "baseline": 0.15,
+        "min": 0.05,
+        "max": 0.30,
+        "unit": "proportion_of_composite",
+        "description": "Weight of token efficiency (FFMx) in composite_score",
+        "metric": "tokens_per_artifact, mission_ffmx, context_waste_rate",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "AGENT_RECOVERY_MODE_THRESHOLD": {
+        "current": 0.50,
+        "baseline": 0.50,
+        "min": 0.30,
+        "max": 0.70,
+        "unit": "composite_score",
+        "description": "Below this = agent moved to retraining tasks only. Quarantine unhealthy, allow recovery",
+        "metric": "quarantine_rate, recovery_success_rate, agent_phase_out_rate",
+        "last_eval": "2026-04-28T00:00:00Z"
+      }
+    },
+
+    "memory_and_bundles": {
+      "CLAUDE_CORE_LOAD_TOKENS": {
+        "current": 1500,
+        "baseline": 1500,
+        "min": 1200,
+        "max": 2000,
+        "unit": "tokens",
+        "description": "CLAUDE-CORE.md loaded at session start (f(0) essential governance rules only)",
+        "metric": "session_startup_latency, f0_compliance, governance_enforcement",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "NECTAR_INJECTION_TOKENS": {
+        "current": 1200,
+        "baseline": 1200,
+        "measured": "2026-04-28 via Scout 2",
+        "min": 800,
+        "max": 3000,
+        "unit": "tokens",
+        "description": "NECTAR tail-50 injection cost per agent. REAL MEASUREMENT: 1,204 tokens (theory was 2-3K, 40-60% cheaper)",
+        "metric": "bundle_injection_cost, agent_ramp_up_efficiency, emergence_signal_freshness",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "HONEY_INJECTION_TOKENS": {
+        "current": 200,
+        "baseline": 200,
+        "measured": "2026-04-28 via Scout 3",
+        "min": 50,
+        "max": 1500,
+        "unit": "tokens",
+        "description": "HONEY (global+project) injection cost per agent. REAL MEASUREMENT: ~200 tokens (theory was 1,500, 7.5x cheaper via compression)",
+        "metric": "context_layer_efficiency, architectural_principle_injection_cost, bundle_overhead",
+        "last_eval": "2026-04-28T00:00:00Z"
+      },
+      "BUNDLE_EMISSION_CONTEXT_THRESHOLD": {
+        "current": 30,
+        "baseline": 30,
+        "min": 20,
+        "max": 50,
+        "unit": "%",
+        "description": "Remaining context % at which agents should emit bundles for future scouts. Creates f(0) equilibrium pressure.",
+        "metric": "bundles_emitted_per_session, main_context_burden_reduction, mission_formation_speed",
+        "last_eval": "2026-04-28T00:00:00Z"
+      }
+    },
+
+    "emergence_tuning": {
+      "EMERGENCE_MULTIPLIER_BASE": {
+        "current": 1.0,
+        "baseline": 1.0,
+        "min": 0.5,
+        "max": 2.5,
+        "unit": "multiplier",
+        "description": "Collaboration bonus: count(cross_citations) * (1 + monkeybranching_depth * EMERGENCE_MULTIPLIER_BASE)",
+        "metric": "mission_ffmx_growth, agent_recruitment_rate, knowledge_reuse",
+        "last_eval": "2026-04-28T00:00:00Z"
+      }
+    }
+  },
+
+  "IMMUTABLE_CONSTANTS": {
+    "AUTO_COMPACT_PCT_THRESHOLD": {
+      "value": 93.5,
+      "unit": "%",
+      "reason": "Architectural ceiling, cannot override higher",
+      "meaning": "Context fill at which auto-compact fires (hard limit)"
+    },
+    "CLAUDE_CODE_BUILTIN_OVERHEAD_TOKENS": {
+      "value": 9000,
+      "unit": "tokens",
+      "reason": "Fixed by Claude architecture",
+      "meaning": "Overhead before user context starts"
+    },
+    "USABLE_CONTEXT_WINDOW_TOKENS": {
+      "value": 191000,
+      "unit": "tokens",
+      "formula": "200000 - 9000",
+      "meaning": "Actual tokens available for agents + memory"
+    }
+  },
+
+  "MUTATION_EXPERIMENT_TEMPLATE": {
+    "experiment_id": "EXP-{YYYY-MM-DD}-{UUID8}",
+    "hypothesis": "[What do you expect to improve?]",
+    "variable_changed": "[MUTABLE parameter from above]",
+    "change": {
+      "from": "[current baseline value]",
+      "to": "[new test value]",
+      "reasoning": "[Why this change respects equilibrium?]"
+    },
+    "measurement_phase_1_baseline": {
+      "duration_sessions": 3,
+      "metrics_to_collect": "[List from 'metric' field for that variable]",
+      "baseline_values": "[Will be filled by /dev-eval]"
+    },
+    "mutation_phase": {
+      "duration_sessions": 3,
+      "variable_value": "[test value above]",
+      "observation_notes": "[What do you observe?]"
+    },
+    "measurement_phase_2_post_mutation": {
+      "duration_sessions": 3,
+      "post_mutation_values": "[Will be filled by /dev-eval]",
+      "delta": "[Post - Baseline for each metric]"
+    },
+    "analysis": {
+      "positive_emergence": "[Did the change improve system health?]",
+      "negative_emergence": "[Any unintended side effects?]",
+      "recommendation": "ACCEPT | REVERT | ITERATE",
+      "reasoning": "[Why? Does it respect equilibrium?]"
+    }
+  },
+
+  "INTEGRATION_POINTS": {
+    "dev_eval_query": "Use: /dev-eval --formulas VARIABLE_NAME --measure-baseline --collect METRIC",
+    "metrics_dashboard": "Use: /metrics --formula-tracking --show VARIABLE_NAME --graph {time_range}",
+    "presend_hook": "Reads this JSON at spawn time to validate wave gates + f(0) compliance",
+    "piston_checkpoint": "Reads wave thresholds to determine W1/W2/W3 triggering",
+    "example_mutation_flow": [
+      "1. Read faerie2-formulas.json, pick MUTABLE parameter to test",
+      "2. Run: /dev-eval --measure-baseline WAVE_1_SPAWN_MAX_CONTEXT_PCT (3 sessions, record metrics)",
+      "3. Edit: faerie2-formulas.json, change WAVE_1_SPAWN_MAX_CONTEXT_PCT.current from 70 to 75",
+      "4. Run: /dev-eval --measure-mutation WAVE_1_SPAWN_MAX_CONTEXT_PCT (3 sessions, record metrics)",
+      "5. Analyze: positive/negative emergence, recommend ACCEPT|REVERT|ITERATE",
+      "6. If ACCEPT: baseline becomes 75, commit change. If REVERT: baseline stays 70.",
+      "7. Repeat for next variable"
+    ]
+  }
+}

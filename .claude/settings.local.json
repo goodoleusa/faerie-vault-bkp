@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:arxiv.org)",
+      "Bash(mkdir -p /mnt/d/0local/gitrepos/ct_vault/0dotclaude/scripts)",
+      "Bash(mkdir -p /mnt/d/0local/gitrepos/ct_vault/0dotclaude/hooks)",
+      "Bash(cp /mnt/d/0local/.claude/faerie2-formulas.json /mnt/d/0local/gitrepos/ct_vault/0dotclaude/)",
+      "Bash(cp /mnt/d/0local/gitrepos/faerie-vault/0dotclaude/*.md /mnt/d/0local/gitrepos/ct_vault/0dotclaude/)",
+      "Bash(cp /mnt/d/0local/gitrepos/faerie-vault/0dotclaude/scripts/* /mnt/d/0local/gitrepos/ct_vault/0dotclaude/scripts/)"
+    ]
+  }
+}

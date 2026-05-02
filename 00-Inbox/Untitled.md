@@ -1,0 +1,3 @@
+---
+blueprint: "[[Blueprints/TechDoc.blueprint]]"
+---
