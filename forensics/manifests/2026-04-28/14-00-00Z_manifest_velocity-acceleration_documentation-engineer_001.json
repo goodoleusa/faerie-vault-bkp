@@ -1,0 +1,36 @@
+{
+  "task_id": "velocity-acceleration-bundle-compression",
+  "investigation_label": "velocity-acceleration",
+  "agent_type": "documentation-engineer",
+  "agent_run_id": "doc-eng-bundle-compression-2026-04-28",
+  "status": "final",
+  "timestamp": "2026-04-28T14:00:00Z",
+  "dashboard_line": "3-phase compression: NECTAR-filter+pollen-dedup+jinja-conditionals → 50-70% bundle savings",
+  "compass_edge": "S",
+  "quality_score": 0.88,
+  "belief_index": 0.87,
+  "phase": "EXTEND",
+  "findings_summary": [
+    "NECTAR selective filtering: HIGH/CRITICAL-only for standard spawns cuts NECTAR section 60-75% (2500→625 tokens in experimental formula).",
+    "Pollen dedup: group-by-(agent,category) + 1-line summaries cuts pollen section 70-80% (1200→240-360 tokens).",
+    "Jinja2 template conditionals: skip background history + analysis appendix for task_complexity=simple cuts boilerplate 40-50% (100 tok of ~250 tok boilerplate).",
+    "Combined savings target: conservative formula 4K→1.5-2K tokens (50-60%); experimental formula 9.7K→3.5-4.8K tokens (50-65%).",
+    "FFMx impact: bundle-size drop raises FFMx because agent_tokens/main_tokens ratio improves (more work per bundle token).",
+    "Zero capability loss constraint: agents retain full HONEY (uncompressed), all HIGH/CRITICAL NECTAR, deduplicated pollen summaries with expand-on-demand path."
+  ],
+  "files_written": [
+    {
+      "path": "forensics/manifests/2026-04-28/14-00-00Z_manifest_velocity-acceleration_documentation-engineer_001.json",
+      "type": "manifest"
+    }
+  ],
+  "next_task_queued": "velocity-acceleration-bundle-compression-implementation",
+  "prescan_decision": "passed — stale or absent",
+  "discovered_work": null,
+  "design_artifact_summary": "Full design spec delivered in agent response text covering: (1) NECTAR filter threshold logic with --nectar-filter flag spec, (2) pollen_compressor.py 100-150 LOC design with group-by-category logic, (3) Jinja2 template conditional blocks keyed on task_complexity param. Validation framework: bundle_size_before/after in manifest, FFMx delta calculation, W1 agent capability smoke test protocol.",
+  "coc_entry": {
+    "event": "manifest_finalized",
+    "manifest_path": "forensics/manifests/2026-04-28/14-00-00Z_manifest_velocity-acceleration_documentation-engineer_001.json",
+    "dashboard_line": "3-phase compression: NECTAR-filter+pollen-dedup+jinja-conditionals → 50-70% bundle savings"
+  }
+}

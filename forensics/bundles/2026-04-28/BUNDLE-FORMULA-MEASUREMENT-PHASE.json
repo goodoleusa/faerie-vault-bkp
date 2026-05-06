@@ -1,0 +1,175 @@
+{
+  "bundle_id": "formula-measurement-phase-001",
+  "timestamp": "2026-04-28T00:00:00Z",
+  "investigation_label": "formula-calibration-measurement",
+  "bundle_type": "standard",
+  "creator": "main-context",
+  "purpose": "Establish REAL token measurements for formula tuning",
+
+  "mission_goal": "Measure actual token burn vs. theoretical predictions. Establish baseline for mutation→eval cycle.",
+
+  "phase_1_baseline_measurement": {
+    "goal": "Measure W1 spawn cost under different context fills",
+    "tasks": [
+      {
+        "task_id": "measure-w1-spawn-cost-70pct",
+        "description": "Spawn 4 agents at context=70%, record /usage delta, compare to theory",
+        "measurement_points": [
+          "Pre-spawn /usage",
+          "Post-spawn /usage",
+          "Delta = tokens_actually_burned",
+          "Theory predicted: 5K tokens for W1 light bundle × 4 agents",
+          "Actual: record the real number"
+        ],
+        "output": "forensics/artifacts/2026-04-28/MEASUREMENT-W1-SPAWN-70PCT.json"
+      },
+      {
+        "task_id": "measure-w1-spawn-cost-60pct",
+        "description": "Same as above but at context=60% (earlier spawn = more available runtime)",
+        "measurement_points": [
+          "Pre-spawn /usage at 60%",
+          "Post-spawn /usage",
+          "Compare burn to 70% baseline"
+        ],
+        "output": "forensics/artifacts/2026-04-28/MEASUREMENT-W1-SPAWN-60PCT.json"
+      },
+      {
+        "task_id": "measure-nectar-injection-cost",
+        "description": "Measure: What does it cost to inject NECTAR.md into bundle?",
+        "method": [
+          "Render bundle WITHOUT NECTAR",
+          "Measure: bundle size, agent prompt size",
+          "Render bundle WITH NECTAR (full 97KB)",
+          "Measure: bundle size delta",
+          "Estimate: NECTAR injection cost to agent context"
+        ],
+        "output": "forensics/artifacts/2026-04-28/MEASUREMENT-NECTAR-INJECTION-COST.json"
+      },
+      {
+        "task_id": "measure-honey-injection-cost",
+        "description": "Same as NECTAR but for HONEY.md",
+        "method": [
+          "Render bundle WITH global HONEY (62KB)",
+          "Render bundle WITH global + project HONEY (if exists)",
+          "Measure size delta + agent prompt size impact"
+        ],
+        "output": "forensics/artifacts/2026-04-28/MEASUREMENT-HONEY-INJECTION-COST.json"
+      }
+    ]
+  },
+
+  "phase_2_formula_calibration": {
+    "goal": "Use real measurements to calibrate theoretical formulas",
+    "tasks": [
+      {
+        "task_id": "calibrate-wave-threshold-formulas",
+        "description": "Do the wave thresholds (70%, 80%, 87%) actually predict agent behavior?",
+        "method": [
+          "Hypothesis: At context=70%, agents complete fast enough to hit cache TTL (5min)",
+          "Test: Spawn 4 agents at 70%, measure actual runtime vs. 5min target",
+          "If actual runtime = 3.5min → agents finish before cache TTL (good!)",
+          "If actual runtime = 7min → miss cache TTL (need to spawn earlier)",
+          "Iterate: Adjust WAVE_1_SPAWN_MAX_CONTEXT_PCT formula based on real runtime data"
+        ],
+        "output": "forensics/artifacts/2026-04-28/CALIBRATION-WAVE-THRESHOLDS.json"
+      },
+      {
+        "task_id": "calibrate-burn-rate-formula",
+        "description": "Does burn_rate = (delta_pct / delta_sec) * 60 actually predict compact timing?",
+        "method": [
+          "Measurement: Track altimeter.json across 3 sessions, collect (context%, timestamp) pairs",
+          "Compute observed burn_rate_pct_per_min from each pair",
+          "Theory: time_to_compact = (93.5 - curr_pct) / burn_rate",
+          "Actual: Does compact fire when predicted?",
+          "Gap analysis: If formula predicts 45min but compact fires at 30min → burn_rate calculation wrong"
+        ],
+        "output": "forensics/artifacts/2026-04-28/CALIBRATION-BURN-RATE.json"
+      },
+      {
+        "task_id": "calibrate-compass-quality-gates",
+        "description": "Do quality_score thresholds (0.50, 0.70, 0.80, 0.85) actually gate work as intended?",
+        "method": [
+          "Collect all manifests from past 7 days, extract quality_score values",
+          "Histogram: How many tasks have quality 0.50-0.60? 0.60-0.70? etc.",
+          "Theory: DEEPEN gate at 0.70 should reject ~10-15% of tasks",
+          "Actual: What % of tasks are BLOCKED at 0.70 gate?",
+          "If actual << 10%, gate is too lenient. If actual >> 15%, gate is too strict."
+        ],
+        "output": "forensics/artifacts/2026-04-28/CALIBRATION-QUALITY-GATES.json"
+      },
+      {
+        "task_id": "calibrate-reputation-weights",
+        "description": "Do reputation_weight values (0.35 truthfulness, 0.30 depth, etc.) actually drive agent behavior?",
+        "method": [
+          "Collect 20 agents with different composite_scores (0.4, 0.6, 0.8, etc.)",
+          "Observation: Do agents with score <0.5 actually get constrained to retraining work?",
+          "Observation: Do agents with score >0.75 get harder missions?",
+          "If yes → weights are well-calibrated. If no → adjust weights."
+        ],
+        "output": "forensics/artifacts/2026-04-28/CALIBRATION-REPUTATION-WEIGHTS.json"
+      }
+    ]
+  },
+
+  "phase_3_eval_wiring": {
+    "goal": "Wire real measurements into /dev-eval + /metrics for continuous monitoring",
+    "tasks": [
+      {
+        "task_id": "wire-token-ledger-tracking",
+        "description": "Every spawn should log actual token consumption to metrics-ledger.jsonl",
+        "spec": {
+          "log_entry_format": {
+            "timestamp": "ISO8601",
+            "event_type": "spawn",
+            "wave": "1|2|3",
+            "agents_count": "N",
+            "theory_tokens_predicted": "5000",
+            "actual_tokens_consumed": "[measured via /usage delta]",
+            "gap": "[actual - theory]",
+            "gap_percent": "[gap / theory * 100]",
+            "cache_hit": "true|false",
+            "burn_rate_pct_per_min": "[measured]"
+          }
+        }
+      },
+      {
+        "task_id": "wire-formula-violation-detection",
+        "description": "Presend hook should flag if /spawn violates context gates (as you just discovered!)",
+        "spec": {
+          "check": "If context_pct > WAVE_3_SPAWN_MAX_CONTEXT_PCT, warn: 'HIGH CONTEXT, W3 BACKGROUND ONLY'",
+          "check": "If context_pct > 93.5, error: 'CONTEXT RED ALERT, COMPACT IMMINENT, DON'T SPAWN'",
+          "log_to": "forensics/artifacts/2026-04-28/PRESEND-VIOLATIONS-{date}.jsonl"
+        }
+      },
+      {
+        "task_id": "wire-emergence-metrics",
+        "description": "Track: Do agents do more than assigned? Do they emit bundles? Do droplets get cited?",
+        "spec": {
+          "metrics": [
+            "emergent_work_discovered (tasks found via frontier scan)",
+            "bundles_emitted_by_agents (how many agents emitted bundles)",
+            "droplet_cross_citations (how many agents cited droplets in manifests)",
+            "average_mission_depth (phases completed: SEED → FULL)",
+            "context_leverage (% of agent context spent on discovery vs. primary task)"
+          ]
+        }
+      }
+    ]
+  },
+
+  "how_to_use_this_bundle": {
+    "description": "This is NOT a task list for one agent. This is a MISSION CONTEXT for 3-4 agents to tackle in parallel.",
+    "phases": [
+      "Phase 1 (W1 LIFTOFF): Spawn 3-4 agents in parallel on different measurement tasks. Each measures one formula aspect.",
+      "Phase 2 (W2 CRUISE): When Phase 1 results return, spawn synthesizer to cross-correlate and identify gaps.",
+      "Phase 3 (W3 INSERTION): Background agent wires findings into /dev-eval + /metrics.",
+      "Phase 4 (Main): You read results, decide which formulas need calibration, commit changes."
+    ],
+    "expected_output": [
+      "forensics/artifacts/2026-04-28/MEASUREMENT-*.json (5 files, raw measurements)",
+      "forensics/artifacts/2026-04-28/CALIBRATION-*.json (4 files, formula adjustments needed)",
+      "forensics/artifacts/2026-04-28/EVAL-WIRING-PLAN.md (integration spec)",
+      "Updated: ~/.claude/faerie2-formulas.json with calibrated values"
+    ]
+  }
+}

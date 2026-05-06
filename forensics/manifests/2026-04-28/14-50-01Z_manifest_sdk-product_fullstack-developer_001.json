@@ -1,0 +1,249 @@
+{
+  "task_id": "sdk-product-audit",
+  "agent_type": "fullstack-developer",
+  "agent_run_id": "fullstack-developer-2026-04-28T14-50-01Z-sdk-product",
+  "investigation_label": "sdk-product-readiness",
+  "timestamp_utc": "2026-04-28T14:50:01Z",
+  "phase": "EXTEND",
+  "status": "complete",
+  "dashboard_line": "3 critical SDK blockers: queue-shim in spawn prompt, missing agent cards, f0 token proxy. 3-phase roadmap: fix/test/ship.",
+  "compass_edge": "S",
+  "next_task_queued": "phase1-sdk-critical-fixes",
+  "next_bearing_agent": "python-pro",
+  "quality_score": 0.88,
+  "belief_index": 0.91,
+  "prescan_decision": "passed — no prior sdk-product manifest exists",
+
+  "audit_findings": {
+
+    "SDK_INTEGRATION_GAPS": {
+      "gap_1_queue_shim_injected_into_every_spawn": {
+        "severity": "CRITICAL",
+        "location": "/mnt/d/0local/.claude/scripts/0x_spawn_template.py lines 1133-1156 (_QUEUE_AUTONOMY_BLOCK)",
+        "description": "_QUEUE_AUTONOMY_BLOCK is injected into every agent spawn prompt by default (queue_autonomy=True). This block instructs agents to call 7x_queue_ops.py, which references the deprecated sprint-queue.json linear queue that was officially deprecated on 2026-04-27. Agents in production spawns are receiving instructions to call a deprecated script path that may not exist or be routed correctly. This means every W1/W2/W3 spawn is carrying dead routing instructions that contradict the compass navigation protocol.",
+        "evidence": [
+          "0x_spawn_template.py:1141 — 7x_queue_ops.py list call",
+          "0x_spawn_template.py:1143-1144 — 7x_queue_ops.py claim call",
+          "0x_spawn_template.py:1148 — 7x_queue_ops.py complete call",
+          "0x_spawn_template.py:1151-1152 — 7x_queue_ops.py monkeybranch-claim call",
+          "DEPRECATIONS.md — /queue /queue-and-spawn /run /sprint all deprecated as of 2026-04-27",
+          "CLAUDE.md mth00101 — compass navigation is the ONLY routing protocol; queue is dead"
+        ],
+        "fix": "Replace _QUEUE_AUTONOMY_BLOCK with a FRONTIER_SCAN_BLOCK that instructs agents to scan forensics/{date}/manifests/ for investigation_label-matched open edges. No 7x_queue_ops.py references. Pure compass navigation.",
+        "effort": "0.5 days — string constant replacement + regression test that no spawned prompt mentions queue_ops"
+      },
+      "gap_2_missing_maps_to_official_type_on_most_agent_cards": {
+        "severity": "HIGH",
+        "location": "/mnt/d/0local/.claude/agents/ (active cards)",
+        "description": "Only 2 of the active agent cards (python-pro, stigmergy-scout) declare maps_to_official_type in frontmatter. The remaining active cards (fullstack-developer, code-reviewer, architect, coc-manager, context-manager, data-scientist, equilibrium-auditor, membot, report-writer, team-builder, etc.) have no maps_to_official_type field. SPAWN-CARD-PROTOCOL.md states this field is required for correct routing: card name -> maps_to_official_type -> Agent(subagent_type=...). Without this field, spawn routing is ambiguous — callers must guess the official type or hardcode it.",
+        "evidence": [
+          "grep -n maps_to_official_type on fullstack-developer.md: zero results",
+          "grep -n maps_to_official_type on code-reviewer.md: zero results",
+          "grep -n maps_to_official_type on architect.md: zero results",
+          "stigmergy-scout.md line 6: maps_to_official_type: general-purpose (correct pattern)",
+          "python-pro.md line 7: maps_to_official_type: general-purpose (correct pattern)"
+        ],
+        "fix": "Add maps_to_official_type frontmatter to all active agent cards. Use the Claude SDK official types: general-purpose, ai-engineer, data-scientist, code-reviewer, etc.",
+        "effort": "1 day — read each card, determine correct official type mapping, edit frontmatter"
+      },
+      "gap_3_f0_token_estimate_is_4x_heuristic_not_real_api_count": {
+        "severity": "HIGH",
+        "location": "/mnt/d/0local/.claude/scripts/0x_spawn_template.py lines 1093-1096",
+        "description": "The f(0) context burden ratio is computed with agent_tokens = main_tokens * 4 (hardcoded heuristic). The formula-audit manifest (04-59-44Z) explicitly identified this as the biggest measurement gap: 'f(0) is asserted, not measured.' Phase 1 instrumentation is wired (good), but the denominator is synthetic. Until actual API response token counts are wired in, f(0) metric cannot be trusted for phase gate decisions. The phase gates (SEED/DEEPEN/EXTEND/FULL) are supposed to advance on quality_score + belief_index thresholds, not f(0) directly, but the FFMx calculation and velocity acceleration roadmap depends on real token counts.",
+        "evidence": [
+          "0x_spawn_template.py:1093-1096 — _agent_tok = _main_tok * 4 (heuristic comment explicit)",
+          "04-59-44Z formula-audit manifest: 'biggest_gap: f(0) is asserted, not measured'",
+          "14-00-00Z phase1-instrumentation manifest: known_gaps[0] = 'f0 agent_tokens estimate is 4x heuristic'"
+        ],
+        "fix": "Phase 3 work: wire actual API response token counts (from Claude API usage field) into log_f0_to_session_metrics(). Requires PostToolUse hook to capture api_response.usage.output_tokens per Agent() call and pass to the metrics writer.",
+        "effort": "2 days — PostToolUse hook wiring + validation"
+      },
+      "gap_4_sibling_manifest_scan_o2_without_prescan_cache_wired": {
+        "severity": "MEDIUM",
+        "location": "/mnt/d/0local/.claude/scripts/0x_spawn_template.py lines 451-492 (_collect_sibling_context)",
+        "description": "The 0x_prescan_cache.py module exists and is correct, but it is NOT imported or called from 0x_spawn_template.py. The sibling manifest scan still uses the O(N^2) direct filesystem pattern (iterdir + sort + per-file stat + per-file read). The code-reviewer audit artifact (053017Z) documented this precisely: 21 read_text() calls, 19 json.loads(), 6 glob operations per spawn, multiplied by 4-5 W1 parallel agents = 100+ file I/O ops at liftoff. The cache module is ready; it just needs to be imported and wired into _collect_sibling_context() and potentially the prescan gate in agent prompts.",
+        "evidence": [
+          "0x_prescan_cache.py exists at /mnt/d/0local/.claude/scripts/0x_prescan_cache.py (177 lines, correct)",
+          "0x_spawn_template.py: no import of prescan_cache anywhere (grep returns 0 hits)",
+          "Velocity audit artifact (053017Z) issue #1: N^2 sibling scan, recommended session-level cache",
+          "knowledge-synthesizer manifest (053017Z): Priority 1 = cache prescan results, 10x ROI"
+        ],
+        "fix": "Import prescan_cache in 0x_spawn_template.py and replace the _collect_sibling_context() direct scan with cached lookups. 1-sprint work per the velocity synthesis.",
+        "effort": "1 day — import + wire cache into _collect_sibling_context() + test"
+      },
+      "gap_5_mission_graph_script_absent_from_faerie_vault_repo": {
+        "severity": "MEDIUM",
+        "location": "faerie-vault repo (this repo) — no 0x_mission_graph.py present",
+        "description": "CLAUDE.md and all manifests reference python3 .claude/scripts/0x_mission_graph.py --query topology/open-edges/blockers/chains as the primary compass navigation tool. This script exists in the faerie2 repo (/mnt/d/0local/gitrepos/faerie2/.claude/scripts/) but is NOT present in faerie-vault or in ~/.claude/scripts/. The faerie-vault is described as the human interface template. For shipping as a standalone product, the mission graph querying capability must be self-contained or clearly documented as a faerie2 dependency.",
+        "evidence": [
+          "find /mnt/d/0local/gitrepos/faerie-vault -name 0x_mission_graph.py: zero results",
+          "find /mnt/d/0local/.claude/scripts -name 0x_mission_graph.py: zero results",
+          "phase2-shadow-mode manifest files_modified[0].path points to /mnt/d/0local/gitrepos/faerie2/.claude/scripts/0x_mission_graph.py",
+          "CLAUDE.md Compass Navigation Protocol: python3 .claude/scripts/0x_mission_graph.py --query topology"
+        ],
+        "fix": "Either: (A) copy/symlink 0x_mission_graph.py into ~/.claude/scripts/ as the canonical shared location, or (B) document the faerie2 repo dependency explicitly in faerie-vault START-HERE.md as a prerequisite.",
+        "effort": "0.5 days — copy script + update path references in CLAUDE.md"
+      },
+      "gap_6_stigmergy_scout_references_deprecated_sprint_queue": {
+        "severity": "MEDIUM",
+        "location": "/mnt/d/0local/.claude/agents/stigmergy-scout.md lines 36-44, 84-85, 98",
+        "description": "The stigmergy-scout agent card (the most-used routing agent) still contains Phase 2 compass scan code that reads sprint-queue.json directly (line 36) and calls 7x_queue_ops.py for ROUTE and FLAG decisions (lines 84-85, 98). This contradicts the deprecation notice and the compass navigation protocol. A scout that follows its own card will try to manipulate a deprecated queue, creating silent failures or no-ops.",
+        "evidence": [
+          "stigmergy-scout.md:36 — json.loads(Path.home() / '.claude/hooks/state/sprint-queue.json'.read_text())",
+          "stigmergy-scout.md:84 — 7x_queue_ops.py release call",
+          "stigmergy-scout.md:85 — 7x_queue_ops.py add call",
+          "stigmergy-scout.md:98 — 7x_queue_ops.py release call",
+          "DEPRECATIONS.md 2026-04-27 — /queue superseded by compass navigation"
+        ],
+        "fix": "Rewrite stigmergy-scout Phase 2 and Phase 3 to use manifest filesystem discovery (grep forensics/manifests/ for investigation_label) instead of queue reads, and replace 7x_queue_ops.py calls with manifest writes to forensics/manifests/.",
+        "effort": "1 day — rewrite Phase 2 compass scan section + Phase 3 ROUTE/FLAG actions"
+      }
+    },
+
+    "PRODUCT_BLOCKERS": {
+      "primary_blockers": [
+        "BLOCKER-1: _QUEUE_AUTONOMY_BLOCK injected into every spawn (dead routing). Agents get contradictory instructions. Ships broken.",
+        "BLOCKER-2: stigmergy-scout.md calls deprecated 7x_queue_ops.py — primary routing agent is broken for ROUTE and FLAG decisions.",
+        "BLOCKER-3: 0x_mission_graph.py missing from canonical ~/.claude/scripts/ — compass query commands fail outside faerie2 repo."
+      ],
+      "secondary_blockers": [
+        "BLOCKER-4: maps_to_official_type missing from most agent cards — spawn routing is ambiguous for SDK callers.",
+        "BLOCKER-5: prescan_cache.py not wired into spawn_template — cache module exists but dead code.",
+        "BLOCKER-6: f(0) uses 4x heuristic — metric not trustworthy for phase gate calibration."
+      ],
+      "already_working": [
+        "Manifest writing to forensics/ — working correctly (evidence: 25+ manifests this session, correct naming pattern)",
+        "Phase 1 f(0) instrumentation — wired into assemble_bundle() (14-00-00Z manifest confirms PASS)",
+        "Phase 2 context_pressure shadow logging — wired (05-28-47Z manifest confirms PASS)",
+        "Manifest format consistency — all manifests have task_id, dashboard_line, compass_edge, investigation_label",
+        "Bundle assembly (conservative + experimental paths) — functioning",
+        "Spawn template signing (HMAC, TEMPLATE-SIGNED header) — functioning",
+        "Agent card validation (_validate_agent_type checks for .md file) — functioning",
+        "Prescan cache module — coded correctly, just needs wiring",
+        "Phase gate thresholds (SEED/DEEPEN/EXTEND/FULL) — defined, manifests emit quality_score + belief_index correctly"
+      ]
+    },
+
+    "MVP_DEFINITION": {
+      "description": "Minimum viable product = faerie2 orchestration running without any subprocess/CLI hacks; pure SDK orchestration with reliable forensics/",
+      "requirements": [
+        "No deprecated queue references in any agent prompt (queue_autonomy block replaced)",
+        "All active agent cards have maps_to_official_type (enables correct Agent() dispatch)",
+        "0x_mission_graph.py in ~/.claude/scripts/ (compass queries work from any session)",
+        "stigmergy-scout.md rewritten to use filesystem discovery (no 7x_queue_ops.py)",
+        "prescan_cache wired into spawn template (performance + correctness)",
+        "Manifests write to forensics/ reliably — already working, maintain",
+        "FFMx metric tracking — Phase 1 wired, Phase 2 shadow wired, Phase 3 (real token counts) pending"
+      ],
+      "out_of_scope_for_mvp": [
+        "Real API token count wiring (f(0) Phase 3) — measurement, not behavioral",
+        "Bundle compression (NECTAR selective + pollen dedup) — velocity optimization, not MVP",
+        "Manifest I/O batching — deferred, low ROI",
+        "Ed25519 signing per-agent (signature_status: pending_external_signing in several manifests)"
+      ]
+    }
+  },
+
+  "completion_roadmap": {
+    "phase_1_critical_sdk_fixes": {
+      "timeline": "2-3 days",
+      "owner": "python-pro",
+      "tasks": [
+        {
+          "task": "Replace _QUEUE_AUTONOMY_BLOCK with FRONTIER_SCAN_BLOCK in 0x_spawn_template.py",
+          "file": "/mnt/d/0local/.claude/scripts/0x_spawn_template.py",
+          "approach": "New constant _FRONTIER_SCAN_BLOCK instructs agents to: (1) scan forensics/{date}/manifests/ for open compass edges, (2) filter by investigation_label, (3) discover north-blocked tasks. Remove all 7x_queue_ops.py references.",
+          "validation": "grep -c queue_ops spawn_template.py == 0 after fix"
+        },
+        {
+          "task": "Rewrite stigmergy-scout.md Phase 2 + Phase 3 to use filesystem discovery",
+          "file": "/mnt/d/0local/.claude/agents/stigmergy-scout.md",
+          "approach": "Replace sprint-queue.json read with manifest scan. Replace 7x_queue_ops.py ROUTE/FLAG calls with direct manifest writes to forensics/manifests/. Keep all KPIs and hard constraints.",
+          "validation": "grep -c queue_ops stigmergy-scout.md == 0 after fix"
+        },
+        {
+          "task": "Copy 0x_mission_graph.py to ~/.claude/scripts/ from faerie2 repo",
+          "approach": "cp /mnt/d/0local/gitrepos/faerie2/.claude/scripts/0x_mission_graph.py /mnt/d/0local/.claude/scripts/. Update CLAUDE.md path references if needed.",
+          "validation": "python3 ~/.claude/scripts/0x_mission_graph.py --query topology returns without error"
+        },
+        {
+          "task": "Add maps_to_official_type to all active agent cards",
+          "files": "fullstack-developer.md, code-reviewer.md, architect.md, coc-manager.md, context-manager.md, data-scientist.md, equilibrium-auditor.md, membot.md, report-writer.md, team-builder.md, inbox-watcher.md, ipfs-publisher.md, penetration-tester.md, queue-janitor.md, spiderfoot.md, vision-ingest.md",
+          "approach": "For each card, determine correct Claude SDK official type (general-purpose is safe default for most). Add maps_to_official_type field to YAML frontmatter.",
+          "validation": "grep -rL maps_to_official_type ~/.claude/agents/*.md returns empty"
+        }
+      ]
+    },
+    "phase_2_end_to_end_test": {
+      "timeline": "1-2 days after Phase 1",
+      "owner": "code-reviewer + data-scientist",
+      "tasks": [
+        {
+          "task": "Wire prescan_cache into 0x_spawn_template.py _collect_sibling_context()",
+          "validation": "W1 spawn of 4 agents shows cache_hit in second+ parallel spawn logs"
+        },
+        {
+          "task": "End-to-end test: spawn W1 wave → manifests write to forensics/ → frontier scan discovers next task → spawn W2",
+          "validation": "Full compass loop: spawn → manifest → discovery → next spawn without queue references"
+        },
+        {
+          "task": "Validate manifest format compliance: all 7 required fields present (task_id, dashboard_line, compass_edge, investigation_label, next_task_queued, quality_score, belief_index)",
+          "validation": "Script check: grep missing fields in last 20 manifests"
+        },
+        {
+          "task": "Confirm 0x_mission_graph.py --query open-edges returns correctly from faerie-vault repo context",
+          "validation": "Output lists manifests from forensics/ with open N/E/W edges"
+        }
+      ]
+    },
+    "phase_3_ship": {
+      "timeline": "1 day after Phase 2",
+      "owner": "fullstack-developer + documentation-engineer",
+      "tasks": [
+        {
+          "task": "Update START-HERE.md with correct SDK usage patterns (no queue references)",
+          "validation": "START-HERE.md mentions maps_to_official_type, compass navigation, no queue"
+        },
+        {
+          "task": "Update DEPRECATIONS.md timeline (2026-05-04 read-only gate is ~6 days out)",
+          "validation": "Deprecation timeline reflects actual state"
+        },
+        {
+          "task": "Write release notes for MVP SDK integration fix",
+          "validation": "forensics/artifacts/ contains release notes artifact"
+        },
+        {
+          "task": "f(0) Phase 3 — wire real API token counts via PostToolUse hook (non-blocking; ship MVP without this, add post-ship)",
+          "validation": "log_f0_to_session_metrics receives real output_tokens from API response"
+        }
+      ]
+    }
+  },
+
+  "manifest_truthfulness": {
+    "dashboard_line_accuracy": "high",
+    "evidence_citation": "all findings cite exact file + line numbers verified by grep/read",
+    "effort_estimation_confidence": 0.82,
+    "assumptions": [
+      "faerie2 repo exists at /mnt/d/0local/gitrepos/faerie2/ and contains 0x_mission_graph.py (referenced in phase2-shadow-mode manifest files_modified)",
+      "Claude SDK official agent types include general-purpose, ai-engineer, data-scientist, code-reviewer, python-developer — confirmed from CLAUDE.md agent types section"
+    ]
+  },
+
+  "discovered_work": [
+    {
+      "discovery_type": "blocker_fix",
+      "task_title": "Replace _QUEUE_AUTONOMY_BLOCK with FRONTIER_SCAN_BLOCK",
+      "investigation_label": "sdk-product-readiness",
+      "next_bearing": "S",
+      "effort": "0.5 days"
+    },
+    {
+      "discovery_type": "blocker_fix",
+      "task_title": "Rewrite stigmergy-scout.md Phase 2+3 queue references",
+      "investigation_label": "sdk-product-readiness",
+      "next_bearing": "S",
+      "effort": "1 day"
+    }
+  ]
+}

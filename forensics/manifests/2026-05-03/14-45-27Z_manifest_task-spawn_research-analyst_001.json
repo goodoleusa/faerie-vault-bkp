@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-scale-w1-test-6",
+  "agent_type": "research-analyst",
+  "investigation_label": "scale-w1-test-6",
+  "wave": "1",
+  "task_description": "Test with 6-agent team",
+  "timestamp": "2026-05-03T14:45:27.174468",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-research-analyst",
+  "prescan_decision": "passed"
+}

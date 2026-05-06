@@ -1,0 +1,59 @@
+{
+  "task_id": "droplet-semantic-threading-design",
+  "agent_type": "ai-engineer",
+  "agent_card": "ai-engineer",
+  "maps_to_official_type": "general-purpose",
+  "session_id": "2026-04-28-droplet-design",
+  "investigation_label": "droplet-semantic-threading",
+  "timestamp": "2026-04-28T19:09:00Z",
+  "decision": "DESIGN_COMPLETE",
+  "dashboard_line": "Hybrid storage + semantic_tags + index.jsonl: cross-time, cross-domain droplet threading.",
+  "compass_edge": "S",
+  "quality_score": 0.82,
+  "belief_index": 0.80,
+  "phase": "DEEPEN",
+  "phase_gate_thresholds": {"quality": 0.70, "belief": 0.50},
+  "phase_gate_passed": true,
+  "next_task_queued": "droplet-index-builder-implementation",
+  "next_bearing": "S",
+  "discovered_work": [
+    {
+      "task_id": "droplet-index-builder-implementation",
+      "agent_type": "python-pro",
+      "compass_edge": "S",
+      "summary": "Implement scripts/8x_droplet_index.py: append-only JSONL index with semantic_tags, investigation_label, embedding_hash. Wire to droplet writer hook."
+    },
+    {
+      "task_id": "droplet-discovery-bootstrap-rewrite",
+      "agent_type": "python-pro",
+      "compass_edge": "E",
+      "summary": "Replace upstream-task-id discovery with semantic-tag + investigation-label match. Output formatted markdown for context injection."
+    },
+    {
+      "task_id": "droplet-schema-migration-existing",
+      "agent_type": "data-engineer",
+      "compass_edge": "N",
+      "summary": "Backfill existing forensics/droplets/*.md with semantic_tags + investigation_label frontmatter (north edge: prerequisite for index)."
+    }
+  ],
+  "design_summary": {
+    "storage_decision": "Option C Hybrid: per-date storage + central forensics/droplets/index.jsonl",
+    "schema_keys": [
+      "droplet_id", "investigation_label", "semantic_tags", "domain",
+      "parent_pollen_id", "parent_droplet_ids", "agent_type", "agent_key_id",
+      "compass_edge_at_emission", "cross_citation_count", "embedding_hash",
+      "summary", "body", "category", "priority", "signature", "session_id"
+    ],
+    "discovery_mechanism": "grep on index.jsonl by semantic_tags OR investigation_label OR domain; embedding similarity optional layer-2",
+    "threading_mechanism": "investigation_label clusters across dates; semantic_tags enable cross-domain match; parent_droplet_ids form citation DAG"
+  },
+  "f_zero_compliance": {
+    "main_burden": "zero — discovery via single grep against index.jsonl",
+    "no_new_orchestration": "wires existing droplet writer hook to append index entry",
+    "respects_equilibrium": "augments existing infrastructure, no replacement"
+  },
+  "artifacts_produced": [
+    "design returned inline as final assistant message"
+  ],
+  "prescan_decision": "passed — no recent design artifact for droplet-semantic-threading; existing task-droplet-architecture.md (2026-04-22) covers task-id linkage only, not semantic/cross-domain threading"
+}

@@ -1,0 +1,47 @@
+{
+  "task_id": "w1-spawn-cost-empirical-measurement",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "agent": "ai-engineer",
+  "agent_run_id": "ai-engineer-2026-04-28-011107Z-001",
+  "wave": "W3-INSERTION",
+  "timestamp_utc": "2026-04-28T01:11:07Z",
+  "dashboard_line": "W1 spawn overhead empirical: 3089 tok/agent (range 2600-3550); Scout 1 theory 5K overestimates -38%",
+  "compass_edge": "E",
+  "next_bearing": "E",
+  "next_task_queued": "task-measure-w2-sonnet-spawn-overhead-empirically",
+  "quality_score": 0.78,
+  "belief_index": 0.85,
+  "phase_gate": "DEEPEN",
+  "decision": "REFRAMED",
+  "infeasibility_type": "documented_protocol_unexecutable",
+  "original_intent": "execute 4-5 W1 spawns and measure altimeter delta to derive AGENT_SPAWN_OVERHEAD_TOKENS",
+  "reframe_summary": "0x_mission_graph.py --spawn flag does not exist (script supports only add/query); ~/.claude/altimeter.json is not a JSON file; subagent cannot invoke Task tool. Reframed: measured spawn cost from ground-truth artifact byte-size of 8 real bundles + spawn template registry + injected partials. More rigorous than altimeter delta because it isolates injection cost from agent work cost.",
+  "alternative_mission": [
+    "task-revise-light-bundle-token-budget-3K-not-5K",
+    "task-measure-w2-sonnet-spawn-overhead-empirically",
+    "task-implement-mission-graph-spawn-flag-or-deprecate-from-docs"
+  ],
+  "AGENT_SPAWN_OVERHEAD_TOKENS_point_estimate": 3089,
+  "AGENT_SPAWN_OVERHEAD_TOKENS_range": [2600, 3550],
+  "discovered_work": [
+    "task-revise-light-bundle-token-budget-3K-not-5K",
+    "task-measure-w2-sonnet-spawn-overhead-empirically",
+    "task-measure-cache-hit-discount-on-rapid-parallel-spawns",
+    "task-implement-altimeter-json-context-pct-field-as-documented",
+    "task-implement-mission-graph-spawn-flag-or-deprecate-from-docs"
+  ],
+  "prescan_decision": "passed — Scout 1 (data-analyst 16:00:00Z) produced framework + theory but did not execute; this agent measures empirically rather than re-spawning",
+  "compass_bearing_rationale": "E (parallel) — deterministic byte measurements (HIGH quality) but execution path unavailable so belief MEDIUM-HIGH; recommend parallel validator when --spawn CLI ships",
+  "manifest_truthfulness": {
+    "executed_actual_spawns": false,
+    "measurements_from_real_disk_artifacts": true,
+    "reframed_per_mth00090_92": true,
+    "scout_1_work_credited": true
+  },
+  "related_artifacts": [
+    "forensics/2026-04-28/artifacts/011107Z_measurement_spawn-cost-w1_ai-engineer_001.json"
+  ],
+  "predecessor_manifests": [
+    "forensics/2026-04-28/manifests/160000Z_manifest_w1-spawn-cost-measurement_data-analyst_001.json"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "task_id": "coc-consolidation-design-phase-2-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "python-pro",
+  "phase": "DESIGN",
+  "created_utc": "2026-04-28T18:30:06Z",
+  "depends_on": "coc-script-mapping-phase-1-w2",
+
+  "ffff_framework": {
+    "findings_goal": "Phase 1 inventory complete; Phase 2 uses that to design unified architecture",
+    "flags_goal": "CRITICAL: 7 violations in current 31 scripts must be eliminated; design must prevent regressions",
+    "flow_goal": "All scripts converge on unified COC writer; indexing and recovery use outputs of that single source; no backdoor writes",
+    "friction_goal": "Script sprawl causes maintenance burden, version inconsistency, silent failures; consolidation reduces surface area"
+  },
+
+  "critical_context": {
+    "phase_1_output": "Inventory spreadsheet from coc-script-mapping-phase-1: function categories, redundancies, canonical candidates",
+    "audit_violations": "7 CRITICAL: scripts writing to wrong paths, under .claude/, 7 schema fields unused, 3 missing writers (pollen, honey-renders, droplets)",
+    "current_pattern": "31 scripts = 5+5+11+10 writes, indexes, audits, recoveries. Design should consolidate to 4-5 core functions"
+  },
+
+  "design_scope": {
+    "unified_coc_writer": "Single script handles: COC entry creation, signature + timestamp, path routing (forensics/{date}/{type}/, not .claude/)",
+    "consolidated_indexer": "Reads all COC entries, builds forensic index, validates chain integrity",
+    "verification_suite": "Enforces manifest schema compliance; phases gate quality/belief thresholds; compass edge validation",
+    "recovery_system": "Exports all artifacts for task_id in court-ready format; recovers from B2 if needed",
+    "deprecation_strategy": "Which scripts get deleted? Which get renamed? How do we migrate existing calls?"
+  },
+
+  "success_criteria": {
+    "architecture_doc": "Design document with function specs, data flow, API contracts, error handling",
+    "unified_writer_spec": "Function signature + behavior spec for single COC writer; show how it replaces current 5 variants",
+    "migration_guide": "How to update existing scripts → call unified writer instead of direct write",
+    "schema_validation": "Proposed manifest schema (11 required fields) with phase gate logic (quality_score + belief_index → compass_edge)",
+    "compass_edge": "S if design is feasible and non-breaking; E if uncertain about backward compat (parallel validation); W if major rearchitecture needed"
+  },
+
+  "next_task_queued": "implement-unified-coc-writer-w3"
+}

@@ -1,0 +1,41 @@
+{
+  "task_id": "audit-coc-script-compliance",
+  "timestamp_utc": "2026-04-28T15:30:00Z",
+  "agent_type": "code-reviewer",
+  "investigation_label": "coc-schema-compliance-2026-04-28",
+  "wave": "2",
+  "quality_score": 0.82,
+  "belief_index": 0.88,
+  "compass_edge": "S",
+  "dashboard_line": "COC audit: 24+ scripts non-compliant; CRITICAL path & schema violations system-wide",
+  "next_task_queued": "design-unified-coc-writer-with-new-schema",
+  "discovered_work": [
+    "task-fix-0x-spawn-template-manifest-path",
+    "task-fix-0x-mission-graph-bundle-path",
+    "task-relocate-8x-ephemeral-capture-out-of-forensics",
+    "task-introduce-pollen-writer-script",
+    "task-introduce-honey-render-writer-script",
+    "task-deprecate-claude-memory-forensics-paths",
+    "task-extend-manifest-writer-with-honey-fields",
+    "task-rename-old-type-first-folders-or-add-shim"
+  ],
+  "honey_version_used": null,
+  "honey_rendering_context": {
+    "audience": "main-orchestrator",
+    "nectar_fragments_injected": 0,
+    "pollen_edges_active": 0
+  },
+  "honey_render_fidelity": null,
+  "prescan_decision": "passed — first audit of this scope; no prior 24h artifact",
+  "audit_summary": {
+    "scripts_inventoried": 31,
+    "critical_violations": 7,
+    "high_violations": 9,
+    "medium_violations": 5,
+    "low_violations": 4,
+    "scripts_writing_to_old_type_first": ["0x_spawn_template.py", "0x_mission_graph.py", "9x_task_droplet_writer.py", "9x_manifests_to_vault_index.py", "8x_droplet_register.py"],
+    "scripts_writing_under_dot_claude": ["4x_subagent_coc_collector.py", "8x_droplet_coc_tracker.py", "8x_task_bridge_hook.py", "8x_manifest_auto_continue.py", "8x_ephemeral_capture.py"],
+    "schema_fields_unused_systemwide": ["quality_score", "belief_index", "dashboard_line", "discovered_work", "honey_version_used", "honey_rendering_context", "honey_render_fidelity"],
+    "missing_writers": ["pollen", "honey-renders", "droplets-to-new-schema"]
+  }
+}

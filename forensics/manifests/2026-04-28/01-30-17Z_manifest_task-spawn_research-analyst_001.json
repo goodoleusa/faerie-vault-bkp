@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-spawn-20260428-053017",
+  "agent_type": "research-analyst",
+  "investigation_label": "spawn-20260428-053017",
+  "wave": "1",
+  "task_description": "shld revv faster",
+  "timestamp": "2026-04-28T01:30:17.880030",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-research-analyst",
+  "prescan_decision": "passed"
+}

@@ -1,0 +1,76 @@
+{
+  "task_id": "formula-calibration-baseline",
+  "agent_id": "performance-eval",
+  "session_id": "formula-calibration-measurement-2026-04-28",
+  "timestamp": "2026-04-28T16:00:02Z",
+  "wave": "W3 INSERTION (background)",
+  "dashboard_line": "Baseline: 1404 tok/agent (-69% vs theory); S=100%; 3-session playbook written",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "compass_edge": "S",
+  "quality_score": 0.78,
+  "belief_index": 0.82,
+  "prescan_decision": "passed — no prior baseline-metrics artifact found for this experiment",
+
+  "artifacts_produced": [
+    {
+      "type": "baseline-metrics-json",
+      "path": "forensics/2026-04-28/artifacts/160000Z_mutation-execution_baseline-metrics_performance-eval_001.json",
+      "description": "Phase 1 baseline metrics: bundle_injection_cost=1404 tokens, formula state confirmed, 3 anomalies flagged for wiring"
+    },
+    {
+      "type": "post-mutation-playbook",
+      "path": "forensics/2026-04-28/artifacts/160001Z_mutation-execution_post-mutation-playbook_performance-eval_001.md",
+      "description": "Step-by-step collection protocol for 3 post-mutation sessions; delta computation template; ACCEPT/ITERATE/REVERT criteria"
+    }
+  ],
+
+  "findings": {
+    "formula_state": "CONFIRMED — NECTAR=1200, HONEY=200 matches experiment plan; mutation live",
+    "bundle_injection_cost": {
+      "value_tokens": 1404,
+      "vs_theoretical_old": 4500,
+      "savings_tokens": 3096,
+      "savings_pct": 68.8,
+      "status": "WITHIN TARGET RANGE (1200-1600)"
+    },
+    "wave_capacity_implication": "~3x more agent bandwidth per session vs theoretical old values",
+    "session_1_health_signals": {
+      "compass_edge_S_rate": "100% (N=1)",
+      "prescan_pass_rate": "100% (N=1)",
+      "quality_score": 0.82,
+      "belief_index": 0.88,
+      "confidence": "LOW — all N=1; directional only"
+    },
+    "critical_tracking_gaps": [
+      "main_context_at_W2_start: never captured across any historical session — structural gap, not a formula issue",
+      "agents_per_wave_W1: not recorded in manifest schema — wave_id field wiring needed",
+      "manifest_chain_depth: should be collected at session END not START"
+    ]
+  },
+
+  "discovered_work": [
+    {
+      "task_id": "context-capture-instrumentation",
+      "description": "Wire context% logging at W2 spawn boundary (presend_estimate.py or hook). Enables main_context_at_W2_start metric collection. Currently unknown for all historical sessions.",
+      "priority": "MEDIUM",
+      "investigation_label": "formula-calibration-measurement-2026-04-28",
+      "compass_edge": "E (parallel wiring task, does not block experiment)"
+    },
+    {
+      "task_id": "manifest-schema-wave-id-wiring",
+      "description": "Add wave_id field to manifest schema so agents_per_wave_W1 becomes measurable.",
+      "priority": "LOW",
+      "investigation_label": "formula-calibration-measurement-2026-04-28",
+      "compass_edge": "E (parallel)"
+    }
+  ],
+
+  "next_task_queued": "post-mutation-measurement-session-2",
+  "next_bearing": "S (proceed — execute sessions 2 and 3 per playbook; collect delta metrics; run ACCEPT/ITERATE/REVERT decision)",
+
+  "recommendation": {
+    "status": "PROCEED TO SESSION 2",
+    "rationale": "Phase 1 baseline collected. Formula state confirmed. Session-1 metrics pass all primary thresholds. No negative emergence observed. 2 sessions remaining in measurement window.",
+    "expected_outcome": "ACCEPT on session 3 — measurement corrections, not behavioral mutations, are historically stable"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "bundle_id": "eval-wiring-hookup-001",
+  "timestamp": "2026-04-28T00:00:00Z",
+  "investigation_label": "eval-metrics-wiring",
+  "bundle_type": "standard",
+  "creator": "main-context",
+  "purpose": "Wire /dev-eval + /metrics into Claude CLI for live formula feedback",
+
+  "mission_goal": "Create real-time feedback loop: /spawn reads formulas → agents work → measurements logged → /metrics shows results → next mutation informed by real data.",
+
+  "context_injection": {
+    "background": "Currently, formula parameters are defined in faerie2-formulas.json but not wired into operational systems. Agents don't know they should adapt behavior based on context%. /metrics doesn't track formula calibration. /dev-eval can't compare baseline vs. mutation because there's no baseline logging.",
+    "what_needs_to_exist": [
+      "1. Real-time token ledger (every spawn logged with actual /usage delta)",
+      "2. Formula violation detection (presend hook warns if /spawn violates gates)",
+      "3. Metrics dashboard (/metrics --formula-tracking shows formula health)",
+      "4. Mutation baseline baseline (T+0 measurements before any tweaks)",
+      "5. Agent-side formula awareness (agents know their reputation score + wave state)"
+    ],
+    "current_gap": "We have formulas defined. We have no operational wiring. Result: formulas are aspirational, not enforced."
+  },
+
+  "phase_1_token_ledger": {
+    "goal": "Log ACTUAL token consumption for every spawn, not estimates",
+    "tasks": [
+      {
+        "task_id": "implement-token-ledger-hook",
+        "description": "Create a presend/postsend hook that logs /usage before/after spawn",
+        "implementation": {
+          "trigger": "Before Agent() call",
+          "action": [
+            "1. Call /usage (Claude Code API → get current context metrics)",
+            "2. Parse: input_tokens, cache_creation_input, cache_read_input",
+            "3. Store as: token-ledger-pre-spawn.json",
+            "4. Let Agent() execute",
+            "5. Call /usage again",
+            "6. Delta = post_usage - pre_usage",
+            "7. Log entry: { timestamp, wave, agents_count, actual_tokens_burned, theory_predicted, gap }"
+          ]
+        },
+        "log_location": "~/.claude/hooks/state/token-ledger-{YYYY-MM-DD}.jsonl",
+        "schema": {
+          "timestamp": "2026-04-28T12:34:56Z",
+          "event": "spawn_w1_complete",
+          "wave": 1,
+          "agents_spawned": 4,
+          "context_pct_before": 68,
+          "context_pct_after": 78,
+          "theory_predicted_tokens": 5000,
+          "actual_tokens_consumed": 4200,
+          "gap": -800,
+          "gap_percent": -16,
+          "cache_hit_rate_observed": 0.87,
+          "burn_rate_pct_per_min": 1.2,
+          "time_to_compact_predicted": 19
+        }
+      },
+      {
+        "task_id": "integrate-ledger-with-metrics-ledger.jsonl",
+        "description": "Merge token-ledger events into the existing metrics-ledger.jsonl for unified /metrics queries",
+        "method": [
+          "Token ledger logs spawn events (high-level)",
+          "Metrics ledger logs agent outcomes (manifest-level)",
+          "Create bridge: spawn_id links token event → agent manifests",
+          "Result: /metrics can show: 'W1 spawn burned 4.2K actual vs 5K theory. 3 of 4 agents completed in <5min (cache hit)'"
+        ]
+      }
+    ]
+  },
+
+  "phase_2_formula_enforcement": {
+    "goal": "Make /spawn respect faerie2-formulas.json wave gates (context-aware spawning)",
+    "tasks": [
+      {
+        "task_id": "add-context-gate-to-spawn",
+        "description": "Before /spawn invokes agents, read altimeter + formulas, determine wave automatically",
+        "implementation": {
+          "file": "/mnt/d/0LOCAL/.claude/skills/spawn/run.py",
+          "change": [
+            "1. Before parse_args(), read altimeter.json",
+            "2. context_pct = altimeter['pct']",
+            "3. Read faerie2-formulas.json",
+            "4. Determine wave based on context_pct (not user --wave flag)",
+            "   if context_pct < 70: wave = 1",
+            "   elif context_pct < 80: wave = 2",
+            "   elif context_pct < 87: wave = 3",
+            "   else: error('CONTEXT RED ALERT')",
+            "5. Log: 'Auto-determined wave={wave} based on context={context_pct}%'",
+            "6. Override user --wave if it violates gates",
+            "   (e.g., if user says --wave 1 but context=85%, force W3)"
+          ]
+        },
+        "presend_warning": {
+          "trigger": "If user specifies --wave that violates context gates",
+          "message": "You requested W1, but context=85% (exceeds WAVE_1_SPAWN_MAX_CONTEXT_PCT=70%). Forcing W3 INSERTION (background only). If you want W1, wait until context drops below 70%.",
+          "log_to": "~/.claude/hooks/state/presend-violations.jsonl"
+        }
+      },
+      {
+        "task_id": "add-formula-parameters-to-spawn-prompt",
+        "description": "Agents should know the formulas driving their dispatch. Inject faerie2-formulas.json into bundle.",
+        "implementation": {
+          "location": "read_context_bundle() in run.py",
+          "addition": [
+            "# Add after NECTAR injection",
+            "formulas = json.load(open('/mnt/d/0local/.claude/faerie2-formulas.json'))",
+            "wave_section = f'''",
+            "# Wave Thresholds (Why You're Spawned in This Wave)",
+            "W1 (LIFTOFF): context < {formulas['WAVE_1_SPAWN_MAX_CONTEXT_PCT']}%",
+            "W2 (CRUISE): {formulas['WAVE_1_SPAWN_MAX_CONTEXT_PCT']}% < context < {formulas['WAVE_2_SPAWN_MAX_CONTEXT_PCT']}%",
+            "W3 (INSERTION): {formulas['WAVE_2_SPAWN_MAX_CONTEXT_PCT']}% < context < {formulas['WAVE_3_SPAWN_MAX_CONTEXT_PCT']}%",
+            "\"\"\"",
+            "bundle_parts.append(wave_section)"
+          ]
+        }
+      }
+    ]
+  },
+
+  "phase_3_metrics_dashboard": {
+    "goal": "Implement /metrics --formula-tracking to show formula health + calibration gaps",
+    "tasks": [
+      {
+        "task_id": "implement-metrics-formula-tracking-view",
+        "description": "Add new display mode to /metrics: show theory vs. practice for each formula",
+        "implementation": {
+          "command": "/metrics --formula-tracking --show {FORMULA_NAME} --graph {TIMERANGE}",
+          "output": {
+            "example": "/metrics --formula-tracking --show WAVE_1_SPAWN_MAX_CONTEXT_PCT --graph 7d",
+            "display": [
+              "Formula: WAVE_1_SPAWN_MAX_CONTEXT_PCT",
+              "Current value: 70%",
+              "Baseline (T+0): 70% (no data yet)",
+              "",
+              "THEORY vs PRACTICE (last 7 days):",
+              "Day 1: context at spawn = 68% (< 70, prediction: W1 4-6 agents)",
+              "       actual agents spawned = 4.2 avg, cache_hit_rate = 87% ✓ (matches theory)",
+              "",
+              "Day 2: context at spawn = 75% (> 70, prediction: W2 2-3 agents)",
+              "       actual agents spawned = 2.8 avg, cache_hit_rate = 64% (LOWER than W1)",
+              "       gap: theory says cache hit drops in W2; practice matches (good calibration)",
+              "",
+              "Day 3: context at spawn = 82% (W3 zone, prediction: background only)",
+              "       user tried --wave 1 anyway, presend blocked it, forced W3 (gate working)",
+              "",
+              "RECOMMENDATION: Formula is well-calibrated. No adjustment needed."
+            ]
+          }
+        }
+      },
+      {
+        "task_id": "implement-emergence-metrics-view",
+        "description": "Track: Do formulas drive emergence? (bundles emitted, droplets cited, discovery depth)",
+        "implementation": {
+          "command": "/metrics --emergence-index --graph 7d",
+          "metrics": [
+            "emergent_work_discovered (tasks found via frontier scan per session)",
+            "bundles_emitted_by_agents (% of agents with >40% context who emitted bundles)",
+            "droplet_citations (% of manifests that cite droplets)",
+            "mission_depth_avg (average phases completed: SEED 1 → FULL 5)",
+            "context_leverage (% of agent context spent on discovery vs. primary)"
+          ],
+          "display": [
+            "Emergence Index (0-100): 67/100",
+            "  Trend: ↑ +12 pts last 7d (good!)",
+            "",
+            "Breakdown:",
+            "  ✓ emergent_work: 3.2 tasks/session (target: 2+)",
+            "  ✓ bundles_emitted: 42% agents (target: 30%+)",
+            "  ⚠ droplet_citations: 18% (target: 30%+)",
+            "  ✓ mission_depth: 3.4 phases avg (target: 3+)",
+            "  → context_leverage: 22% (target: 25%+)",
+            "",
+            "Insight: Bundles are being emitted, discovery happening, but droplets not being reused.",
+            "Action: Next mutation: raise EMERGENCE_MULTIPLIER_BASE to encourage droplet reuse."
+          ]
+        }
+      }
+    ]
+  },
+
+  "phase_4_mutation_baseline": {
+    "goal": "Establish T+0 baseline before ANY formula changes",
+    "tasks": [
+      {
+        "task_id": "record-t-plus-0-baseline",
+        "description": "Measure system health with CURRENT formulas (no changes). This is baseline for all future mutations.",
+        "method": [
+          "1. Run 3 sessions with CURRENT faerie2-formulas.json values (frozen)",
+          "2. Collect all token-ledger entries",
+          "3. Collect all metrics",
+          "4. Save to: forensics/mutation-baselines/mutation-baseline-T0-2026-04-28.json",
+          "5. Lock the file (git commit, immutable)",
+          "6. This is the reference point for all future mutation→eval cycles"
+        ],
+        "baseline_metrics_to_record": {
+          "token_efficiency": "tokens_burned_per_artifact",
+          "emergence_index": "droplet_citations + bundle_emission + discovery",
+          "wave_distribution": "% of spawns at W1 vs W2 vs W3",
+          "formula_violations": "times /spawn forced wave change due to context gate",
+          "agent_quality": "avg quality_score, belief_index, composite_score"
+        }
+      }
+    ]
+  },
+
+  "phase_5_mutation_protocol": {
+    "goal": "Enable safe formula mutations with measured validation",
+    "example_mutation": {
+      "hypothesis": "Raise WAVE_1_SPAWN_MAX_CONTEXT_PCT from 70 to 75. Prediction: cache_hit_rate improves, flywheel stays fast.",
+      "baseline_T0": "cache_hit_rate = 42%, agents_parallelism = 4.2, compact_freq = 1.3/session",
+      "mutation": "faerie2-formulas.json: WAVE_1_SPAWN_MAX_CONTEXT_PCT = 75",
+      "measure_T1": "Run 3 sessions, collect same metrics as T0",
+      "delta": "cache_hit_rate = 45% (+7%), agents_parallelism = 4.8 (+14%), compact_freq = 1.2 (-8%)",
+      "analysis": "Positive emergence: cache hit improved, more agents, fewer compacts. Equilibrium: ✓ (no new work added)",
+      "decision": "ACCEPT mutation. Update baseline to 75.",
+      "log_mutation": "git commit -m 'mutation: WAVE_1_SPAWN_MAX_CONTEXT_PCT 70→75 (improved cache hit +7%, agents +14%, compacts -8%)'"
+    }
+  },
+
+  "deliverables": [
+    "1. Token ledger hook (logs real /usage deltas per spawn)",
+    "2. Context gate enforcement in /spawn (respects WAVE_*_MAX_CONTEXT_PCT formulas)",
+    "3. /metrics --formula-tracking dashboard (shows theory vs practice)",
+    "4. /metrics --emergence-index view (tracks emergence signals)",
+    "5. T+0 baseline locked in git (immutable reference for mutations)",
+    "6. Mutation protocol documentation (how to safely test formula changes)"
+  ],
+
+  "success_criteria": [
+    "✓ Every spawn logs actual token usage (no more estimates)",
+    "✓ /spawn auto-gates waves based on real context% (not user preference)",
+    "✓ /metrics shows formulas are well-calibrated OR identifies gaps",
+    "✓ Baseline T+0 established and locked",
+    "✓ Next mutation test can compare theory vs practice with hard numbers"
+  ]
+}

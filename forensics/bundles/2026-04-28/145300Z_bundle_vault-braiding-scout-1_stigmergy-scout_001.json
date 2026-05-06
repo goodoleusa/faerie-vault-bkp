@@ -1,0 +1,55 @@
+{
+  "task_id": "vault-braiding-nesting-scan",
+  "investigation_label": "vault-crystallization-phase-1",
+  "phase": "SEED",
+  "timestamp": "2026-04-28T14:53:00Z",
+  "agent_type": "stigmergy-scout",
+  "discovery_mode": true,
+
+  "work_statement": "STIGMERGY SCOUT — Nesting & Duplication Scan. Scan CT_VAULT/2026-04-28/ for structural issues: (1) docs with overlapping topics (use 07-codex terminology to detect topic drift), (2) nested folder redundancy (e.g., Templates/ contents should be ≤1-2 deep), (3) orphaned docs (no wikilinks TO them from 00-DASHBOARD), (4) incorrect routing (docs referencing investigation_labels that don't exist in 06-investigation-id-governance).",
+
+  "governance_references": [
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/07-work-hierarchy-codex.md — Terminology + hierarchy reference",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/08-documentation-governance.md — Cascade rules + canonical doc validation",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/09-vault-architecture.md — Braiding pattern + discoverability",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/10-vault-maintenance.md — Anti-creep protocols + consolidation workflow"
+  ],
+
+  "scan_checklist": [
+    "[ ] Read 07-codex: identify all defined topics (mission, phase, task, bundle, step, artifact)",
+    "[ ] Scan CT_VAULT/2026-04-28/*.md: extract topic keywords from titles + frontmatter",
+    "[ ] Identify overlap: docs that cover same topic using different terminology (e.g., 'routing logic' vs 'compass navigation')",
+    "[ ] Check wikilinks: count backlinks TO each doc from 00-DASHBOARD; flag docs with 0 backlinks",
+    "[ ] Validate investigation_labels: cross-check against 06-investigation-id-governance for status (candidate/validated/active)",
+    "[ ] Check folder depth: Templates/, Droplets/ should be ≤2 levels deep",
+    "[ ] Verify braiding: ensure each doc has breadcrumb + related section footer per 09-vault-architecture"
+  ],
+
+  "output_format": {
+    "findings": [
+      {
+        "type": "nesting|duplication|orphan|routing_error|missing_braiding",
+        "doc": "filename or path",
+        "severity": "HIGH|MEDIUM|LOW",
+        "description": "what is the issue",
+        "suggested_fix": "consolidate, delete, relink, or update per 10-vault-maintenance"
+      }
+    ],
+    "manifest_decision": {
+      "action": "discovered_duplication_issues",
+      "count_high": "X issues requiring immediate consolidation",
+      "count_medium": "Y issues requiring braiding updates",
+      "count_low": "Z issues requiring minor cleanup",
+      "next_phase": "Pass findings to vault-braiding-fixer-N scout for execution"
+    }
+  },
+
+  "constraints": [
+    "DISCOVERY ONLY — Do NOT modify files. Log findings to manifest only.",
+    "Use 07-codex terminology consistently in findings (mission, phase, task, phase gate, etc.)",
+    "If doc is unclear, mark as routing_error (may indicate it should be merged or archived)",
+    "Prescan: if similar scan was done <24h ago, reference that manifest + only scan NEW docs"
+  ],
+
+  "success_criterion": "Identify 5+ structural issues + propose fix strategy. Quality score ≥0.70 (honest about ambiguous cases, not perfect omniscience)."
+}

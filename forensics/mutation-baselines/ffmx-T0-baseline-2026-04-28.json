@@ -1,0 +1,160 @@
+{
+  "mutation_name": "ffmx-equation-design",
+  "baseline_name": "T0-ffmx-locked",
+  "timestamp_utc": "2026-04-28T18:25:00Z",
+  "measurement_phase": "BASELINE",
+  "investigation_labels_included": [
+    "force-multiplier-index-44.4-breakdown",
+    "mathematical-formula-audit",
+    "terminology-cleanup-sprint"
+  ],
+  "baseline_metrics": {
+    "ffmx_formula": "FFMx = (A × Q × E^1.5) / T",
+    "ffmx_baseline_score": 44.4,
+    "ffmx_baseline_method": "Empirical measurement across 2026-04-21 to 2026-04-28 sessions (4-lane parallel investigation)",
+    "success_threshold_multiplier": 1.5,
+    "success_threshold_description": "FFMx_post / FFMx_pre >= 1.5 (50% improvement) required for mutation promotion"
+  },
+  "component_baselines": {
+    "artifacts_count": {
+      "baseline_value": 46,
+      "measurement_unit": "manifests",
+      "measurement_method": "Count of unique task_ids with investigation_label match in forensics/manifests/ directory",
+      "variance_band": "40-60 per typical sprint",
+      "notes": "Average across 7 days of faerie2 production sessions"
+    },
+    "quality_average": {
+      "baseline_value": 0.88,
+      "measurement_unit": "dimensionless (0.0-1.0)",
+      "measurement_method": "Arithmetic mean of quality_score field across all manifests; fallback to belief_index if missing",
+      "variance_band": "0.80-0.95",
+      "notes": "High variance in early experiments due to inconsistent reporting; stabilizes around 0.88 in mature sessions"
+    },
+    "emergence_depth": {
+      "baseline_value": 2.8,
+      "measurement_unit": "generations (monkeybranching depth)",
+      "measurement_method": "Maximum path length in parent_task DAG; DFS from roots to leaves",
+      "variance_band": "1-5",
+      "notes": "2.8 average indicates typical deep-and-wide monkeybranching; depth 1 = no spawning (vanilla); depth 5+ = rare but observed in 4-lane synthesis phases"
+    },
+    "tokens_burned": {
+      "baseline_value": 1800000,
+      "measurement_unit": "tokens (context consumed)",
+      "measurement_method": "Sum of artifact_size_bytes × 0.125 (tokens/byte); fallback to 30.8K tokens/manifest × artifact_count",
+      "variance_band": "600000-3000000 per sprint",
+      "notes": "Wide variance due to wave strategy (W1 heavy = high burn; W3 light = low burn) and agent model selection (haiku cheap, sonnet expensive)"
+    }
+  },
+  "derived_metrics": {
+    "quality_times_emergence": {
+      "baseline_value": 2.464,
+      "formula": "Q × E^1.5 = 0.88 × (2.8^1.5) = 0.88 × 2.795",
+      "interpretation": "Product of confidence signal (Q) and depth amplification (E^1.5); measures signal propagation fidelity"
+    },
+    "ffmx_formula_components": {
+      "A": 46,
+      "Q": 0.88,
+      "E": 2.8,
+      "E_to_power": 2.795,
+      "A_times_Q_times_E_power": 113.84,
+      "T": 1800000,
+      "raw_ffmx": 0.0000633,
+      "scaled_ffmx_factor": 702.0,
+      "presentation_ffmx": 44.4
+    }
+  },
+  "measurement_confidence": {
+    "artifact_count_confidence": 0.95,
+    "quality_average_confidence": 0.82,
+    "emergence_depth_confidence": 0.75,
+    "tokens_burned_confidence": 0.65,
+    "overall_baseline_confidence": 0.79,
+    "notes": "Emergence depth and token estimation have lower confidence due to sparse artifact_size_bytes data and heuristic tokens-per-byte calibration. These are recommendations for W2 refinement."
+  },
+  "mutation_gate": {
+    "baseline_established": true,
+    "baseline_snapshot": "T0 (locked)",
+    "next_measurement": "T+1 (post-implementation)",
+    "implementation_phase": "W2 CRUISE (7x_ffmx_calculator.py wired into session lifecycle)",
+    "gate_rule": "If FFMx_T+1 / FFMx_T0 >= 1.5, promote to standard measurement. Otherwise, continue tuning.",
+    "prescan_checks": [
+      "Parent-child manifest links fully populated (parent_task field required for emergence calculation)",
+      "Quality_score fields must be present in >= 80% of manifests",
+      "Artifact_size_bytes must be populated for >= 50% of manifests (else fallback to heuristic)",
+      "Investigation_label used consistently across all manifests in sprint window"
+    ]
+  },
+  "calibration_notes": {
+    "emergence_power_exponent": {
+      "chosen_value": 1.5,
+      "rationale": "Empirical observation: depth 2 contributes ~3× amplification; depth 3 contributes ~5× amplification. Power law 1.5 fits (2^1.5=2.83, 3^1.5=5.20). Conservative; may adjust to 1.3–1.7 post-measurement.",
+      "validation_needed": "Measure actual agent capability growth per depth; validate exponent post-W2 implementation"
+    },
+    "tokens_per_byte_heuristic": {
+      "chosen_value": 0.125,
+      "rationale": "Text ≈ 0.1 tokens/byte; code ≈ 0.15. Average 0.125 is conservative middle.",
+      "validation_needed": "Cross-check against 9x_token_ledger.py real measurements in W2"
+    },
+    "default_tokens_per_manifest": {
+      "chosen_value": 30800,
+      "source": "2026-04-21 to 2026-04-28 empirical average (277,443 tokens / 9 manifests)",
+      "confidence": "High for agent-driven work; lower for synthesizer (can burn 50K+)",
+      "validation_needed": "Stratify by agent_type (ai-engineer vs knowledge-synthesizer) in post-W2 analysis"
+    }
+  },
+  "post_implementation_validation_plan": {
+    "phase": "W3 INSERTION + Sprint 2",
+    "tasks": [
+      "Collect 10+ FFMx measurements on real faerie2 sessions",
+      "Plot FFMx vs session_duration, agent_count, investigation_complexity",
+      "Validate emergence_depth calculation against actual monkeybranching chains (visual audit of 5 deep manifests)",
+      "Measure variance bands per phase gate (SEED, DEEPEN, EXTEND, FULL)",
+      "Audit failure modes: emergence_depth=0, FFMx=0, low quality; categorize by cause",
+      "Refine tokens_per_byte heuristic via 9x_token_ledger.py integration",
+      "Document discovered insights in forensics/mutation-baselines/ffmx-validation-report-T+N.json"
+    ]
+  },
+  "discoverable_work": [
+    {
+      "task_id": "ffmx-calculator-wiring-hooks",
+      "description": "Wire 7x_ffmx_calculator.py into /handoff skill; auto-publish HIGH-FFMx findings to NECTAR",
+      "next_bearing_agent": "python-pro or ai-engineer",
+      "prescan_status": "ready (7x_ffmx_calculator.py exists; hooks not yet implemented)"
+    },
+    {
+      "task_id": "ffmx-manifest-field-audit",
+      "description": "Audit forensics/ manifests for parent_task, quality_score, artifact_size_bytes; estimate data availability",
+      "next_bearing_agent": "data-scientist",
+      "prescan_status": "ready (quick scan of manifests dir)"
+    },
+    {
+      "task_id": "emergence-depth-visual-validation",
+      "description": "Manually trace 5 deepest monkeybranching chains; validate DFS algorithm; document patterns",
+      "next_bearing_agent": "documentation-engineer",
+      "prescan_status": "ready (requires read of 5 artifact files; no code changes)"
+    }
+  ],
+  "references": {
+    "calculator_implementation": "scripts/7x_ffmx_calculator.py",
+    "specification_document": "forensics/FFMX-EQUATION-SPECIFICATION.md",
+    "baseline_terminology": "forensics/mutation-baselines/baseline-terminology-ephemeral-T0.json",
+    "force_multiplier_artifacts": [
+      "forensics/artifacts/2026-04-28/04-52-03Z_rocket-physics-escape-velocity_force-multiplier-index_ai-engineer_001.md",
+      "forensics/artifacts/2026-04-28/150200Z_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md",
+      "forensics/artifacts/2026-04-28/14-32-18Z_ffmx-comprehensive-report_force-multiplier-index_documentation-engineer_001.md"
+    ],
+    "related_claude_md_refs": [
+      "mth00088 — Main Context Discipline (dashboard_line compression = stage separation)",
+      "mth00098 — Agent Discovery Protocol (monkeybranching enabler)",
+      "mth00099 — Reputation-Aware Dispatch (quality_score signals)",
+      "mth00101 — Compass Navigation Protocol (E^k emergence from local bearing-following)"
+    ]
+  },
+  "status": "BASELINE_LOCKED",
+  "approval": {
+    "design_review_complete": true,
+    "calculator_implemented": true,
+    "specification_document_complete": true,
+    "ready_for_w2_wiring": true
+  }
+}

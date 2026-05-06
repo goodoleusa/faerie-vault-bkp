@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-spawn-20260428-053533",
+  "agent_type": "fullstack-developer",
+  "investigation_label": "spawn-20260428-053533",
+  "wave": "1",
+  "task_description": "Implement priority velocity improvements: prescan cache, bundle compression",
+  "timestamp": "2026-04-28T01:35:33.152737",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-fullstack-developer",
+  "prescan_decision": "passed"
+}

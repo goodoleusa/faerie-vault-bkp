@@ -1,0 +1,42 @@
+{
+  "task_id": "bundle-cost-model-update",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "agent_id": "knowledge-synthesizer",
+  "wave": "W2",
+  "compass_edge": "E",
+  "quality_score": 0.75,
+  "belief_index": 0.82,
+  "dashboard_line": "Cost model updated: 10.3K/agent measured (-33%); W1 capacity +44% to ~13 agents",
+  "primary_artifact": "forensics/2026-04-28/artifacts/163000Z_artifact_bundle-cost-model-update_knowledge-synthesizer_001.md",
+  "inputs_read": [
+    "/mnt/d/0LOCAL/.claude/scripts/0x_spawn_bundle_template.md"
+  ],
+  "findings": {
+    "spawn_overhead_tokens_measured": 3089,
+    "bundle_injection_tokens_measured": 7200,
+    "total_per_agent_tokens_measured": 10289,
+    "old_theory_per_agent_tokens": 15000,
+    "delta_percent": -31.4,
+    "w1_capacity_old": 9,
+    "w1_capacity_new": 13,
+    "w1_capacity_improvement_percent": 44,
+    "nectar_variance_caveat": "1200 tokens is median; high-activity sessions may reach 2500-3000"
+  },
+  "recommendations": [
+    "Update CLAUDE.md W1 max-parallel guidance from 4-5 to 6-7 agents",
+    "Raise 0x_mission_graph.py --spawn W1 default --max-parallel from 4 to 6",
+    "Grep .claude/scripts/ for hard-coded BUNDLE_COST/SPAWN_OVERHEAD/TOKENS_PER_AGENT constants"
+  ],
+  "discovered_work": [
+    {
+      "task_id": "wave-capacity-recalculation-for-w1",
+      "bearing": "E",
+      "description": "Sample 5 sessions for empirical NECTAR token distribution; compute p50/p90/p99 per-agent costs; validate +44% W1 capacity claim with confidence interval",
+      "priority": "MEDIUM",
+      "agent_type": "data-scientist"
+    }
+  ],
+  "prescan_decision": "passed — no prior bundle-cost-model-update artifact found in 2026-04-28/artifacts/",
+  "next_task_queued": "wave-capacity-recalculation-for-w1",
+  "timestamp": "2026-04-28T16:30:00Z"
+}

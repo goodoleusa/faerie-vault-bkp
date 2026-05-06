@@ -1,0 +1,64 @@
+{
+  "bundle_type": "measurement_protocol",
+  "task_id": "w1-spawn-cost-measurement-70pct",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "scout_id": "measure-w1-spawn-70pct",
+  "agent_type": "data-analyst",
+  "wave": "W1",
+  "created_at": "2026-04-28T16:00:00Z",
+  "context_fill_pct": 70,
+  "measurement_objective": "Capture actual token consumption of W1 LIFTOFF spawn (4 parallel haiku agents) and compare to theoretical formula",
+  "measurement_protocol": {
+    "phase_1_baseline": {
+      "step_1": "Record pre-spawn context usage snapshot",
+      "step_2": "Document bundle composition and injection points",
+      "step_3": "Verify 4 bundles are ready in forensics/bundles/2026-04-28/",
+      "expected_output": "baseline_usage_snapshot.json with fields: context_pct, tokens_used, memory_model"
+    },
+    "phase_2_spawn": {
+      "step_1": "Trigger W1 spawn with max_parallel=4, model=haiku",
+      "step_2": "Record spawn timestamp and configuration",
+      "step_3": "Allow all 4 agents to complete (sync wait)",
+      "expected_output": "spawn_config.json + agent_run_ids for all 4 agents"
+    },
+    "phase_3_manifest_collection": {
+      "step_1": "Poll forensics/2026-04-28/manifests/ for 4 new manifests",
+      "step_2": "Verify all 4 manifests written with correct task_ids",
+      "step_3": "Extract quality_score, belief_index, compass_edge from each",
+      "expected_output": "manifests_summary.json with dashboard_lines and routing signals"
+    },
+    "phase_4_usage_capture": {
+      "step_1": "Record post-spawn context usage snapshot",
+      "step_2": "Compare pre vs. post usage",
+      "step_3": "Calculate: actual_tokens = post_usage - pre_usage",
+      "expected_output": "usage_delta.json with actual_consumed, theory_predicted, gap"
+    },
+    "phase_5_analysis": {
+      "step_1": "Retrieve theoretical formula from CLAUDE.md or prior measurements",
+      "step_2": "Calculate expected tokens: 4 agents × 5K tokens/light bundle = 20K",
+      "step_3": "Calculate gap: (actual - predicted) / predicted × 100%",
+      "step_4": "Assess cache efficiency (cache_hit_rate = 1 - gap%)",
+      "expected_output": "analysis_report.md with findings and recommendations"
+    }
+  },
+  "theory_baseline": {
+    "tokens_per_light_bundle": 5000,
+    "agents_count": 4,
+    "theory_predicted": 20000,
+    "notes": "Light bundle = HONEY (1K) + NECTAR tail-30 (500) + pollen (1K) + task (1K) + injection overhead (1.5K) = ~5K per agent"
+  },
+  "success_criteria": {
+    "all_4_agents_spawn": "manifest_count = 4",
+    "manifests_returned": "all 4 timestamps recorded",
+    "quality_threshold": "quality_score >= 0.70 on all 4",
+    "usage_measured": "actual_tokens calculated with <5% measurement error"
+  },
+  "dependencies": [
+    "forensics/bundles/2026-04-28/183000Z_bundle_coc-script-mapping-w2_code-reviewer_001.json",
+    "forensics/bundles/2026-04-28/183001Z_bundle_manifest-schema-wiring-critical_python-pro_001.json",
+    "forensics/bundles/2026-04-28/183002Z_bundle_wormbucket-ci-discovery_general-purpose_001.json",
+    "forensics/bundles/2026-04-28/183003Z_bundle_hash-tracker-audit_code-reviewer_001.json"
+  ],
+  "compass_bearing_expected": "S",
+  "next_phase": "formula-calibration-analysis"
+}

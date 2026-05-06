@@ -1,0 +1,87 @@
+{
+  "task_id": "formula-calibration-measurement-2026-04-28",
+  "agent_id": "knowledge-synthesizer",
+  "session_id": "w3-formula-calibration-synthesis",
+  "timestamp": "2026-04-28T15:00:01Z",
+  "wave": "W3",
+  "dashboard_line": "Mutation experiment designed: NECTAR=1200, HONEY=200 baselines; 6-session plan ready",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "compass_edge": "S",
+  "quality_score": 0.85,
+  "belief_index": 0.88,
+  "prescan_decision": "passed — no prior mutation experiment artifact found for formula-calibration-acceptance",
+  "variables_in_scope": [
+    {
+      "variable": "NECTAR_INJECTION_TOKENS",
+      "old_theory": 2000,
+      "new_baseline": 1200,
+      "delta_pct": -40,
+      "status": "ACCEPTED — already written to faerie2-formulas.json",
+      "measured_by": "Scout 2 W1"
+    },
+    {
+      "variable": "HONEY_INJECTION_TOKENS",
+      "old_theory": 1500,
+      "new_baseline": 200,
+      "delta_pct": -87,
+      "status": "ACCEPTED — already written to faerie2-formulas.json",
+      "measured_by": "Scout 3 W1"
+    }
+  ],
+  "variables_blocked": [
+    {
+      "variable": "COMPASS_QUALITY_GATES",
+      "reason": "N<20 data samples",
+      "action": "do not mutate"
+    },
+    {
+      "variable": "W1_SPAWN_COST",
+      "reason": "N<20 data samples",
+      "action": "do not mutate"
+    }
+  ],
+  "experiment_plan": {
+    "experiment_id": "EXP-2026-04-28-f0calA1",
+    "phase_1_baseline": {
+      "sessions": 3,
+      "key_metrics": [
+        "bundle_injection_cost",
+        "agent_ramp_up_efficiency",
+        "emergence_signal_freshness",
+        "main_context_at_W2_start",
+        "compass_edge_S_rate"
+      ],
+      "status": "READY — execute next 3 sessions"
+    },
+    "mutation_phase": {
+      "status": "ALREADY APPLIED — faerie2-formulas.json updated 2026-04-28",
+      "sessions": 3,
+      "observation_notes": "TBD during execution"
+    },
+    "phase_2_post_mutation": {
+      "sessions": 3,
+      "status": "PENDING — execute after Phase 1 baseline captured"
+    },
+    "expected_outcome": "ACCEPT — measurement correction, not behavioral change; positive emergence from cheaper injection"
+  },
+  "artifacts": [
+    {
+      "type": "mutation_experiment_plan",
+      "path": "forensics/2026-04-28/artifacts/150000Z_mutation-experiment_formula-calibration-acceptance_knowledge-synthesizer_001.md",
+      "description": "Full 6-session mutation experiment plan: baseline capture, mutation phase, post-mutation measurement, analysis template, governance constraints, revert procedure"
+    }
+  ],
+  "discovered_work": [
+    "bundle-cost-model-update",
+    "wave-capacity-recalculation-post-calibration",
+    "compass-quality-gates-experiment-unlock-at-n20"
+  ],
+  "next_task_queued": "bundle-cost-model-update",
+  "next_bearing": "S (proceed to bundle cost model update — NECTAR+HONEY now 1400 tokens vs 4500 theory; wave capacity calculations need refresh)",
+  "context_remaining_pct": 55,
+  "metadata": {
+    "synthesis_source": "W2 calibration synthesis manifest (formula-calibration-synthesis-w2) + faerie2-formulas.json snapshot",
+    "equilibrium_check": "passed — measurement correction only, no new scripts, no new abstractions",
+    "concurrent_mutation_lock": "COMPASS_QUALITY_GATES, W1_SPAWN_COST locked for duration of 6-session window"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "task_id": "sys-celery-bridge-adapter",
+  "investigation_label": "sys-free-model-readiness",
+  "phase": "DEEPEN",
+  "timestamp": "2026-04-28T14:48:56Z",
+  "agent_type": "ai-engineer",
+  "priority": "HIGH",
+  "blocks": "Data-ingest team spawning on Ollama/vLLM",
+  "origin_manifest": "skills-audit-cost-readiness-manifest.json",
+
+  "work_statement": "Build Agent() tool replacement using Celery task queue for open model spawning. Current faerie2 uses Claude CLI Agent() exclusively; open models need async task coordination layer. Create lightweight Celery bridge that: (1) emits task bundles to Redis queue, (2) spawns worker processes on Ollama/vLLM, (3) writes manifests to forensics/ just like Claude spawns do, (4) preserves investigation_label routing and compass edge semantics.",
+
+  "context": {
+    "current_architecture": "faerie2 optimized for Claude CLI Agent() tool. Manifests + compass graph are model-agnostic, but orchestration layer is Claude-specific.",
+    "constraint": "Zero changes to manifest schema or forensic integrity. Celery bridge must emit identical manifest structure + COC entries.",
+    "success_criterion": "Audio-ingest team can spawn llama2-70b task via Celery bridge and receive manifest with dashboard_line + compass_edge within <5s (vs. Agent() ~2s baseline).",
+    "scope": "Celery bridge adapter only. Do NOT build reputation service (separate sys-reputation-service task) or vision adapter (separate task)."
+  },
+
+  "deliverables": [
+    "celery_bridge.py — Task queue adapter with manifest emission",
+    "celery_config.py — Redis/Celery configuration for faerie2",
+    "tests/test_celery_manifest_emission.py — Verify manifest structure preserved",
+    "docs/celery-bridge-architecture.md — How to add Ollama workers"
+  ],
+
+  "roadmap_week": 1,
+  "effort_estimate": "60 tokens context, 2–3 hours implementation"
+}

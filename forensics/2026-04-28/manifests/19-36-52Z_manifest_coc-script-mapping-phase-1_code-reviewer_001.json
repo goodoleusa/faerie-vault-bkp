@@ -1,0 +1,62 @@
+{
+  "task_id": "coc-script-mapping-phase-1-w2",
+  "agent": "code-reviewer",
+  "investigation_label": "coc-script-mapping-phase-1-w2",
+  "timestamp": "2026-04-28T19:36:52Z",
+  "dashboard_line": "61 scripts inventoried: 4 RED (duplicates), 18 YELLOW (legacy/silent-fail), 39 GREEN",
+  "compass_edge": "S",
+  "quality_score": 0.78,
+  "belief_index": 0.82,
+  "next_task_queued": "coc-consolidation-design-phase-2-w2",
+  "discovered_work": [
+    "task-fix-0x-spawn-template-manifest-path",
+    "task-introduce-pollen-writer-script",
+    "task-archive-4x_synthesize_master_coc-one-time-migrator",
+    "task-deduplicate-8x_protect_coc_paths-vs-4x",
+    "task-consolidate-4x_coc_writer-into-0x_coc_writer",
+    "task-deduplicate-4x_coc_bridge-redundant-with-0x",
+    "task-migrate-9x_forensic_signer-from-hooks-state-to-forensics-manifests",
+    "task-merge-8x_build_spawn_bundle-into-0x_spawn_template",
+    "task-archive-0x_state_to_forensics_migrator-after-final-run",
+    "task-add-error-handling-5d_ann_coc_watcher-silent-failures",
+    "task-deprecate-global-4x-coc-stack-in-favor-of-faerie2-0x"
+  ],
+  "category_summary": {
+    "A_writers": 23,
+    "B_indexers": 11,
+    "C_auditors": 19,
+    "D_recovery": 8
+  },
+  "redundancy_findings": {
+    "duplicate_pairs": [
+      ["~/.claude/scripts/4x_coc_writer.py", "faerie2/.claude/scripts/4x_coc_writer.py", "faerie2/.claude/scripts/0x_coc_writer.py"],
+      ["~/.claude/scripts/8x_protect_coc_paths.py", "~/.claude/scripts/4x_protect_coc_paths.py", "faerie2/.claude/scripts/8x_protect_coc_paths.py", "faerie2/.claude/scripts/4x_protect_coc_paths.py"],
+      ["~/.claude/scripts/4x_coc_bridge.py", "faerie2/.claude/scripts/4x_coc_bridge.py"],
+      ["faerie2/.claude/scripts/8x_build_spawn_bundle.py", "0x_spawn_template.py"],
+      ["~/.claude/scripts/4x_forensic_coc_check.py", "faerie2/.claude/scripts/9x_coc_verifier.py"]
+    ],
+    "one_time_migrators_to_archive": [
+      "0x_state_to_forensics_migrator.py",
+      "4x_synthesize_master_coc.py"
+    ],
+    "writes_to_legacy_paths": [
+      "4x_coc_writer.py (~/.claude/memory/forensics/agent-runs.jsonl)",
+      "9x_forensic_signer.py (hooks/state)",
+      "4x_forensic_coc_check.py (reads .claude/memory/forensics)"
+    ]
+  },
+  "call_graph_summary": {
+    "canonical_writer": "faerie2/0x_coc_writer.py",
+    "canonical_verifier": "faerie2/9x_coc_verifier.py",
+    "canonical_signer": "9x_coc_writer_signed.py",
+    "callers_of_0x_coc_writer": ["0x_session_start", "4x_coc_writer (wrapper)", "5x_backup_forensics", "5x_write_relay", "6x_report_supergenesis", "7x_data_ingest_orchestrator", "9x_agent_key_integrity", "9x_coc_writer_signed", "9x_session_closeout"],
+    "scripts_writing_forensics_directly_bypassing_writer": ["3x_eval_harness", "3x_eval_membench", "3x_eval_mutation", "5x_post_vault_write_stamp", "5x_vault_mutation_tracker", "8x_pre_write_forensics_guard"]
+  },
+  "severity_counts": {
+    "RED": 4,
+    "YELLOW": 18,
+    "GREEN": 39
+  },
+  "artifact_path": "forensics/2026-04-28/artifacts/19-36-52Z_artifact_coc-script-mapping_code-reviewer_001.csv",
+  "phase_recommendation": "Phase 2 design should: (1) declare faerie2 0x_coc_writer.py CANONICAL; (2) demote ~/.claude/scripts/4x_* family to compatibility shims that delegate to 0x; (3) archive one-time migrators to forensics/deprecated/; (4) merge 8x_build_spawn_bundle into 0x_spawn_template; (5) migrate 9x_forensic_signer off hooks/state path."
+}

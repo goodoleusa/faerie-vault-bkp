@@ -1,0 +1,66 @@
+{
+  "task_id": "infra-context-capture-and-wave-id",
+  "agent_type": "ai-engineer",
+  "agent_id": "ai-engineer-w2-01-25-49Z",
+  "wave": "W2",
+  "wave_id": "W2",
+  "main_context_pct_at_spawn": null,
+  "ts": "2026-04-29T01:25:49Z",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "compass_edge": "S",
+  "next_bearing": "S",
+  "next_task_queued": "apply-patch-and-rerun-eval",
+  "phase": "EXTEND",
+  "quality_score": 0.78,
+  "belief_index": 0.82,
+  "decision": "COMPLETE",
+  "dashboard_line": "patch=2-fix (ctx_pct+wave_id); gap=closable; needs apply-via-relay",
+  "findings_summary": [
+    "Fix #1 (context-capture): Added _capture_context_pct_at_spawn() reading from compact-risk.json (canonical) → context-phase.json → ctx-prev.json (fallback chain). Wired into 7x_faerie_spawn.py existing spawn-log COC entry as main_context_pct_at_spawn field. Verified locally: returns 0.0 from ctx-prev.json (current state).",
+    "Fix #1 (session log): Added _append_session_context_log() that writes per-session jsonl to ~/.claude/memory/forensics/session-{sid8}.jsonl with schema {ts,event,wave,wave_id,context_pct,task_id,agent_type,session_id}. Lets altimeter calibration jobs correlate context_pct with wave dispatch without scanning all spawn logs. Verified write works in tmp dir.",
+    "Fix #2 (manifest schema): Added 3 fields to the MANIFEST RETURN FORMAT prompt block in 0x_spawn_template.py — task_id (was implicit), wave_id (W1|W2|W3, required), main_context_pct_at_spawn (mirror of spawn-log capture). Agents now write wave_id alongside task_id, closing the agents_per_wave_W1 measurement gap.",
+    "EQUILIBRIUM RESPECT: Did NOT add new hook or new script. Wired into the existing spawn-log writer (7x_faerie_spawn.py:90-105) and existing prompt schema block (0x_spawn_template.py:1303). One function added (_capture_context_pct_at_spawn), one helper added (_append_session_context_log), zero new abstractions. Both are fail-open — measurement never breaks spawning.",
+    "BLOCKER: Edit to .claude/scripts/* was denied by sandbox (correct policy per CLAUDE.md FILE WRITING PROTOCOL). Patch artifact written to forensics/2026-04-28/artifacts/ for parent to apply via 5x_write_relay.py or git apply. Mission constraint: I cannot directly mutate .claude/, so manifest carries patch reference per fallback protocol."
+  ],
+  "files_modified": [],
+  "patches": [
+    {
+      "path": "/mnt/d/0LOCAL/.claude/scripts/7x_faerie_spawn.py",
+      "summary": "Add _capture_context_pct_at_spawn() + _append_session_context_log() helpers; extend spawn-log entry with wave_id alias and main_context_pct_at_spawn; emit per-session jsonl",
+      "patch_artifact": "/mnt/d/0local/gitrepos/faerie-vault/forensics/2026-04-28/artifacts/01-25-49Z_artifact_infra-context-capture-and-wave-id_ai-engineer_001.patch"
+    },
+    {
+      "path": "/mnt/d/0LOCAL/.claude/scripts/0x_spawn_template.py",
+      "summary": "Extend MANIFEST RETURN FORMAT prompt block (line 1303) with task_id, wave_id, main_context_pct_at_spawn fields",
+      "patch_artifact": "/mnt/d/0local/gitrepos/faerie-vault/forensics/2026-04-28/artifacts/01-25-49Z_artifact_infra-context-capture-and-wave-id_ai-engineer_001.patch"
+    }
+  ],
+  "measurement_gaps_closed": [
+    "main_context_at_W2_start (Fix #1): now captured at every spawn; reads canonical state files; null only if all 3 sources absent",
+    "agents_per_wave_W1 (Fix #2): wave_id field now part of manifest schema; agents write it; downstream histograms work",
+    "wave-context correlation: per-session jsonl enables time-series of (wave, context_pct) per session, feeds altimeter calibration"
+  ],
+  "verification": {
+    "fix1_capture_logic": "Verified: python3 dry-run reads ctx-prev.json, returns 0.0 (float). Fail-open path covered for all 3 sources missing.",
+    "fix1_session_log": "Verified: tmp-dir write produces valid JSONL line with correct schema (ts, event, wave, wave_id, context_pct, task_id, agent_type, session_id).",
+    "fix2_schema": "Schema text added to spawn-template prompt block. Will propagate at next bundle render. No backward-incompat: agents that omit wave_id still pass (existing manifests have no schema validator running per grep — only prompt-instruction enforcement)."
+  },
+  "discovered_work": [],
+  "droplets_emitted": [],
+  "f0_metrics": {
+    "main_tokens_used": "~10K (file scans + verification)",
+    "agent_tokens_used": "~15K",
+    "f0_estimate": 0.40
+  },
+  "manifest_truthfulness_self_assessment": {
+    "dashboard_line_matches_reality": true,
+    "patch_actually_applied": false,
+    "reason_not_applied": "Sandbox correctly denied Edit to .claude/scripts/ per FILE WRITING PROTOCOL. Patch artifact emitted as required fallback.",
+    "honest_caveat": "wave_id field is added to PROMPT INSTRUCTIONS to agents, not enforced by a validator hook (no manifest_size_validator.py exists per grep). Adoption depends on agent compliance with prompt schema. Future hardening: write a validator hook that rejects manifests missing wave_id."
+  },
+  "coc_entry": {
+    "event": "manifest_finalized",
+    "manifest_path": "/mnt/d/0local/gitrepos/faerie-vault/forensics/2026-04-28/manifests/01-25-49Z_manifest_infra-context-capture-and-wave-id_ai-engineer_001.json",
+    "dashboard_line": "patch=2-fix (ctx_pct+wave_id); gap=closable; needs apply-via-relay"
+  }
+}

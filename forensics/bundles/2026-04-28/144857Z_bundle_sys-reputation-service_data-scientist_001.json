@@ -1,0 +1,29 @@
+{
+  "task_id": "sys-reputation-service",
+  "investigation_label": "sys-free-model-readiness",
+  "phase": "DEEPEN",
+  "timestamp": "2026-04-28T14:48:57Z",
+  "agent_type": "data-scientist",
+  "priority": "HIGH",
+  "blocks": "Reputation-aware gating for HIGH/CRITICAL phases",
+  "origin_manifest": "skills-audit-cost-readiness-manifest.json",
+
+  "work_statement": "Build lightweight reputation scoring service for open models. Faerie2's composite_score + belief_index framework currently measures agent honesty via Claude eval. Open models need equivalent honesty signal derived from task outcomes. Create service that: (1) reads manifests from forensics/{YYYY-MM-DD}/, (2) computes belief_index from manifest truthfulness (dashboard_line accuracy vs. actual_outcome), (3) updates agent reputation card, (4) gates HIGH/CRITICAL work by score threshold (≥0.5 for HIGH/CRITICAL, <0.5 for recovery retraining).",
+
+  "context": {
+    "current_framework": "reputation-schema.json defines composite_score (0.0–1.0) from belief_index, domain_mastery, consistency metrics.",
+    "signal_source": "Manifests contain: task_id, dashboard_line (self-reported outcome), next_task_queued (self-reported bearing). Compare against discovered_work + actual phase progression.",
+    "constraint": "Service reads manifests only (forensics/ is immutable). No agent intrusion or behavior modification—purely measurement.",
+    "success_criterion": "Open model agent (llama2-70b) completes 5 tasks, reputation service computes belief_index within 3% of Claude agents' average honesty signal."
+  },
+
+  "deliverables": [
+    "reputation_service.py — Lightweight reputation computation engine",
+    "belief_index_calculator.py — Manifest truthfulness metrics",
+    "tests/test_open_model_reputation.py — Validate scoring on llama2/Ollama",
+    "docs/reputation-open-models.md — How reputation gates work for free models"
+  ],
+
+  "roadmap_week": 2,
+  "effort_estimate": "40 tokens context, 3–4 hours implementation"
+}

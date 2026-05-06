@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-vault-consolidation-final",
+  "agent_type": "knowledge-synthesizer",
+  "investigation_label": "vault-consolidation-final",
+  "wave": "1",
+  "task_description": "Consolidate and finalize vault structure: pseudosystem component map in faerie-vault with Obsidian graph links, mission graph synced in 00-SHARED/mission-graph, publications framework in place with frontmatter. Clean up vault drift, ensure CT_VAULT flows correctly, all paths symlinked.",
+  "timestamp": "2026-05-05T14:19:43.566378",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-knowledge-synthesizer",
+  "prescan_decision": "passed"
+}

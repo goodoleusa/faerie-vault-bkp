@@ -1,0 +1,42 @@
+{
+  "task_id": "hash-tracker-canonicalization-audit-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "code-reviewer",
+  "phase": "AUDIT",
+  "created_utc": "2026-04-28T18:30:03Z",
+
+  "ffff_framework": {
+    "findings_goal": "Locate ALL hash_tracker* variants (13+ found so far); identify which are canonical, which are forks, which are dead code",
+    "flags_goal": "RED: script incompatibilities between faerie2 and faerie-vault versions; YELLOW: outdated crypto (SHA-256 still OK?); GREEN: clear version lineage",
+    "flow_goal": "Trace provenance: where did each variant come from? Which agents actually call which version? Is there a call ordering?",
+    "friction_goal": "Version mismatch causes COC integrity failures; multiple versions create confusion; no single source of truth"
+  },
+
+  "critical_context": {
+    "variants_found": [
+      "/mnt/d/0LOCAL/.claude/scripts/4x_hash_tracker.py (LIKELY CANONICAL — global, Tier 4x)",
+      "/mnt/d/0local/gitrepos/cybertemplate/scripts/hash_tracker.py",
+      "/mnt/d/0local/gitrepos/data-analysis-engine/scripts/hash_tracker.py",
+      "/mnt/d/0local/0-OSINTTOOLS/hashtracker/ (5+ legacy variants, probably dead)",
+      "/mnt/d/0local/.claude-backup/scripts/4x_hash_tracker.py (backup)"
+    ],
+    "recommendation": "Single source of truth: /mnt/d/0LOCAL/.claude/scripts/4x_hash_tracker.py with symlinks or imports from faerie2/faerie-vault"
+  },
+
+  "audit_scope": {
+    "code_review": "Compare each variant: crypto algorithm, output format, error handling, logging",
+    "call_site_analysis": "Which scripts call which hash_tracker version? Can we grep to find all invocations?",
+    "version_lineage": "When was each variant created? Which is the original? How did forks happen?",
+    "deprecation_path": "If we consolidate to canonical version, what breaks? What needs migration?"
+  },
+
+  "success_criteria": {
+    "canonical_decision": "Document which version is canonical and why",
+    "deprecation_list": "List which variants should be removed or marked legacy",
+    "migration_guide": "How to update projects that use old versions → new canonical",
+    "compass_edge": "S if clear lineage and simple consolidation; E if variants incompatible (needs parallel validators); W if orphaned code without clear purpose"
+  },
+
+  "next_task_queued": "admin-provisioning-design"
+}

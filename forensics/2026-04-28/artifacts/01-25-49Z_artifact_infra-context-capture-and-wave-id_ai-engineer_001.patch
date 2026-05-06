@@ -1,0 +1,142 @@
+--- a/.claude/scripts/7x_faerie_spawn.py
++++ b/.claude/scripts/7x_faerie_spawn.py
+@@ -28,8 +28,80 @@
+ import subprocess
+ from pathlib import Path
+ import sys as _sys; _sys.path.insert(0, str(Path(__file__).resolve().parent))
+ from path_utils import resolve_forensics_root
+-from datetime import datetime
++from datetime import datetime, timezone
++
++
++def _capture_context_pct_at_spawn() -> float | None:
++    """Read current main context fill percentage at spawn-time.
++
++    Resolution order (first hit wins):
++      1. ~/.claude/hooks/state/compact-risk.json   (corrected_pct, canonical)
++      2. ~/.claude/hooks/state/context-phase.json  (raw_pct, fallback)
++      3. ~/.claude/hooks/state/ctx-prev.json       (pct, last-known)
++
++    Fail-open: returns None if no source available. NEVER raises — measurement
++    must never break spawning.
++    """
++    try:
++        claude_home = Path(os.environ.get("CLAUDE_HOME", str(Path.home() / ".claude")))
++        state = claude_home / "hooks" / "state"
++        for filename, key in (
++            ("compact-risk.json", "corrected_pct"),
++            ("context-phase.json", "raw_pct"),
++            ("ctx-prev.json", "pct"),
++        ):
++            f = state / filename
++            if not f.exists():
++                continue
++            try:
++                data = json.loads(f.read_text(encoding="utf-8"))
++            except (json.JSONDecodeError, OSError):
++                continue
++            if key in data:
++                try:
++                    return float(data[key])
++                except (TypeError, ValueError):
++                    continue
++    except Exception:
++        pass
++    return None
++
++
++def _append_session_context_log(
++    session_id: str,
++    wave: str,
++    context_pct: float | None,
++    task_id: str | None,
++    agent_type: str,
++) -> None:
++    """Append a context-snapshot entry to per-session jsonl in memory/forensics/.
++
++    File: ~/.claude/memory/forensics/session-{sid}.jsonl
++    Schema: {ts, event, wave, wave_id, context_pct, task_id, agent_type, session_id}
++
++    Fail-open: any error swallowed.
++    """
++    try:
++        claude_home = Path(os.environ.get("CLAUDE_HOME", str(Path.home() / ".claude")))
++        outdir = claude_home / "memory" / "forensics"
++        outdir.mkdir(parents=True, exist_ok=True)
++        sid8 = (session_id or "unknown")[:8]
++        path = outdir / f"session-{sid8}.jsonl"
++        entry = {
++            "ts": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
++            "event": "spawn_context_snapshot",
++            "wave": wave,
++            "wave_id": wave,
++            "context_pct": context_pct,
++            "task_id": task_id,
++            "agent_type": agent_type,
++            "session_id": session_id,
++        }
++        with open(path, "a", encoding="utf-8") as f:
++            f.write(json.dumps(entry) + "\n")
++    except Exception:
++        pass
+
+@@ -88,18 +160,38 @@ def generate_agent_spawn_command(
+     # Generate short description
+     if task_description:
+         short_desc = task_description[:60]
+     elif task_id:
+         short_desc = f"Task #{task_id}"
+     else:
+         short_desc = f"{agent_type} work"
+
++    # Capture main context% at spawn boundary (closes measurement gap for
++    # main_context_at_W{N}_start). Reads from canonical compact-risk.json or
++    # context-history.jsonl tail; fail-open returns None.
++    context_pct = _capture_context_pct_at_spawn()
++
+     # Log to COC
+     coc_entry = {
+         "ts": datetime.utcnow().isoformat() + "Z",
+         "event": "agent_spawn",
+         "agent_type": agent_type,
+         "task_id": task_id,
+         "wave": wave,
++        "wave_id": wave,  # alias for downstream metrics consumers expecting wave_id
+         "session_id": os.environ.get("CLAUDE_SESSION_ID", "unknown"),
+         "prompt_tokens": len(prompt) // 4,
+         "run_in_background": run_in_background,
+         "team_name": team_name,
++        "main_context_pct_at_spawn": context_pct,
+     }
+
+     coc_path = resolve_forensics_root() / "spawn-log.jsonl"
+     coc_path.parent.mkdir(parents=True, exist_ok=True)
+     with open(coc_path, "a") as f:
+         f.write(json.dumps(coc_entry) + "\n")
++
++    # Also append to per-session forensic line so altimeter/calibration jobs
++    # can correlate context_pct with wave dispatch without rescanning all spawn logs.
++    _append_session_context_log(
++        session_id=os.environ.get("CLAUDE_SESSION_ID", "unknown"),
++        wave=wave,
++        context_pct=context_pct,
++        task_id=task_id,
++        agent_type=agent_type,
++    )
+
+     return {
+
+--- a/.claude/scripts/0x_spawn_template.py
++++ b/.claude/scripts/0x_spawn_template.py
+@@ -1303,11 +1303,16 @@
+ MANIFEST RETURN FORMAT (ENFORCED):
++- task_id: string (mirror of $TASK_ID — required for grep/recovery)
++- wave_id: "W1" | "W2" | "W3" (REQUIRED — enables agents_per_wave metric;
++  use the wave the spawning template was emitted under, e.g. "W2")
++- main_context_pct_at_spawn: number | null (mirror what spawn-log captured;
++  null OK if compact-risk.json was unavailable)
+ - dashboard_line: ≤80 chars, SHAPE-REQUIRED: (a) measured value (b) diagnosis (c) signal
+ - findings_summary: ≤300 tokens max (3-5 bullets only; essential data — ~1200 chars)
+ - files_modified: [] or [{"path": "...", "hash": "sha256:..."}] — no inline descriptions
+ - next_task: null or task_id string
+ - coc_entry: {...} as before

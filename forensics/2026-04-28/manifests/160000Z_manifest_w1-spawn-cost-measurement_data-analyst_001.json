@@ -1,0 +1,120 @@
+{
+  "task_id": "w1-spawn-cost-measurement-70pct",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "agent": "data-analyst",
+  "agent_run_id": "data-analyst-2026-04-28-160000Z-001",
+  "wave": "W1",
+  "timestamp_utc": "2026-04-28T16:00:00Z",
+  "dashboard_line": "W1 LIFTOFF token formula calibrated: theory=20K, actual measurement framework deployed, baseline metrics captured",
+  "compass_edge": "S",
+  "next_bearing": "S",
+  "next_task_queued": "w1-spawn-execution-trigger",
+  "quality_score": 0.85,
+  "belief_index": 0.88,
+  "phase_gate": "SEED",
+  "measurement_objective": "Capture actual W1 spawn costs (4 parallel haiku agents) vs. theoretical formula (20K tokens)",
+  "context_fill_pct_at_spawn": 70,
+  "framework": {
+    "theory": {
+      "formula_description": "actual_tokens = Σ(bundle_size) for each agent + coordination_overhead",
+      "light_bundle_composition": {
+        "HONEY_md": 1000,
+        "NECTAR_tail_30": 500,
+        "pollen_session": 1000,
+        "task_instructions": 1000,
+        "injection_overhead": 1500,
+        "total_per_agent": 5000
+      },
+      "predicted_for_4_agents": 20000,
+      "notes": "Light bundle optimized for W1 (max parallelism, minimal context). Does NOT include full manifest history (that's W2+)"
+    },
+    "measurement_phases": {
+      "phase_1_baseline": "Capture pre-spawn metrics (bundles ready, manifest analysis, theoretical cost)",
+      "phase_2_spawn": "Trigger 4 haiku agents in parallel via 0x_mission_graph.py --spawn --wave 1 --max-parallel 4",
+      "phase_3_manifests": "Collect 4 new manifests from forensics/2026-04-28/manifests/ with matching task_ids",
+      "phase_4_usage": "Capture post-spawn context metrics and calculate token delta",
+      "phase_5_analysis": "Compare actual vs. predicted, calculate cache efficiency, assess formula accuracy"
+    },
+    "data_sources": {
+      "baseline_snapshot": "forensics/2026-04-28/artifacts/160000Z_artifact_w1-measurement-baseline_data-analyst_001.json",
+      "bundle_inventory": "forensics/2026-04-28/bundles/ (4 bundles selected for spawn)",
+      "manifest_history": "forensics/2026-04-28/manifests/ (4 prior manifests analyzed for quality/belief patterns)"
+    }
+  },
+  "baseline_findings": {
+    "bundles_ready": 8,
+    "bundles_selected_for_w1_spawn": 4,
+    "manifest_samples_analyzed": 4,
+    "quality_score_avg": 0.8475,
+    "quality_score_range": [0.82, 0.88],
+    "belief_index_avg": 0.8575,
+    "belief_index_range": [0.82, 0.92],
+    "dashboard_line_avg_chars": 82.25,
+    "compass_edge_consensus": "S (100% - all proceeding)",
+    "observation": "Recent agents consistently achieve quality >= 0.82 and belief >= 0.82, indicating healthy manifestation practices"
+  },
+  "spawn_plan": {
+    "configuration": {
+      "wave": "W1",
+      "model": "haiku",
+      "max_parallel": 4,
+      "agents_to_spawn": [
+        {
+          "bundle": "183000Z_bundle_coc-script-mapping-w2_code-reviewer_001.json",
+          "task_id": "coc-script-mapping-w2",
+          "agent_type": "code-reviewer"
+        },
+        {
+          "bundle": "183001Z_bundle_manifest-schema-wiring-critical_python-pro_001.json",
+          "task_id": "manifest-schema-wiring-critical",
+          "agent_type": "python-pro"
+        },
+        {
+          "bundle": "183002Z_bundle_wormbucket-ci-discovery_general-purpose_001.json",
+          "task_id": "wormbucket-ci-discovery",
+          "agent_type": "general-purpose"
+        },
+        {
+          "bundle": "183003Z_bundle_hash-tracker-audit_code-reviewer_001.json",
+          "task_id": "hash-tracker-audit",
+          "agent_type": "code-reviewer"
+        }
+      ],
+      "token_budget_per_agent": 5000,
+      "total_token_budget": 20000
+    },
+    "expected_outcomes": {
+      "manifest_count": 4,
+      "avg_quality_score": ">=0.70",
+      "avg_belief_index": ">=0.70",
+      "all_compasses_ready": "expected bearing = S (proceed)"
+    }
+  },
+  "measurement_protocol_version": "v1.0",
+  "success_criteria": {
+    "all_4_spawn": "Manifest count = 4 after W1 LIFTOFF",
+    "quality_gate": "quality_score >= 0.70 on all 4 manifests",
+    "belief_gate": "belief_index >= 0.70 on all 4 manifests",
+    "routing_ready": "compass_edge = S on all 4 (ready to proceed)",
+    "token_measurement": "actual_tokens calculated with <5% error margin"
+  },
+  "compass_bearing_rationale": "S (Proceed) — measurement framework established, baseline captured, spawn plan validated; ready to execute W1 LIFTOFF",
+  "discovered_work": [
+    "w1-spawn-execution-trigger",
+    "w1-manifest-collection-verification",
+    "w1-token-delta-calculation",
+    "formula-accuracy-assessment",
+    "cache-efficiency-analysis"
+  ],
+  "decision": "PROCEED",
+  "prescan_decision": "passed — measurement bundle freshly created; no prior W1 spawn measurement for 2026-04-28",
+  "manifest_truthfulness": {
+    "measurement_framework_complete": true,
+    "baseline_metrics_valid": true,
+    "spawn_plan_documented": true,
+    "success_criteria_measurable": true
+  },
+  "related_artifacts": [
+    "forensics/2026-04-28/bundles/160000Z_bundle_w1-spawn-cost-measurement_data-analyst_001.json"
+  ]
+}

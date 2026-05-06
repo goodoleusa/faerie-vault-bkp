@@ -1,0 +1,90 @@
+{
+  "task_id": "blueprint-landscape-audit",
+  "investigation_label": "vault-blueprints-standardization",
+  "phase": "SEED",
+  "timestamp": "2026-04-28T15:00:00Z",
+  "agent_type": "documentation-engineer",
+  "discovery_mode": true,
+
+  "work_statement": "DOCUMENTATION ENGINEER — Blueprint Landscape Audit. Scan CT_VAULT/Blueprints/ (and any other blueprint locations) to inventory all .blueprint files and Nunjucks templates. Categorize by completeness: (1) frontmatter-only stubs (minimal structure), (2) partial templates (some sections defined), (3) full-featured blueprints (complete Nunjucks + custom blocks). Identify template drift: inconsistent variable names, conflicting section styles, version mismatches. Map usage: which blueprints are applied in vault (grep frontmatter 'blueprint:' fields), which are orphaned. Flag: duplicates, near-duplicates, deprecated versions.",
+
+  "governance_references": [
+    "/mnt/d/0local/gitrepos/faerie-vault/Blueprints/ — all blueprint files",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/09-vault-architecture.md — braiding pattern expectations",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/10-vault-maintenance.md — consolidation workflows"
+  ],
+
+  "workflow": [
+    "1. Scan CT_VAULT/Blueprints/ and subdirs: list all .blueprint files",
+    "2. For each blueprint: extract frontmatter, count template lines, identify Nunjucks constructs",
+    "3. Categorize by completeness: stub | partial | full (see output_format.blueprint_inventory)",
+    "4. Identify drift: compare variable names across blueprints (expect consistency: {{timestamp}}, {{content}}, {{agent_type}}, etc.)",
+    "5. Check section patterns: {% section %} vs. custom Obsidian blocks; inconsistency = drift flag",
+    "6. Usage analysis: grep -r 'blueprint:' CT_VAULT/2026-04-28/*.md; count references per blueprint",
+    "7. Identify orphans: blueprints with 0 references in vault",
+    "8. Flag near-duplicates: blueprints >80% text similarity (same sections, different names)",
+    "9. Validate: ensure all Nunjucks syntax is valid (no unclosed tags, broken filters)",
+    "10. Summarize findings: X stubs, Y partial, Z full; A drift issues; B orphans; C near-dups"
+  ],
+
+  "output_format": {
+    "blueprint_inventory": [
+      {
+        "filename": "Droplet.blueprint",
+        "completeness": "full | partial | stub",
+        "lines_of_template": 42,
+        "nunjucks_constructs": ["{{ var }}", "{% section %}", "{% for %}"],
+        "frontmatter_complete": true,
+        "custom_obsidian_blocks": ["{% section %}"],
+        "usage_count": 3,
+        "usage_locations": ["00-SHARED/Droplets/..."],
+        "variables_expected": ["content", "timestamp", "agent_type"],
+        "variables_missing": [],
+        "drift_flags": ["inconsistent date format vs. Droplet-v2"]
+      }
+    ],
+    "drift_analysis": {
+      "variable_inconsistencies": [
+        {
+          "variable": "timestamp",
+          "formats_found": ["{{ timestamp }}", "{{ date }}", "{{ created_at }}"],
+          "recommendation": "Standardize to {{ timestamp }} per 09-vault-architecture"
+        }
+      ],
+      "section_style_drift": [
+        {
+          "pattern": "Some blueprints use {% section %}, others use # Markdown headers",
+          "impact": "QuickAdd macro won't know which to render",
+          "recommendation": "Standardize on {% section %} for Obsidian-native rendering"
+        }
+      ],
+      "orphaned_blueprints": ["deprecated-v1.blueprint", "experimental-tags.blueprint"],
+      "near_duplicates": [
+        {
+          "pair": ["Droplet.blueprint", "Droplet-v2.blueprint"],
+          "similarity": 0.87,
+          "recommendation": "Consolidate; keep newer version, delete older"
+        }
+      ]
+    },
+    "manifest_decision": {
+      "action": "discovered_blueprint_drift",
+      "total_blueprints": "X",
+      "stubs": "Y (immediate triage needed)",
+      "partial": "Z (prioritize completion)",
+      "full": "W (reference implementations)",
+      "drift_severity": "HIGH | MEDIUM | LOW",
+      "next_phase": "Pass findings to blueprint-standardization-fixer for consolidation + variable normalization"
+    }
+  },
+
+  "constraints": [
+    "DISCOVERY ONLY — Do NOT modify or delete blueprints. Log all findings to manifest.",
+    "If a blueprint can't be parsed (syntax error), flag as 'UNPARSEABLE' + error message",
+    "Count lines strictly: skip comments, only count executable Nunjucks + frontmatter",
+    "Similarity check: use substring matching or simple edit distance (not NLP)",
+    "Preserve all blueprint names and paths for traceability"
+  ],
+
+  "success_criterion": "Inventory all blueprints, categorize by completeness, identify ≥3 drift patterns, flag orphans and near-duplicates. Quality score ≥0.70 (honest assessment, flag ambiguous cases)."
+}

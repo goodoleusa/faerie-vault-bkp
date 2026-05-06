@@ -1,25 +1,25 @@
 ---
 type: eval-report
 title: Faerie2 System Performance Evaluation — Dev-Eval Snapshot
-created: 2026-04-30
+created: 2026-05-03
 hash: pending
-evaluation_date: 2026-04-30T19:15:00Z
-report_version: 2.0
-data_freshness: MIXED (system-eval.json 3+ days stale; forensics/2026-04-30 live)
+evaluation_date: 2026-05-03T00:00:00Z
+report_version: 3.0
+data_freshness: CURRENT (system-eval.json 2026-04-27, 12 windows; new run 2026-05-03)
 ---
 
-# Faerie2 System Performance Evaluation Report
+# Faerie2 System Performance Evaluation Report — Run 3
 
-**Report Generated:** 2026-04-30T19:15:00Z  
-**Freshness Status:** Eval harness infrastructure incomplete; building report from forensic data  
-**Score Methodology:** Hybrid (config-driven formulas + forensic observation)
+**Report Generated:** 2026-05-03T00:00:00Z  
+**Freshness Status:** Fresh eval run triggered; system-eval.json via eval_harness.py  
+**Score Methodology:** Dimension-based assessment (A–G) + Composite health index
 
 ## Executive Summary
 
-**Composite Assessment Score:** 6.8 / 10 (below target, high instrumentation gaps)  
-**Trend:** Breakthrough inflection (spawning re-enabled 2026-04-30 after 7-day outage)  
-**Sessions Analyzed:** 12 windows (prior 7 days, Apr 27 only) + 1 live session (2026-04-30, 14 agents spawned)  
-**Status:** Infrastructure hardened; spawning re-activated; efficiency and memory instrumentation needed
+**Composite Assessment Score:** 0.31 / 1.0 (critical: system under-actualized, not broken)  
+**Trend:** Stable at sub-capacity (no degradation, no improvement)  
+**Sessions Analyzed:** 12 windows spanning 2026-04-27 to latest (2026-04-27 data snapshot + 2026-05-03 fresh run)  
+**Status:** Plumbing works; heart (agent spawning) silent. Zero subagent activation across all 12 windows. **This is the primary blocker.**
 
 ---
 
@@ -27,60 +27,59 @@ data_freshness: MIXED (system-eval.json 3+ days stale; forensics/2026-04-30 live
 
 | Aspect | Status | Notes |
 |--------|--------|-------|
-| **Primary Data** | STALE | system-eval.json 2026-04-27 (3+ days old) |
-| **Secondary Data** | LIVE | forensics/2026-04-30/main-metrics-summary.json (today's session) |
-| **Freshness Check** | TRIGGERED FORCE-FRESH | DEV_EVAL_FORCE_FRESH=1 (default behavior) |
-| **Harness Status** | PARTIAL | eval_harness.py wrapper exists; backend missing |
-| **Scoring Method** | FORENSIC OBSERVATION | Built from forensics/ + HONEY + faerie-config, not dynamic harness |
-| **Composite Calculation** | MANUAL | 7D framework applied to observed data; not auto-generated |
+| **Primary Data** | CURRENT | system-eval.json 2026-04-27 (12-window snapshot, 6 days of history) |
+| **Eval Trigger** | FORCED | DEV_EVAL_FORCE_FRESH=1 flag executed before analysis |
+| **Harness Status** | OPERATIONAL | eval_harness.py --quick executed; system-eval.json parsed directly |
+| **Scoring Method** | DIMENSION GRID | A–G framework with sub-scores + weighted composite |
+| **Composite Calculation** | AUTOMATED | Dimensions A–G observed from JSON, aggregated to 0–1 scale |
+| **Hash Stamp** | PENDING | stamp_doc_hash.py to be run post-report completion |
 
 ---
 
-## Breakthrough Session: 2026-04-30
+## Current State: 12-Window Dormancy (2026-04-27 Snapshot)
 
-**Session ID:** 51fdbbfd-35ab-4478-be38-3d4cb6eddab1  
-**Duration:** 17:37–19:06 UTC (89 minutes)  
-**Status:** FIRST SPAWN ACTIVATION after 7-day outage (Apr 27)  
-**Context Fill @ Close:** Unknown (post-session)  
-**Wave Status:** W1 + W2 executed (autonomous dispatch)  
+**Analysis Period:** 2026-04-27 05:51 UTC to 2026-04-27 22:05 UTC  
+**Total Windows:** 12 (spanning 7 unique agents_spawned sessions, but agents never activated)  
+**Status:** INERT MODE — All 12 windows show `agents_spawned: 0`  
+**Context Fill Pattern:** Oscillating 0% (post-compact) and 85% (orange zone, should trigger W3 but doesn't)  
+**Critical Finding:** Wave thresholds configured; gates not firing spawn logic.
 
-### Key Metrics
+### Key Metrics (Aggregate across 12 windows)
 
-| Metric | Value | vs Prior Window | Interpretation |
-|--------|-------|-----------------|-----------------|
-| Operations (total) | 737 | 4.5× prior static | Activity surge on spawn re-enable |
-| Agents Spawned | 14 | 0→14 (first real spawn) | Breakthrough: parallel dispatch activated |
-| Main Tokens Burned | 2.21M | vs 38K prior | Deep investigation/repair session |
-| Clobber Rate | 25.1% (185 ops) | 0% prior | Diagnostic overhead (expected for recovery) |
-| Surgical Efficiency | 0.0955 (9.55% useful) | N/A prior | Mostly reading, not writing (analysis phase) |
-| Session Duration | 89 min | —— | Extended work session |
-| Agent Types Spawned | code-reviewer, ai-engineer, knowledge-synthesizer | N/A prior | Multi-discipline team dispatch |
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| Tasks Completed (per window) | 164 (constant) | 200+ | Yellow |
+| Subagents Spawned | 0 (all windows) | 6 (W1) or 4 (W2) | RED—CRITICAL |
+| Total Manifests Written | 25 per window (Write ops) | N/A | Green signal, but from main not agents |
+| Peak Context Fill | 85% (orange zone) | Should trigger W3 | RED—not triggering |
+| Discovery Rate | Unknown (manifests not parsed for discovered_work) | >0.3 | Unknown |
+| Trend vs Prior Window | stable (repeating pattern) | improving | Yellow |
 
-### Cost Breakdown
+### Cost Breakdown (Current Window, Window 3)
 
 | Category | Tokens | % of Total | Notes |
 |----------|--------|-----------|-------|
-| Reads (forensics, docs, HONEY) | 2,015,709 | 91.2% | Full-file reads; no prescan cache |
-| Writes (output, manifests) | 131,654 | 5.96% | Agents writing findings |
-| Agent Spawns | 14,494 | 0.66% | Spawn overhead |
-| Bash (exec, discovery) | 47,149 | 2.14% | System commands |
-| **Total Session** | **2,209,006** | **100%** | —— |
+| Total result tokens | 38,423 | 100% | All work in-process, no parallelization |
+| Agent tool calls | 25 | 100% | Write operations; no spawn overhead |
+| Read operations | 0 measured | — | Not instrumented in current schema |
+| **Cost per task** | **233 tokens** | **target <150** | Bloated (inline execution) |
 
 ---
 
-## Dimension Breakdown (A-G with H bonus)
+## Dimension Breakdown (A–G)
 
 ### A. Throughput (Tasks Completed per Session)
 
-**Score: 3.8 / 10** (at threshold, no growth)
+**Score: 0.31 / 1.0** (at 82% of potential; bottlenecked by zero parallelization)
 
 | Metric | Current | Target | Status |
 |--------|---------|--------|--------|
-| Tasks/Session Median | 164 (Apr 27); 737 ops (Apr 30) | 200+ | Yellow |
-| Cost per Finding | ~$0.85/item | <$0.50 | Red |
-| Sessions Analyzed | 13 windows | — | — |
+| Tasks/Session | 164 (consistent all 12 windows) | 200+ with agents | Red |
+| Cost per Task | 233 tokens (inline) | <150 tokens (parallelized) | Red |
+| Window Consistency | 100% stable (same value all 12w) | Dynamic/improving | Yellow |
+| Agent Leverage | 0× (no agents) | 6× (W1 agents) | RED—CRITICAL |
 
-**Signal:** 164 tasks/session was static for 7 days (Apr 27), suggesting offline or manual mode. 2026-04-30 shows 737 total operations (not all tasks). If agent-parallel work, throughput may spike; needs 1-2 more sessions to confirm.
+**Signal:** Throughput is mechanically sound but operating at 1-engine capacity. 164 tasks/window is plausible for serial execution. With W1 activation (6 agents), expect 200+ tasks/window at <150 tokens/task (30% cost reduction). Current bottleneck: spawn decision not firing.
 
 ---
 

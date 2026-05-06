@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-phase2-shadow-mode",
+  "agent_type": "python-pro",
+  "investigation_label": "phase2-shadow-mode",
+  "wave": "1",
+  "task_description": "Implement Phase 2 shadow-mode instrumentation: wire context_pressure (logistic sigmoid) and phase_gate_probability formulas alongside hardcoded thresholds, track agreement %, disagreement types, measure impact",
+  "timestamp": "2026-04-28T01:22:08.480430",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-python-pro",
+  "prescan_decision": "passed"
+}

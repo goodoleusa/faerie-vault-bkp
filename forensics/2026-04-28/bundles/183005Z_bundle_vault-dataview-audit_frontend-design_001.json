@@ -1,0 +1,39 @@
+{
+  "task_id": "vault-dataview-blueprint-audit-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "frontend-design",
+  "phase": "AUDIT",
+  "created_utc": "2026-04-28T18:30:05Z",
+
+  "ffff_framework": {
+    "findings_goal": "Audit CT_VAULT Obsidian plugins: dataview version, blueprint version, obsidian-linter version; check daily-dashboard.md.j2 template compatibility",
+    "flags_goal": "YELLOW: dataview queries using outdated syntax; RED: blueprint templates clash with Jinja2 rendering; YELLOW: frontmatter confuses Obsidian parser",
+    "flow_goal": "Daily folder auto-opens → daily-dashboard.md.j2 renders → Obsidian loads template → dataview queries execute → metrics display",
+    "friction_goal": "Version mismatches break queries; blueprint conflicts prevent templating; Obsidian parser chokes on mixed metadata"
+  },
+
+  "critical_context": {
+    "vault_plugins": "Check .obsidian/community-plugins.json and .obsidian/manifest.json for: dataview, blueprint, obsidian-linter, obsidian-kanban (if used)",
+    "template_path": "/mnt/d/0local/gitrepos/faerie-vault/templates/daily-dashboard.md.j2 (176 lines, Jinja2 template)",
+    "rendering_pipeline": "Jinja2 renders template → Obsidian parses YAML frontmatter → dataview queries execute → metrics display"
+  },
+
+  "audit_scope": {
+    "plugin_versions": "Are dataview + blueprint versions compatible? Check CHANGELOG for breaking changes (2026 Q1-Q2)",
+    "dataview_queries": "Which query syntax is used? Is it compatible with installed dataview version?",
+    "blueprint_templates": "Do blueprint templates conflict with Jinja2 delimiters ({{ }})? Can they coexist?",
+    "frontmatter_parsing": "Does Obsidian YAML parser handle Jinja2-generated frontmatter correctly?",
+    "daily_folder_setup": "Does CT_VAULT have daily-{YYYY-MM-DD}/ folder template? Does it auto-open on startup?"
+  },
+
+  "success_criteria": {
+    "compatibility_matrix": "CSV: plugin_name, installed_version, required_version, compatibility_status",
+    "query_audit": "List all dataview queries in template; flag any using deprecated syntax",
+    "template_fixes": "If conflicts exist, propose solutions: separate blueprint/dataview sections, or use template preprocessing",
+    "plugin_pinning": "Recommend exact versions for .obsidian/manifest.json to ensure reproducibility",
+    "compass_edge": "S if all plugins compatible and queries work; E if uncertain (need test render); W if major conflicts found"
+  },
+
+  "next_task_queued": "coc-consolidation-design-phase-2-w2"
+}

@@ -1,0 +1,86 @@
+{
+  "task_id": "task-formula-audit",
+  "agent_id": "ai-engineer",
+  "agent_run_id": "ai-eng-2026-04-28-04-59-44Z",
+  "investigation_label": "mathematical-formula-audit",
+  "parent_task": "ffmx-lane3-ai-engineer",
+  "timestamp_utc": "2026-04-28T04:59:44Z",
+  "session_phase": "EXTEND",
+  "decision": "COMPLETED",
+  "dashboard_line": "Cataloged 11 current + 11 proposed formulas; top-5 wire-first roadmap; shadow-mode ready.",
+  "compass_edge": "S",
+  "next_task_queued": "implementation-roadmap-context-pressure-and-f0-measurement",
+  "next_bearing_rationale": "Top-5 formulas (context_pressure logistic, f(0) ratio, bundle mixture, reputation decay, mission coherence entropy) are ready for Phase 1 measurement-only instrumentation. No policy change required; pure observability gain.",
+  "quality_score": 0.92,
+  "belief_index": 0.88,
+  "belief_components": {
+    "dashboard_line_truthfulness": 0.95,
+    "next_bearing_accuracy": 0.85,
+    "assumption_validity": 0.85,
+    "failure_honesty": 0.87
+  },
+  "phase_gate_evaluation": {
+    "phase": "EXTEND",
+    "quality_threshold": 0.80,
+    "belief_threshold": 0.75,
+    "quality_pass": true,
+    "belief_pass": true,
+    "result": "S — proceed to FULL on follow-up sessions"
+  },
+  "artifacts_produced": [
+    "forensics/artifacts/2026-04-28/04-59-44Z_mathematical-formula-audit_faerie-system_ai-engineer_001.md"
+  ],
+  "deliverables": {
+    "current_formula_inventory_count": 11,
+    "alternative_formula_count": 11,
+    "top_5_implementation_ready": [
+      "context_pressure_logistic_sigmoid",
+      "f_zero_context_burden_ratio",
+      "spawn_bundle_mixture_weighted_recency",
+      "reputation_decay_sigmoid",
+      "mission_coherence_entropy"
+    ],
+    "research_tier_alternatives_count": 5,
+    "drop_in_python_appendix": true,
+    "calibration_procedure_documented": true,
+    "implementation_roadmap_phases": 4
+  },
+  "summary": {
+    "audit_verdict": "Faerie2 is fundamentally a product of multiplicative factors gated by thresholds and amplified by logarithmic compression. Compression dominates because it is the only lever with diminishing-returns immunity. f(0), reputation decay, and bundle composition are the three biggest measurement gaps.",
+    "key_finding": "FFMx 44.4x dominant term is ln(M0/Mf) = 3.22, contributing >70% of multiplier. Engineering attention should target compression ratio, not agent quality.",
+    "biggest_gap": "f(0) is asserted, not measured. Section 2.2 proposes Context Burden Ratio (main_tokens / total_tokens) with target less-than-or-equal 0.05.",
+    "anti_bloat_guardrail_invoked": "Per Fundamental Governance Rule, all proposed formulas require shadow-mode measurement before promotion. No formula auto-promotes without 80%+ shadow agreement and Membench delta non-negative."
+  },
+  "discovered_work": [],
+  "discovery_scan_performed": false,
+  "discovery_scan_skipped_reason": "Primary task is comprehensive — full token budget consumed by 11+11 formula audit. No residual >40% context for frontier scan.",
+  "prescan_decision": "passed — target file did not exist before this session",
+  "references": {
+    "lane_1_formula_breakdown": "forensics/artifacts/2026-04-28/150200Z_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md",
+    "lane_3_rocket_physics": "forensics/artifacts/2026-04-28/04-52-03Z_rocket-physics-escape-velocity_force-multiplier-index_ai-engineer_001.md",
+    "lane_4_synthesis": "forensics/artifacts/2026-04-28/14-32-18Z_ffmx-comprehensive-report_force-multiplier-index_documentation-engineer_001.md"
+  },
+  "mutation_discipline": {
+    "baseline_measured": false,
+    "audit_complete": true,
+    "fix_applied": false,
+    "post_fix_measured": false,
+    "publish_status": "audit_only",
+    "note": "This is a documentation/inventory task. No mutations applied. All proposed formulas explicitly gated behind shadow-mode measurement per FGR."
+  },
+  "agent_self_assessment": {
+    "task_was_feasible_as_stated": true,
+    "reframing_required": false,
+    "knowledge_boundary_hit": false,
+    "spawn_followup_recommended": true,
+    "followup_targets": [
+      "ai-engineer or python-pro: Phase 1 instrumentation (wire f(0), aged_score, coherence entropy as measurement-only)",
+      "data-scientist: Replicate FFMx calibration across 10 sessions to fix variance bands"
+    ]
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "ai-engineer-key",
+    "signature_status": "pending_external_signing"
+  }
+}

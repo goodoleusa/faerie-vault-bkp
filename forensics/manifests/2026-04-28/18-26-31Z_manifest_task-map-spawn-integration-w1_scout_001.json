@@ -1,0 +1,66 @@
+{
+  "task_id": "map-spawn-integration-w1",
+  "dashboard_line": "6 integration points identified: bundle-creation, agent-spawn, manifest-scoring, artifact-naming, prescan-logging, wave-compression; 64 LOC needed; 4 critical hooks ready for W2 wiring",
+  "compass_edge": "S",
+  "investigation_label": "terminology-cleanup-sprint",
+  "agent_type": "stigmergy-scout",
+  "wave": "W1",
+  "timestamp": "2026-04-28T00:00:00Z",
+  "prescan_decision": "passed",
+  "quality_score": 0.95,
+  "belief_index": 0.98,
+  "integration_points_mapped": 6,
+  "critical_hooks_identified": 4,
+  "estimated_loc_changes": 64,
+  "files_to_modify": [
+    "/mnt/d/0LOCAL/.claude/skills/spawn/run.py",
+    "/mnt/d/0LOCAL/.claude/skills/spawn/executor.py"
+  ],
+  "integration_checklist": [
+    {
+      "point": "A",
+      "file": "run.py:77-115",
+      "action": "Add ephemeral capture: log start_context_tokens BEFORE bundle assembly; enforce terminology (investigation_label, quality_score, compass_edge)"
+    },
+    {
+      "point": "B",
+      "file": "run.py:174-226 + executor.py:44-64",
+      "action": "Add pre/post spawn measurement: baseline_context_tokens BEFORE Agent() call; spawn_event logging AFTER; validate wave format (W1|W2|W3)"
+    },
+    {
+      "point": "C",
+      "file": "executor.py:113-124 + 7x_ffmx_calculator.py integration",
+      "action": "After agent manifest returns: call 7x_ffmx_calculator.py to score FFMx; enforce manifest schema validation (task_id, investigation_label, quality_score, belief_index, compass_edge, prescan_decision)"
+    },
+    {
+      "point": "D",
+      "file": "run.py:197-209",
+      "action": "Add artifact naming enforcement to agent prompt: {HH-MM-SS}Z_{type}_{task_id}_{agent}_{wave}_{counter}.{ext}; include wave ID in filename"
+    },
+    {
+      "point": "E",
+      "file": "run.py:117-144 + run.py:146-172",
+      "action": "Modify prescan_check() return type to (bool, decision_reason); replace hardcoded 'passed' with enum: passed|skipped-fresh-artifact|skipped-prescan-gate"
+    },
+    {
+      "point": "F",
+      "file": "executor.py:113-124",
+      "action": "Add wave-completion summary: measure aftermath_context_tokens; compute context_burn_pct; aggregate FFMx score; emit dashboard_line to STDOUT"
+    }
+  ],
+  "scripts_to_integrate": [
+    "7x_ffmx_calculator.py (call after each agent manifest returns)",
+    "8x_time_estimate_analyzer.py (call after W1/W2/W3 wave completes)"
+  ],
+  "terminology_standards_enforced": [
+    "investigation_label (canonical; not mission, cluster_id)",
+    "quality_score (canonical; not quality, output_quality)",
+    "belief_index (canonical; not honesty, self_awareness_score)",
+    "compass_edge (literal N|S|E|W; not bearing, direction)",
+    "wave (format W1|W2|W3; not wave_1, WAVE1)",
+    "prescan_decision (enum: passed|skipped-fresh-artifact|skipped-prescan-gate)",
+    "discovered_work (optional field for frontier scan results)"
+  ],
+  "next_task_queued": "implement-spawn-integration-w2",
+  "discovered_work": []
+}

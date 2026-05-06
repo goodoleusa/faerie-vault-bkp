@@ -1,0 +1,11 @@
+path,size_bytes,mtime,hash_algo,has_tier_header,has_pgp_keymanager,emoji_drift,role,status,recommendation
+/mnt/d/0LOCAL/.claude/scripts/4x_hash_tracker.py,30966,2026-04-24,SHA-256,yes,yes,no(ASCII),CANONICAL global Tier-4x,KEEP,canonical source of truth
+/mnt/d/0local/.claude-backup/scripts/4x_hash_tracker.py,30966,2026-04-24,SHA-256,yes,yes,no,backup-identical,KEEP-AS-BACKUP,byte-identical to canonical (md5 match expected)
+/mnt/d/0local/gitrepos/cybertemplate/scripts/hash_tracker.py,30765,2026-03-22,SHA-256,no,yes,no(ASCII),project fork,DEPRECATE,replace with symlink or import from canonical; differs only by Tier header + minor
+/mnt/d/0local/gitrepos/data-analysis-engine/scripts/hash_tracker.py,32388,2026-03-23,SHA-256,no,yes,unknown,project fork (largest),REVIEW-then-DEPRECATE,1.6KB extra; audit DAE-specific extensions before consolidation
+/mnt/d/0local/0-OSINTTOOLS/hashtracker/hash_tracker.py,30016,2026-01-16,SHA-256,no,yes,yes(emoji),OSINT origin v1.0,DEPRECATE,legacy origin; superseded; archive only
+/mnt/d/0local/0-OSINTTOOLS/hashtracker/hash_tracker5.py,30016,2026-01-16,SHA-256,no,yes,yes,OSINT v5 (snapshot of main),DEPRECATE,duplicate of OSINT main (same size); delete
+/mnt/d/0local/0-OSINTTOOLS/hashtracker/hash_tracker-v2.py,21334,2026-01-16,SHA-256,no,yes,unknown,OSINT iteration v2,DEPRECATE,intermediate dev artifact; delete
+/mnt/d/0local/0-OSINTTOOLS/hashtracker/hash_tracker1.py,19567,2026-01-14,SHA-256,no,unknown,unknown,OSINT iteration v1,DEPRECATE,early dev artifact; delete
+/mnt/d/0local/0-OSINTTOOLS/hashtracker/hash_tracker-t.py,17447,2026-01-14,SHA-256,no,unknown,unknown,OSINT test variant,DEPRECATE,test artifact; delete
+/mnt/d/0local/0-OSINTTOOLS/hashtracker/hash_tracker-lesslogs.py,16107,2026-01-14,SHA-256,no,unknown,unknown,OSINT logging-experiment,DEPRECATE,experiment artifact; delete

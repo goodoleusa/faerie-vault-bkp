@@ -1,0 +1,80 @@
+{
+  "task_id": "vault-enhancement-dashboard",
+  "investigation_label": "vault-enhancement-2026-04-28",
+  "agent_id": "frontend-design",
+  "session_id": "w2-cruise-vault-enhancement",
+  "status": "in_progress",
+  "created_at": "2026-04-28T10:15:03Z",
+  "wave": 2,
+
+  "dashboard_line": "DISPATCHED: Enhance 00-DASHBOARD.md with dataview + metabind + visuals",
+
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Add Dataview Snippets",
+      "status": "pending",
+      "deliverables": [
+        "Task list view",
+        "Calendar view",
+        "Progress tracking",
+        "Table aggregations"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Implement Metabind Macros",
+      "status": "pending",
+      "buttons": [
+        "Sync Settings",
+        "Check Readiness",
+        "Deploy MCP",
+        "View Manifests"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Create Visual Components",
+      "status": "pending",
+      "components": [
+        "Agent reputation scores",
+        "Context pressure gauge",
+        "Manifest truthfulness trend",
+        "MCP latency indicator"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Organize Quick Links",
+      "status": "pending"
+    }
+  ],
+
+  "target_file": "/mnt/d/0local/CT_VAULT/2026-04-28/00-DASHBOARD.md",
+  "sync_to": "/mnt/d/0local/faerie-vault/2026-04-28/00-DASHBOARD.md",
+  "bundle_location": "/mnt/d/0local/gitrepos/faerie-vault/forensics/bundles/2026-04-28/101501Z_bundle_vault-enhancement-dashboard_frontend-design_001.json",
+
+  "obsidian_requirements": {
+    "plugins": [
+      "dataview (community)",
+      "metabind (community)"
+    ]
+  },
+
+  "acceptance_criteria": [
+    "00-DASHBOARD.md enhanced with >=3 dataview snippets",
+    "Metabind frontmatter macros with >=4 buttons",
+    "Visual health indicators rendered",
+    "Quick navigation by role + time horizon",
+    "Dashboard renders in Obsidian (no errors)",
+    "All wikilinks functional"
+  ],
+
+  "parallel_agent": "documentation-engineer",
+  "coordination_method": "stigmergy (filesystem manifest reads)",
+
+  "compass_edge": "E",
+  "next_task_queued": "vault-enhancement-docs-suite (parallel E-edge work)",
+
+  "notes": "W2 CRUISE dispatch. Works in parallel with documentation-engineer. Obsidian plugins (dataview, metabind) must be available in vault."
+}

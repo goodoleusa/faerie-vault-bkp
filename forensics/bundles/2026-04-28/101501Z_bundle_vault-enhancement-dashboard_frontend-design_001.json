@@ -1,0 +1,208 @@
+{
+  "task_id": "vault-enhancement-dashboard",
+  "investigation_label": "vault-enhancement-2026-04-28",
+  "wave": 2,
+  "agent_type": "frontend-design",
+  "priority": "high",
+  "created_at": "2026-04-28T10:15:01Z",
+
+  "mission": {
+    "title": "Transform 00-DASHBOARD.md into Live System Status Hub",
+    "description": "Beautify and enhance dashboard with dataview plugin snippets, metabind macros, and visual health indicators",
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Add Dataview Snippets",
+        "deliverables": [
+          "Task list view (active investigations)",
+          "Calendar view (agent activity timeline)",
+          "Progress tracking (FFMx + phase gates)",
+          "Table aggregations from frontmatter"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "Implement Metabind Macros",
+        "deliverables": [
+          "Sync Settings button",
+          "Check Readiness button",
+          "Deploy MCP button",
+          "View Manifests link"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "Create Visual Components",
+        "deliverables": [
+          "Agent reputation scores with sparklines",
+          "Context pressure gauge (W1/W2/W3)",
+          "Manifest truthfulness trend",
+          "MCP latency indicator"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "Organize Quick Links",
+        "deliverables": [
+          "Links by role (operator/engineer/investigator)",
+          "Links by time horizon (today/week/sprint)",
+          "Search shortcuts",
+          "Navigation card layout"
+        ]
+      }
+    ]
+  },
+
+  "requirements": {
+    "target_file": "/mnt/d/0local/CT_VAULT/2026-04-28/00-DASHBOARD.md",
+    "sync_to": "/mnt/d/0local/faerie-vault/2026-04-28/00-DASHBOARD.md",
+
+    "dataview_snippets": {
+      "task_list": {
+        "description": "Show all active investigations from forensics/",
+        "fields": ["task_id", "status", "agent_type", "investigation_label"],
+        "filter": "status != 'completed'",
+        "sort": "created DESC",
+        "example": "```dataview\nTABLE task_id, status, agent_type, investigation_label\nFROM \"2026-04-28\"\nWHERE status != \"completed\"\nSORT created DESC\n```"
+      },
+      "calendar_view": {
+        "description": "Timeline of agent activity",
+        "fields": ["date", "agent_type", "completed_tasks"],
+        "example": "```dataview\nCALENDAR created\nFROM \"2026-04-28\"\n```"
+      },
+      "progress_tracking": {
+        "description": "FFMx score trend + phase gate status",
+        "fields": ["metric", "current_score", "trend", "phase"],
+        "metrics": ["FFMx", "manifest_truthfulness", "context_burden", "mcp_readiness"]
+      }
+    },
+
+    "metabind_macros": {
+      "frontmatter": {
+        "sync_settings_button": "button(\"Sync Settings\", \"run-script\", \"scripts/2x_settings_sync.py\")",
+        "readiness_check_button": "button(\"Check Readiness\", \"run-script\", \"scripts/7x_readiness_checker.py\")",
+        "deploy_mcp_button": "link(\"Deploy MCP\", \"04-mcp-deployment-vps.md\")",
+        "view_manifests_button": "link(\"View Manifests\", \"../../forensics/manifests/2026-04-28\")"
+      },
+      "inline": {
+        "description": "Buttons render as interactive elements in Obsidian",
+        "styling": "Use Obsidian theme colors for consistency"
+      }
+    },
+
+    "visual_components": {
+      "agent_reputation_table": {
+        "columns": ["Agent", "Belief Index", "Domains", "Status", "Trend"],
+        "enhancement": "Add mini sparklines if possible (e.g., ASCII charts or emoji trend)",
+        "data_source": "Agent culture snapshot (live from forensics/)"
+      },
+      "context_pressure_gauge": {
+        "description": "Visual indicator of W1/W2/W3 wave pressure",
+        "display": "Gauge or progress bar showing context fill %",
+        "thresholds": {
+          "W1_LIFTOFF": ">60K tokens",
+          "W2_CRUISE": "60K-80K tokens",
+          "W3_INSERTION": "<60K tokens"
+        }
+      },
+      "manifest_truthfulness_trend": {
+        "description": "Line chart or sparkline showing belief_index over time",
+        "data": "From recent manifests (past 7 days)",
+        "threshold": "Keep belief_index >= 73% for CAUTION"
+      },
+      "mcp_latency_indicator": {
+        "description": "Real-time or recent latency to MCP server",
+        "target": "<500ms SLA",
+        "display": "Color-coded status: green (<250ms), yellow (250-500ms), red (>500ms)"
+      }
+    },
+
+    "layout_structure": {
+      "header": [
+        "Title + Status line",
+        "Wave indicator + Active investigations",
+        "BLANK LINE"
+      ],
+      "section_1": {
+        "title": "System Health Snapshot",
+        "content": [
+          "Enhanced metrics table with sparklines",
+          "Context pressure gauge",
+          "Manifest truthfulness trend"
+        ]
+      },
+      "section_2": {
+        "title": "Today's Work",
+        "content": [
+          "Completed tasks (from dataview)",
+          "In progress tasks (from dataview)",
+          "Next tasks (from compass edges)"
+        ]
+      },
+      "section_3": {
+        "title": "Documentation Index",
+        "content": "Links to all 5 docs (00-05) with brief descriptions"
+      },
+      "section_4": {
+        "title": "Agent Culture Snapshot",
+        "content": "Reputation table with inline sparklines"
+      },
+      "section_5": {
+        "title": "Quick Navigation",
+        "subsections": [
+          "By Role (operator/engineer/investigator)",
+          "By Time Horizon (today/week/sprint)",
+          "Search shortcuts"
+        ]
+      },
+      "section_6": {
+        "title": "Quick Actions (Metabind Buttons)",
+        "buttons": [
+          "Sync Settings",
+          "Check Readiness",
+          "Deploy MCP",
+          "View Recent Manifests"
+        ]
+      }
+    }
+  },
+
+  "obsidian_plugins_required": [
+    "dataview (community plugin for dynamic tables/calendars)",
+    "metabind (community plugin for interactive macros/buttons)"
+  ],
+
+  "obsidian_plugin_install": {
+    "dataview": "https://github.com/blacksmithgu/obsidian-dataview",
+    "metabind": "https://github.com/RafaelGB/obsidian-metabind"
+  },
+
+  "acceptance_criteria": [
+    "00-DASHBOARD.md enhanced with >=3 dataview snippets",
+    "Metabind frontmatter added with >=4 interactive buttons",
+    "Visual health indicators (reputation, pressure gauge, trends) implemented",
+    "Quick navigation section organized by role + time horizon",
+    "Dashboard renders correctly in Obsidian (tested with dataview/metabind plugins)",
+    "File synced to faerie-vault/2026-04-28/00-DASHBOARD.md",
+    "All wikilinks functional and pointing to existing docs"
+  ],
+
+  "quality_notes": {
+    "avoid": [
+      "Overly complex dataview queries (keep <3 lines each)",
+      "Button actions that require user to set up external scripts",
+      "Visual elements that break markdown rendering outside Obsidian"
+    ],
+    "prefer": [
+      "Simple, understandable dataview syntax",
+      "Buttons that link to existing resources or run built-in scripts",
+      "ASCII art and emoji for visual indicators (compatible with all markdown renderers)"
+    ]
+  },
+
+  "context": {
+    "existing_dashboard": "/mnt/d/0local/CT_VAULT/2026-04-28/00-DASHBOARD.md",
+    "mission_status": "W2 CRUISE phase",
+    "parallel_task": "documentation-engineer creating 4 new docs + templates"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "coc-script-mapping-phase-1-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "code-reviewer",
+  "phase": "MAPPING",
+  "created_utc": "2026-04-28T18:30:00Z",
+
+  "ffff_framework": {
+    "findings_goal": "Inventory all 31+ COC-related scripts across 3 codebases; categorize by function; identify redundancy and canonical status",
+    "flags_goal": "Raise severity markers: which scripts write to wrong path? which have hardcoded secrets? which have no error handling?",
+    "flow_goal": "Map call graph: which scripts invoke which others? Where does COC entry actually get persisted? Trace the happy path",
+    "friction_goal": "Identify blockers: do scripts require manual credential setup? Do they fail silently? Are there race conditions?"
+  },
+
+  "critical_context": {
+    "audit_summary": "COC audit 2026-04-28 found 7 CRITICAL violations: 5 scripts write to old type-first paths, 5 scripts write under .claude/, 7 manifest schema fields unused system-wide",
+    "scripts_under_scrutiny": ["0x_spawn_template.py", "0x_mission_graph.py", "9x_task_droplet_writer.py", "9x_manifests_to_vault_index.py", "8x_droplet_register.py"],
+    "global_coc_scripts_found": "20+ scripts in /mnt/d/0LOCAL/.claude/scripts/ with pattern 4x_coc_*.py, 8x_droplet_*.py, 9x_coc_*.py",
+    "target_locations": [
+      "/mnt/d/0LOCAL/.claude/scripts/",
+      "/mnt/d/0local/gitrepos/faerie2/.claude/scripts/",
+      "/mnt/d/0local/gitrepos/faerie-vault/scripts/"
+    ]
+  },
+
+  "success_criteria": {
+    "spreadsheet": "CSV with columns: script_path, function_category, writes_to, reads_from, dependencies, canonical_y_n, severity_flags",
+    "categorization": "Buckets: (A) COC entry writers, (B) forensic indexers, (C) audit/verification, (D) recovery/export",
+    "redundancy_report": "Which functions are duplicated? Which scripts are unused? Which should be deprecated?",
+    "compass_edge": "S if mapping complete and high-confidence; E if uncertain about any script's true function; W if conflicts found"
+  },
+
+  "next_task_queued": "coc-consolidation-design-phase-2-w2"
+}

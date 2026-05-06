@@ -1,0 +1,87 @@
+{
+  "task_id": "admin-provisioning-design-w2",
+  "agent_id": "python-pro",
+  "session_id": "system-consolidation-sprint-phase2",
+  "timestamp": "2026-04-28T20:16:49Z",
+  "investigation_label": "admin-provisioning-design-w2",
+  "dashboard_line": "B2 provisioner + immutable backup designed; 1 Terraform template; 8 edge cases handled",
+  "compass_edge": "S",
+  "quality_score": 0.86,
+  "belief_index": 0.84,
+  "prescan_decision": "passed — no prior admin-provisioning-design-w2 artifacts found in manifests/2026-04-28/",
+  "artifacts": [
+    {
+      "type": "python_script",
+      "path": "forensics/2026-04-28/artifacts/20-16-49Z_artifact_admin-provisioning-design-w2_python-pro_001.py",
+      "description": "0x_b2_provisioner.py — idempotent WORM bucket provisioner with exponential+jitter backoff, scoped credentials (write+read-only), Terraform HCL output, COC integration, COMPLIANCE-mode lifecycle (forensics/=WORM, pollen/=versioning, temp/=90d-delete), dry-run support"
+    },
+    {
+      "type": "python_script",
+      "path": "forensics/2026-04-28/artifacts/20-16-49Z_artifact_admin-provisioning-design-w2_python-pro_002.py",
+      "description": "0x_immutable_backup.py — idempotent tar.gz snapshot creator with SHA-256 hashing, B2 WORM upload, delete-test immutability verification, COC provenance chain logging, backup manifest JSON, recovery instructions, force-new override"
+    }
+  ],
+  "success_criteria_check": {
+    "idempotent": true,
+    "idempotency_mechanism": "bucket existence pre-check via b2_list_buckets; content-hash check via b2_list_file_names on same-day bucket",
+    "credentials_safe": true,
+    "credentials_mechanism": "env var precedence chain: B2_KEY_ID > BACKBLAZE_KEY_ID > B2_MASTER_KEY_ID; never hardcoded; CI/CD variable compatible",
+    "rate_limit_backoff": true,
+    "backoff_mechanism": "exponential backoff with ±25% jitter; 6 attempts; cap 64s; covers 429, 503, 408, network errors",
+    "coc_integrated": true,
+    "coc_mechanism": "0x_coc_writer.py auto-discovered from known locations; degrades gracefully if absent (exit code 4 warning)",
+    "error_handling": true,
+    "error_handling_mechanism": "structured exit codes 0-5; fail-fast on credentials/validation; retry on transient B2 errors; all errors logged",
+    "terraform_templates": true,
+    "terraform_mechanism": "single .tf file per bucket; uses backblaze/backblaze >= 0.8 provider; credentials as variables (never hardcoded); lifecycle rules wired"
+  },
+  "edge_cases_handled": [
+    "Bucket name length enforcement (6-50 chars); truncation with preserved date suffix",
+    "Bucket already exists: idempotent reuse without duplicate creation",
+    "Identical backup content: SHA-256 hash comparison before upload (skip if same)",
+    "B2 rate limits (429/503): exponential backoff with jitter across 6 attempts",
+    "Network errors: retry with backoff, surface after 6 failures",
+    "Upload failures: per-chunk SHA1 verification per B2 protocol; retry on 408/429/503",
+    "WORM lock verification: probe-delete test (expect 403); non-fatal warn if unconfirmable",
+    "COC writer unavailable: silent degradation with exit-code-4 advisory (backup still succeeds)"
+  ],
+  "terraform_templates": [
+    {
+      "filename": "b2_bucket_{customer_slug}_{project_slug}.tf",
+      "provider": "backblaze/backblaze >= 0.8",
+      "features": [
+        "COMPLIANCE-mode Object Lock",
+        "lifecycle rules (forensics/=WORM, pollen/=versioning, temp/=90d auto-delete)",
+        "SSE-B2 encryption",
+        "credentials via variables (never hardcoded)",
+        "terraform import command for existing buckets",
+        "outputs: bucket_name, bucket_id, bucket_url"
+      ]
+    }
+  ],
+  "ffff_analysis": {
+    "findings": "Two production-ready idempotent Python scripts designed; B2 provisioner handles full lifecycle from authorization through Terraform export; immutable backup handles snapshot creation through WORM verification. Both integrate with canonical 0x_coc_writer.py.",
+    "flags": "WORM verification via delete-probe may be blocked by some B2 account configurations (Object Lock must be enabled at account level first — provider-level limitation, not script limitation). Rate-limit 40% failure in Phase 1 discovery is addressable by the exponential+jitter implementation.",
+    "flow": "provision_worm_bucket() → b2_authorize() → b2_find_bucket() → [create if absent] → b2_create_worm_bucket() → b2_verify_worm_immutability() → b2_create_scoped_key(write) → b2_create_scoped_key(read) → write_terraform_config() → log_to_coc(). Parallel flow: create_immutable_backup() → create_tar_snapshot() → [find/create bucket] → [idempotency hash check] → b2_upload_file() → b2_verify_immutability() → log_to_coc() → write_manifest_json().",
+    "friction": "B2 Object Lock (WORM) requires account-level enablement (B2 Plus/Enterprise or support request). Scripts gracefully warn when object lock not active rather than failing hard. Terraform provider version pinned to >= 0.8 which is current; may need update as B2 provider evolves."
+  },
+  "mutation_tracking": {
+    "positive_mutations": [
+      "Enables WORM-compliant backup capability not previously possible in faerie-vault (new capability from script consolidation)",
+      "Dual credentials (write + read-only) pattern separates auditor access from write access — was not in original bash scripts",
+      "Content-hash idempotency check prevents duplicate uploads — original bash scripts would upload unconditionally"
+    ],
+    "negative_mutations": [],
+    "mysterious_mutations": [
+      "Rate-limit backoff effectiveness: actual B2 response times under load are unmeasured; 40% failure rate from Phase 1 should drop but exact improvement ratio requires post-implementation measurement"
+    ]
+  },
+  "discovered_work": [
+    "task-b2-provisioner-implementation: wire 0x_b2_provisioner.py into hustle/ CI/CD (replace 07-auto-spawn-worm-bucket.sh calls)",
+    "task-immutable-backup-implementation: wire 0x_immutable_backup.py as post-task hook in faerie2 agent lifecycle (on-demand COC snapshot after each sprint)",
+    "task-b2-object-lock-account-enablement: confirm B2 Object Lock enabled at account level before WORM features work (prerequisite N-edge)",
+    "task-terraform-provider-version-pin: confirm backblaze/backblaze >= 0.8 is current stable; update pin if > 0.8 released"
+  ],
+  "next_task_queued": "admin-provisioning-implementation-w3",
+  "next_bearing": "S (proceed to implementation — scripts are production-ready pending B2 account Object Lock enablement)"
+}

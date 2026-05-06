@@ -1,0 +1,56 @@
+{
+  "task_id": "admin-provisioning-design-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "python-pro",
+  "phase": "DESIGN",
+  "created_utc": "2026-04-28T18:30:04Z",
+
+  "ffff_framework": {
+    "findings_goal": "Study existing hustle wormbucket provisioning (07-auto-spawn-worm-bucket.sh); existing B2 account structure; customer nickname schemes",
+    "flags_goal": "MISSING: no B2 provisioning script that respects COC-compliant bucket scheme; MISSING: no immutable backup script with customer nicknames",
+    "flow_goal": "Two parallel flows: (A) Request→bucket creation→creds→COC logging→test; (B) Snapshot→tar.gz→hash→B2 upload→metadata logging",
+    "friction_goal": "B2 rate limits, WORM enforcement 24h delay, manual credential setup, no automated recovery"
+  },
+
+  "critical_context": {
+    "wormbucket_reference": "/mnt/d/0local/gitrepos/hustle/scripts/07-auto-spawn-worm-bucket.sh (uses --customer, --project, --retention-days; outputs to .env.local)",
+    "coc_requirements": "Buckets must enforce WORM on forensics/, versioning on pollen/, auto-delete temp files after 90d; all provisioning logged to COC",
+    "customer_scheme": "Bucket naming: faerie-{customer-nickname}-{purpose}-{date}; credentials scoped per project (read-only for auditors, write for sync)"
+  },
+
+  "design_tasks": {
+    "part_a_b2_provisioning": {
+      "input": "COC-compliant config (name, access policy, WORM enforcement)",
+      "process": [
+        "Create B2 bucket with customer nickname embedded",
+        "Set lifecycle: WORM on forensics/, versioning on pollen/, delete after 90d on temp",
+        "Set up replication from local forensics/ to B2",
+        "Generate scoped credentials per project",
+        "Log provisioning details to COC"
+      ],
+      "output": "Terraform/CloudFormation config + bucket URL + credentials file"
+    },
+    "part_b_immutable_backup": {
+      "input": "Local repo path + customer nickname + backup schedule",
+      "process": [
+        "Create tar.gz snapshot of entire folder (NOT git metadata)",
+        "Hash entire backup",
+        "Create B2 bucket: faerie-{nickname}-backup-{YYYYMMDD}",
+        "Upload to WORM bucket (immutable after 90d)",
+        "Log backup metadata to COC"
+      ],
+      "output": "Backup manifest + recovery instructions + bucket URL"
+    }
+  },
+
+  "success_criteria": {
+    "python_scripts": "Two idempotent scripts: 0x_b2_provisioner.py and 0x_immutable_backup.py",
+    "config_templates": "Terraform and YAML templates for bucket lifecycle policies",
+    "coc_integration": "Both scripts write COC entries via unified COC writer (from Phase 1)",
+    "recovery_playbook": "Step-by-step guide to restore from backup using metadata",
+    "compass_edge": "S if scripts are production-ready; E if uncertain about rate-limit handling; W if conflicts with existing provisioning"
+  },
+
+  "next_task_queued": "coc-consolidation-design-phase-2-w2"
+}

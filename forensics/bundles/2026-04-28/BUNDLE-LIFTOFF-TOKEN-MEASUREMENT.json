@@ -1,0 +1,172 @@
+{
+  "bundle_id": "liftoff-token-measurement-w1",
+  "timestamp": "2026-04-28T00:00:00Z",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "bundle_type": "light",
+  "creator": "main-context",
+  "compass_edge": "S",
+  "next_bearing": "Once measurements complete, route to W2 CRUISE for synthesis + calibration",
+
+  "🎯_strategic_goal": "Establish REAL token measurements (no more estimates). Baseline T+0 for mutation→eval cycles.",
+
+  "📊_measurement_objectives": {
+    "obj_1_w1_spawn_cost": "Measure actual W1 LIFTOFF spawn cost at context=70%",
+    "obj_2_memory_injection": "What's the real cost to inject NECTAR + HONEY into bundle?",
+    "obj_3_burn_rate_prediction": "Does burn_rate formula predict compact timing accurately?",
+    "obj_4_quality_gate_calibration": "Do quality_score thresholds (0.70, 0.80, 0.85) gate work as intended?"
+  },
+
+  "🚀_w1_liftoff_parallel_scouts": [
+    {
+      "scout_id": "measure-w1-spawn-70pct",
+      "role": "data-analyst",
+      "mission": "Measure W1 LIFTOFF cost when context=70%",
+      "task": {
+        "objective": "Capture /usage delta before→after spawning 4 agents at context=70%",
+        "method": [
+          "1. User pastes /usage (pre-spawn baseline)",
+          "2. You trigger W1 spawn: 4 haiku agents in parallel",
+          "3. Wait for all 4 manifests to return",
+          "4. User pastes /usage again (post-spawn)",
+          "5. Calculate delta: actual_tokens = post_usage - pre_usage",
+          "6. Compare to theory: formula predicted ~5K tokens for light bundle × 4 agents"
+        ],
+        "output_manifest": {
+          "dashboard_line": "[actual_tokens_burned] vs [theory_predicted]: [gap]%",
+          "measurement": {
+            "context_pct_at_spawn": 70,
+            "agents_spawned": 4,
+            "theory_predicted_tokens": 5000,
+            "actual_tokens_consumed": "[user will measure]",
+            "gap_tokens": "[actual - theory]",
+            "cache_hit_rate_observed": "[measure via manifest runtimes]"
+          }
+        }
+      }
+    },
+    {
+      "scout_id": "measure-nectar-injection-cost",
+      "role": "data-scientist",
+      "mission": "What does NECTAR.md cost to inject into bundles?",
+      "task": {
+        "objective": "Render bundle WITHOUT NECTAR vs WITH NECTAR (97KB). Measure size + token impact.",
+        "method": [
+          "1. Call 0x_spawn_template.py with --include-nectar false",
+          "2. Measure bundle size (bytes)",
+          "3. Call 0x_spawn_template.py with --include-nectar true",
+          "4. Measure bundle size delta",
+          "5. Estimate token impact: NECTAR injection cost ≈ (delta_bytes / 4)",
+          "6. Compare to theory: Formula says NECTAR tail-50 ≈ 2-3K tokens"
+        ],
+        "output_manifest": {
+          "dashboard_line": "NECTAR injection: [actual_bytes] delta = [tokens]K (theory predicted [theory_tokens]K)"
+        }
+      }
+    },
+    {
+      "scout_id": "measure-honey-injection-cost",
+      "role": "data-scientist",
+      "mission": "What does HONEY.md cost to inject?",
+      "task": {
+        "objective": "Render bundle with/without global + project HONEY. Measure impact.",
+        "method": [
+          "1. Render WITHOUT HONEY",
+          "2. Render WITH global HONEY (62KB)",
+          "3. Render WITH global + project HONEY (if exists)",
+          "4. Measure deltas, estimate token cost"
+        ],
+        "output_manifest": {
+          "dashboard_line": "HONEY injection: global=[tokens]K, project=[tokens]K, total=[tokens]K (capped at ~1.5K theory)"
+        }
+      }
+    },
+    {
+      "scout_id": "measure-quality-gate-effectiveness",
+      "role": "evidence-curator",
+      "mission": "Do quality_score gates (0.70, 0.80, 0.85) actually block low-quality work?",
+      "task": {
+        "objective": "Collect all manifests (past 7 days), analyze quality_score distribution. Check: Are gates effective?",
+        "method": [
+          "1. Query: find forensics/manifests -mtime -7 | grep -h quality_score",
+          "2. Extract all quality_score values, build histogram",
+          "3. Theory: DEEPEN gate at 0.70 should reject ~10-15% of tasks",
+          "4. Actual: What % of tasks scored <0.70? (that's reject rate)",
+          "5. If actual << 10%: gate too lenient. If actual >> 15%: gate too strict."
+        ],
+        "output_manifest": {
+          "dashboard_line": "Quality gate calibration: DEEPEN=0.70 rejects [X]% (theory 10-15%), EXTEND=0.80 rejects [Y]% (theory 5-10%)"
+        }
+      }
+    }
+  ],
+
+  "⚡_w2_cruise_synthesis": {
+    "description": "After W1 scouts return, synthesizer correlates measurements + identifies formula adjustments",
+    "compass_edge": "S",
+    "next_bearing": "Route to calibration work (update faerie2-formulas.json with real numbers)",
+    "synthesis_agent": "knowledge-synthesizer",
+    "task": {
+      "objective": "Merge 4 scout measurements into one coherent view: theory vs actual",
+      "output": "forensics/artifacts/2026-04-28/CALIBRATION-RESULTS-MEASUREMENT.md",
+      "sections": [
+        "## Summary: Theory vs Actual",
+        "### W1 Spawn Cost",
+        "  Theory: 5K tokens",
+        "  Actual: [scout reported]",
+        "  Gap: [analysis]",
+        "",
+        "### NECTAR Injection",
+        "  Theory: 2-3K tokens",
+        "  Actual: [scout reported]",
+        "  Gap: [analysis]",
+        "",
+        "### HONEY Injection",
+        "  Theory: 1.5K tokens (global)",
+        "  Actual: [scout reported]",
+        "  Gap: [analysis]",
+        "",
+        "### Quality Gate Effectiveness",
+        "  Theory: 10-15% reject at DEEPEN=0.70",
+        "  Actual: [scout reported]%",
+        "  Gap: [gate too strict/lenient/calibrated?]",
+        "",
+        "## Recommendations",
+        "  1. [Adjust WAVE_1_SPAWN_MAX_CONTEXT_PCT? If so, from X to Y]",
+        "  2. [Adjust compass gate thresholds? If so, which ones?]",
+        "  3. [Next mutation to test: ...]"
+      ]
+    }
+  },
+
+  "🛸_w3_insertion_background": {
+    "description": "While W1+W2 run, background agent wires token ledger hooks + presend enforcement",
+    "async_agent": "mlops-engineer",
+    "task": {
+      "objective": "Implement token-ledger logging (background, non-blocking)",
+      "scope": "Add presend hook to log /usage before/after every spawn",
+      "output": "~/.claude/hooks/presend-token-ledger.sh (ready for next spawn)"
+    }
+  },
+
+  "📍_compass_navigation": {
+    "current_bearing": "S (Proceed to synthesis once W1 scouts return)",
+    "next_task_queued": "W2 CRUISE calibration work",
+    "discovered_work": [
+      "If scouts discover: 'CLAUDE.md actually costs [X]K not 13.3K', that blocks other formulas. Manifest it as N edge (unblock first)."
+    ],
+    "cross_citations": [
+      "faerie2-formulas.json (what we're measuring against)",
+      "THEORY-VS-PRACTICE.md (framework for gap analysis)",
+      "mutation-baseline-T0.json (will lock actual baseline after this)"
+    ]
+  },
+
+  "🎯_success_criteria": [
+    "✓ W1 LIFTOFF scouts complete in parallel",
+    "✓ All 4 measurements logged to manifests (no estimates, real /usage deltas)",
+    "✓ W2 synthesizer merges results into coherent calibration report",
+    "✓ Recommendations identify which formulas need adjustment",
+    "✓ Token ledger hook wired (W3 background, non-blocking)",
+    "✓ Next bearing clear: Route to faerie2-formulas.json updates"
+  ]
+}

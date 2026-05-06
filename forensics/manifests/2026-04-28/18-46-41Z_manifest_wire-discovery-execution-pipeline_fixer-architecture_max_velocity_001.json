@@ -1,0 +1,211 @@
+{
+  "task_id": "wire-discovery-execution-pipeline",
+  "agent_id": "fixer-architecture",
+  "agent_run_id": "max-velocity-2026-04-28T18-42-38Z",
+  "investigation_label": "terminology-cleanup-sprint",
+  "wave": "W2",
+  "session_phase": "DEEPEN",
+  "timestamp_utc": "2026-04-28T18:46:41Z",
+  "agent_run_start_utc": "2026-04-28T18:42:38Z",
+  "agent_run_end_utc": "2026-04-28T18:46:41Z",
+  "elapsed_seconds": 243,
+  "predicted_duration_minutes": 15,
+  "actual_duration_minutes": 4.05,
+  "accuracy_percent": 73.0,
+  "dashboard_line": "Discovery-execution pipeline architected: 5-stage flow, FFMx gate@1.3x, schema v2, 0% exec rate addressed",
+  "status": "complete",
+  "decision": "COMPLETED",
+  "compass_edge": "S",
+  "next_task_queued": "impl-discovery-promoter-script",
+  "next_bearing_agent": "python-pro",
+  "next_bearing_rationale": "Architecture locked; 5 sequenced impl tasks defined in Section 9 of the artifact. python-pro takes lead on tasks 1-4 (W2 CRUISE); data-scientist takes shadow-mode (W3 INSERTION).",
+  "quality_score": 0.86,
+  "belief_index": 0.82,
+  "belief_components": {
+    "dashboard_line_truthfulness": 0.90,
+    "next_bearing_accuracy": 0.85,
+    "assumption_validity": 0.80,
+    "failure_honesty": 0.75
+  },
+  "scope_decision": {
+    "scope_chosen": [
+      "wire-discovery-execution-pipeline (CRITICAL — primary deliverable)",
+      "wire-gap-1-w2-spawn (FFMx gate, integrated into pipeline Stage 4)",
+      "time-tracking-manifest-enhancement (schema v2, integrated into Section 6)"
+    ],
+    "scope_deferred": [
+      "wire-gap-2-agent-selection (deferred to dedicated python-pro task; algorithm needs >40% of token budget alone)",
+      "wire-gap-3-context-budget (deferred; depends on agent selection landing first)",
+      "implement-ephemeral-capture-w2 (hook wiring task; W1 design is complete; wiring is mechanical, not architectural)"
+    ],
+    "rationale": "Selected the work that unblocks the most downstream work. Discovery-execution pipeline is the dominant emergence blocker (FFMx E component depth is suppressed because chains die at depth 1). FFMx gate and schema v2 fold cleanly into the same artifact because they touch the same surfaces (manifest fields + spawn-time decisions). The deferred items need their own focused architecture passes."
+  },
+  "prescan_decision": "passed — no prior wire-discovery-execution-pipeline artifact in forensics/artifacts/2026-04-28/; primary deliverable is greenfield",
+  "artifact_path": "forensics/artifacts/2026-04-28/18-42-38Z_artifact_wire-discovery-execution-pipeline_fixer-architecture_001.md",
+  "artifact_size_bytes": 12180,
+  "artifacts_produced": [
+    "forensics/artifacts/2026-04-28/18-42-38Z_artifact_wire-discovery-execution-pipeline_fixer-architecture_001.md"
+  ],
+  "key_findings": [
+    "Empirical: 0/80+ discovered_work items have ever been re-spawned across 51 W1 manifests. 0% exec rate confirmed.",
+    "Root cause: 4 gaps — no promotion script, no claim ledger, no prescan gate for discoveries, no wave-aware routing of bearings.",
+    "Solution: 5-stage pipeline (Harvest → Dedupe → Prescan → Wave-Route → Bundle Emit) implemented as scripts/9x_discovery_promoter.py.",
+    "FFMx gate placed at Stage 4 with 1.3x baseline forecast threshold (lower than 1.5x publish threshold; spawn-time forecasts are noisier than measured outcomes).",
+    "Manifest Schema v2 is additive and fail-open; backward-compatible with all existing manifests; 12 new fields covering lineage, time-tracking, and FFMx forecast/post.",
+    "Bearing→Wave mapping: N→W1 (scouts unblock), S→W2 (fixers proceed), E→W2 (parallel batch), W→W3 (synthesizers reframe).",
+    "Hook wiring: post-handoff hook + 30-min cron for reliability. No new abstraction; just wires existing scripts to existing events.",
+    "Equilibrium plan: 7-day shadow mode in --dry-run, measure FFMx delta, only promote if exec rate ≥0.60 AND FFMx ≥1.3x baseline."
+  ],
+  "architectural_decisions": [
+    {
+      "decision": "Discovery promoter is a separate script (9x tier), not a hook into existing /run",
+      "rationale": "Separation of concerns — /run consumes bundles; promoter produces bundles. Mixing them would couple discovery to claim cycle.",
+      "tradeoff": "One more script to maintain; one more cron entry. Acceptable because the script is small (~150 LOC) and the contract is narrow."
+    },
+    {
+      "decision": "FFMx forecast threshold = 1.3x baseline (not 1.5x)",
+      "rationale": "1.5x is the FGR threshold for measured improvements. Forecasts are noisier; gating at 1.5x would over-reject. 1.3x = positive expected value with margin.",
+      "tradeoff": "Will allow some marginal promotions through. Mitigation: shadow-mode measurement for 30 days, tune constant based on outcomes."
+    },
+    {
+      "decision": "Schema v2 changes are all additive and fail-open",
+      "rationale": "Mutation discipline: don't break existing manifests; let validator emit warnings instead of errors. Allows gradual migration as agents learn.",
+      "tradeoff": "Required-marked fields aren't actually enforced for first sprint. Acceptable because schema validator counts violations and enables data-driven enforcement decision."
+    },
+    {
+      "decision": "Claim ledger is JSONL append-only, not a database",
+      "rationale": "Forensic integrity (hash-chain compatible). No service to run. Trivially backed up by the same git/S3 path as the rest of forensics.",
+      "tradeoff": "Linear scan on dedupe (O(N) per harvest). Mitigated: ledger is small (1 line per claim, ~200 bytes); 10K claims = 2MB scan; <50ms."
+    }
+  ],
+  "discovered_work": [
+    {
+      "task_id": "impl-discovery-promoter-script",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Implement scripts/9x_discovery_promoter.py per Section 4.1 of the architecture artifact. ~150 LOC, 5 stages (harvest, dedupe, prescan, wave-route, emit). Includes CLI with --dry-run and --force flags.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "wave": "W2",
+      "parent_task_id": "wire-discovery-execution-pipeline",
+      "parent_manifest_path": "forensics/manifests/2026-04-28/18-46-41Z_manifest_wire-discovery-execution-pipeline_fixer-architecture_max_velocity_001.json",
+      "prescan_status": "passed — promoter script does not exist; greenfield",
+      "estimated_loc": 150,
+      "priority_score": 0.95
+    },
+    {
+      "task_id": "impl-ffmx-forecast-function",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Add forecast_ffmx(record) function to scripts/7x_ffmx_calculator.py per Section 5. Additive change; ~40 LOC. Implements expected_subdiscovery heuristic and 1.3x gate constant.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "wave": "W2",
+      "parent_task_id": "wire-discovery-execution-pipeline",
+      "prescan_status": "passed — function does not exist in current 7x_ffmx_calculator.py",
+      "estimated_loc": 40,
+      "priority_score": 0.90
+    },
+    {
+      "task_id": "impl-schema-validator",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Write scripts/8x_manifest_schema_validator.py per Section 6. ~80 LOC. Validates manifest writes against Schema v2; emits coc-entry warnings, never blocks. Fail-open contract.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "wave": "W2",
+      "parent_task_id": "wire-discovery-execution-pipeline",
+      "prescan_status": "passed — validator does not exist",
+      "estimated_loc": 80,
+      "priority_score": 0.82
+    },
+    {
+      "task_id": "wire-discovery-promoter-hook",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Add post-handoff hook to .claude/settings.json invoking 9x_discovery_promoter.py. Add cron entry for every 30 min. ~10 LOC config change.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "wave": "W2",
+      "parent_task_id": "wire-discovery-execution-pipeline",
+      "prescan_status": "blocked-on-impl-discovery-promoter-script — promoter must exist before hook can call it",
+      "estimated_loc": 10,
+      "priority_score": 0.78,
+      "depends_on": ["impl-discovery-promoter-script"]
+    },
+    {
+      "task_id": "shadow-mode-discovery-pipeline",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Run 9x_discovery_promoter.py in --dry-run for 7 days; collect what would have been promoted; report FFMx delta forecast vs measured baseline. Background W3 work.",
+      "agent_type": "data-scientist",
+      "compass_bearing": "E",
+      "wave": "W3",
+      "parent_task_id": "wire-discovery-execution-pipeline",
+      "prescan_status": "deferred — depends on impl-discovery-promoter-script completion",
+      "priority_score": 0.70,
+      "depends_on": ["impl-discovery-promoter-script"]
+    }
+  ],
+  "discovery_scan_performed": true,
+  "discovery_scan_tokens_remaining": 95000,
+  "phase_gate_evaluation": {
+    "phase": "DEEPEN",
+    "quality_threshold": 0.70,
+    "belief_threshold": 0.50,
+    "quality_pass": true,
+    "belief_pass": true,
+    "result": "S — proceed to EXTEND once impl tasks land. Architecture quality (0.86) and belief (0.82) both clear DEEPEN gates with margin."
+  },
+  "manifest_truthfulness_signals": {
+    "dashboard_matches_artifact": true,
+    "claims_backed_by_evidence": true,
+    "scope_deferrals_documented": true,
+    "unknown_admissions_present": true,
+    "tradeoffs_disclosed_per_decision": true,
+    "prescan_decision_documented": true,
+    "discovered_work_has_parent_lineage": true,
+    "discovered_work_has_priority_scores": true
+  },
+  "agent_self_assessment": {
+    "task_was_feasible_as_stated": true,
+    "reframing_required": false,
+    "knowledge_boundary_hit": false,
+    "spawn_followup_recommended": true,
+    "scope_chosen_was_correct": true,
+    "honest_about_unknowns": true,
+    "areas_of_lower_confidence": [
+      "FFMx forecast threshold constant (1.3x) — needs 30d shadow to tune",
+      "Bearing→wave mapping correctness — feels right, not measured",
+      "Whether agents reliably populate bearing on discovered_work[] entries",
+      "Cross-session lineage edge cases when parent manifest is on prior day"
+    ]
+  },
+  "mutation_discipline": {
+    "baseline_measured": true,
+    "baseline_value": "0% exec rate (0/80+ discovered items spawned); FFMx baseline 44.4 from existing T0 file",
+    "baseline_path": "forensics/mutation-baselines/ffmx-T0-baseline-2026-04-28.json",
+    "audit_complete": true,
+    "fix_applied": false,
+    "post_fix_measured": false,
+    "publish_status": "design_locked",
+    "note": "Architecture only. No mutations applied yet. Implementation tasks queued in discovered_work. Per FGR: 7-day shadow mode required before promotion; gate criteria are exec_rate >= 0.60 AND FFMx >= 1.3x baseline."
+  },
+  "primary_citations": [
+    "forensics/manifests/2026-04-28/182244Z_manifest_audit-formulas-w1.5_scout_001.json — 6 inference gaps, wire-gap-1 priority",
+    "forensics/manifests/2026-04-28/182500Z_manifest_design-ffmx-equation-w1_stigmergy-scout_001.json — FFMx equation locked",
+    "forensics/manifests/2026-04-28/18-26-31Z_manifest_task-map-spawn-integration-w1_scout_001.json — 6 integration points",
+    "forensics/manifests/2026-04-28/14-56-18Z_manifest_design-time-tracking-w1_scout_001.json — schema source",
+    "forensics/manifests/2026-04-28/145400Z_manifest_design-ephemeral-capture-w1_scout_001.json — hook pattern reference",
+    "CLAUDE.md mth00098 (Agent Discovery Protocol) — doctrine being implemented",
+    "CLAUDE.md mth00100 (Bundle Emission & Spawn Discipline) — prescan + wave gating doctrine"
+  ],
+  "ready_for_w2_impl": true,
+  "w2_acceptance_criteria_for_impl": [
+    "9x_discovery_promoter.py executes Stage 1-5 end-to-end in <2s on a 50-manifest day",
+    "Claim ledger is append-only and idempotent (re-running promoter doesn't duplicate bundles)",
+    "FFMx forecast function passes unit tests with synthetic records",
+    "Schema validator emits warnings (not errors) on legacy manifests",
+    "Post-handoff hook fires within 5s of /handoff event"
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "fixer-architecture-key",
+    "signature_status": "pending_external_signing"
+  }
+}

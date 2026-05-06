@@ -1,0 +1,61 @@
+script_path,function_category,writes_to,reads_from,dependencies,canonical_y_n,severity_flags,notes
+/mnt/d/0LOCAL/.claude/scripts/4x_coc_writer.py,A-writer,~/.claude/memory/forensics/agent-runs.jsonl,stdin/CLI args,fcntl/hashlib,N (legacy global),YELLOW,Old global path; superseded by faerie2 0x_coc_writer
+/mnt/d/0LOCAL/.claude/scripts/4x_coc_bridge.py,A-writer,forensics/coc/*.jsonl,faerie hooks,4x_coc_writer,N,YELLOW,Bridge wrapper; redundant with 0x_coc_writer
+/mnt/d/0LOCAL/.claude/scripts/4x_forensic_coc_check.py,C-auditor,stdout report,~/.claude/memory/forensics/,hashlib,N,YELLOW,Reads legacy path
+/mnt/d/0LOCAL/.claude/scripts/4x_protect_coc_paths.py,C-auditor (hook),hook decision,Bash command strings,none,Y (PreToolUse hook),GREEN,Path protection
+/mnt/d/0LOCAL/.claude/scripts/4x_subagent_coc_collector.py,A-writer,canonical forensics jsonl,subagent transcripts,4x_coc_writer,Y,GREEN,Closes subagent COC gap
+/mnt/d/0LOCAL/.claude/scripts/4x_synthesize_master_coc.py,B-indexer,master-coc.jsonl,session-*.jsonl,hashlib,N (one-time),YELLOW,One-time migration; archive
+/mnt/d/0LOCAL/.claude/scripts/5d_ann_coc_watcher.py,A-writer,vault ann COC,ann-submit/,vault-collab-config,Y,YELLOW,No retry/error handling
+/mnt/d/0LOCAL/.claude/scripts/8x_droplet_coc_tracker.py,A-writer,forensics/droplet-coc-*.jsonl,LIVE-*.md,hashlib,Y,GREEN,Droplet-specific
+/mnt/d/0LOCAL/.claude/scripts/8x_droplet_index_generator.py,B-indexer,forensics/droplets/index.json,droplet files,none,Y,GREEN,Index builder
+/mnt/d/0LOCAL/.claude/scripts/8x_droplet_register.py,A-writer,droplet manifest,agent context,8x_droplet_coc_tracker,Y,GREEN,Droplet registration
+/mnt/d/0LOCAL/.claude/scripts/8x_manifest_auto_continue.py,A-writer,forensics/manifests/,manifest.status,Agent tool,Y,YELLOW,Auto-continuation logic
+/mnt/d/0LOCAL/.claude/scripts/8x_pre_write_forensics_guard.py,C-auditor (hook),hook decision,write paths,none,Y,GREEN,Blocks .claude/memory/forensics writes
+/mnt/d/0LOCAL/.claude/scripts/8x_protect_coc_paths.py,C-auditor (hook),hook decision,Bash strings,none,N (dup of 4x),RED,Duplicate of 4x_protect_coc_paths
+/mnt/d/0LOCAL/.claude/scripts/9x_coc_writer_signed.py,A-writer,forensics/*.jsonl signed,COC entries,Ed25519/cryptography,Y,GREEN,Signed canonical writer
+/mnt/d/0LOCAL/.claude/scripts/9x_coc_verifier.py,C-auditor,stdout report,COC jsonl,Ed25519,Y,GREEN,Chain verification
+/mnt/d/0LOCAL/.claude/scripts/9x_forensic_query.py,D-recovery,stdout,agent-runs.jsonl + manifests,none,Y,GREEN,Query by AGENT-RUN-ID
+/mnt/d/0LOCAL/.claude/scripts/9x_forensic_signer.py,A-writer,manifest JSON (in-place),hooks/state manifests,Ed25519,N (legacy state path),YELLOW,PostToolUse signer; legacy path
+/mnt/d/0LOCAL/.claude/scripts/9x_droplet_architecture_test.py,C-auditor,test report,droplet artifacts,8x_droplet_*,Y,GREEN,Architecture tests
+/mnt/d/0LOCAL/.claude/scripts/9x_droplet_cadence.py,B-indexer,session reads log,droplet LIVE files,none,Y,GREEN,Cadence reader
+/mnt/d/0LOCAL/.claude/scripts/9x_manifests_to_vault_index.py,B-indexer,vault eval-snapshot.md,forensics/manifests/,none,Y,GREEN,Vault index sync
+/mnt/d/0LOCAL/.claude/scripts/9x_task_droplet_writer.py,A-writer,repo+vault droplet files,agent context,signing keys,Y,GREEN,Dual-write droplets
+/mnt/d/0LOCAL/.claude/scripts/9x_write_eval_manifest.py,A-writer,forensics/manifests eval,eval-report,none,Y,YELLOW,Limited error handling
+/mnt/d/0LOCAL/.claude/scripts/0x_spawn_template.py,A-writer (bundle),forensics/bundles/,HONEY/NECTAR/manifests,jinja-like render,Y,YELLOW,Bundle path may drift
+/mnt/d/0LOCAL/.claude/scripts/0x_state_to_forensics_migrator.py,D-recovery,forensics/manifests/,hooks/state/,none,N (one-time),YELLOW,Archive after run
+/mnt/d/0LOCAL/.claude/scripts/2_weekly_2a_b2_verify_coc_chain_admin.py,C-auditor,B2 audit report,B2 bucket,rclone,Y,GREEN,Weekly audit
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/0x_coc_writer.py,A-writer,forensics/coc-entries/{date}/,CLI args,hashlib/fcntl,Y (CANONICAL),GREEN,Canonical COC writer per CLAUDE.md
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/0a_bundle_enforcer.py,C-auditor (hook),hook decision,spawn calls,none,Y,GREEN,Enforces bundle emission
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/4x_coc_writer.py,A-writer,forensics/*.jsonl,CLI,hashlib,N (older copy),RED,Duplicate of 0x_coc_writer; consolidate
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/4x_coc_bridge.py,A-writer,forensics/coc,faerie hooks,4x_coc_writer,N,RED,Duplicate bridge
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/4x_forensic_coc_check.py,C-auditor,stdout,forensics/,hashlib,N (dup),YELLOW,Redundant with 9x_coc_verifier
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/4x_protect_coc_paths.py,C-auditor (hook),hook decision,Bash strings,none,N (dup),YELLOW,Duplicate of global
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/4x_subagent_coc_collector.py,A-writer,forensics jsonl,subagent transcripts,0x_coc_writer,Y,GREEN,Subagent collector
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/4x_synthesize_master_coc.py,B-indexer,master-coc.jsonl,session jsonl,hashlib,N (one-time),YELLOW,Archive
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/5d_ann_coc_watcher.py,A-writer,vault ann COC,ann-submit/,config,Y,YELLOW,Silent failures
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_coc_verifier.py,C-auditor,stdout,COC jsonl,Ed25519,Y (CANONICAL verifier),GREEN,Master verifier
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_coc_writer_signed.py,A-writer,forensics signed jsonl,CLI,Ed25519,Y,GREEN,Signed writer
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_forensic_query.py,D-recovery,stdout,agent-runs + manifests,none,Y,GREEN,Query
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_forensic_signer.py,A-writer,manifest in-place,hooks/state,Ed25519,N (legacy),YELLOW,Legacy state path
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_build_spawn_bundle.py,A-writer (bundle),forensics/bundles,context inputs,template render,N (dup of 0x_spawn_template),YELLOW,Consolidate with 0x_spawn_template
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_droplet_coc_tracker.py,A-writer,droplet COC jsonl,droplet files,hashlib,Y (dup of global),YELLOW,Duplicate
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_droplet_index_generator.py,B-indexer,droplets/index.json,droplet files,none,Y,GREEN,Index
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_droplet_register.py,A-writer,droplet manifest,agent context,droplet_coc_tracker,Y,GREEN,Registration
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_faerie_brief_index_generator.py,B-indexer,faerie brief index,manifests,none,Y,GREEN,Brief indexer
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_manifest_auto_continue.py,A-writer,forensics/manifests,manifest.status,Agent,Y,YELLOW,Auto-continue
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_pre_write_forensics_guard.py,C-auditor (hook),hook decision,write paths,none,Y,GREEN,Guard hook
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_protect_coc_paths.py,C-auditor (hook),hook decision,Bash,none,N (dup),RED,Duplicate
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/8x_w1_completion_index_generator.py,B-indexer,w1 index,manifests,none,Y,GREEN,W1 indexer
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9f_externalise_bundles.py,D-recovery,external bundle dir,forensics/bundles/,none,Y,GREEN,Bundle externaliser
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_manifests_to_vault_index.py,B-indexer,vault eval-snapshot,forensics/manifests/,none,Y,GREEN,Vault index
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_task_droplet_writer.py,A-writer,repo+vault droplets,agent context,signing keys,Y,GREEN,Dual-write
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/9x_write_eval_manifest.py,A-writer,forensics/manifests eval,eval-report,none,Y,YELLOW,Limited errors
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/0x_state_to_forensics_migrator.py,D-recovery,forensics/manifests,hooks/state,none,N (one-time),YELLOW,Archive
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/1_daily_1a_b2_sync_forensics_to_bucket.py,D-recovery,B2 bucket,forensics/,rclone+sig verify,Y,GREEN,Daily WORM sync
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/2_weekly_2a_b2_verify_coc_chain_admin.py,C-auditor,B2 audit report,B2,rclone,Y,GREEN,Weekly admin audit
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/2_weekly_2a_b2_verify_coc_chain_user.py,C-auditor,user audit report,B2,rclone,Y,GREEN,Weekly user audit
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/5x_backup_forensics.py,D-recovery,backup tarball,forensics/,tar,Y,YELLOW,Manual creds env
+/mnt/d/0local/gitrepos/faerie2/.claude/scripts/7x_forensic_memory_analyzer.py,C-auditor,stdout analysis,forensics/manifests,statistics,Y,GREEN,Memory analyzer
+/mnt/d/0local/gitrepos/faerie-vault/scripts/7x_ffmx_calculator.py,C-auditor,stdout FFMx,forensics/manifests,none,Y,YELLOW,Vault-local; not COC core
+/mnt/d/0local/gitrepos/faerie-vault/scripts/7x_formula_gates.py,C-auditor,stdout gates,manifests,none,Y,YELLOW,Vault-local
+/mnt/d/0local/gitrepos/faerie-vault/scripts/9x_honey_sync_to_vault.py,B-indexer,vault HONEY.md,~/.claude/HONEY.md,none,Y,GREEN,HONEY sync

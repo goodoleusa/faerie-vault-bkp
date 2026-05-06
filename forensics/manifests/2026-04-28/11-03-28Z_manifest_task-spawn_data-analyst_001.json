@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-bundle-compression-v1",
+  "agent_type": "data-analyst",
+  "investigation_label": "bundle-compression-v1",
+  "wave": "1",
+  "task_description": "Analyze bundle compression impact on FFMx",
+  "timestamp": "2026-04-28T11:03:28.601487",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-data-analyst",
+  "prescan_decision": "passed"
+}

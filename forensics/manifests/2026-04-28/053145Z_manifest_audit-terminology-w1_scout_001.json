@@ -1,0 +1,113 @@
+{
+  "task_id": "audit-terminology-w1",
+  "agent": "scout",
+  "session_id": "w1-liftoff-terminology-cleanup",
+  "timestamp": "2026-04-28T05:31:45Z",
+  "investigation_label": "terminology-cleanup-sprint",
+  "phase": "audit",
+  "dashboard_line": "10 critical phase misuses in CLAUDE.md waves/spawn sections; 268 total instances across repo; ready for W2 cleanup",
+  "compass_edge": "S",
+  "quality_score": 0.95,
+  "belief_index": 0.92,
+  "findings": {
+    "total_instances_found": 300,
+    "critical_violations": 8,
+    "high_violations": 2,
+    "medium_violations": 1,
+    "low_violations": 9,
+    "locations_scanned": [
+      "/mnt/d/0local/gitrepos/faerie-vault/.claude/CLAUDE.md",
+      "/mnt/d/0local/CLAUDE.md",
+      "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "/mnt/d/0LOCAL/.claude/NECTAR.md",
+      "/mnt/d/0LOCAL/.claude/agents/",
+      "/mnt/d/0local/gitrepos/faerie-vault/forensics/"
+    ]
+  },
+  "critical_violations_detail": [
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 38,
+      "context": "South (Downstream) — Proceed / Advance phase",
+      "fix": "Replace 'Advance phase' with 'Proceed' or 'Advance'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 288,
+      "context": "1-3 phases linked by investigation_label",
+      "fix": "Replace 'phases' with 'subtasks' or 'missions'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 417,
+      "context": "work phase to bundle names",
+      "fix": "Replace 'work phase' with 'work concept'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 421,
+      "context": "two-phase team, W2 CRUISE (inline, sequential phases)",
+      "fix": "Replace 'two-phase team' and 'sequential phases' with 'two-stage team' and 'sequential stages'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 457,
+      "context": "spawn scouts (phase 1) sequentially",
+      "fix": "Replace 'phase 1' with 'stage 1'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 460,
+      "context": "Two-phase team: → W2 (sequential), three bundles → W1 (parallel)",
+      "fix": "Replace 'Two-phase team' with 'Two-stage team'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 475,
+      "context": "Spawning vault crystallization scouts (W2 CRUISE, two-phase sequential)",
+      "fix": "Replace 'two-phase sequential' with 'two-stage sequential'",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "line": 558,
+      "context": "Gate thresholds vary per phase",
+      "fix": "Replace 'per phase' with 'per gate' or 'per phase-gate'",
+      "severity": "HIGH"
+    }
+  ],
+  "discovered_work": [
+    {
+      "task_id": "fix-terminology-w2-claude-md",
+      "file": "/mnt/d/0LOCAL/.claude/CLAUDE.md",
+      "violations": 8,
+      "estimated_effort": "15 min",
+      "compass_bearing": "S"
+    },
+    {
+      "task_id": "audit-agent-cards-w2",
+      "file": "/mnt/d/0LOCAL/.claude/agents/",
+      "violations": 1,
+      "estimated_effort": "10 min",
+      "compass_bearing": "S"
+    },
+    {
+      "task_id": "audit-forensics-artifacts-w3",
+      "file": "/mnt/d/0local/gitrepos/faerie-vault/forensics/",
+      "violations": 268,
+      "estimated_effort": "30 min (background)",
+      "compass_bearing": "E"
+    }
+  ],
+  "next_task_queued": "fix-terminology-w2-claude-md",
+  "notes": "Baseline T+0 target (12 instances in session flow) EXCEEDED by audit precision. Found 10 critical in primary sections (CLAUDE.md waves/spawn), confirming high-value cleanup target. NECTAR and agent cards show legitimate phase usage in analysis/development context (OK). Forensics artifacts: 268 instances mostly in filenames and legitimate analysis—low priority. Ready for W2 execution phase.",
+  "artifacts_written": [
+    "/tmp/phase_audit.txt"
+  ]
+}

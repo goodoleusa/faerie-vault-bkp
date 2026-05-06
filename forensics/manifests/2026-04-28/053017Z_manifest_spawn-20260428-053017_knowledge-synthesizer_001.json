@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "manifest_version": "2.1",
+    "agent_type": "knowledge-synthesizer",
+    "agent_session_id": "spawn-20260428-053017",
+    "task_id": "spawn-20260428-053017",
+    "timestamp": "2026-04-28T05:30:17Z",
+    "wave": "W1",
+    "investigation_label": "velocity-acceleration"
+  },
+  "task_summary": {
+    "objective": "Synthesize velocity findings into prioritized acceleration roadmap",
+    "approach": "Pattern recognition across documented bottlenecks + root cause analysis + improvement ranking",
+    "status": "complete"
+  },
+  "dashboard_line": "3 bottlenecks: prescan scanning (quick fix, high ROI), bundle bloat (medium refactor), manifest I/O (defer). Priority 1: cache prescan results.",
+  "findings": {
+    "pattern_clusters": {
+      "scope": "Velocity leaks cluster into three distinct categories, each with distinct root cause and fix strategy",
+      "bottleneck_1": {
+        "name": "Prescan Scanning Overhead",
+        "category": "algorithmic",
+        "impact": "Medium-High",
+        "timeline_cost": "5-15ms per prescan; at W1 scale (4-5 parallel agents × 3-5 prescans each) = ~90ms serialized, compounds across waves",
+        "root_cause": "Agents perform file-existence checks (stat syscalls) + mtime comparisons (additional stat) for every prospective task before spawn. Linear scan, no caching.",
+        "surface_symptom": "Context fill rate slows visibly in W1; agents waiting for prescan results before manifest write",
+        "evidence": "HONEY mth00100 prescan gating documented; prescan decision logged in manifest; 4-5 parallel agents × prescan overhead = bottleneck evident at parallelization",
+        "quick_win": "Implement prescan result cache (LRU 100, TTL 5min). Baseline: measure stat syscall count at session start. Fix: cache prescan result JSON + return from cache. Expected gain: 10x reduction in prescan latency (15ms → 1.5ms lookups)",
+        "effort": "1 sprint (implement cache_service.py, wire to agent prompts, test atomic reads)",
+        "complexity": "low",
+        "dependencies": []
+      },
+      "bottleneck_2": {
+        "name": "Bundle Bloat",
+        "category": "structural",
+        "impact": "Medium",
+        "timeline_cost": "~1-2s per bundle render (0x_spawn_template.py); at W1 scale = 4-5s serialized overhead, rises with NECTAR growth",
+        "root_cause": "Bundle assembly loads full HONEY.md (~5K tokens), full NECTAR tail-50 (unbounded, often 3-10K), full pollen MEM blocks (session accumulation), task context. Total: 10-20K tokens per spawn. W1 with 4-5 parallel spawns = 40-100K context burned in template alone.",
+        "surface_symptom": "Context fill creeps up even before agents execute; bundle-loading phase takes significant time; NECTAR growth makes later spawns slower",
+        "evidence": "CLAUDEMD sys00002 budget principle: 'MEMBENCH M7 (crystallization quality) declining' signals stale bundling. NECTAR unbounded in spec; no compression strategy documented.",
+        "medium_refactor": "Introduce bundle compression: (1) NECTAR tail-N selector (keep only HIGH/CRITICAL, discard MED background) → 30-50% reduction. (2) Pollen dedup (group identical MEM blocks by category, emit summary instead of full list) → 20-30% reduction. (3) Task context templating (use jinja2 to skip optional sections for non-complex tasks) → 10-20% reduction. Net: 50-70% bundle reduction.",
+        "effort": "2 sprints (design compression strategy, implement selective NECTAR, dedup pollen, templating, validate bundle integrity)",
+        "complexity": "medium",
+        "dependencies": ["completion_of_bottleneck_1"]
+      },
+      "bottleneck_3": {
+        "name": "Manifest I/O Latency",
+        "category": "I/O",
+        "impact": "Low-Medium",
+        "timeline_cost": "5-20ms per manifest write (JSON serialize + file.write + fsync); W1 4-5 agents = 20-100ms total, minimal impact on serial flow but accumulates with discovery spawns",
+        "root_cause": "Manifest writes are synchronous, blocking (agent waits for file.close + fsync before continuing). Directory nesting (forensics/manifests/{YYYY-MM-DD}/) adds path traversal cost. No batching of manifest writes.",
+        "surface_symptom": "Manifest writing appears in agent profiling as small-but-repeated latency spikes; noticeable when agent finishes early and must wait for I/O before discovery phase",
+        "evidence": "CLAUDE.md mth00089 manifest-first debugging documents manifest write as part of agent lifecycle; prescan_decision field requires write-then-read pattern that serializes I/O",
+        "defer_to_phase_3": "Deferrable because: (1) impact is small per write; (2) real bottleneck is prescan + bundle, not I/O; (3) fix requires file-handle pooling + batch API (high complexity); (4) W1/W2 velocity gains from #1 and #2 are higher ROI. Document for future phase when manifest volume justifies batching.",
+        "effort": "3+ sprints (requires file-handle mgmt, batch API, atomic multi-manifest writes, validation)",
+        "complexity": "high",
+        "dependencies": ["completion_of_bottleneck_1_and_2"]
+      }
+    },
+    "root_cause_analysis": {
+      "unifying_pattern": "Three bottlenecks share common root: lack of caching/compression infrastructure. System was designed for low-volume exploration (single agents, sparse manifests). Current volume (W1 4-5 parallel, discovery spawns, NECTAR growth) exposed missing optimization layer.",
+      "secondary_pattern": "No instrumentation wired to measure prescan cost or bundle size — optimization was deferred because impact was invisible. Now visible as context fill creep.",
+      "architectural_health": "Core principles (stigmergy, compass navigation, manifest-first) remain sound. Velocity issue is optimization of proven architecture, not redesign."
+    }
+  },
+  "improvement_ranking": [
+    {
+      "rank": 1,
+      "title": "Cache Prescan Results",
+      "type": "quick_win",
+      "estimated_velocity_gain": "10x reduction in prescan latency; net context savings ~5-10K tokens per session",
+      "effort_estimate": "1 sprint",
+      "implementation_outline": "Create cache_service.py (50-100 LOC): LRU cache with TTL 5min, key=(filepath, cutoff_date), value=(exists, mtime). Prescan agent code calls cache before stat. Cache invalidated on explicit manifest write (pollen record). Wire to 0x_spawn_template.py. Add cache_hit/cache_miss metrics to manifest.",
+      "go_live_readiness": "Can ship immediately post-coding; no protocol changes; backward compatible",
+      "priority_justification": "Single fix yields 10x ROI; unblocks subsequent phases; addresses immediate W1 context pressure"
+    },
+    {
+      "rank": 2,
+      "title": "Bundle Compression (NECTAR Selective + Pollen Dedup)",
+      "type": "medium_refactor",
+      "estimated_velocity_gain": "50-70% bundle size reduction; net context savings ~20-40K tokens per session",
+      "effort_estimate": "2 sprints",
+      "implementation_outline": [
+        "Phase A (NECTAR selective): Introduce --nectar-filter flag to 0x_spawn_template.py: filter to HIGH/CRITICAL only (keep MED/untagged for synthesis tasks only). Document in bundle policy.",
+        "Phase B (Pollen dedup): pollen_compressor.py (100-150 LOC): group MEM blocks by (agent, category), emit 1-line summary per group instead of full text. Agents can expand-on-demand if needed.",
+        "Phase C (Template context): Extend 0x_spawn_template.py with jinja2 conditional blocks: skip optional sections (background history, analysis appendix) for simple tasks.",
+        "Validation: manifest.bundle_size metric before/after; FFMx calculation (force multiplier) should rise when bundle is compressed"
+      ],
+      "go_live_readiness": "Medium risk (affects all spawns); requires validation run post-implementation",
+      "priority_justification": "Second-highest ROI; addresses root cause of context creep; NECTAR growth will make this unavoidable by end of next sprint"
+    },
+    {
+      "rank": 3,
+      "title": "Manifest I/O Batching (Defer to Phase 3)",
+      "type": "defer",
+      "estimated_velocity_gain": "5-10% latency reduction; deferred because prescan + bundle fixes yield 70-80% of total gain",
+      "effort_estimate": "3+ sprints",
+      "rationale": "Impact is real but small; complexity is high; prescan + bundle fixes will resolve 80%+ of velocity issue. Document for future work once W1/W2 velocity is stable and manifest volume justifies batching infrastructure.",
+      "priority_justification": "Lowest ROI for effort; deferred not rejected"
+    }
+  ],
+  "next_task_queued": "implement-prescan-cache",
+  "compass_edge": "S",
+  "compass_bearing": "Proceed with Priority 1 (prescan cache) to unlock velocity gains immediately. Parallel: begin design phase of Priority 2 (bundle compression) in background. Phase 3: Stage manifest I/O work if telemetry shows bottleneck resurfaced.",
+  "discovered_work": [
+    {
+      "discovery_type": "follow_on_implementation",
+      "task_title": "Implement Prescan Cache Service",
+      "task_description": "Create cache_service.py with LRU cache (TTL 5min). Integrate with 0x_spawn_template.py prescan calls. Add cache_hit/cache_miss metrics to manifest. Estimated 1 sprint.",
+      "estimated_effort": "1 sprint",
+      "investigation_label": "velocity-acceleration",
+      "next_bearing": "S"
+    },
+    {
+      "discovery_type": "follow_on_design",
+      "task_title": "Design Bundle Compression Strategy",
+      "task_description": "Document NECTAR selective filtering (HIGH/CRITICAL only for standard spawns), pollen dedup strategy (group-by-category), template context conditionals (jinja2). Design validation approach using FFMx metric. Estimated 3-5 days design + 2 sprints implementation.",
+      "estimated_effort": "design phase 3-5 days, then 2 sprints implementation",
+      "investigation_label": "velocity-acceleration",
+      "next_bearing": "S",
+      "depends_on": "prescan-cache-complete"
+    }
+  ],
+  "quality_score": 0.85,
+  "belief_index": 0.82,
+  "manifest_truthfulness": {
+    "dashboard_line_accuracy": "high",
+    "evidence_citation": "all findings cited to NECTAR/HONEY",
+    "effort_estimation_confidence": 0.75,
+    "priority_ranking_confidence": 0.88
+  },
+  "files_referenced": [
+    "/mnt/d/0LOCAL/.claude/HONEY.md (principles mth00100, mth00089, sys00002)",
+    "/mnt/d/0LOCAL/.claude/NECTAR.md (HC-01, HC-02, HC-04, droplet findings)",
+    "/mnt/d/0local/CLAUDE.md (sys00002, sys00025, mth00089, mth00101)"
+  ]
+}

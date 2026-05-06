@@ -1,0 +1,134 @@
+{
+  "task_id": "vault-structural-scan-2026-04-28",
+  "investigation_label": "vault-architecture-assessment",
+  "agent_type": "stigmergy-scout",
+  "dashboard_line": "Vault scan: 11 issues (3 HIGH, 5 MEDIUM, 3 LOW); orphaned links & metadata gaps",
+  "compass_edge": "S",
+  "quality_score": 0.78,
+  "belief_index": 0.85,
+  "next_task_queued": "vault-braiding-implement-fixes",
+  "scan_timestamp": "2026-04-28T15:00:00Z",
+  "findings": [
+    {
+      "type": "ORPHANED_WIKILINK",
+      "severity": "HIGH",
+      "doc": "00-DASHBOARD.md",
+      "description": "References [[investigation-1]], [[investigation-2]], [[investigation-3]] but these docs do not exist in vault. These are placeholder links never materialized as actual investigations.",
+      "impact": "Readers clicking these links will fail in Obsidian; breaks discoverability pattern",
+      "location": "Line 12, Active Investigations section",
+      "suggested_fix": "Remove placeholder references OR create actual investigation docs. Current status: placeholder links should be deleted; replace with real active investigations from dashboard snapshot."
+    },
+    {
+      "type": "ORPHANED_WIKILINK",
+      "severity": "HIGH",
+      "doc": "00-DASHBOARD.md",
+      "description": "References [[skills-audit-free-model-readiness]] as 'Discovered work queued' but doc does not exist. Listed as if it's a canonical vault doc with manifest artifacts.",
+      "impact": "Link appears authoritative (implies manifest exists) but the doc is missing entirely. Breaks credibility chain.",
+      "location": "Line 78-80, Skills Audit Results section",
+      "suggested_fix": "Either: (1) Create 03-skills-audit-free-models.md as a canonical doc, OR (2) Remove reference and document discovery in manifests/artifacts/ instead. Current design stores artifacts in forensics/, not vault, so this should not appear as a vault doc reference."
+    },
+    {
+      "type": "ORPHANED_WIKILINK",
+      "severity": "MEDIUM",
+      "doc": "01-forensic-governance.md",
+      "description": "Related section references [[mcp-server-architecture]] without full wiki name prefix (missing '03-' numbering). Inconsistent wikilink style (should match breadcrumb format).",
+      "impact": "May not resolve in strict Obsidian; inconsistency with naming convention established in other docs",
+      "location": "Last line, Related section",
+      "suggested_fix": "Change [[mcp-server-architecture]] to [[03-mcp-server-architecture]] for consistency"
+    },
+    {
+      "type": "MISSING_BREADCRUMB",
+      "severity": "HIGH",
+      "doc": "00-DASHBOARD.md",
+      "description": "DASHBOARD lacks breadcrumb navigation. All other docs have **Breadcrumb:** at top; dashboard should have entry point marker per 09-vault-architecture rules.",
+      "impact": "Readers cannot navigate up from dashboard; breaks braiding pattern for vault entry point",
+      "location": "Line 1-8 (header section)",
+      "suggested_fix": "Add breadcrumb: **Breadcrumb:** [VAULT ROOT] or **Breadcrumb:** [[00-DASHBOARD]] (self-reference, indicating entry point)"
+    },
+    {
+      "type": "INCONSISTENT_FRONTMATTER",
+      "severity": "MEDIUM",
+      "doc": "02-settings-sync-strategy.md, 03-mcp-server-architecture.md, 04-mcp-deployment-vps.md, 05-mcp-deployment-zimaboard.md",
+      "description": "Docs 02-05 include YAML frontmatter (task_id, investigation_label, status, created) but docs 01, 06-10 do NOT. This creates inconsistency in vault document format.",
+      "impact": "Mixed schema: some docs are task artifacts (with YAML), others are reference docs (no YAML). Confuses intent: are these task work products or canonical vault docs?",
+      "location": "Lines 1-6 of docs 02-05",
+      "suggested_fix": "DECISION REQUIRED: (1) Remove YAML frontmatter from 02-05 (treat as canonical vault docs), OR (2) Add task_id/investigation_label to docs 01, 06-10 (treat all as task artifacts). Currently ambiguous."
+    },
+    {
+      "type": "NESTING_DEPTH_EXCESSIVE",
+      "severity": "MEDIUM",
+      "doc": "02-settings-sync-strategy.md",
+      "description": "Breadcrumb nesting goes 3 levels deep: [[00-DASHBOARD]] > [[02-settings-sync-strategy]] > [[01-forensic-governance]]. Per 09-vault-architecture, optimal is \u22642 hops from root.",
+      "impact": "Confusing navigation: why does 02 point back to 01 in breadcrumb? Expected: linear chain 00\u219201\u219202\u219203\u219204\u219205 or star pattern from 00",
+      "location": "Line 2, Breadcrumb section",
+      "suggested_fix": "Straighten breadcrumb to: [[00-DASHBOARD]] > [[02-settings-sync-strategy]]. Remove back-reference to 01. Let wikilinks table handle relationships."
+    },
+    {
+      "type": "TOPIC_DUPLICATION",
+      "severity": "MEDIUM",
+      "doc": "04-mcp-deployment-vps.md, 05-mcp-deployment-zimaboard.md",
+      "description": "Both docs cover nearly identical scope: MCP deployment steps, prerequisites, networking, systemd service setup. Differ only in infrastructure (VPS vs. ZimaBoard). Heavy duplication of procedures; should consolidate into one doc with infrastructure-agnostic steps + variants section.",
+      "impact": "Maintenance burden: changes to deployment process must be updated in 2 places. Risk of drift (VPS instructions get updated, ZimaBoard doesn't).",
+      "location": "Docs 04 and 05 entirely",
+      "suggested_fix": "Consolidate: Create 04-mcp-deployment-guide.md (infrastructure-agnostic) with sections: '## VPS Deployment (DigitalOcean, Linode)' and '## ZimaBoard Deployment (Personal Hardware)'. Delete or archive separate VPS/ZimaBoard docs."
+    },
+    {
+      "type": "FORWARD_NAVIGATION_INCOMPLETE",
+      "severity": "MEDIUM",
+      "doc": "05-mcp-deployment-zimaboard.md",
+      "description": "Breadcrumb shows [[05-mcp-deployment-zimaboard]] > [[04-mcp-deployment-vps]] but Navigation Table does not list a 'Next' option. Linear chain breaks; no onward edge defined.",
+      "impact": "Readers cannot navigate forward; unclear what comes after ZimaBoard deployment guide",
+      "location": "Lines 16-23, Navigation Table",
+      "suggested_fix": "Add '\u2192 Next' row or clarify: 'Next: [[00-DASHBOARD]] (return to system status)' OR define what logical work follows deployment (testing guide? Operations guide?)"
+    },
+    {
+      "type": "MISSING_FOOTER_METADATA",
+      "severity": "LOW",
+      "doc": "00-DASHBOARD.md",
+      "description": "Dashboard has timestamp but NO **Status:** field. Other canonical docs declare status (CANONICAL, LOCKED, Ready for implementation, etc). Dashboard should clarify its status.",
+      "impact": "Unclear if dashboard is a fixed reference (locked) or living document (editable). Breaks metadata consistency.",
+      "location": "Last paragraph (lines 213-216)",
+      "suggested_fix": "Add **Status:** to dashboard footer. Example: **Status:** LIVING DOCUMENT \u2014 Updated per session. Last refresh: 2026-04-28 10:44 UTC"
+    },
+    {
+      "type": "WIKILINK_TYPO_INCONSISTENCY",
+      "severity": "LOW",
+      "doc": "Multiple (00-DASHBOARD.md, 01-forensic-governance.md)",
+      "description": "Some references use full doc names ([[03-mcp-server-architecture]]), others use shorthand ([[mcp-server-architecture]], [[forensic-governance]], [[settings-sync]]). Inconsistent style.",
+      "impact": "Some links may fail in strict Obsidian if shorthand names aren't configured as aliases",
+      "location": "Lines in 00-DASHBOARD and 01-forensic-governance",
+      "suggested_fix": "Standardize: Always use full numbered names ([[03-mcp-server-architecture]] not [[mcp-server-architecture]]). Or configure Obsidian aliases for shorthand versions."
+    },
+    {
+      "type": "ROUTING_AMBIGUITY",
+      "severity": "LOW",
+      "doc": "06-investigation-id-governance.md",
+      "description": "Doc 06 is FOUNDATIONAL (defines investigation lifecycle, validation criteria) but positioned as 6th in sequence. Readability would improve if it appeared earlier in onboarding flow (docs 07-10 reference it heavily).",
+      "impact": "New readers following breadcrumb 00\u219201\u219202\u2192...\u219206 won't see investigation fundamentals until doc 6. Better order: 00, 07 (CODEX), 06 (INVESTIGATIONS), then infrastructure docs.",
+      "location": "Entire doc position in vault sequence",
+      "suggested_fix": "Renumber: Move 06 earlier in canonical sequence (before deployment docs). Suggest new order: 00-DASHBOARD, 07-CODEX, 06-INVESTIGATIONS, 08-GOVERNANCE, then infrastructure 01-05. OR: explicitly mark 06 as 'foundational reference' in dashboard, suggesting it be read early."
+    }
+  ],
+  "summary": {
+    "total_findings": 11,
+    "by_severity": {
+      "HIGH": 3,
+      "MEDIUM": 5,
+      "LOW": 3
+    },
+    "critical_issues": [
+      "Orphaned wikilinks to non-existent docs (investigation-1/2/3, skills-audit-free-model-readiness)",
+      "Missing breadcrumb on DASHBOARD entry point",
+      "Inconsistent frontmatter schema (some docs have task_id YAML, others don't)"
+    ],
+    "structural_health": "YELLOW (72/100) \u2014 Good overall braiding, but orphaned links and ambiguous formatting reduce confidence",
+    "next_actions": [
+      "1. Delete placeholder references OR materialize investigation docs (HIGH priority)",
+      "2. Add breadcrumb to 00-DASHBOARD (HIGH priority)",
+      "3. Resolve frontmatter inconsistency across all docs (MEDIUM priority)",
+      "4. Consolidate MCP deployment guides into single doc with variants (MEDIUM priority)",
+      "5. Audit wikilink consistency (LOW priority, polish)"
+    ]
+  },
+  "agent_notes": "Vault has excellent overall structure (clear hierarchy, good wikilink coverage, strong braiding). Primary issues are: (1) placeholder links left unfilled, (2) mixed frontmatter schema creating ambiguity about doc type, (3) MCP deployment duplication. These are consolidation/cleanup tasks, not fundamental design flaws. Recommend fixer scout to execute HIGH fixes first, then MEDIUM cleanup."
+}

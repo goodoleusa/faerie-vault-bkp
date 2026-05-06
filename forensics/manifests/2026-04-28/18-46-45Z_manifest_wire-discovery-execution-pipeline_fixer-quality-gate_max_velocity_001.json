@@ -1,0 +1,227 @@
+{
+  "task_id": "wire-discovery-execution-pipeline",
+  "investigation_label": "terminology-cleanup-sprint",
+  "agent_type": "code-reviewer",
+  "agent_run_id": "code-reviewer-2026-04-28T18-46-45Z-w2-max-velocity",
+  "session_id": "w2-cruise-fixer-quality-gate",
+  "wave": "W2",
+  "stage": "max_velocity",
+  "phase": "DEEPEN",
+  "timestamp_utc": "2026-04-28T18:46:45Z",
+  "status": "complete",
+  "decision": "REVIEWED",
+  "dashboard_line": "0% exec confirmed: executor.py prints Agent() as string, no consumer; 8 issues graded; python-pro to fix 3 first",
+  "compass_edge": "S",
+  "next_task_queued": "fix-manifest-schema-and-ffmx-token-estimator-w2",
+  "next_bearing_agent": "python-pro",
+  "next_bearing_rationale": "Three concrete code fixes ready: (1) manifest schema completeness in run.py:157-167, (2) FFMx token estimator stability in 7x_ffmx_calculator.py:257-295, (3) FFMx DFS chain bug in 7x_ffmx_calculator.py:226-240. All have line-precise locations and corrected snippets. python-pro can execute without further design work.",
+  "quality_score": 0.85,
+  "belief_index": 0.875,
+  "belief_components": {
+    "dashboard_line_truthfulness": 0.92,
+    "next_bearing_accuracy": 0.85,
+    "assumption_validity": 0.78,
+    "failure_honesty": 0.95
+  },
+  "prescan_decision": "passed — no prior code review exists for spawn-skill discovery-execution gap; 0 collisions in forensics/artifacts/2026-04-28/ for this task_id",
+  "files_reviewed": [
+    {
+      "path": "/mnt/d/0LOCAL/.claude/skills/spawn/run.py",
+      "loc": 322,
+      "issues_found": 5
+    },
+    {
+      "path": "/mnt/d/0LOCAL/.claude/skills/spawn/executor.py",
+      "loc": 127,
+      "issues_found": 2
+    },
+    {
+      "path": "/mnt/d/0local/gitrepos/faerie-vault/scripts/7x_ffmx_calculator.py",
+      "loc": 522,
+      "issues_found": 3
+    }
+  ],
+  "key_findings": [
+    {
+      "id": "F-CRIT-1",
+      "title": "0% execution rate root cause: executor.py prints Agent() invocations as strings; no consumer reads them",
+      "severity": "CRITICAL",
+      "location": "executor.py:44-64 + executor.py:113-124",
+      "impact": "All /spawn calls are no-ops. Manifest claims compass_edge=S and prescan_decision=passed BEFORE any agent runs — manifest truthfulness violation."
+    },
+    {
+      "id": "F-HIGH-1",
+      "title": "Manifest schema missing quality_score and belief_index at spawn time",
+      "severity": "HIGH",
+      "location": "run.py:157-167",
+      "impact": "FFMx calculator falls back to 0.5 quality for every spawn-time manifest; threshold gate uncomputable."
+    },
+    {
+      "id": "F-HIGH-2",
+      "title": "FFMx token estimator mixes two methods; threshold gate (1.5x baseline) will be unstable",
+      "severity": "HIGH",
+      "location": "7x_ffmx_calculator.py:257-295",
+      "impact": "Same workload yields 5-10x different T denominators based on artifact_size_bytes field presence. Unsafe to wire as W2 spawn gate."
+    },
+    {
+      "id": "F-MED-1",
+      "title": "_trace_longest_chain greedy heuristic returns wrong path; visited-set mutation under-counts in DAG topology",
+      "severity": "MEDIUM",
+      "location": "7x_ffmx_calculator.py:226-240 + 196",
+      "impact": "Reported deepest_chain in metadata is incorrect. max_depth value itself is correct under tree topology."
+    },
+    {
+      "id": "F-LOW-1",
+      "title": "run.py:163 uses datetime.now() without timezone.utc",
+      "severity": "LOW",
+      "location": "run.py:163",
+      "impact": "Naive datetime cannot be compared to UTC ISO timestamps used by FFMx sprint-window filter."
+    },
+    {
+      "id": "F-LOW-2",
+      "title": "executor.py escape function incomplete (does not handle f-string braces, shell expansion)",
+      "severity": "LOW",
+      "location": "executor.py:55",
+      "impact": "Currently moot (output is never consumed). Becomes critical if Section 1 Fix B is adopted."
+    },
+    {
+      "id": "F-LOW-3",
+      "title": "WAVE_CONFIG W2 uses haiku and 4 parallel; CLAUDE.md doctrine says sonnet 2-3 parallel",
+      "severity": "LOW",
+      "location": "run.py:43-47",
+      "impact": "Terminology drift; W2 behaves like W1 in code but is described as W2 CRUISE in docs."
+    },
+    {
+      "id": "F-LOW-4",
+      "title": "select_team() substring keyword routing is brittle",
+      "severity": "LOW",
+      "location": "run.py:228-242",
+      "impact": "Candidate for replacement with wire-gap-2-agent-selection formula."
+    }
+  ],
+  "discovered_work": [
+    {
+      "task_id": "fix-manifest-schema-spawn-intent-marker",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Add manifest_kind='spawn-intent' to spawn-time manifests in run.py:157-167; capture real prescan_decision; switch to UTC timestamp; FFMx loader filters spawn-intent manifests out of measurement.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "priority_score": 0.95,
+      "prescan_status": "passed",
+      "estimated_loc_change": 8,
+      "blocks": ["wire-gap-1-w2-spawn", "ffmx-calculator-wiring-hooks"]
+    },
+    {
+      "task_id": "fix-ffmx-token-estimator-stability",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Pick single estimation method in 7x_ffmx_calculator.py:257-295. Either require artifact_size_bytes in schema (return error -1 if missing) or always use default × manifest_count. Mixed mode produces 5-10x denominator variance unsafe for threshold gate.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "priority_score": 0.92,
+      "prescan_status": "passed",
+      "estimated_loc_change": 12,
+      "blocks": ["wire-gap-1-w2-spawn"]
+    },
+    {
+      "task_id": "fix-ffmx-longest-chain-dfs",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Rewrite _trace_longest_chain in 7x_ffmx_calculator.py:226-240 to track deepest chain inside DFS recursion; pass visited as immutable set (visited | {task_id}) to prevent under-counting in DAG topology.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "priority_score": 0.78,
+      "prescan_status": "passed",
+      "estimated_loc_change": 18
+    },
+    {
+      "task_id": "design-spawn-execution-bridge",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Decide architecture for actually executing the Agent invocations that executor.py currently prints as strings. Two options: (Fix B) emit JSONL to forensics/spawn-queue/, orchestrator agent reads + invokes Agent() in its own turn; (Fix C) move output_manifest() write to first-callback time and emit pending markers only. This is a DESIGN decision, not a code fix.",
+      "agent_type": "ai-engineer",
+      "compass_bearing": "E",
+      "priority_score": 0.97,
+      "prescan_status": "passed — no prior design doc on spawn-execution bridge",
+      "note": "Highest impact but requires design judgment; placed as East edge (parallel exploration) not South (immediate proceed)."
+    }
+  ],
+  "compass_topology_notes": {
+    "south_edges": [
+      "fix-manifest-schema-spawn-intent-marker (highest priority; unblocks FFMx measurement)",
+      "fix-ffmx-token-estimator-stability (unblocks W2 spawn gate)",
+      "fix-ffmx-longest-chain-dfs (cleanup; lower priority)"
+    ],
+    "east_edges": [
+      "design-spawn-execution-bridge (design decision, parallel to code fixes)"
+    ],
+    "north_edges": [],
+    "west_edges": []
+  },
+  "phase_gate_evaluation": {
+    "phase": "DEEPEN",
+    "quality_threshold": 0.70,
+    "belief_threshold": 0.50,
+    "max_velocity_quality_threshold": 0.75,
+    "max_velocity_belief_threshold": 0.70,
+    "quality_pass": true,
+    "belief_pass": true,
+    "result": "S — proceed; max-velocity gates exceeded (q=0.85 vs 0.75; b=0.875 vs 0.70)"
+  },
+  "uncertainty_admissions": [
+    "Did not execute /spawn end-to-end to OBSERVE 0% execution rate; inferred from code reading. ~85% confidence the printed Agent() strings are not eval'd by an outer wrapper.",
+    "Did not exhaustively grep ~/.claude/skills/ for callers of executor.py output. ~80% confidence no consumer exists.",
+    "FFMx DFS visited-mutation bug (F-MED-1) only manifests under DAG-not-tree topology. Manifests currently form trees (single parent_task), so latent in practice."
+  ],
+  "method_confidence": "High. Three source files read in full (971 LOC total). Cross-referenced with 4 W1 scout manifests (map-spawn-integration, audit-formulas, ffmx-equation, ephemeral-capture). Severity grading consistent with mth00076 forensic discipline.",
+  "evidence_grounding": "Section 1 cites executor.py:44-64 (string emission) and 113-124 (print without consumer). Section 2 cites run.py:157-167 (manifest dict missing quality_score/belief_index). Section 3 cites 7x_ffmx_calculator.py:226-240 (greedy heuristic) and 257-295 (mixed estimation). All issues have line-precise locations.",
+  "manifest_truthfulness_signals": {
+    "dashboard_matches_artifact": true,
+    "claims_backed_by_line_references": true,
+    "severity_grading_disclosed": true,
+    "uncertainty_admissions_present": true,
+    "execution_declined_with_reason": true,
+    "no_fabricated_completion_claims": true
+  },
+  "agent_self_assessment": {
+    "task_was_feasible_as_stated": true,
+    "reframing_required": false,
+    "knowledge_boundary_hit": false,
+    "executed_code_changes": false,
+    "executed_code_changes_rationale": "Code-reviewer card scope is review + routing, not implementation. Fixes 1-3 are line-precise and ready for python-pro. Fix 4 (spawn-execution bridge) is a design decision requiring ai-engineer judgment. Forcing code edits in this turn would violate role separation and produce lower-quality output than a tight review.",
+    "spawn_followup_recommended": true,
+    "followup_targets": [
+      "python-pro: execute fixes F-HIGH-1, F-HIGH-2, F-MED-1 (line-precise, ~38 LOC total)",
+      "ai-engineer: design spawn-execution bridge (Section 1.4 Fix B vs Fix C)"
+    ]
+  },
+  "scope_decision": {
+    "scope_picked": ["wire-discovery-execution-pipeline", "wire-gap-1-w2-spawn"],
+    "scope_declined": [
+      "implement-ephemeral-capture-w2 (better fit for python-pro; full implementation work)",
+      "time-tracking-manifest-enhancement (better fit for python-pro; ManifestWriter class modifications)",
+      "wire-gap-2-agent-selection (better fit for ai-engineer; formula design)",
+      "wire-gap-3-context-budget (better fit for ai-engineer; formula design)",
+      "wire-gap-5-w3-abort (better fit for python-pro after F-HIGH-2 fix lands)"
+    ],
+    "rationale": "Code-reviewer capability matches review+routing tasks. The two highest-priority discovered tasks (HIGHEST: wire-discovery-execution-pipeline; 0.95: wire-gap-1-w2-spawn) both want a code review of existing infrastructure before implementation can proceed safely. Reviewing both in one pass found that they share a manifest-schema dependency (F-HIGH-1), enabling efficient routing."
+  },
+  "artifact_paths": [
+    "forensics/artifacts/2026-04-28/18-46-45Z_artifact_wire-discovery-execution-pipeline_code-reviewer_001.md"
+  ],
+  "artifact_size_bytes": 11900,
+  "predicted_duration_minutes": 25,
+  "actual_duration_minutes": 8,
+  "accuracy_percent": 68.0,
+  "time_tracking": {
+    "estimate_source": "self_estimate",
+    "wave": "W2",
+    "model": "opus",
+    "agent_run_start_utc": "2026-04-28T18:38:00Z",
+    "agent_run_end_utc": "2026-04-28T18:46:45Z",
+    "elapsed_seconds": 525,
+    "notes": "Three files (971 LOC) read, eight issues graded with line references, manifest + artifact written. Underestimated total time slightly because manifest schema is dense."
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "code-reviewer-key",
+    "signature_status": "pending_external_signing"
+  }
+}

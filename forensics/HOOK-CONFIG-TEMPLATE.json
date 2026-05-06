@@ -1,0 +1,158 @@
+{
+  "description": "Hook configuration for ephemeral artifact capture system. Add to .claude/settings.json under 'hooks' and 'cron' keys.",
+  "hooks": {
+    "pre-submit": {
+      "description": "Capture user prompt and system context before API submission",
+      "trigger": "pre-submit",
+      "script": "python3 ./.claude/scripts/8x_ephemeral_capture.py capture-prompt",
+      "async": true,
+      "timeout_ms": 2000,
+      "enabled": true,
+      "env": {
+        "EPHEMERAL_ROOT": "{repo}/.claude/forensics/ephemeral",
+        "CAPTURE_METADATA": "true"
+      },
+      "notes": [
+        "Fires BEFORE Claude API call",
+        "Captures: user message + system context (first 500 chars)",
+        "Returns immediately; queues to buffer"
+      ]
+    },
+    "post-submit": {
+      "description": "Capture full Claude API response after submission",
+      "trigger": "post-submit",
+      "script": "python3 ./.claude/scripts/8x_ephemeral_capture.py capture-response",
+      "async": true,
+      "timeout_ms": 3000,
+      "enabled": true,
+      "env": {
+        "EPHEMERAL_ROOT": "{repo}/.claude/forensics/ephemeral",
+        "CAPTURE_TOKENS": "true"
+      },
+      "notes": [
+        "Fires AFTER Claude returns response",
+        "Captures: full response object, response text, token counts",
+        "Includes prompt hash for lineage"
+      ]
+    },
+    "post-tool-call": {
+      "description": "Capture tool outputs (Bash, Read, Edit, Write, etc)",
+      "trigger": "post-tool-call",
+      "script": "python3 ./.claude/scripts/8x_ephemeral_capture.py capture-bash-output",
+      "async": true,
+      "timeout_ms": 1500,
+      "enabled": true,
+      "env": {
+        "EPHEMERAL_ROOT": "{repo}/.claude/forensics/ephemeral",
+        "CAPTURE_STDOUT": "true",
+        "CAPTURE_STDERR": "true"
+      },
+      "notes": [
+        "Fires after each tool invocation (Bash, Read, Edit, Write, Bash, etc)",
+        "Captures: tool name, command, stdout (2KB), stderr (1KB), exit code, elapsed_ms",
+        "STREAMING FORMAT: one JSON per line (JSONL)"
+      ]
+    },
+    "post-error": {
+      "description": "Capture exceptions and errors for debugging",
+      "trigger": "post-error",
+      "script": "python3 ./.claude/scripts/8x_ephemeral_capture.py capture-error",
+      "async": true,
+      "timeout_ms": 1000,
+      "enabled": true,
+      "env": {
+        "EPHEMERAL_ROOT": "{repo}/.claude/forensics/ephemeral",
+        "CAPTURE_STACK": "true"
+      },
+      "notes": [
+        "Fires when exception or error is caught",
+        "Captures: error type, message, stack trace (2KB), context (last tool/command)",
+        "Non-blocking even on error"
+      ]
+    },
+    "session-init": {
+      "description": "Capture session metadata when session starts or resumes",
+      "trigger": "session-checkpoint",
+      "script": "python3 ./.claude/scripts/8x_ephemeral_capture.py capture-metadata",
+      "async": true,
+      "timeout_ms": 1000,
+      "enabled": true,
+      "env": {
+        "EPHEMERAL_ROOT": "{repo}/.claude/forensics/ephemeral"
+      },
+      "notes": [
+        "Fires at session start + on resume",
+        "Captures: session_id, task_id, investigation_label, cwd, environment snapshot",
+        "Metadata written immediately to disk (not buffered)"
+      ]
+    }
+  },
+  "cron": {
+    "ephemeral-rotate-archive": {
+      "description": "Archive and compress ephemeral artifacts older than 7 days",
+      "schedule": "0 22 * * *",
+      "script": "python3 ./.claude/scripts/8x_ephemeral_capture.py rotate-archive",
+      "timeout_ms": 30000,
+      "enabled": true,
+      "notes": [
+        "Runs daily at 22:00 UTC",
+        "Archives forensics/ephemeral/{YYYY-MM-DD}/ folders >7 days old",
+        "Compresses to forensics/ephemeral/archive/ephemeral-{YYYY-MM-DD}.tar.gz",
+        "Writes COC entry for each archive",
+        "TODO: Upload to S3/B2 WORM bucket if configured",
+        "Deletes source folder after archival"
+      ]
+    }
+  },
+  "implementation_notes": {
+    "async_guarantee": [
+      "All hooks marked 'async: true' to prevent main thread blocking",
+      "Hook scripts return immediately after queuing (<100ms)",
+      "Background flusher subprocess handles I/O (main doesn't wait)",
+      "Subprocess spawned with run_in_background, parent detaches"
+    ],
+    "buffer_strategy": [
+      "In-memory buffer per artifact_type (transcript, response, bash-output, error, cot, prompt, metadata)",
+      "Buffer capped at 10MB per type",
+      "If threshold exceeded, immediate flush to disk (non-blocking subprocess)",
+      "Flusher daemon wakes every 5 seconds to flush pending records"
+    ],
+    "naming_convention": "{HH-MM-SS}Z_{artifact_type}_{task_id}_{session_id8}_{counter}.{ext}",
+    "artifact_types": {
+      "transcript": "JSONL (streaming)",
+      "response": "JSON (object)",
+      "bash-output": "JSONL (streaming)",
+      "error": "JSON (object)",
+      "cot": "TXT (plain text)",
+      "prompt": "TXT (plain text)",
+      "metadata": "JSON (object)"
+    },
+    "storage_structure": {
+      "root": "forensics/ephemeral/",
+      "organization": "{artifact_type}/{YYYY-MM-DD}/{timestamp}_{type}_{task_id}_{session_id8}_{counter}.{ext}",
+      "retention": "7 days local + archive + S3/B2 WORM"
+    },
+    "forensic_integrity": [
+      "All artifacts stored in forensics/ (system of record)",
+      "Complete lineage in filename (task_id, session_id, timestamp)",
+      "COC entry written for each artifact (SHA256 hash, metadata)",
+      "Append-only: never overwritten, only archived",
+      "Court-ready: complete audit trail recoverable via 6x_forensic_recovery.py"
+    ],
+    "zero_context_burden": [
+      "Hooks return in <100ms (queue + return, no wait)",
+      "I/O happens in subprocess, not main thread",
+      "Buffer size capped to prevent OOM",
+      "Flusher runs detached; main never monitors it",
+      "Discovery via ls forensics/ephemeral/*/2026-04-28/*task_id* (zero latency)"
+    ],
+    "configuration_steps": [
+      "1. Copy 'hooks' dict into .claude/settings.json under 'hooks:' key",
+      "2. Copy 'cron' dict into .claude/settings.json under 'cron:' key",
+      "3. Set EPHEMERAL_ROOT env var in hook config (or use default)",
+      "4. Start flusher daemon on session init: python3 8x_ephemeral_capture.py flusher --pidfile /tmp/ephemeral-flusher.pid &",
+      "5. Verify: ls forensics/ephemeral/ after first session (should see transcript/, response/, etc folders)",
+      "6. Test: check transcript for user prompts, response for API returns, bash-output for tool invocations"
+    ]
+  }
+}

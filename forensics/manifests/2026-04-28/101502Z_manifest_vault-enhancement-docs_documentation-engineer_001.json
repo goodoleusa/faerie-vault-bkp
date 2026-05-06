@@ -1,0 +1,61 @@
+{
+  "task_id": "vault-enhancement-docs-suite",
+  "investigation_label": "vault-enhancement-2026-04-28",
+  "agent_id": "documentation-engineer",
+  "session_id": "w2-cruise-vault-enhancement",
+  "status": "in_progress",
+  "created_at": "2026-04-28T10:15:02Z",
+  "wave": 2,
+
+  "dashboard_line": "DISPATCHED: Create 4 docs + templates + sync verification for CT_VAULT",
+
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Create 4 Missing Documentation Files",
+      "status": "pending",
+      "files": [
+        "02-settings-sync-strategy.md",
+        "03-mcp-server-architecture.md",
+        "04-mcp-deployment-vps.md",
+        "05-mcp-deployment-zimaboard.md"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Create QuickAdd Templates",
+      "status": "pending",
+      "files": [
+        "templates/investigation-report.md",
+        "templates/agent-update.md",
+        "templates/deployment-log.md",
+        "templates/settings-sync-check.md"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Verify Dual-Vault Sync",
+      "status": "pending"
+    }
+  ],
+
+  "deliverables_location": "/mnt/d/0local/CT_VAULT/2026-04-28/",
+  "sync_target": "/mnt/d/0local/faerie-vault/2026-04-28/",
+  "bundle_location": "/mnt/d/0local/gitrepos/faerie-vault/forensics/bundles/2026-04-28/101500Z_bundle_vault-enhancement-docs_documentation-engineer_001.json",
+
+  "acceptance_criteria": [
+    "All 4 docs (02-05) complete",
+    "Breadcrumbs + wikilinks verified",
+    "4 QuickAdd templates with no empty files",
+    "Dual-vault sync verified (git diff clean)",
+    "All files follow COC schema"
+  ],
+
+  "parallel_agent": "frontend-design",
+  "coordination_method": "stigmergy (filesystem manifest reads)",
+
+  "compass_edge": "E",
+  "next_task_queued": "vault-enhancement-dashboard (parallel E-edge work)",
+
+  "notes": "W2 CRUISE dispatch. Both agents run in parallel. Main will read manifests asynchronously via compass navigation."
+}

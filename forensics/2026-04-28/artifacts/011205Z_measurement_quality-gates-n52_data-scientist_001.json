@@ -1,0 +1,176 @@
+{
+  "measurement_id": "STAT-QG-2026-04-28",
+  "measurement_type": "compass_quality_gate_calibration",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "agent": "data-scientist",
+  "timestamp": "2026-04-28T01:12:05Z",
+  "sample_size": 52,
+  "exclusions": 19,
+  "exclusion_reason": "spawn stubs with MISSING quality_score (no agent work completed)",
+
+  "pre_registered_hypotheses": [
+    {
+      "id": "STAT-QG-001",
+      "question": "Are compass quality gates well-calibrated for observed agent quality_scores?",
+      "null_hypothesis": "Gate thresholds sit at reasonable percentile boundaries (SEED admits ~90%, DEEPEN ~70%, EXTEND ~40%, FULL ~20%)",
+      "result": "REJECTED — 3 of 4 gates TOO EASY (pass rates far exceed targets)"
+    },
+    {
+      "id": "STAT-QG-002",
+      "question": "Does quality_score vary by investigation_label?",
+      "null_hypothesis": "No between-group variance",
+      "result": "INCONCLUSIVE — parametric (F=2.66, p=0.052) says NOT SIG, non-parametric (H=13.6, p=0.018) says SIG; methods disagree"
+    },
+    {
+      "id": "STAT-QG-003",
+      "question": "Does belief_index correlate with quality_score?",
+      "null_hypothesis": "No correlation (r=0)",
+      "result": "REJECTED — Pearson r=0.54 (p=3.6e-5), Spearman rho=0.78 (p<1e-6); LARGE positive correlation; both methods agree"
+    },
+    {
+      "id": "STAT-QG-004",
+      "question": "Do compass bearings correspond to gate logic?",
+      "null_hypothesis": "Bearing independent of quality/belief thresholds",
+      "result": "REJECTED — Fisher exact p=0.0005; perfect separation (0/3 below-gate got S, 47/49 above-gate got S)"
+    }
+  ],
+
+  "descriptive_statistics": {
+    "quality_score": {
+      "mean": 0.8548,
+      "median": 0.88,
+      "std": 0.1058,
+      "min": 0.30,
+      "max": 1.00,
+      "iqr": [0.82, 0.92],
+      "bootstrap_95ci": [0.8238, 0.8802],
+      "normality_shapiro_w": 0.7324,
+      "normality_p": 0.0000,
+      "distribution": "NON-NORMAL (left-skewed with one extreme outlier at 0.30)"
+    },
+    "belief_index": {
+      "mean": 0.8759,
+      "median": 0.88,
+      "std": 0.0564,
+      "min": 0.72,
+      "max": 0.98,
+      "iqr": [0.85, 0.92],
+      "bootstrap_95ci": [0.8609, 0.8912],
+      "normality_shapiro_w": 0.9686,
+      "normality_p": 0.185,
+      "distribution": "NORMAL"
+    }
+  },
+
+  "compass_edge_distribution": {
+    "S_proceed": {"count": 47, "pct": 90.4},
+    "N_blocked": {"count": 4, "pct": 7.7},
+    "E_parallel": {"count": 0, "pct": 0.0},
+    "W_retreat": {"count": 1, "pct": 1.9}
+  },
+
+  "gate_calibration": {
+    "SEED": {
+      "threshold": 0.50,
+      "pass_count": 51,
+      "pass_pct": 98.1,
+      "target_pct": 90,
+      "status": "CALIBRATED",
+      "percentile_position": 1.9,
+      "suggested_threshold": 0.78
+    },
+    "DEEPEN": {
+      "threshold": 0.70,
+      "pass_count": 49,
+      "pass_pct": 94.2,
+      "target_pct": 70,
+      "status": "TOO_EASY",
+      "percentile_position": 5.8,
+      "suggested_threshold": 0.82
+    },
+    "EXTEND": {
+      "threshold": 0.80,
+      "pass_count": 43,
+      "pass_pct": 82.7,
+      "target_pct": 40,
+      "status": "TOO_EASY",
+      "percentile_position": 17.3,
+      "suggested_threshold": 0.89
+    },
+    "FULL": {
+      "threshold": 0.85,
+      "pass_count": 34,
+      "pass_pct": 65.4,
+      "target_pct": 20,
+      "status": "TOO_EASY",
+      "percentile_position": 44.2,
+      "suggested_threshold": 0.92
+    }
+  },
+
+  "test_battery": [
+    {"id": 1, "test": "Shapiro-Wilk (quality_score)", "statistic": "W=0.7324", "p": 0.0000, "effect_size": "n/a", "significant": true},
+    {"id": 2, "test": "Shapiro-Wilk (belief_index)", "statistic": "W=0.9686", "p": 0.185, "effect_size": "n/a", "significant": false},
+    {"id": 3, "test": "ANOVA (quality by inv_label)", "statistic": "F=2.660", "p": 0.0516, "effect_size": "eta^2=0.388 (large)", "significant": false},
+    {"id": 4, "test": "Kruskal-Wallis (quality by inv_label)", "statistic": "H=13.596", "p": 0.0184, "effect_size": "n/a", "significant": true},
+    {"id": 5, "test": "Pearson r (quality vs belief)", "statistic": "r=0.540", "p": 0.000036, "effect_size": "r=0.54 (large)", "significant": true},
+    {"id": 6, "test": "Spearman rho (quality vs belief)", "statistic": "rho=0.782", "p": 0.000000, "effect_size": "rho=0.78 (very large)", "significant": true},
+    {"id": 7, "test": "Fisher exact (bearing vs gate)", "statistic": "OR=inf", "p": 0.0005, "effect_size": "perfect separation", "significant": true}
+  ],
+
+  "bayesian_update": {
+    "prior_calibrated": 0.50,
+    "mean_gate_deviation_pp": 30.1,
+    "likelihood_ratio": 0.50,
+    "posterior_calibrated": 0.3329,
+    "interpretation": "Gates likely need recalibration (posterior < 0.5 under uninformative prior)",
+    "sensitivity": {
+      "prior_0.1": 0.0525,
+      "prior_0.3": 0.1762,
+      "prior_0.5": 0.3329,
+      "prior_0.7": 0.5380,
+      "prior_0.9": 0.8179
+    }
+  },
+
+  "anomalies": {
+    "z_score_anomalies": [
+      {"task": "vault-crystal-scout-3", "quality": 0.30, "z": -5.24, "both_methods": true}
+    ],
+    "iqr_anomalies": [
+      {"task": "blueprint-landscape-audit-1", "quality": 0.65},
+      {"task": "blueprint-landscape-audit-2", "quality": 0.65},
+      {"task": "vault-crystal-scout-3", "quality": 0.30}
+    ]
+  },
+
+  "correlation_quality_belief": {
+    "pearson_r": 0.540,
+    "pearson_p": 0.000036,
+    "spearman_rho": 0.782,
+    "spearman_p": 0.000000,
+    "effect_size": "large",
+    "methods_agree": true,
+    "interpretation": "Strong positive correlation — high-quality agents also self-report more honestly"
+  },
+
+  "limitations_and_caveats": [
+    "Single-day data (2026-04-28); temporal generalization unknown",
+    "quality_score and belief_index are self-reported by agents, not independently verified",
+    "Phase field missing from majority of manifests (only 18/52 have explicit phase)",
+    "No FULL-phase samples available for direct gate validation",
+    "The vault-crystal-scout-3 outlier (quality=0.30) drives non-normality; without it, distribution is more symmetric",
+    "quality_score distribution is left-skewed; current population is HIGH-performing, which inflates pass rates",
+    "ANOVA vs Kruskal-Wallis disagreement on STAT-QG-002 suggests sensitivity to distributional assumptions"
+  ],
+
+  "what_would_change_conclusion": [
+    "If future sessions produce quality_scores with mean ~0.70 (closer to theoretical midpoint), gates would appear better calibrated",
+    "If quality_score self-reporting is independently validated and found inflated, suggested thresholds should adjust downward",
+    "Multi-day measurement (3+ sessions) with diverse investigation_labels would increase confidence in percentile-based suggestions",
+    "If FULL-phase samples accumulate with quality < 0.85, the FULL gate may be correctly calibrated despite appearing easy now"
+  ],
+
+  "recommended_compass_bearing": "E",
+  "recommendation": "Gates DEEPEN/EXTEND/FULL are too easy for current agent population. Suggested recalibration: SEED=0.78, DEEPEN=0.82, EXTEND=0.89, FULL=0.92. However, this recommendation should be validated across 3+ sessions before changing faerie2-formulas.json. The current population may be artificially high-quality (selection effect from single active day)."
+}

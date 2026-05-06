@@ -1,0 +1,39 @@
+{
+  "task_id": "velocity-acceleration",
+  "agent": "python-pro",
+  "agent_run_id": "ba7c2d91-f3e1-4a08-9e5f-012c3d4e5f67",
+  "investigation_label": "velocity-acceleration",
+  "ts": "2026-04-28T14:49:33Z",
+  "status": "complete",
+  "dashboard_line": "Bundle compression spec: 3 files changed, ~240 LOC, deploy-ready S",
+  "compass_edge": "S",
+  "quality_score": 0.88,
+  "belief_index": 0.90,
+  "files_changed": [
+    {
+      "file": "/mnt/d/0LOCAL/.claude/scripts/0x_spawn_template.py",
+      "change_type": "modify",
+      "functions_added": ["_filter_nectar_by_priority", "_classify_task_complexity"],
+      "functions_modified": ["_assemble_conservative_bundle", "_assemble_experimental_bundle", "assemble_bundle"],
+      "estimated_loc": 95
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/scripts/pollen_compressor.py",
+      "change_type": "new",
+      "functions_added": ["compress", "_parse_mem_blocks", "_group_blocks", "_summarize_group"],
+      "estimated_loc": 145
+    },
+    {
+      "file": "/mnt/d/0LOCAL/.claude/skills/run/run.py",
+      "change_type": "modify",
+      "functions_modified": ["emit_spawn_jsonl"],
+      "estimated_loc": 18
+    }
+  ],
+  "total_estimated_loc": 258,
+  "deployment_readiness": "ready — all changes are additive, fail-open, backward-compatible",
+  "rollback_procedure": "revert to prior assemble_bundle() signature; pollen_compressor.py deletion safe (no callers outside run.py integration point)",
+  "next_task_queued": null,
+  "prescan_decision": "passed — no prior velocity-acceleration manifests found",
+  "manifest_version": 1
+}

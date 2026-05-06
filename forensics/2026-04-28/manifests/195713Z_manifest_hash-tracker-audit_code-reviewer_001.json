@@ -1,0 +1,61 @@
+{
+  "task_id": "hash-tracker-canonicalization-audit-w2",
+  "investigation_label": "hash-tracker-canonicalization-audit-w2",
+  "agent": "code-reviewer",
+  "agent_run_id": "code-reviewer-2026-04-28-195713Z-001",
+  "wave": "W2",
+  "timestamp_utc": "2026-04-28T19:57:13Z",
+  "dashboard_line": "10 variants audited; canonical=~/.claude/scripts/4x_hash_tracker.py; SHA-256 uniform; 8 deprecate",
+  "compass_edge": "S",
+  "next_bearing": "S",
+  "next_task_queued": "admin-provisioning-design",
+  "quality_score": 0.82,
+  "belief_index": 0.85,
+  "phase_gate": "EXTEND",
+  "discovered_work": [
+    "audit-dae-hash-tracker-delta-1.6kb",
+    "deprecate-legacy-osinttools-variants",
+    "migrate-cybertemplate-to-canonical-via-runpy-shim",
+    "update-honey-sys00014-script-reference",
+    "fix-9a_rename_scripts-target-name-4c-to-4x",
+    "remove-stale-windows-paths-from-vault_sign-resolution",
+    "set-HASH_TRACKER_PATH-env-canonical"
+  ],
+  "blast_radius": {
+    "class_A_forward_grep": 60,
+    "class_B_pure_inverse": 0,
+    "class_C_subprocess_callers": 4,
+    "active_subprocess_callers": [
+      "~/.claude/scripts/7x_emergency_handoff.py",
+      "data-analysis-engine/scripts/4a-forensic-sign.py",
+      "data-analysis-engine/ObsidianVault/scripts/2c_vault_sign.py",
+      "00-c;laude-faerie-magick-bkp/claude-cli/scripts/vault_sign.py"
+    ],
+    "severity": "LOW (no inverse callers; subprocess callers all honor HASH_TRACKER_PATH env)"
+  },
+  "findings": {
+    "canonical": "/mnt/d/0LOCAL/.claude/scripts/4x_hash_tracker.py",
+    "canonical_size": 30966,
+    "canonical_mtime": "2026-04-24",
+    "crypto_uniform": "SHA-256 across all 10 variants; no MD5/SHA-1",
+    "variants_total": 10,
+    "variants_keep": 2,
+    "variants_deprecate": 8,
+    "dae_delta_bytes": 1623,
+    "dae_audit_required": true,
+    "ct_delta_bytes": -201,
+    "ct_delta_summary": "missing TIER: 4x_ header only; otherwise equivalent"
+  },
+  "artifacts": [
+    "forensics/2026-04-28/artifacts/195713Z_artifact_hash-tracker-variants_code-reviewer_001.csv",
+    "forensics/2026-04-28/artifacts/195713Z_artifact_hash-tracker-migration_code-reviewer_001.md"
+  ],
+  "decision": "PROCEED",
+  "prescan_decision": "passed — no prior hash-tracker audit artifact in forensics/2026-04-28/",
+  "manifest_truthfulness": {
+    "claims_verified_by_grep": true,
+    "diff_outputs_inspected": true,
+    "no_files_modified": true,
+    "scope_within_card": true
+  }
+}

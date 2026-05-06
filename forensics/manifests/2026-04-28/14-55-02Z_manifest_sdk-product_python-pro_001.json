@@ -1,0 +1,64 @@
+{
+  "task_id": "sdk-product",
+  "agent_type": "python-pro",
+  "agent_run_id": "agent-run-faerie2-python-pro-sdk-harness-20260428",
+  "investigation_label": "sdk-cli-prototype-to-product",
+  "dashboard_line": "SDK harness: 795 LOC, 8/8 tests pass, W1/W2/W3 dispatch + atomic manifests",
+  "compass_edge": "S",
+  "next_task_queued": "wire-anthropic-api-key-and-run-live-w1-liftoff",
+  "status": "complete",
+  "quality_score": 0.91,
+  "belief_index": 0.93,
+  "phase": "SEED",
+  "files_modified": [
+    {
+      "path": "implementation_spec.py",
+      "lines": 795,
+      "description": "Production-grade Agent SDK Harness: AgentSpawner, ManifestWriter, WaveDispatcher, BundleComposer"
+    }
+  ],
+  "api_contract": {
+    "AgentSpawnConfig": {
+      "inputs": ["task_id", "agent_type", "investigation_label", "goal", "wave"],
+      "optional": ["model", "timeout_seconds", "run_in_background", "honey_content", "nectar_content", "pollen_content", "phase", "parent_task_id", "compass_edge_in"],
+      "validate()": "returns list[str] of validation errors"
+    },
+    "AgentRunResult": {
+      "outputs": ["agent_run_id", "task_id", "agent_type", "wave", "status", "dashboard_line", "compass_edge", "next_task_queued", "quality_score", "belief_index", "manifest_path", "duration_seconds"],
+      "to_manifest_dict()": "serialize to forensic manifest JSON"
+    },
+    "BundleComposer.compose(config)": {
+      "layers": ["global_HONEY", "project_HONEY", "NECTAR_tail50", "pollen", "agent_card_excerpt", "spawn_discipline", "task_goal"],
+      "returns": "str bundle prompt prefix for agent injection"
+    },
+    "ManifestWriter.write(result, investigation_label)": {
+      "contract": "atomic temp+rename write; COC entry via 4x_coc_writer.py subprocess",
+      "naming": "{HH-MM-SS}Z_manifest_{task_id}_{agent_type}_{counter}.json",
+      "returns": "Path of written manifest"
+    },
+    "WaveDispatcher.dispatch_wave(wave, configs, investigation_label)": {
+      "W1": "max 5 agents parallel, haiku, inline wait",
+      "W2": "max 3 agents parallel, sonnet, inline wait",
+      "W3": "max 2 agents, sonnet, background fire-and-forget",
+      "returns": "WaveResult with aggregate stats + all AgentRunResults"
+    },
+    "run_three_wave_session(...)": {
+      "contract": "W1+W2 inline, W3 background; returns dict[w1|w2|w3 -> WaveResult]"
+    }
+  },
+  "implementation_notes": {
+    "sdk_availability": "anthropic library NOT installed in this environment; SDK path implemented and probed at runtime via _probe_sdk(); falls back to dry-run simulation gracefully",
+    "dry_run_mode": "full structural validation without API calls; all 8 tests pass in dry-run",
+    "asyncio_pattern": "Python 3.11+ asyncio.TaskGroup for structured concurrency (W1/W2 inline); asyncio.create_task for W3 background",
+    "rate_limiting": "TokenBucketRateLimiter (2.0 rps default) gates all API calls; tune via rate_limit_rps param",
+    "atomic_writes": "temp file + os.rename() on POSIX; fsync before rename; collision-resistant counter in filename",
+    "coc_integrity": "4x_coc_writer.py subprocess call after every manifest write; failure is logged but non-fatal (manifest already committed)",
+    "bundle_composition": "role-aware via agent card injection; honey_content/nectar_content can be overridden per spawn; TTL cache (5min) on NECTAR reads",
+    "manifest_parse": "extracts dashboard_line + compass_edge + quality_score + belief_index from agent output via fenced ```manifest``` block or JSON scan fallback",
+    "retry_pattern": "exponential backoff: 1s, 2s, 4s; unrecoverable errors (AuthenticationError, BadRequestError) abort immediately",
+    "self_test_results": "8/8 tests pass: AgentRunID uniqueness, BundleComposer, ManifestWriter atomic, AgentSpawner dry-run, W1 parallel, config validation, bundle validation, three-wave session"
+  },
+  "prescan_decision": "passed -- stale or absent",
+  "artifact_path": "implementation_spec.py",
+  "ts": "2026-04-28T14:55:02Z"
+}

@@ -1,0 +1,43 @@
+{
+  "bundle_id": "sdk-readiness-mcp-deployment-w2",
+  "created_at": "2026-04-28T10:00:00Z",
+  "investigation_label": "sdk-readiness-mcp-deployment",
+  "wave": 2,
+  "phase": "SEED",
+  "context_layers": {
+    "global_honey": "Two-tier memory: entity/IP/domain-scoped → project HONEY; universal → global HONEY (gauntlet required). Manifests ARE position records. Stigmergy via filesystem. Dead reckoning navigation at scale. f(0) = zero orchestration burden. Every spawn generates AGENT-RUN-ID (forensic anchor). Task routing via investigation_label clustering.",
+    "project_honey": "faerie2 agent SDK harness complete (795 LOC, 8/8 tests pass). AgentSpawnConfig, AgentRunResult, BundleComposer, ManifestWriter, WaveDispatcher, run_three_wave_session API. Dry-run mode with graceful SDK fallback. Atomic manifest writes. COC integrity via subprocess. Rate limiting, async safety (asyncio.TaskGroup), error handling (exponential backoff).",
+    "nectar_tail": "SDK harness quality_score: 0.91, belief_index: 0.93. SEED phase. Ready for production assessment and MCP server build.",
+    "task_goals": [
+      "Phase 1: SDK Readiness Audit (api-engineer, W2) - review API contracts, test coverage, production readiness checklist",
+      "Phase 2: MCP Server Build (python-pro, W2) - FastAPI server + 3 deployment guides (VPS/Docker/ZimaOS) + security/monitoring/playbooks"
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "sdk-readiness-audit",
+      "agent_type": "ai-engineer",
+      "goal": "Assess faerie2 SDK completeness. Audit API contracts (AgentSpawnConfig, AgentRunResult, BundleComposer, ManifestWriter, WaveDispatcher). Verify test coverage (8/8 pass: uniqueness, composition, atomic writes, dry-run, parallelism, config validation, bundle validation, three-wave). Check production readiness: error handling (unrecoverable → abort, recoverable → exponential backoff), rate limiting (TokenBucketRateLimiter, 2.0 rps), dry-run fallback (_probe_sdk), COC integrity (4x_coc_writer subprocess). Validate manifest naming (forensic-ready). Output: 10-15 item readiness report with quality_score and belief_index rationale.",
+      "model": "haiku",
+      "timeout_seconds": 600,
+      "investigation_label": "sdk-readiness-mcp-deployment",
+      "compass_edge_in": "S"
+    },
+    {
+      "task_id": "mcp-server-build",
+      "agent_type": "python-pro",
+      "goal": "Build production-ready faerie MCP server exposing Agent SDK via MCP protocol. Deliverables: (1) faerie_mcp_server.py (200-300 LOC FastAPI, endpoints: /spawn POST, /manifest-list GET, /manifest-get GET, /compass-query GET, /wave-dispatch POST, /health GET, request validation, response serialization dashboard_line/compass_edge/next_task_queued). (2) vps-deployment-guide.md (nginx reverse proxy TLS/rate-limiting/CORS, systemd service file faerie-mcp.service, ufw firewall rules, monitoring via systemd journal + prometheus metrics export, syslog logging). (3) docker-deployment-guide.md (Dockerfile python:3.11-slim, docker-compose.yml with app+nginx+prometheus+ELK, .env.example API_KEY/RATE_LIMIT_RPS/LOG_LEVEL, health checks, persistent /forensics volume). (4) zimaos-deployment-guide.md (app-manifest.json, lifecycle hooks install/start/stop/uninstall, /forensics storage binding, dashboard widget, setup.sh). (5) security-hardening.md (API key header X-Faerie-Key, rate limiting per-IP/per-key, input validation task_id alphanumeric+dash/underscore, dashboard_line sanitization max 80 chars, TLS+certbot, CORS whitelist). (6) monitoring-logging-setup.md (prometheus metrics spawns_total/manifest_write_latency_ms/compass_edge_distribution/error_rate, structured JSON logging, log aggregation syslog/ELK, alerting thresholds). (7) operational-playbooks.md (deployment checklist pre/runtime/post, troubleshooting common errors, horizontal scaling via load balancer, rollback version pinning, COC audit logs).",
+      "model": "haiku",
+      "timeout_seconds": 1200,
+      "investigation_label": "sdk-readiness-mcp-deployment",
+      "compass_edge_in": "S"
+    }
+  ],
+  "expected_outputs": {
+    "sdk-readiness-audit": "manifest with dashboard_line (readiness assessment), quality_score, belief_index, next_task_queued",
+    "mcp-server-build": "manifest + artifacts (faerie_mcp_server.py, 7 deployment/security/monitoring guides)"
+  },
+  "investigation_cluster": "sdk-readiness-mcp-deployment",
+  "expected_compass_edge": "S",
+  "prescan_result": "passed - no existing manifests for these task_ids in 24h"
+}

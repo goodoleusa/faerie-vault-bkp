@@ -1,0 +1,34 @@
+{
+  "task_id": "measure-quality-gates-n52",
+  "agent_type": "data-scientist",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "timestamp": "2026-04-28T01:12:05Z",
+  "dashboard_line": "N=52 q=0.85 b=0.88 | 3/4 gates TOO EASY | r(q,b)=0.54*** | recalibrate E",
+  "compass_edge": "E",
+  "quality_score": 0.90,
+  "belief_index": 0.85,
+  "phase": "DEEPEN",
+  "phase_gate_traversed": "DEEPEN",
+  "next_bearing": "E",
+  "next_task_queued": "recalibrate-compass-gates-multi-session",
+  "artifact_path": "forensics/2026-04-28/artifacts/011205Z_measurement_quality-gates-n52_data-scientist_001.json",
+  "metrics": {
+    "sample_size": 52,
+    "quality_score_mean": 0.8548,
+    "quality_score_std": 0.1058,
+    "belief_index_mean": 0.8759,
+    "belief_index_std": 0.0564,
+    "gates_calibrated": 1,
+    "gates_too_easy": 3,
+    "pearson_r_quality_belief": 0.540,
+    "pearson_p": 0.000036,
+    "fisher_p_bearing_vs_gate": 0.0005,
+    "bayesian_posterior_calibrated": 0.3329
+  },
+  "discovered_work": [
+    "Multi-session measurement needed (3+ sessions) to validate percentile-based gate suggestions",
+    "Independent quality_score verification method needed (currently self-reported)",
+    "Phase field standardization — only 18/52 manifests carry explicit phase"
+  ],
+  "prescan_decision": "passed — no prior quality gate measurement with N>=20 exists"
+}

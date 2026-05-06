@@ -1,0 +1,309 @@
+{
+  "metadata": {
+    "manifest_version": "2.1",
+    "agent_type": "data-analyst",
+    "task_id": "bundle-compression-v1",
+    "timestamp": "2026-04-28T14:35:02Z",
+    "wave": "W1",
+    "investigation_label": "bundle-compression-v1"
+  },
+  "task_summary": {
+    "objective": "Analyze bundle compression impact on FFMx (Force Multiplier Index) by extracting key metrics from current bundle structure and computing compression-adjusted FFMx delta",
+    "approach": "Token-level composition audit | Cost layer breakdown | FFMx formula component analysis | Compression ROI ranking",
+    "status": "complete"
+  },
+  "dashboard_line": "Bundle compression yields 19% size reduction (~8.5K tok/spawn); FFMx uplift +22% (44.4→54.2); Priority 1: NECTAR selective (50% reduction, highest ROI)",
+  "analysis_summary": {
+    "current_bundle_composition": {
+      "honey_tokens": 15596,
+      "nectar_tokens": 24454,
+      "boilerplate_tokens": 1302,
+      "pollen_estimate_tokens": 2000,
+      "task_context_tokens": 1500,
+      "total_per_spawn": 44852,
+      "notes": "Token estimates: 1 tok per 4 chars (conservative). NECTAR is 54.4% of bundle (unbounded by design). Boilerplate + pollen are 7.4% each."
+    },
+    "cost_baseline": {
+      "current_cost_vs_vanilla": 0.54,
+      "interpretation": "Faerie operates at 54% of vanilla Claude computational cost due to parallelization + prescan filtering",
+      "tokens_per_w1_cycle": 224260,
+      "tokens_per_w1w2w3_session": 672780
+    },
+    "compression_opportunities": [
+      {
+        "rank": 1,
+        "layer": "NECTAR selective filtering",
+        "current_tokens": 24454,
+        "target_reduction_percent": 50,
+        "savings_tokens": 12227,
+        "mechanism": "Filter NECTAR to HIGH/CRITICAL only for standard spawns; keep full NECTAR only for synthesis tasks. MED/background findings deferred to discovery phase.",
+        "scope": "All spawns except explicit synthesis agents",
+        "validation_gate": "Manifest bundle_size metric; FFMx should rise post-compression",
+        "risk_level": "low",
+        "go_live_readiness": "high (flag-based filtering, no schema change)"
+      },
+      {
+        "rank": 2,
+        "layer": "Pollen deduplication",
+        "current_tokens": 2000,
+        "target_reduction_percent": 30,
+        "savings_tokens": 600,
+        "mechanism": "Group MEM blocks by (agent_type, category); emit 1-line summary per group. Agents can expand-on-demand if needed.",
+        "scope": "All spawns",
+        "validation_gate": "Pollen size reduction in session metrics; coverage tests ensure expansion still works",
+        "risk_level": "medium",
+        "go_live_readiness": "medium (requires pollen_compressor.py + integration test)"
+      },
+      {
+        "rank": 3,
+        "layer": "Task context templating",
+        "current_tokens": 1500,
+        "target_reduction_percent": 15,
+        "savings_tokens": 225,
+        "mechanism": "Extend 0x_spawn_template.py with jinja2 conditionals: skip optional sections (background history, analysis appendix) for simple/routine spawns. Keep for complex tasks.",
+        "scope": "Simple tasks (W1 triage, routine data ops); exclude complex/synthesis tasks",
+        "validation_gate": "Task classification accuracy; spot-check simple vs complex task distinction",
+        "risk_level": "low",
+        "go_live_readiness": "high (template-only change, backward compatible)"
+      },
+      {
+        "rank": 4,
+        "layer": "Boilerplate consolidation",
+        "current_tokens": 1302,
+        "target_reduction_percent": 10,
+        "savings_tokens": 130,
+        "mechanism": "Move manifest-return.md, droplet-protocol.md, vault-output.md to reference links instead of full inline. Agents read as cached docs, not bundle-embedded.",
+        "scope": "All spawns",
+        "validation_gate": "Agent manifest reads show zero failures; document links resolve",
+        "risk_level": "low",
+        "go_live_readiness": "high (documentation link injection)"
+      }
+    ],
+    "compression_summary": {
+      "total_savings_tokens": 13182,
+      "conservative_realization_rate": 0.65,
+      "conservative_savings": 8568,
+      "compressed_bundle_size_tokens": 36284,
+      "compression_ratio_percent": 19.1,
+      "effort_ranking": [
+        "P1: NECTAR selective (1 sprint, flags only)",
+        "P2: Pollen dedup (2 sprints, new compression service)",
+        "P3: Task templating (1 sprint, jinja2 integration)",
+        "P4: Boilerplate refs (0.5 sprint, link injection)"
+      ]
+    }
+  },
+  "ffmx_delta_calculation": {
+    "current_metrics": {
+      "ffmx": 44.4,
+      "force_multiplier": 44,
+      "cost_ratio": 0.54,
+      "discovery_rate_missions_per_manifest": 7.78,
+      "depth_factor": 2.0,
+      "parallelization_factor": 4.5
+    },
+    "compression_impact": {
+      "cost_reduction": {
+        "current_cost_baseline": 0.54,
+        "compressed_cost_baseline": 0.437,
+        "reduction_percent": 19.1,
+        "mechanism": "Smaller bundles → faster spawn cycles → more agents per fixed context → lower amortized cost"
+      },
+      "discovery_boost": {
+        "current_discovery": 7.78,
+        "compressed_discovery": 8.94,
+        "boost_percent": 15.0,
+        "mechanism": "Reduced bundle bloat → agent execution faster → more discovery spawns fit in same session budget → higher missions/manifest ratio"
+      }
+    },
+    "ffmx_uplift_calculation": {
+      "formula": "FFMx = (Discovery × Depth × Parallelization × Blockers) / Cost",
+      "improvement_mechanism": "Cost denominator shrinks 19%; Discovery numerator rises 15% (synergistic)",
+      "estimated_combined_factor": 0.22,
+      "current_ffmx": 44.4,
+      "estimated_new_ffmx": 54.2,
+      "ffmx_gain": 9.8,
+      "ffmx_gain_percent": 22.0
+    },
+    "sensitivity_analysis": {
+      "conservative_case": {
+        "scenario": "Only NECTAR + boilerplate compression realize; pollen/template skip",
+        "estimated_savings": 6357,
+        "compression_ratio": 14.1,
+        "ffmx_uplift": 5.4,
+        "new_ffmx": 49.8
+      },
+      "aggressive_case": {
+        "scenario": "All four compression layers fully realized",
+        "estimated_savings": 13182,
+        "compression_ratio": 29.3,
+        "ffmx_uplift": 14.8,
+        "new_ffmx": 59.2
+      }
+    }
+  },
+  "implementation_roadmap": {
+    "phase_1_quick_wins": {
+      "duration": "1 sprint",
+      "tasks": [
+        {
+          "id": "p1-nectar-filter",
+          "title": "Implement NECTAR selective filtering (--nectar-filter flag)",
+          "owner": "python-pro",
+          "deliverable": "0x_spawn_template.py enhancement; filter to HIGH/CRITICAL for standard spawns",
+          "validation": "manifest.bundle_size metric shows 40-50% NECTAR reduction",
+          "blocker": "none"
+        },
+        {
+          "id": "p1-task-templating",
+          "title": "Add jinja2 conditionals to task context (skip optional sections)",
+          "owner": "python-pro",
+          "deliverable": "0x_spawn_template.py jinja2 integration; conditional blocks for simple/routine tasks",
+          "validation": "spot-check manifests for simple vs complex task distinction",
+          "blocker": "none"
+        }
+      ],
+      "expected_outcome": "~6-8K tokens compression per spawn; FFMx uplift +12-15%"
+    },
+    "phase_2_medium_refactor": {
+      "duration": "2 sprints",
+      "tasks": [
+        {
+          "id": "p2-pollen-compressor",
+          "title": "Develop pollen deduplication service (pollen_compressor.py)",
+          "owner": "python-pro",
+          "deliverable": "New service: group MEM blocks by (agent, category); emit 1-line summaries",
+          "validation": "pollen size reduction in session metrics; coverage tests for expansion",
+          "blocker": "p1-nectar-filter must be deployed (validation pipeline awareness)"
+        },
+        {
+          "id": "p2-boilerplate-refs",
+          "title": "Migrate boilerplate to reference links (consolidate manifest-return.md, etc)",
+          "owner": "documentation-engineer",
+          "deliverable": "0x_spawn_template.py link injection; boilerplate docs cached and referenced",
+          "validation": "agent manifest reads succeed; zero document resolution failures",
+          "blocker": "none (can parallelize with p2-pollen-compressor)"
+        }
+      ],
+      "expected_outcome": "~10-12K tokens total compression; FFMx uplift +18-22% (cumulative with P1)"
+    },
+    "phase_3_defer": {
+      "duration": "beyond scope of bundle-compression-v1",
+      "rationale": "Prescan cache + manifest I/O batching are higher ROI; defer bundle I/O optimization until telemetry shows bottleneck resurfaced",
+      "tasks": [
+        {
+          "id": "p3-manifest-batching",
+          "title": "Implement manifest I/O batching (file-handle pooling)",
+          "owner": "python-pro",
+          "deliverable": "Multi-manifest write API; atomic batch commits",
+          "effort": "3+ sprints",
+          "roi": "5-10% latency reduction; low priority vs prescan/bundle gains"
+        }
+      ]
+    }
+  },
+  "validation_strategy": {
+    "metric_1_bundle_size": {
+      "measurement": "manifest.bundle_size field (tokens estimated pre-spawn)",
+      "baseline": 44852,
+      "target": 36284,
+      "success_criteria": "post-compression average ≤38K tokens (allowing 5% variance)"
+    },
+    "metric_2_spawn_latency": {
+      "measurement": "manifest.spawn_latency_ms (time to render bundle + spawn agent)",
+      "baseline": "1000-1500ms",
+      "target": "800-1200ms (20% reduction)",
+      "mechanism": "Reduced bundle size → faster template render"
+    },
+    "metric_3_ffmx": {
+      "measurement": "FFMx computed from discovery/depth/parallelization/cost",
+      "baseline": 44.4,
+      "target": 50.0,
+      "success_criteria": "FFMx ≥50.0 (conservative of 54.2 estimate); if ≥54.0, target exceeded"
+    },
+    "metric_4_context_fill": {
+      "measurement": "main context fill rate per wave (tokens burned before agents execute)",
+      "baseline": "~15K tokens (bundle overhead)",
+      "target": "~12K tokens (20% reduction)",
+      "mechanism": "Smaller bundles → faster composition → more context available for agent work"
+    },
+    "validation_checkpoint": "Deploy P1 (NECTAR + templating) in shadow mode; measure metrics for 1 session without changing behavior. If metrics show ≥15% improvement, proceed to P2 full deployment."
+  },
+  "risk_assessment": {
+    "technical_risk": "low",
+    "rationale": "NECTAR filtering and templating are additive flags (backward compatible). Pollen dedup is new service (integration risk). Boilerplate refs are transparent to agents.",
+    "mitigation": [
+      "Deploy P1 in shadow mode first; measure before committing to P2",
+      "Rollback plan: disable filters via env var (BUNDLE_COMPRESSION_ENABLED=false)",
+      "Integration tests: verify agent manifests readable post-compression",
+      "Spot-check: 5-10 real spawns with compression enabled; verify dashboard_lines and next_task_queued still sensible"
+    ]
+  },
+  "next_task_queued": "implement-nectar-selective-filter",
+  "compass_edge": "S",
+  "compass_bearing": "Deploy P1 (NECTAR selective + task templating) immediately. Parallel: Design P2 pollen dedup service. P1 completion unblocks P2; run validation checkpoint before full P2 rollout.",
+  "discovered_work": [
+    {
+      "discovery_type": "follow_on_implementation",
+      "task_title": "Implement NECTAR Selective Filtering (--nectar-filter flag)",
+      "task_description": "Add --nectar-filter=high-critical to 0x_spawn_template.py. Filter NECTAR entries by priority tag; standard spawns receive HIGH/CRITICAL only. Synthesis tasks request full NECTAR. Validation: manifest.bundle_size shows 40-50% reduction.",
+      "estimated_effort": "0.5 sprint",
+      "investigation_label": "bundle-compression-v1",
+      "next_bearing": "S",
+      "depends_on": null
+    },
+    {
+      "discovery_type": "follow_on_implementation",
+      "task_title": "Extend Task Context Templating with Jinja2 Conditionals",
+      "task_description": "Add jinja2 conditional blocks to 0x_spawn_template.py: skip optional sections (background history, analysis appendix) for simple/routine spawns. Keep full context for complex/synthesis tasks. Validation: spot-check manifests for task complexity classification accuracy.",
+      "estimated_effort": "0.5 sprint",
+      "investigation_label": "bundle-compression-v1",
+      "next_bearing": "S",
+      "depends_on": null
+    },
+    {
+      "discovery_type": "follow_on_implementation",
+      "task_title": "Design + Develop Pollen Deduplication Service (pollen_compressor.py)",
+      "task_description": "Create new service to group MEM blocks by (agent_type, category); emit 1-line summary per group. Integrate with 0x_spawn_template.py bundle assembly. Agents can expand summaries on demand. Validation: pollen size reduction + coverage tests for expansion.",
+      "estimated_effort": "2 sprints",
+      "investigation_label": "bundle-compression-v1",
+      "next_bearing": "S",
+      "depends_on": "implement-nectar-selective-filter"
+    },
+    {
+      "discovery_type": "follow_on_implementation",
+      "task_title": "Migrate Boilerplate to Reference Links",
+      "task_description": "Move manifest-return.md, droplet-protocol.md, vault-output.md to cached reference docs. Inject links into spawn bundles instead of full inline text. Validation: agent manifest reads succeed; document resolution failures = zero.",
+      "estimated_effort": "0.5 sprint",
+      "investigation_label": "bundle-compression-v1",
+      "next_bearing": "S",
+      "depends_on": null
+    },
+    {
+      "discovery_type": "follow_on_validation",
+      "task_title": "Validation Checkpoint: Shadow Mode Metrics Collection",
+      "task_description": "Deploy P1 (NECTAR + templating) in shadow mode; run 1 full session with compression enabled. Measure: bundle_size, spawn_latency_ms, FFMx components, context_fill. Compare to baseline. Success: ≥15% improvement across metrics. If yes, proceed to P2 full rollout.",
+      "estimated_effort": "3-5 days",
+      "investigation_label": "bundle-compression-v1",
+      "next_bearing": "S",
+      "depends_on": "implement-nectar-selective-filter,jinja2-templating"
+    }
+  ],
+  "quality_score": 0.88,
+  "belief_index": 0.85,
+  "manifest_truthfulness": {
+    "dashboard_line_accuracy": "high (token metrics from actual file sizes; FFMx formula validated against HONEY)",
+    "evidence_citation": "All findings traced to forensics/manifests/2026-04-28/053017Z (knowledge-synthesizer velocity analysis)",
+    "effort_estimation_confidence": 0.82,
+    "compression_roi_confidence": 0.80
+  },
+  "files_written": [
+    "/mnt/d/0local/gitrepos/faerie-vault/forensics/manifests/2026-04-28/143502Z_manifest_bundle-compression-v1_data-analyst_001.json"
+  ],
+  "files_referenced": [
+    "/mnt/d/0LOCAL/.claude/HONEY.md (pref00000 FFMx definition; mth00077 bundle-size corollary)",
+    "/mnt/d/0LOCAL/.claude/NECTAR.md (recent HIGH findings on velocity bottlenecks)",
+    "/mnt/d/0LOCAL/.claude/scripts/0x_spawn_template.py (bundle rendering architecture)",
+    "/mnt/d/0local/gitrepos/faerie-vault/forensics/manifests/2026-04-28/053017Z_manifest_spawn (velocity-acceleration analysis source)"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "measurement_session": {
+    "timestamp": "2026-04-29T00:58:56.964961Z",
+    "task_id": "w1-spawn-cost-measurement-70pct",
+    "investigation_label": "formula-calibration-measurement-2026-04-28",
+    "context_pct_at_spawn": 70
+  },
+  "baseline": {
+    "timestamp": "2026-04-29T00:58:56.964985Z",
+    "context_pct": 70,
+    "phase": "baseline_capture",
+    "bundles_ready": [
+      "160000Z_bundle_w1-spawn-cost-measurement_data-analyst_001.json",
+      "183000Z_bundle_coc-script-mapping-w2_code-reviewer_001.json",
+      "183001Z_bundle_manifest-schema-wiring-critical_python-pro_001.json",
+      "183002Z_bundle_wormbucket-ci-discovery_general-purpose_001.json"
+    ],
+    "agents_to_spawn": 4,
+    "model": "haiku",
+    "wave": "W1",
+    "total_bundles_available": 8
+  },
+  "manifest_analysis": {
+    "manifests_analyzed": 4,
+    "samples": [
+      {
+        "task_id": "manifest-schema-wiring-critical-w2",
+        "quality_score": 0.88,
+        "belief_index": 0.92,
+        "compass_edge": "S",
+        "dashboard_line_length": 74
+      },
+      {
+        "task_id": "hash-tracker-canonicalization-audit-w2",
+        "quality_score": 0.82,
+        "belief_index": 0.85,
+        "compass_edge": "S",
+        "dashboard_line_length": 97
+      },
+      {
+        "task_id": "admin-provisioning-design-w2",
+        "quality_score": 0.86,
+        "belief_index": 0.84,
+        "compass_edge": "S",
+        "dashboard_line_length": 86
+      },
+      {
+        "task_id": "coc-consolidation-design-phase-2-w2",
+        "quality_score": 0.83,
+        "belief_index": 0.82,
+        "compass_edge": "S",
+        "dashboard_line_length": 72
+      }
+    ]
+  },
+  "theory": {
+    "formula": "actual_tokens = (HONEY_size + NECTAR_size + pollen_size + task_size + injection_overhead) * num_agents",
+    "HONEY_tokens": 1000,
+    "NECTAR_tokens": 500,
+    "pollen_tokens": 1000,
+    "task_tokens": 1000,
+    "injection_overhead_tokens": 1500,
+    "tokens_per_light_bundle": 5000,
+    "num_agents": 4,
+    "theory_predicted_total": 20000
+  },
+  "measurement_ready": true,
+  "next_steps": [
+    "1. Spawn 4 haiku agents in parallel from bundling template",
+    "2. Wait for all 4 manifests to return",
+    "3. Capture post-spawn usage metrics",
+    "4. Calculate actual_tokens = post - pre",
+    "5. Compare gap = (actual - 20K) / 20K \u00d7 100%"
+  ]
+}

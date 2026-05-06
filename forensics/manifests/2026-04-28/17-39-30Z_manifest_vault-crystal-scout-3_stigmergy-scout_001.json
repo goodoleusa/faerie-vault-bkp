@@ -1,0 +1,185 @@
+{
+  "task_id": "vault-crystal-scout-3",
+  "agent_id": "stigmergy-scout",
+  "timestamp": "2026-04-28T17:39:30Z",
+  "investigation_label": "vault-enhancement-2026-04-28",
+  "phase": "DEEPEN",
+  "quality_score": 0.3,
+  "belief_index": 0.85,
+  "dashboard_line": "Routing validation audit complete: 7 critical routing errors, missing registry, 11/15 docs lack frontmatter",
+  "compass_edge": "N",
+  "findings": [
+    {
+      "category": "ROUTING_ERROR",
+      "severity": "HIGH",
+      "finding": "Missing investigation_label on canonical docs",
+      "affected_files": [
+        "00-DASHBOARD.md",
+        "01-forensic-governance.md",
+        "06-investigation-id-governance.md",
+        "07-work-hierarchy-codex.md",
+        "08-documentation-governance.md",
+        "09-vault-architecture.md",
+        "10-vault-maintenance.md"
+      ],
+      "impact": "Docs cannot be routed via mission graph; /run --missions will not discover them",
+      "governance_ref": "06-investigation-id-governance.md Stage 1-4: all docs must declare investigation_label"
+    },
+    {
+      "category": "INVALID_LABEL",
+      "severity": "CRITICAL",
+      "finding": "Documents reference non-existent investigation_labels",
+      "issues": [
+        {
+          "label": "canonical-vault-architecture",
+          "files": [
+            "09-vault-architecture.md"
+          ],
+          "note": "Not in governance registry; appears to be invented label"
+        },
+        {
+          "label": "sdk-readiness",
+          "files": [
+            "03-mcp-server-architecture.md"
+          ],
+          "note": "Governance shows 'sdk-readiness-mcp-deployment'; short form not registered"
+        },
+        {
+          "label": "str",
+          "files": [
+            "03-mcp-server-architecture.md"
+          ],
+          "note": "Invalid label (appears to be parsing artifact, not actual investigation_label)"
+        },
+        {
+          "label": "random-label-i-picked",
+          "files": [
+            "06-investigation-id-governance.md"
+          ],
+          "note": "Example in governance doc showing BAD PRACTICE; should not be in actual vault"
+        }
+      ],
+      "impact": "Mission graph clustering will fail; manifests won't route to correct mission nodes"
+    },
+    {
+      "category": "MISSING_FRONTMATTER",
+      "severity": "HIGH",
+      "finding": "Canonical docs missing YAML frontmatter",
+      "affected_files": [
+        "01-forensic-governance.md",
+        "06-investigation-id-governance.md",
+        "07-work-hierarchy-codex.md",
+        "08-documentation-governance.md",
+        "09-vault-architecture.md",
+        "10-vault-maintenance.md"
+      ],
+      "required_fields": [
+        "investigation_label",
+        "timestamp",
+        "phase",
+        "agent_type",
+        "status"
+      ],
+      "governance_ref": "08-documentation-governance.md states: 'Each canonical doc has version timestamp, lock status'"
+    },
+    {
+      "category": "MISSING_METADATA",
+      "severity": "HIGH",
+      "finding": "All scanned docs missing timestamp metadata",
+      "affected_files": [
+        "00-DASHBOARD.md (missing timestamp only)",
+        "01-forensic-governance.md (missing timestamp + frontmatter)",
+        "02-settings-sync-strategy.md (missing timestamp)",
+        "03-mcp-server-architecture.md (missing timestamp)",
+        "04-mcp-deployment-vps.md (missing timestamp)",
+        "05-mcp-deployment-zimaboard.md (missing timestamp)",
+        "06-investigation-id-governance.md (missing timestamp + frontmatter)",
+        "07-work-hierarchy-codex.md (missing timestamp + frontmatter)",
+        "08-documentation-governance.md (missing timestamp + frontmatter)",
+        "09-vault-architecture.md (missing timestamp + frontmatter)",
+        "10-vault-maintenance.md (missing timestamp + frontmatter)"
+      ],
+      "impact": "Cannot determine document age, modification history, or version tracking; breaks audit trail"
+    },
+    {
+      "category": "LOCK_STATUS_VIOLATION",
+      "severity": "MEDIUM",
+      "finding": "Canonical docs marked 'canonical' but missing lock indicators",
+      "affected_files": [
+        {
+          "file": "00-DASHBOARD.md",
+          "status": "marked canonical, missing \u2705 lock marker"
+        },
+        {
+          "file": "07-work-hierarchy-codex.md",
+          "status": "marked canonical, missing \u2705 lock marker"
+        },
+        {
+          "file": "09-vault-architecture.md",
+          "status": "marked canonical, missing \u2705 lock marker"
+        },
+        {
+          "file": "10-vault-maintenance.md",
+          "status": "marked canonical, missing \u2705 lock marker"
+        }
+      ],
+      "governance_ref": "08-documentation-governance.md: 'Lock status (\u2705 = canonical, updates only on major revisions)'",
+      "impact": "Agents won't recognize docs as locked; may attempt edits on system-critical documents"
+    },
+    {
+      "category": "REGISTRY_MISSING",
+      "severity": "CRITICAL",
+      "finding": "No investigations-registry.json file found",
+      "path": "/mnt/d/0LOCAL/CT_VAULT/forensics/investigations-registry.json",
+      "status": "MISSING",
+      "governance_ref": "06-investigation-id-governance.md Stage 3: 'Update forensics/investigations-registry.json (COC-tracked)'",
+      "impact": "Validation gate cannot function; no record of which investigations are active vs candidate vs abandoned",
+      "blocker_type": "NORTH_EDGE"
+    },
+    {
+      "category": "CANDIDATE_INVESTIGATION_UNVALIDATED",
+      "severity": "MEDIUM",
+      "finding": "References to candidate investigations in docs without validation record",
+      "references": [
+        {
+          "label": "vault-enhancement-2026-04-28",
+          "files": [
+            "02-settings-sync-strategy.md",
+            "03-mcp-server-architecture.md",
+            "04-mcp-deployment-vps.md",
+            "05-mcp-deployment-zimaboard.md"
+          ],
+          "status": "CANDIDATE (awaiting validation)",
+          "manifests": "No manifest evidence in forensics/manifests/",
+          "governance_rule": "Candidate status requires \u22653 related manifests + coherence validation before mission claims"
+        }
+      ],
+      "impact": "Docs are clustering around unvalidated investigation; may collapse if validation fails"
+    },
+    {
+      "category": "DEPRECATION_STATUS_UNCLEAR",
+      "severity": "MEDIUM",
+      "finding": "Documents contain 'candidate' keyword but lack formal status tracking",
+      "files_with_candidate_keyword": [
+        "00-DASHBOARD.md",
+        "03-mcp-server-architecture.md",
+        "06-investigation-id-governance.md",
+        "07-work-hierarchy-codex.md"
+      ],
+      "governance_ref": "06-investigation-id-governance.md: 'Mark as candidate \u2014 awaiting validation' must be in registry",
+      "impact": "Ambiguous whether docs are meant for active use or temporary staging"
+    }
+  ],
+  "summary": {
+    "total_docs_scanned": 15,
+    "docs_with_frontmatter": 4,
+    "docs_with_investigation_label": 5,
+    "docs_with_timestamp": 0,
+    "canonical_docs_properly_locked": 1,
+    "invalid_investigation_labels_found": 4,
+    "critical_blockers": 2
+  },
+  "next_task_queued": "vault-crystal-fixer-3",
+  "prescan_decision": "passed \u2014 audit complete, routing errors detected",
+  "discovery": []
+}

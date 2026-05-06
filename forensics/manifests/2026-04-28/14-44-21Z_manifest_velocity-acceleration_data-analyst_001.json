@@ -1,0 +1,51 @@
+{
+  "task_id": "velocity-acceleration-bundle-compression",
+  "investigation_label": "velocity-acceleration",
+  "agent_type": "data-analyst",
+  "agent_run_id": "data-analyst-bundle-compression-validation-2026-04-28",
+  "status": "complete",
+  "timestamp": "2026-04-28T14:44:21Z",
+  "dashboard_line": "7-gate validation: G004(pressure) G006(capability) G001(FFMx>7.0) G002(quality>0.863) guard 50-70% compression",
+  "compass_edge": "S",
+  "phase": "EXTEND",
+  "quality_score": 0.92,
+  "belief_index": 0.90,
+  "manifest_truthfulness": 0.92,
+  "prescan_decision": "passed — no prior data-analyst manifest for velocity-acceleration task exists",
+  "artifact_path": "forensics/artifacts/2026-04-28/14-44-21Z_validation-framework_velocity-acceleration_data-analyst_001.json",
+  "findings_summary": [
+    "Baseline established: avg quality_score=0.908, belief_index=0.900, manifest_truthfulness=0.947 (n=9 manifests, 2026-04-28).",
+    "Bundle cost driver identified: HONEY.md 62KB (15,596 tokens) + NECTAR.md 97KB (24,454 tokens). Tail-30 bundles ~17K tokens; full-injection bundles ~41K tokens.",
+    "7 safety gates defined with auto-revert triggers: G004 (context pressure rise), G006 (capability probe failure), G001 (FFMx discovery drop >10%). Investigation holds: G002, G003, G005, G007.",
+    "3-phase protocol: Phase 1 (baseline measurement, 5-10 spawns, instrument bundle_size_bytes), Phase 2 (C1+C2+C3 compression isolation then combined), Phase 3 (FFMx delta + 5 capability probes + gate validation).",
+    "Wave-aware compression strategy: W1 full (C1+C2+C3, 55-70% target), W2 medium (C1+C2, 45-60%), W3 light (C2 only, 20-35%) — preserves W3 synthesis depth.",
+    "Key trade-off: C1 (NECTAR filter) highest risk. Mitigation: per-agent-type filter threshold config + bundle_mode=full escape valve.",
+    "FFMx should IMPROVE post-compression: cost_efficiency (0.54) should decrease as bundle tokens drop, pushing FFMx from 44.4 toward ~48+ if compression achieves 65% bundle reduction.",
+    "Primary instrumentation gap: bundle_size_bytes and manifest_write_latency_ms not yet recorded in manifests. These are Phase 1 preconditions before any compression can be validated."
+  ],
+  "next_task_queued": "velocity-acceleration-bundle-compression-implementation",
+  "next_bearing_agent": "python-pro",
+  "next_bearing": "S",
+  "key_metrics": {
+    "baseline_quality_score": 0.908,
+    "baseline_belief_index": 0.900,
+    "baseline_manifest_truthfulness": 0.947,
+    "baseline_manifests_sampled": 9,
+    "honey_size_bytes": 62384,
+    "nectar_size_bytes": 97816,
+    "typical_bundle_tokens_tail30": 17096,
+    "typical_bundle_tokens_full_injection": 41050,
+    "safety_gates_count": 7,
+    "auto_revert_gates": ["G004", "G006", "G001"],
+    "capability_probes_count": 5,
+    "compression_phases": 3,
+    "target_size_reduction_pct": "50-70 (W1), 45-60 (W2), 20-35 (W3)"
+  },
+  "discovered_work": null,
+  "coc_entry": {
+    "event": "manifest_finalized",
+    "manifest_path": "forensics/manifests/2026-04-28/14-44-21Z_manifest_velocity-acceleration_data-analyst_001.json",
+    "artifact_path": "forensics/artifacts/2026-04-28/14-44-21Z_validation-framework_velocity-acceleration_data-analyst_001.json",
+    "dashboard_line": "7-gate validation: G004(pressure) G006(capability) G001(FFMx>7.0) G002(quality>0.863) guard 50-70% compression"
+  }
+}

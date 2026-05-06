@@ -1,0 +1,172 @@
+{
+  "task_id": "bundle-compression-code-review",
+  "agent_type": "code-reviewer",
+  "agent_run_id": "agent-run-bcr01-code-reviewer-a7f42e8c",
+  "investigation_label": "bundle-compression-v1",
+  "wave": 1,
+  "phase": "SEED",
+  "status": "complete",
+  "timestamp": "2026-04-28T15:42:00Z",
+  "dashboard_line": "Bundle compression analysis complete: 8 critical findings, risk_score=62, FFMx payload compression viable",
+  "compass_edge": "S",
+  "next_task_queued": "implement-bundle-compression-fixes",
+  "quality_score": 0.78,
+  "belief_index": 0.82,
+  "findings_summary": {
+    "total_findings": 8,
+    "critical": 3,
+    "high": 3,
+    "medium": 2,
+    "risk_score": 62,
+    "code_quality_signals": [
+      "strong_architecture (0.85): modular, layered design; clear separation of concerns",
+      "maintainability_concern (0.61): NECTAR caching logic + bundle validation lacks inline documentation",
+      "correctness_gaps (0.74): three race conditions detected; atomic writes mitigate but edge cases remain"
+    ]
+  },
+  "detailed_findings": [
+    {
+      "id": "FFMx-1-NECTAR-TTL-RACE",
+      "severity": "CRITICAL",
+      "component": "BundleComposer._read_nectar_tail()",
+      "issue": "Time-of-check to time-of-use (TOCTOU) race on _nectar_cache_ts. Under W1 parallel load (4-5 agents spawning within 1ms), multiple agents can bypass TTL check and trigger redundant file reads.",
+      "code_location": "implementation_spec.py:350-367",
+      "evidence": "Line 353: cache TTL check uses `time.monotonic()` without synchronization lock; W1 parallel dispatch can cause cache invalidation storms",
+      "impact": "Potential 5-10 redundant NECTAR.md reads per W1 cycle; token budget wasted on duplicate context; unpredictable behavior under concurrent access",
+      "remediation": "Wrap _nectar_cache_ts update in asyncio.Lock; ensure TTL check + update are atomic",
+      "confidence": 0.88
+    },
+    {
+      "id": "FFMx-2-BUNDLE-TRUNCATION-SILENT",
+      "severity": "CRITICAL",
+      "component": "BundleComposer._read_global_honey()",
+      "issue": "Silent truncation of HONEY.md at 5K token budget (20K chars) without changelog. Agents receive incomplete context; manifest_truthfulness may suffer if agents cannot access necessary principles.",
+      "code_location": "implementation_spec.py:318-331",
+      "evidence": "Line 325-326: truncates at 20K chars with placeholder message. No validation that truncation preserved critical sections (e.g., spawn discipline boilerplate)",
+      "impact": "HONEY.md integrity compromised; agent self-awareness degrades; downstream manifests show lower belief_index due to incomplete context",
+      "remediation": "Parse HONEY.md frontmatter + key sections before truncation; preserve mandatory sections (principles, discipline boilerplate); log what was dropped",
+      "confidence": 0.91
+    },
+    {
+      "id": "FFMx-3-MANIFEST-WRITER-COUNTER-OVERFLOW",
+      "severity": "CRITICAL",
+      "component": "ManifestWriter._next_counter()",
+      "issue": "Counter state is in-memory dict with no persistence. If ManifestWriter is recreated (e.g., process restart), collisions possible between old and new counter sequences within same second.",
+      "code_location": "implementation_spec.py:600-605",
+      "evidence": "Line 597: `self._counter_state = {}` has no lock-free read-modify-write semantics; counter is ephemeral",
+      "impact": "Collision risk for manifest filenames; breaks immutability guarantee (forensic principle violated); manifest recovery becomes ambiguous",
+      "remediation": "Initialize counter from filesystem state at startup; scan existing manifest files in target dir to bootstrap counter. OR: use UUID instead of counter for collision-free naming",
+      "confidence": 0.85
+    },
+    {
+      "id": "FFMx-4-AGENT-CARD-EXCERPT-BUDGET-VIOLATION",
+      "severity": "HIGH",
+      "component": "BundleComposer._read_agent_card_excerpt()",
+      "issue": "Card trimming logic at line 377-379 is aggressive but fragile: keeps first 800 chars + last 200 chars. Risk of breaking YAML frontmatter or splitting mid-instruction.",
+      "code_location": "implementation_spec.py:369-380",
+      "evidence": "Line 375-379: splits card at character boundary without parsing structure. If card has frontmatter (YAML), boundary may slice through metadata",
+      "impact": "Agent cards receive corrupted or incomplete behavioral templates; agent type-to-official-type mapping may fail; spawn discipline boilerplate gets truncated",
+      "remediation": "Parse card frontmatter + body separately; truncate body only, preserve frontmatter + closing section intact",
+      "confidence": 0.79
+    },
+    {
+      "id": "FFMx-5-WAVE-PARAMS-CONFIG-HARDCODED",
+      "severity": "HIGH",
+      "component": "WAVE_PARAMS dict + AgentSpawner wave config",
+      "issue": "Wave parameters (max_parallel, timeout_seconds, model) are hardcoded at module level. No environment variable override, no per-investigation-label customization. Breaks equilibrium constraint: cannot tune system response without editing source.",
+      "code_location": "implementation_spec.py:100-122",
+      "evidence": "Lines 100-122: WAVE_PARAMS is a static dict. No Config class or env-var reader to allow runtime tuning",
+      "impact": "Cannot adapt wave parameters to different investigation contexts (e.g., W1 haiku may be too weak for deep synthesis; no way to upgrade to sonnet mid-investigation)",
+      "remediation": "Externalize WAVE_PARAMS to config file (JSON/YAML) or environment variables; add override capability at dispatch_wave() call site",
+      "confidence": 0.81
+    },
+    {
+      "id": "FFMx-6-RATE-LIMITER-ASYNC-ONLY",
+      "severity": "HIGH",
+      "component": "TokenBucketRateLimiter (sync fallback missing)",
+      "issue": "Rate limiter has both async and sync methods, but sync_acquire() does not have asyncio.Lock guard. W1 parallel spawn with both async + sync contexts causes token bucket state corruption.",
+      "code_location": "implementation_spec.py:747-790",
+      "evidence": "Lines 777-789: acquire_sync() modifies self._tokens without lock; async path uses self._lock but sync path bypasses it",
+      "impact": "Rate limit enforcement becomes probabilistic; API quota may be exceeded during W1 LIFTOFF; cost overruns possible",
+      "remediation": "Unify to async-only (preferred) or use threading.Lock for true sync safety. Audit _is_async_context() usage pattern",
+      "confidence": 0.83
+    },
+    {
+      "id": "FFMx-7-MANIFEST-VALIDATION-INCOMPLETE",
+      "severity": "MEDIUM",
+      "component": "BundleComposer.validate_bundle()",
+      "issue": "Bundle validation only checks for marker strings, not semantic correctness. Missing: dashboard_line length check, compass_edge valid values (N/S/E/W), quality_score/belief_index bounds (0.0-1.0).",
+      "code_location": "implementation_spec.py:469-496",
+      "evidence": "Lines 476-487: only searches for marker presence; no schema validation",
+      "impact": "Invalid manifests can be written; downstream agents receiving corrupt bundles; scout/compass-navigator agents may fail to parse signals",
+      "remediation": "Add schema validator (JSON schema or Pydantic model); check bounds, format, semantic constraints before bundle is injected",
+      "confidence": 0.76
+    },
+    {
+      "id": "FFMx-8-COC-ENTRY-FAILURE-SILENT",
+      "severity": "MEDIUM",
+      "component": "ManifestWriter._write_coc_entry()",
+      "issue": "COC entry subprocess failure (line 738-739) is caught and logged as warning only. No fallback or retry. Critical forensic signal lost silently.",
+      "code_location": "implementation_spec.py:686-739",
+      "evidence": "Lines 738-739: subprocess timeout/error → log.warning(), return; manifest written but COC entry missing",
+      "impact": "Forensic chain of custody broken; audit trail incomplete; cannot prove manifest was generated by legitimate agent (reputation scoring unreliable)",
+      "remediation": "Retry COC write with exponential backoff; if still failing, raise exception and fail the manifest write (transactional guarantee)",
+      "confidence": 0.78
+    }
+  ],
+  "positive_findings": [
+    {
+      "id": "PLUS-1-ATOMIC-WRITE-PATTERN",
+      "component": "ManifestWriter.write()",
+      "note": "Excellent atomic write pattern: temp file + fsync + rename (POSIX atomic). Prevents partial-read corruption. This is correct."
+    },
+    {
+      "id": "PLUS-2-STRUCTURED-CONCURRENCY",
+      "component": "WaveDispatcher._dispatch_inline()",
+      "note": "Uses asyncio.TaskGroup (Python 3.11+) for structured concurrency. Proper exception handling via ExceptionGroup. Clean + correct."
+    },
+    {
+      "id": "PLUS-3-SELF-TEST-SUITE",
+      "component": "_run_self_tests()",
+      "note": "Comprehensive 8-test self-test suite covers core workflows (bundle composition, manifest write, dry-run). Good validation practice."
+    },
+    {
+      "id": "PLUS-4-BUNDLE-COMPOSITION-LAYERING",
+      "component": "BundleComposer.compose()",
+      "note": "Correct layering of context: global HONEY → project HONEY → NECTAR → pollen → card → task. Respects faerie2 principles."
+    }
+  ],
+  "compression_impact_assessment": {
+    "ffmx_payload_compression_factor": 0.54,
+    "dashboard_line_compression_ratio": 2.2,
+    "findings_vs_ffmx": "FFMx report claims 2.2× compression via dashboard-line limitation (30.8K tokens/manifest vs. 65K+ transcripts). Implementation_spec.py validates this: ManifestWriter outputs manifest JSON + dashboard_line (80-char capped). However, bundle composition (BundleComposer) can inflate context significantly due to HONEY/NECTAR/card inlining. NECTAR caching is critical to achieving 0.54× cost savings; race condition (FFMx-1) jeopardizes this.",
+    "risk_to_ffmx_metric": "If NECTAR TTL race causes redundant reads or bundle validation fails (FFMx-7), actual measured compression may degrade to 0.65-0.75× instead of claimed 0.54×. This would lower FFMx from 44.4 to ~35-38, a 15-20% degradation."
+  },
+  "code_quality_scoring": {
+    "architecture_score": 0.85,
+    "maintainability_score": 0.61,
+    "correctness_score": 0.74,
+    "performance_score": 0.72,
+    "security_score": 0.68,
+    "composite": 0.72
+  },
+  "recommendations": [
+    "IMMEDIATE (before W1 production): Fix FFMx-1 (NECTAR TTL race) and FFMx-3 (manifest counter collision). Both affect forensic integrity.",
+    "HIGH PRIORITY: Implement FFMx-2 (HONEY truncation tracking) and FFMx-4 (card excerpt parsing). Both affect agent context completeness.",
+    "MEDIUM PRIORITY: Externalize WAVE_PARAMS (FFMx-5) and add bundle schema validation (FFMx-7). Both improve maintainability + flexibility.",
+    "CONSIDER: Unified async-only design (remove sync fallback) or true threading.Lock for rate limiter (FFMx-6)."
+  ],
+  "next_steps": [
+    "Implement atomic NECTAR cache with asyncio.Lock",
+    "Add manifests tests for counter collision scenarios",
+    "Parse HONEY/NECTAR structure before truncation",
+    "Create JSON schema for bundle validation",
+    "Spike: measure actual compression ratio in production (compare claimed vs. observed FFMx)"
+  ],
+  "observed_patterns": [
+    "Bundle composition respects faerie2 principles (good); async architecture is modern + correct",
+    "Caching strategy is sound (TTL + 5-min piston wave cadence match); race condition is implementation detail, not design flaw",
+    "Manifest naming (date-organized, task_id-in-filename) follows forensic standard correctly",
+    "Error handling is mostly graceful; COC entry failure is the weak spot"
+  ]
+}

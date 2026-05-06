@@ -1,0 +1,201 @@
+{
+  "task_id": "vault-crystallization-scout-2",
+  "agent_type": "stigmergy-scout",
+  "investigation_label": "vault-crystallization-parallel-audit",
+  "status": "completed",
+  "phase": "SEED",
+  "quality_score": 0.78,
+  "belief_index": 0.88,
+  "dashboard_line": "Vault braiding audit: 10/11 docs complete, dashboard missing 3 headers, 13 broken wikilinks, all content dense (307-2295 words)",
+  "compass_edge": "S",
+  "next_task_queued": "vault-crystallization-fixer-phase",
+  "metadata": {
+    "scope": "braiding_completeness_orphan_detection",
+    "start_time": "2026-04-28T00:00:00Z",
+    "focus_area": "SCOUT 2 of 4 — Braiding Completeness & Orphan Detection"
+  },
+  "findings": [
+    {
+      "severity": "HIGH",
+      "category": "missing_structure",
+      "doc": "00-DASHBOARD.md",
+      "issue": "Missing breadcrumb navigation header",
+      "detail": "Dashboard lacks '**Breadcrumb:** [[00-DASHBOARD]] > [[...]' pattern. Required per 09-vault-architecture §3 Pattern 1.",
+      "impact": "Readers cannot navigate up to parent or across to siblings from dashboard"
+    },
+    {
+      "severity": "HIGH",
+      "category": "missing_structure",
+      "doc": "00-DASHBOARD.md",
+      "issue": "Missing related footer",
+      "detail": "Dashboard lacks footer: '**Related:** [[doc1]], [[doc2]], [[doc3]]'. Required per 09-vault-architecture §3 Pattern 3.",
+      "impact": "Discoverability broken at entry point; users cannot find related docs"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "missing_structure",
+      "doc": "00-DASHBOARD.md",
+      "issue": "Missing status footer",
+      "detail": "Dashboard lacks '**Status:** [descriptor] | [Last Updated: DATE]' footer per canonical pattern.",
+      "impact": "Readers unclear on document freshness and canonical status"
+    },
+    {
+      "severity": "HIGH",
+      "category": "broken_wikilink",
+      "source_docs": ["00-DASHBOARD.md"],
+      "targets": [
+        "[[forensic-governance]]",
+        "[[settings-sync]]",
+        "[[investigation-1]]",
+        "[[investigation-2]]",
+        "[[investigation-3]]",
+        "[[sdk-readiness-mcp-deployment]]",
+        "[[skills-audit-free-model-readiness]]"
+      ],
+      "count": 7,
+      "detail": "7 wikilinks reference docs that don't exist or have wrong names. E.g., '[[forensic-governance]]' should resolve to '[[01-forensic-governance]]', '[[settings-sync]]' should be '[[02-settings-sync-strategy]]'.",
+      "impact": "Dashboard links are dead; readers cannot follow trails to documentation"
+    },
+    {
+      "severity": "HIGH",
+      "category": "broken_wikilink",
+      "source_docs": ["09-vault-architecture.md"],
+      "targets": [
+        "[[05-mcp-server-architecture]]",
+        "[[mcp-server-architecture]]"
+      ],
+      "count": 2,
+      "detail": "References '[[05-mcp-server-architecture]]' but actual doc is '[[03-mcp-server-architecture]]'. Also '[[mcp-server-architecture]]' should be '[[03-mcp-server-architecture]]'.",
+      "impact": "Vault architecture doc points readers to nonexistent docs"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "broken_wikilink",
+      "source_docs": ["00-DASHBOARD.md"],
+      "targets": ["[[doc1]]", "[[doc2]]", "[[doc3]]"],
+      "count": 3,
+      "detail": "Template placeholders left in dashboard wikilinks. These should be replaced with actual doc names or removed.",
+      "impact": "Placeholder clutter; confuses readers about actual vault structure"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "broken_wikilink",
+      "source_docs": ["00-DASHBOARD.md"],
+      "targets": ["[[settings-sync-strategy]]"],
+      "count": 1,
+      "detail": "Wikilink '[[settings-sync-strategy]]' exists but correct doc name is '[[02-settings-sync-strategy]]'.",
+      "impact": "Link resolution may fail or require manual navigation"
+    },
+    {
+      "severity": "LOW",
+      "category": "orphan_low_backlinks",
+      "doc": "10-vault-maintenance.md",
+      "backlinks": 1,
+      "detail": "Referenced only 1 time in vault. Only mentioned in 09-vault-architecture footer.",
+      "impact": "Low discoverability from main docs; could be missed by new readers"
+    },
+    {
+      "severity": "LOW",
+      "category": "orphan_low_backlinks",
+      "doc": "05-mcp-deployment-zimaboard.md",
+      "backlinks": 4,
+      "detail": "Referenced only 4 times (deployment option, not core discovery path).",
+      "impact": "Secondary deployment path; lower traffic expected"
+    },
+    {
+      "severity": "LOW",
+      "category": "orphan_low_backlinks",
+      "doc": "09-vault-architecture.md",
+      "backlinks": 4,
+      "detail": "Referenced 4 times; should be higher given its foundational role in braiding.",
+      "impact": "Vault architecture is under-linked; readers may not discover maintenance protocol naturally"
+    },
+    {
+      "severity": "INFO",
+      "category": "content_density",
+      "doc": "01-forensic-governance.md",
+      "word_count": 307,
+      "detail": "Shortest doc in vault; focused governance model.",
+      "assessment": "Appropriate density for focused topic"
+    }
+  ],
+  "summary": {
+    "total_canonical_docs": 11,
+    "docs_with_complete_structure": 10,
+    "docs_missing_breadcrumb": 1,
+    "docs_missing_related": 1,
+    "docs_missing_status": 1,
+    "broken_wikilinks_total": 13,
+    "broken_wikilink_categories": {
+      "name_mismatch": 5,
+      "template_placeholders": 3,
+      "nonexistent_targets": 5
+    },
+    "orphans_critical": 0,
+    "orphans_low_backlinks": 3,
+    "average_wikilinks_per_doc": 2.5,
+    "content_density_assessment": "HEALTHY — all docs 307-2295 words, no thin/stub docs"
+  },
+  "braiding_metrics": {
+    "breadcrumb_pattern_compliance": "90.9%",
+    "related_footer_compliance": "90.9%",
+    "wikilink_health": "50.0%",
+    "avg_backlinks_per_doc": 6.3,
+    "documentation_quality": "🟡 CAUTION — structure present but dashboard hub broken"
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "action": "Fix 00-DASHBOARD structure",
+      "tasks": [
+        "Add breadcrumb: '**Breadcrumb:** [[00-DASHBOARD]]'",
+        "Add footer: '**Related:** [[07-work-hierarchy-codex]], [[08-documentation-governance]], [[09-vault-architecture]]'",
+        "Ensure consistent footer format across all docs"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "action": "Resolve dashboard wikilinks",
+      "tasks": [
+        "Replace [[forensic-governance]] → [[01-forensic-governance]]",
+        "Replace [[settings-sync]] → [[02-settings-sync-strategy]]",
+        "Remove template placeholders [[doc1]], [[doc2]], [[doc3]]",
+        "Remove placeholder investigation references: [[investigation-1]], [[investigation-2]], [[investigation-3]]"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "action": "Fix 09-vault-architecture wikilinks",
+      "tasks": [
+        "Replace [[05-mcp-server-architecture]] → [[03-mcp-server-architecture]]",
+        "Replace [[mcp-server-architecture]] → [[03-mcp-server-architecture]]"
+      ]
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Increase backlink coverage for low-linked docs",
+      "tasks": [
+        "Link 09-vault-architecture from 07-work-hierarchy-codex (braiding is part of hierarchy)",
+        "Link 10-vault-maintenance from more core docs (it's critical anti-creep policy)",
+        "Consider adding 10-vault-maintenance reference to dashboard 'Read First' section"
+      ]
+    },
+    {
+      "priority": "LOW",
+      "action": "Monitor content density",
+      "assessment": "All docs are well-formed and substantive. No consolidation needed at this time."
+    }
+  ],
+  "prescan_decision": "passed — stale work, documents are fresh but structure fixes needed",
+  "discovered_work": [
+    {
+      "task": "vault-crystallization-fixer-phase",
+      "phase": "DEEPEN",
+      "type": "structure_repair",
+      "blocker_count": 13,
+      "estimated_complexity": "MEDIUM",
+      "agent_type": "documentation-engineer",
+      "investigation_label": "vault-crystallization-parallel-audit"
+    }
+  ]
+}

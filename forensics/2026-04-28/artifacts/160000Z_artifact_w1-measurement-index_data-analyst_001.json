@@ -1,0 +1,171 @@
+{
+  "index_type": "W1_LIFTOFF_TOKEN_MEASUREMENT",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "task_id": "w1-spawn-cost-measurement-70pct",
+  "created_at": "2026-04-28T16:00:00Z",
+  "status": "framework_complete_ready_for_execution",
+  "context_fill_pct": 70,
+  "artifacts": [
+    {
+      "name": "w1-measurement-index",
+      "path": "forensics/2026-04-28/artifacts/160000Z_artifact_w1-measurement-index_data-analyst_001.json",
+      "type": "index",
+      "purpose": "Navigation guide for all W1 measurement artifacts",
+      "status": "current"
+    },
+    {
+      "name": "w1-measurement-baseline",
+      "path": "forensics/2026-04-28/artifacts/160000Z_artifact_w1-measurement-baseline_data-analyst_001.json",
+      "type": "json_snapshot",
+      "purpose": "Pre-spawn baseline metrics (bundles, manifest analysis, theory)",
+      "status": "complete",
+      "phase": 1,
+      "key_contents": ["bundle_inventory", "manifest_samples", "theory_predicted"]
+    },
+    {
+      "name": "w1-measurement-methodology",
+      "path": "forensics/2026-04-28/artifacts/160001Z_artifact_w1-token-measurement-methodology_data-analyst_001.md",
+      "type": "markdown_protocol",
+      "purpose": "5-phase measurement protocol with detailed steps and gates",
+      "status": "complete",
+      "phases": ["baseline_capture", "spawn_execution", "manifest_collection", "usage_metrics", "analysis"],
+      "key_sections": ["phase descriptions", "success criteria", "compass navigation"]
+    },
+    {
+      "name": "w1-spawn-formula-calibration",
+      "path": "forensics/2026-04-28/artifacts/160002Z_artifact_w1-spawn-formula-calibration_data-analyst_001.md",
+      "type": "markdown_theory",
+      "purpose": "Detailed token budget breakdown, cache efficiency mechanics, scaling analysis",
+      "status": "complete",
+      "theory_predicted_tokens": 20000,
+      "expected_actual_with_cache": 13250,
+      "key_sections": ["token_budget", "cache_mechanisms", "scaling", "interpretation_guide"]
+    },
+    {
+      "name": "w1-measurement-summary",
+      "path": "forensics/2026-04-28/artifacts/160003Z_artifact_w1-measurement-summary_data-analyst_001.md",
+      "type": "markdown_executive",
+      "purpose": "Executive summary, key findings, success criteria, compass bearing logic",
+      "status": "complete",
+      "key_sections": ["baseline_findings", "protocol_phases", "success_criteria", "next_steps"]
+    },
+    {
+      "name": "w1-measurement-execution-checklist",
+      "path": "forensics/2026-04-28/artifacts/160004Z_artifact_w1-measurement-execution-checklist_data-analyst_001.md",
+      "type": "markdown_checklist",
+      "purpose": "Step-by-step execution guide with checkboxes, commands, and decision tree",
+      "status": "ready_to_execute",
+      "phases": ["pre_execution", "spawn_execution", "manifest_collection", "token_measurement", "analysis"],
+      "key_features": ["checkbox_workflows", "command_templates", "decision_tree"]
+    },
+    {
+      "name": "w1-measurement-results",
+      "path": "forensics/2026-04-28/artifacts/160005Z_artifact_w1-measurement-results_data-analyst_001.md",
+      "type": "markdown_results",
+      "purpose": "Post-execution results (to be filled after W1 spawn completes)",
+      "status": "template_ready",
+      "phase": 5,
+      "to_be_filled": ["metrics_collected", "outcome_classification", "findings", "compass_bearing"]
+    }
+  ],
+  "bundles": [
+    {
+      "name": "w1-spawn-cost-measurement",
+      "path": "forensics/2026-04-28/bundles/160000Z_bundle_w1-spawn-cost-measurement_data-analyst_001.json",
+      "type": "task_bundle",
+      "purpose": "Measurement protocol and task instructions for W1 agents",
+      "wave": "W1",
+      "agents": 4,
+      "model": "haiku"
+    }
+  ],
+  "manifests": [
+    {
+      "name": "w1-spawn-cost-measurement",
+      "path": "forensics/2026-04-28/manifests/160000Z_manifest_w1-spawn-cost-measurement_data-analyst_001.json",
+      "type": "routing_signal",
+      "purpose": "Measurement plan, baseline findings, spawn plan, success criteria",
+      "quality_score": 0.85,
+      "belief_index": 0.88,
+      "compass_edge": "S",
+      "next_bearing": "S",
+      "next_task_queued": "w1-spawn-execution-trigger"
+    }
+  ],
+  "key_metrics": {
+    "theory_predicted_tokens": 20000,
+    "light_bundle_tokens": 5000,
+    "agents_to_spawn": 4,
+    "expected_actual_tokens_with_cache": 13250,
+    "expected_cache_efficiency_pct": 33.75,
+    "quality_gate_threshold": 0.70,
+    "belief_gate_threshold": 0.70,
+    "acceptable_gap_pct": 10
+  },
+  "reading_order": [
+    "THIS FILE (index)",
+    "w1-measurement-summary (executive overview)",
+    "w1-measurement-baseline (pre-spawn snapshot)",
+    "w1-measurement-methodology (5-phase protocol)",
+    "w1-spawn-formula-calibration (token theory)",
+    "w1-measurement-execution-checklist (how to run)"
+  ],
+  "decision_tree": {
+    "phase_1_baseline": {
+      "description": "Baseline captured, formula documented, ready to spawn",
+      "status": "complete",
+      "next": "phase_2_spawn"
+    },
+    "phase_2_spawn": {
+      "description": "Trigger W1 LIFTOFF with 4 haiku agents",
+      "status": "ready",
+      "next": "phase_3_manifests",
+      "success_criteria": "all_4_agents_return_manifests"
+    },
+    "phase_3_manifests": {
+      "description": "Collect 4 manifests, verify quality >= 0.70 and belief >= 0.70",
+      "status": "pending_spawn_completion",
+      "bearing_if_pass": "proceed",
+      "bearing_if_fail": "north_unblock"
+    },
+    "phase_4_measurement": {
+      "description": "Calculate actual tokens vs. 20K theory",
+      "status": "pending_manifests",
+      "success_criteria": "gap_within_10_percent"
+    },
+    "phase_5_analysis": {
+      "description": "Determine compass bearing (N/S/E/W) and next investigation",
+      "status": "pending_measurement",
+      "outcomes": {
+        "south": "all_gates_pass_formula_calibrated",
+        "north": "quality_degradation_enhance_bundle",
+        "east": "cache_efficiency_surprisingly_high",
+        "west": "formula_significantly_off_recalibrate"
+      }
+    }
+  },
+  "related_investigations": [
+    "formula-calibration-analysis (W2 phase, deep analysis)",
+    "cache-efficiency-characterization (if E bearing)",
+    "bundle-composition-redesign (if W bearing)"
+  ],
+  "forensic_recovery": {
+    "all_artifacts_recoverable_via": "find forensics -name '*160000*' -o -name '*160001*' ... -o -name '*160005*'",
+    "quick_grep": "grep -r 'w1-spawn-cost-measurement' forensics/",
+    "archive_bundle": "w1-measurement-archive-2026-04-28.tar.gz (post-execution)"
+  },
+  "quality_metrics": {
+    "framework_completeness": 1.0,
+    "documentation_coverage": 1.0,
+    "execution_readiness": 1.0,
+    "success_criteria_measurable": true
+  },
+  "compass_bearing_current": "S",
+  "compass_bearing_expected_after_spawn": "S",
+  "status_dashboard": {
+    "setup_phase": "complete",
+    "baseline_phase": "complete",
+    "execution_phase": "ready",
+    "analysis_phase": "pending_execution"
+  }
+}

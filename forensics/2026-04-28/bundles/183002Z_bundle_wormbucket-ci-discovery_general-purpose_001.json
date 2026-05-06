@@ -1,0 +1,47 @@
+{
+  "task_id": "wormbucket-ci-cd-discovery-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "general-purpose",
+  "phase": "DISCOVERY",
+  "created_utc": "2026-04-28T18:30:02Z",
+
+  "ffff_framework": {
+    "findings_goal": "Locate all wormbucket CI/CD scripts scattered across ~(?), hustle/, faerie2/, global .claude/; identify what each does, when it runs, interdependencies",
+    "flags_goal": "RED flags: hardcoded secrets, no error handling, silent failures; YELLOW: undocumented, untested; GREEN: well-structured with proper logging",
+    "flow_goal": "Map deployment pipeline: dev → staging → prod; bucket provisioning flow; backup initiation; monitoring/alerting. Where are the gates?",
+    "friction_goal": "B2 rate-limit timeouts (40% failure rate per audit note), missing stage gates between staging↔prod, no automated recovery/retry"
+  },
+
+  "critical_context": {
+    "scripts_found": {
+      "hustle_location": "/mnt/d/0local/gitrepos/hustle/scripts/",
+      "scripts": [
+        "03-auto-deploy.sh (deployment orchestrator)",
+        "06-b2-integrate-backup.sh (backup to B2)",
+        "07-auto-spawn-worm-bucket.sh (WORM bucket provisioning w/ --customer --project --retention-days)",
+        "08-test-worm-bucket.sh (validation)",
+        "09-monitor-coc-buckets.py (monitoring + alerting)",
+        "worm-bucket-config.yml (configuration)"
+      ]
+    },
+    "scattering_problem": "CI/CD scripts also found in: ~/.?, faerie2/.claude/, possibly global .claude/ — need comprehensive inventory",
+    "integration_gaps": "Do hustle scripts talk to faerie-vault forensics? Do they write COC entries? Do they respect manifest routing (investigation_label)?"
+  },
+
+  "discovery_tasks": {
+    "locate_all": "Find all CI/CD scripts: bash find across ~, d/0local/gitrepos/*, .claude/* for patterns: *ci*, *cd*, *deploy*, *workflow*, *bucket*, *backup*, *push*",
+    "categorize": "Buckets: (A) deployment orchestration, (B) provisioning, (C) backup/restore, (D) monitoring/alerting, (E) validation/testing",
+    "map_pipeline": "Draw flow diagram: what triggers what? What are the gates? What can run in parallel?",
+    "audit_hardening": "Security review: are secrets injected safely? Error handling? Logging sufficiency?"
+  },
+
+  "success_criteria": {
+    "inventory": "CSV with path, function, triggers, dependencies, RED/YELLOW/GREEN status",
+    "pipeline_diagram": "Markdown flowchart showing dev→staging→prod flow with gates and parallel stages",
+    "consolidation_recommendation": "Suggest target home for unified CI/CD (likely faerie-vault/scripts/ or faerie2/.claude/scripts/)",
+    "compass_edge": "S if all scripts documented and flow clear; E if uncertain about hidden scripts; W if conflicting patterns found"
+  },
+
+  "next_task_queued": "ci-cd-consolidation-design"
+}

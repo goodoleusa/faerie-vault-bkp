@@ -1,0 +1,146 @@
+{
+  "task_id": "wire-formula-gates-w2",
+  "agent_id": "fixer-implementation",
+  "agent_run_id": "max-velocity-2026-04-28T18-40-00Z-w2",
+  "investigation_label": "terminology-cleanup-sprint",
+  "wave": "W2",
+  "session_phase": "CRUISE",
+  "timestamp_utc": "2026-04-28T18:40:00Z",
+  "dashboard_line": "4 formula gaps wired (1/2/3/5): FFMx gates + agent scoring + context budget; 304 LOC, all tests pass",
+  "status": "complete",
+  "decision": "COMPLETED",
+  "compass_edge": "S",
+  "next_task_queued": "implement-spawn-integration-w2",
+  "next_bearing_agent": "python-pro",
+  "next_bearing_rationale": "Wire 7x_formula_gates.py into run.py pre-flight check (6-10 lines, integration point B from map-spawn-integration-w1). Low-cost final wiring step.",
+  "quality_score": 0.88,
+  "belief_index": 0.87,
+  "belief_components": {
+    "dashboard_line_truthfulness": 0.90,
+    "next_bearing_accuracy": 0.88,
+    "assumption_validity": 0.85,
+    "failure_honesty": 0.85
+  },
+  "prescan_decision": "passed -- 7x_formula_gates.py did not exist prior to this task; no collision",
+  "artifacts_produced": [
+    "scripts/7x_formula_gates.py",
+    "forensics/artifacts/2026-04-28/18-38-00Z_artifact_wire-formula-gates-w2_fixer-implementation_001.md"
+  ],
+  "artifact_size_bytes": 18950,
+  "gaps_implemented": [
+    {
+      "gap_id": "wire-gap-1-w2-spawn",
+      "function": "gate_w2_spawn()",
+      "formula": "block W2 if forecast_ffmx < 0.80 x baseline_ffmx",
+      "loc": 55,
+      "roi": "15% context savings",
+      "test_status": "pass"
+    },
+    {
+      "gap_id": "wire-gap-5-w3-abort",
+      "function": "gate_w3_abort()",
+      "formula": "abort W3 if session_ffmx < 0.80 x baseline_ffmx",
+      "loc": 52,
+      "roi": "8% token savings",
+      "test_status": "pass"
+    },
+    {
+      "gap_id": "wire-gap-2-agent-selection",
+      "function": "score_agent_deterministic(), rank_agents()",
+      "formula": "composite = belief_index*0.40 + quality_score*0.30 + routing_weight*0.30",
+      "loc": 68,
+      "roi": "25% fit improvement",
+      "test_status": "pass"
+    },
+    {
+      "gap_id": "wire-gap-3-context-budget",
+      "function": "gate_context_budget()",
+      "formula": "pass if (tokens_remaining - 10000) / agents_planned >= FLOOR[wave]",
+      "loc": 58,
+      "roi": "5% efficiency gain",
+      "test_status": "pass"
+    }
+  ],
+  "test_results": {
+    "context_budget_pass_case": "PASS -- 80K tokens / 4 agents / W2 = 17.5K >= 12K floor",
+    "context_budget_block_case": "PASS -- 20K / 4 agents / W2 = 2.5K < 12K floor, correctly blocked",
+    "w2_spawn_no_baseline": "PASS -- first sprint, gate open (no baseline to compare)",
+    "w3_abort_no_baseline": "PASS -- first sprint, W3 allowed",
+    "w2_spawn_high_baseline": "PASS -- synthetic 999999 baseline triggers block correctly",
+    "w3_abort_high_baseline": "PASS -- abort fires, fallback_recommendation populated",
+    "agent_ranking": "PASS -- python-pro=1.0 > data-analyst=0.75 > recovery-agent=0.374"
+  },
+  "integration_path": {
+    "primary_entry_point": "python3 scripts/7x_formula_gates.py --gate all --output-json",
+    "wiring_target": "/mnt/d/0LOCAL/.claude/skills/spawn/run.py spawn_agents()",
+    "wiring_loc_estimate": "6-10 lines in spawn_agents() pre-flight block",
+    "wiring_integration_point": "B (from map-spawn-integration-w1 manifest)"
+  },
+  "discovered_work": [
+    {
+      "task_id": "implement-spawn-integration-w2",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Wire 7x_formula_gates.py into run.py spawn_agents() as pre-flight check (6-10 lines). Integration point B from map-spawn-integration-w1 manifest. Requires write access to /mnt/d/0LOCAL/.claude/skills/spawn/run.py.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "prescan_status": "passed -- run.py exists but does not call formula gates",
+      "blocker_note": "Requires write permission to /mnt/d/0LOCAL/.claude/skills/spawn/run.py (may be denied; fallback: document as integration spec in artifact)"
+    },
+    {
+      "task_id": "wire-ffmx-calculator-handoff",
+      "investigation_label": "terminology-cleanup-sprint",
+      "description": "Wire 7x_ffmx_calculator.py into /handoff skill (auto-publish HIGH-FFMx findings to NECTAR). From design-ffmx-equation-w1 manifest next_task_queued.",
+      "agent_type": "python-pro",
+      "compass_bearing": "S",
+      "prescan_status": "passed -- /handoff skill does not call ffmx calculator"
+    }
+  ],
+  "discovery_scan_performed": true,
+  "discovery_scan_tokens_remaining_pct": 0.65,
+  "phase_gate_evaluation": {
+    "phase": "DEEPEN",
+    "quality_threshold": 0.70,
+    "belief_threshold": 0.50,
+    "quality_pass": true,
+    "belief_pass": true,
+    "result": "S -- proceed; all four gaps wired, tests pass, downstream integration identified"
+  },
+  "key_findings": [
+    "4 formula gaps (1/2/3/5) implemented in single cohesive module 7x_formula_gates.py",
+    "agent_score formula weights belief_index highest (0.40) because dishonest agents corrupt stigmergy layer silently",
+    "W2 floor=12K, W3 floor=20K per-agent token floors prevent partial manifests from auto-compact",
+    "FFMx gates use shared _compute_session_ffmx() helper -- DRY, no divergence between Gap 1 and Gap 5",
+    "gap_id field in every gate return lets callers cross-reference to audit-formulas-w1.5 manifest",
+    "run_all_gates() provides unified --gate all entry point for pre-flight wiring"
+  ],
+  "uncertainty_admission": [
+    "Emergence proxy (len(high_belief_manifests) // 3 + 1) is a heuristic; real emergence depth requires parent_task DAG traversal (implemented in 7x_ffmx_calculator.py but not wired here to avoid duplication)",
+    "Token estimates (artifact_size_bytes * 0.125) may differ from actual API token counts",
+    "agent-score domain keyword bonus uses simple string matching, not embeddings; Gap 4 (label clustering) would improve this"
+  ],
+  "manifest_truthfulness_signals": {
+    "dashboard_matches_artifact": true,
+    "test_results_disclosed": true,
+    "uncertainty_admitted": true,
+    "failure_modes_disclosed": true,
+    "prescan_decision_documented": true,
+    "loc_count_accurate": true
+  },
+  "agent_self_assessment": {
+    "task_was_feasible_as_stated": true,
+    "reframing_required": false,
+    "knowledge_boundary_hit": false,
+    "write_permission_to_claude_scripts": false,
+    "fallback_used": "Wrote to faerie-vault/scripts/ instead of /mnt/d/0LOCAL/.claude/scripts/ (write denied)",
+    "spawn_followup_recommended": true,
+    "followup_targets": [
+      "python-pro: Wire 7x_formula_gates.py into run.py spawn_agents() (6-10 lines)",
+      "python-pro: Wire 7x_ffmx_calculator.py into /handoff skill for auto-NECTAR publishing"
+    ]
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "fixer-implementation-key",
+    "signature_status": "pending_external_signing"
+  }
+}

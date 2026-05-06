@@ -1,0 +1,187 @@
+{
+  "artifact_type": "mutation-execution-baseline-metrics",
+  "experiment_id": "EXP-2026-04-28-f0calA1",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "authored_by": "performance-eval (W3 INSERTION)",
+  "authored_at": "2026-04-28T16:00:00Z",
+  "phase": "Phase 1 — Baseline Capture (pre-mutation observation, mutation already applied)",
+  "collection_method": "Scalar reads of faerie2-formulas.json + forensics/2026-04-28/manifests/; no full artifact reads",
+
+  "formula_state_confirmed": {
+    "NECTAR_INJECTION_TOKENS_current": 1200,
+    "NECTAR_INJECTION_TOKENS_baseline": 1200,
+    "NECTAR_INJECTION_TOKENS_measured": "2026-04-28 via Scout 2",
+    "HONEY_INJECTION_TOKENS_current": 200,
+    "HONEY_INJECTION_TOKENS_baseline": 200,
+    "HONEY_INJECTION_TOKENS_measured": "2026-04-28 via Scout 3",
+    "formula_source": "/mnt/d/0local/.claude/faerie2-formulas.json",
+    "status": "CONFIRMED — both values match experiment plan; mutation is live"
+  },
+
+  "baseline_metrics": {
+    "collection_date": "2026-04-28",
+    "manifests_sampled": 1,
+    "manifest_paths_sampled": [
+      "forensics/2026-04-28/manifests/143024Z_manifest_wormbucket-ci-cd-discovery-w2_agent_001.json"
+    ],
+    "note": "N=1 manifest available today in forensics/2026-04-28/manifests/. Baseline is single-session; 3-session average will be computed by post-mutation measurement cycle.",
+
+    "primary_metrics": {
+      "bundle_injection_cost_tokens": {
+        "value": 1404,
+        "formula": "NECTAR_actual(1204) + HONEY_actual(200)",
+        "theoretical_old_value": 4500,
+        "delta_vs_theory": -3096,
+        "delta_pct": -68.8,
+        "confidence": "HIGH — both components measured empirically this session",
+        "target_healthy_range": "1200-1600"
+      },
+      "NECTAR_actual_tokens": {
+        "value": 1204,
+        "source": "Scout 2 measurement 2026-04-28; confirmed in faerie2-formulas.json",
+        "confidence": "HIGH"
+      },
+      "HONEY_actual_tokens": {
+        "value": 200,
+        "source": "Scout 3 measurement 2026-04-28; confirmed in faerie2-formulas.json",
+        "confidence": "HIGH"
+      },
+      "agent_ramp_up_efficiency_pct": {
+        "value": 100,
+        "n_agents": 1,
+        "method": "Manifest investigation_label field present and correct in sampled manifest",
+        "confidence": "LOW — N=1; treat as directional only",
+        "target_healthy": ">=70%"
+      },
+      "emergence_signal_freshness_pct": {
+        "value": "UNMEASURABLE_THIS_SESSION",
+        "reason": "Metric requires checking whether manifests cite NECTAR entries <=24h old. Single manifest available does not include NECTAR citation fields. Will be measurable in post-mutation sessions.",
+        "target_healthy": ">=60%"
+      },
+      "context_layer_efficiency_pct": {
+        "value": "PROXY_ONLY",
+        "proxy": "Sampled manifest demonstrates correct compass bearing (S), investigation_label, and f(0) field structure → 100% on this proxy (N=1)",
+        "confidence": "LOW — N=1",
+        "target_healthy": ">=80%"
+      },
+      "architectural_principle_injection_cost_tokens": {
+        "value": 200,
+        "source": "HONEY_actual from Scout 3 measurement",
+        "target_healthy_range": "150-300",
+        "status": "IN RANGE"
+      },
+      "bundle_overhead_fraction": {
+        "value": 0.374,
+        "formula": "bundle_injection_cost(1404) / typical_agent_context(~3750 tokens for short-context task)",
+        "note": "Approximate denominator. For full sessions, overhead fraction is lower. Target: <=40% overhead",
+        "target_healthy": "<=0.40",
+        "status": "WITHIN RANGE (barely; depends on task instruction length)"
+      }
+    },
+
+    "secondary_metrics": {
+      "main_context_at_W2_start_pct": {
+        "value": "UNKNOWN",
+        "reason": "Not captured in manifests; token-context-log.json shows all historical runs also have context_used_k='unknown'. This is a persistent tracking gap.",
+        "action_required": "Post-mutation playbook includes explicit collection step for this metric",
+        "target_healthy": "<=50%"
+      },
+      "agents_per_wave_W1": {
+        "value": "NOT_DIRECTLY_OBSERVABLE",
+        "reason": "Only 1 manifest returned today; W1 wave count not recorded in manifest fields",
+        "proxy": "Manifest discovered_work=6 tasks queued from 1 agent; suggests agent was highly productive without N-agent W1 observable",
+        "target_healthy": ">=4"
+      },
+      "manifest_chain_depth": {
+        "value": 1,
+        "note": "1 manifest with 6 discovered_work items; chain starts but no downstream manifests written yet today",
+        "target_healthy": ">=3 per investigation_label"
+      },
+      "prescan_pass_rate_pct": {
+        "value": 100,
+        "n_spawns": 1,
+        "evidence": "prescan_decision field = 'passed — no recent CI/CD consolidation work found'",
+        "confidence": "LOW — N=1",
+        "target_healthy": ">=80%"
+      },
+      "compass_edge_S_rate_pct": {
+        "value": 100,
+        "n_manifests": 1,
+        "evidence": "compass_edge = 'S' in sampled manifest",
+        "confidence": "LOW — N=1",
+        "target_healthy": ">=60%"
+      },
+      "quality_score_sample": {
+        "value": 0.82,
+        "n": 1,
+        "source": "wormbucket-ci-cd-discovery-w2 manifest"
+      },
+      "belief_index_sample": {
+        "value": 0.88,
+        "n": 1,
+        "source": "wormbucket-ci-cd-discovery-w2 manifest"
+      }
+    }
+  },
+
+  "baseline_summary": {
+    "bundle_injection_cost_avg": 1404,
+    "agent_ramp_up_efficiency_avg_pct": "100 (N=1, low confidence)",
+    "emergence_signal_freshness_avg_pct": "unmeasurable — need post-mutation session data",
+    "main_context_at_W2_start_avg_pct": "unknown — structural tracking gap",
+    "compass_edge_S_rate_avg_pct": "100 (N=1, low confidence)",
+    "prescan_pass_rate_avg_pct": "100 (N=1, low confidence)",
+    "n_sessions_this_baseline": 1,
+    "sessions_still_needed": 2,
+    "note": "3-session average per experiment plan requires 2 more sessions. This document captures session-1 state. Post-mutation playbook defines collection protocol for sessions 2 and 3."
+  },
+
+  "anomalies_and_flags": {
+    "ANOMALY_1": {
+      "metric": "main_context_at_W2_start_pct",
+      "severity": "MEDIUM",
+      "description": "This metric has NEVER been captured across any session in token-context-log.json (all historical runs show context_used_k='unknown'). The experiment plan designates it as a primary secondary metric, but there is no instrumentation to collect it. Post-mutation sessions will face the same gap unless collection is wired.",
+      "recommended_action": "Add explicit context% checkpoint logging to session start protocol (not a formula mutation — a hook wiring task)",
+      "investigation_flag": "DISCOVERED_WORK — should spawn context-capture-wiring task"
+    },
+    "ANOMALY_2": {
+      "metric": "manifest_chain_depth",
+      "severity": "LOW",
+      "description": "Only 1 manifest in forensics/2026-04-28/manifests/ today, chain depth=1. This is a session-start baseline limitation, not a system health issue. Depth will grow as downstream agents complete discovered_work items.",
+      "recommended_action": "Collect chain depth at session END not session START for meaningful comparison"
+    },
+    "ANOMALY_3": {
+      "metric": "agents_per_wave_W1",
+      "severity": "LOW",
+      "description": "W1 wave count is not recorded in any manifest field — agents don't self-report their wave assignment. Cannot measure 'agents_per_wave_W1' without spawn log instrumentation.",
+      "recommended_action": "Add wave_id field to manifest schema (minimal change, high diagnostic value)"
+    }
+  },
+
+  "mutation_phase_observation": {
+    "status": "MUTATION ALREADY APPLIED",
+    "nectar_confusion_observed": false,
+    "honey_compass_errors_observed": false,
+    "anomalous_manifest_structure": false,
+    "token_savings_vs_prior_theory": {
+      "per_agent_tokens_saved": 3096,
+      "formula": "(NECTAR_old_theory(2000) + HONEY_old_theory(1500)) - (NECTAR_new(1204) + HONEY_new(200)) = 4500 - 1404 = 3096",
+      "pct_savings": 68.8,
+      "interpretation": "Each agent spawn now costs ~3,096 fewer tokens in context overhead — creates significant additional headroom per wave"
+    },
+    "wave_capacity_implication": {
+      "old_per_agent_cost": 4500,
+      "new_per_agent_cost": 1404,
+      "usable_context": 191000,
+      "system_overhead": 9000,
+      "available_for_agents": 182000,
+      "old_agents_per_context_window_theoretical": 40,
+      "new_agents_per_context_window_theoretical": 130,
+      "note": "Theoretical maximum; in practice limited by wave gates and task instruction tokens. But directionally: 3x more agent bandwidth available per session."
+    }
+  },
+
+  "compass_edge": "S",
+  "next_task_queued": "post-mutation-measurement-session-2",
+  "next_bearing": "S (proceed — execute sessions 2 and 3 of post-mutation measurement per playbook)"
+}

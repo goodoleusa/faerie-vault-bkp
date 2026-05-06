@@ -1,0 +1,100 @@
+{
+  "task_id": "coc-consolidation-design-phase-2-w2",
+  "agent_id": "python-pro",
+  "investigation_label": "coc-consolidation-design-phase-2-w2",
+  "timestamp": "2026-04-28T20:19:08Z",
+  "dashboard_line": "COC arch design done: 0x canonical, 4x shim, 8x deleted, 4 migrations W2",
+  "quality_score": 0.83,
+  "belief_index": 0.82,
+  "compass_edge": "S",
+  "phase": "DEEPEN",
+  "decision": "COMPLETED",
+
+  "artifact_path": "forensics/2026-04-28/artifacts/20-19-08Z_artifact_coc-consolidation-design-phase-2-w2_python-pro_001.md",
+
+  "key_findings": [
+    "4x_coc_writer.py is MORE capable than 0x_coc_writer.py (has fcntl locking, HMAC chains, Ed25519, branch support) — migration requires porting features INTO 0x first, then shimming 4x",
+    "4x_coc_bridge.py is NOT a redundant COC writer — it is a pure hash utility (stamp/verify); classified incorrectly in Phase 1 as redundant; keep it with scope annotation",
+    "8x_protect_coc_paths.py and 4x_protect_coc_paths.py are identical in body — safe to delete 8x immediately",
+    "5x_vault_mutation_tracker.py, 5x_post_vault_write_stamp.py, 8x_droplet_coc_tracker.py all do direct open().write() to forensic JSONLs — 3 concrete migration targets for W2",
+    "5d_ann_coc_watcher.py has no retry logic on rclone upload — silent failure risk confirmed",
+    "4x_subagent_coc_collector.py is NOT a duplicate — serves distinct subagent trace collection function",
+    "eval-history.jsonl in 3x_eval_harness.py has its own hash chain (acceptable domain separation)"
+  ],
+
+  "corrections_to_phase_1": [
+    "4x_coc_bridge.py should be KEEP+ANNOTATE, not DELETE — it is a hash utility, not a COC writer",
+    "4x_coc_writer.py features must be PORTED to 0x before shimming, not simply replaced — implementation order in Phase 1 design was inverted",
+    "4x_subagent_coc_collector.py is a distinct tool, not a duplicate of any other script"
+  ],
+
+  "architecture_decision": {
+    "canonical_writer_unsigned": "faerie2/.claude/scripts/0x_coc_writer.py",
+    "canonical_writer_signed": "faerie2/.claude/scripts/9x_coc_writer_signed.py",
+    "canonical_verifier": "faerie2/.claude/scripts/9x_coc_verifier.py",
+    "hash_utility": "faerie2/.claude/scripts/4x_coc_bridge.py",
+    "shim_targets": ["4x_coc_writer.py (faerie2)", "4x_coc_writer.py (global)", "9x_coc_writer_signed.py (global)"],
+    "immediate_deletes": ["8x_protect_coc_paths.py"],
+    "archive_targets": ["0x_state_to_forensics_migrator.py", "4x_synthesize_master_coc.py", "4x_forensic_coc_check.py"],
+    "migration_required": ["5x_vault_mutation_tracker.py", "5x_post_vault_write_stamp.py", "5d_ann_coc_watcher.py", "8x_droplet_coc_tracker.py"],
+    "new_functions_needed": ["log_vault_mutation()", "log_annotation()", "log_droplet()"],
+    "error_handling_needed": ["_with_retry()", "circuit breaker (5-failure threshold)", "rate limiter (10/10s)", "fallback path"]
+  },
+
+  "migration_schedule": {
+    "W1": [
+      "Port fcntl locking + HMAC chain + branch support from 4x into 0x",
+      "Add log_vault_mutation() and log_annotation() to 0x",
+      "Add error handling (retry, circuit breaker, rate limiter, fallback) to 0x",
+      "Annotate 4x_coc_bridge.py scope comment",
+      "Delete 8x_protect_coc_paths.py (identical to 4x)"
+    ],
+    "W2": [
+      "Migrate 5x_vault_mutation_tracker.py to log_vault_mutation()",
+      "Migrate 5x_post_vault_write_stamp.py to log_operation() via subprocess",
+      "Migrate 5d_ann_coc_watcher.py to log_annotation() + add retry loop",
+      "Migrate 8x_droplet_coc_tracker.py to log_annotation()",
+      "Make 4x_coc_writer.py (faerie2) a shim delegating to 0x"
+    ],
+    "W3": [
+      "Run 0x_state_to_forensics_migrator.py final pass → archive",
+      "Run 4x_synthesize_master_coc.py final pass → archive",
+      "Deprecate 4x_forensic_coc_check.py → archive",
+      "Create global shims for 4x_coc_writer + 9x_coc_writer_signed"
+    ],
+    "W4": [
+      "Run 9x_coc_verifier.py --all (chain integrity check)",
+      "Capture post-migration eval baseline via 3x_eval_mutation.py",
+      "Update docs/COC-WRITE-CONTRACT.md",
+      "Update hook configs: remove 8x_protect references"
+    ]
+  },
+
+  "discovered_work": [
+    "task-port-4x-features-into-0x-coc-writer",
+    "task-add-log-vault-mutation-function",
+    "task-add-error-handling-circuit-breaker",
+    "task-migrate-5x-vault-mutation-tracker",
+    "task-migrate-5d-ann-coc-watcher-add-retries",
+    "task-delete-8x-protect-coc-paths",
+    "task-annotate-4x-coc-bridge-scope",
+    "task-measure-pre-migration-baseline"
+  ],
+
+  "next_task_queued": "coc-consolidation-implementation-w3",
+  "next_bearing": "S",
+
+  "prescan_decision": "passed — no existing design artifact for phase-2 found",
+
+  "emergence_notes": {
+    "positive": "Consolidated writer enables per-script traceability via agent_id+task_id; new log_vault_mutation() surfaces vault mutation rate analytics that are currently invisible",
+    "uncertain": "manifest_truthfulness improvement is unconfirmed — measure pre/post in W4 before claiming",
+    "correction": "Phase 1 misclassified 4x_coc_bridge.py as redundant; this correction prevents an unnecessary deletion that would break hash stamping in vault scripts"
+  },
+
+  "sign_off": {
+    "agent": "python-pro",
+    "model": "claude-sonnet-4-6",
+    "session_note": "Direct codebase inspection of all key scripts; corrections to Phase 1 manifest classification are load-bearing for correct implementation"
+  }
+}

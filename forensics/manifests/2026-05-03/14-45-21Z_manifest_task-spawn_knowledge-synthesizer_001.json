@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-scale-w1-test",
+  "agent_type": "knowledge-synthesizer",
+  "investigation_label": "scale-w1-test",
+  "wave": "1",
+  "task_description": "Test wave 1 parallelism",
+  "timestamp": "2026-05-03T14:45:21.026345",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-knowledge-synthesizer",
+  "prescan_decision": "passed"
+}

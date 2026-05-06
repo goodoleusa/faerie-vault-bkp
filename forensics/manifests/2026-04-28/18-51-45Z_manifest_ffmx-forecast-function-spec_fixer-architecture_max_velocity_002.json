@@ -1,0 +1,105 @@
+{
+  "task_id": "ffmx-forecast-function-spec",
+  "agent_id": "fixer-architecture",
+  "agent_run_id": "max-velocity-2026-04-28T18-48-48Z",
+  "investigation_label": "terminology-cleanup-sprint",
+  "wave": "W2",
+  "session_phase": "DEEPEN",
+  "timestamp_utc": "2026-04-28T18:51:45Z",
+  "agent_run_start_utc": "2026-04-28T18:46:50Z",
+  "agent_run_end_utc": "2026-04-28T18:51:45Z",
+  "elapsed_seconds": 295,
+  "predicted_duration_minutes": 5,
+  "actual_duration_minutes": 4.92,
+  "accuracy_percent": 1.6,
+  "parent_task_id": "wire-discovery-execution-pipeline",
+  "parent_manifest_path": "forensics/manifests/2026-04-28/18-46-41Z_manifest_wire-discovery-execution-pipeline_fixer-architecture_max_velocity_001.json",
+  "parent_emergence_depth": 1,
+  "discovered_via": "in-flight discovery scan after primary manifest written; remaining context >75% triggered Inspiration Strike per CLAUDE.md mth00100",
+  "dashboard_line": "FFMx forecast function spec'd: contract, components, gates, edge cases, 5 unit tests, tuning plan",
+  "status": "complete",
+  "decision": "COMPLETED",
+  "compass_edge": "S",
+  "next_task_queued": "impl-ffmx-forecast-function",
+  "next_bearing_agent": "python-pro",
+  "next_bearing_rationale": "Spec is implementation-ready. python-pro can take this artifact + the parent pipeline architecture and write ~40 LOC additive function with unit tests, no further design work needed.",
+  "quality_score": 0.85,
+  "belief_index": 0.80,
+  "belief_components": {
+    "dashboard_line_truthfulness": 0.92,
+    "next_bearing_accuracy": 0.85,
+    "assumption_validity": 0.72,
+    "failure_honesty": 0.72
+  },
+  "prescan_decision": "passed — no prior forecast function spec exists; greenfield within parent architecture's Section 5",
+  "artifact_path": "forensics/artifacts/2026-04-28/18-48-48Z_artifact_ffmx-forecast-function-spec_fixer-architecture_001.md",
+  "artifact_size_bytes": 5870,
+  "artifacts_produced": [
+    "forensics/artifacts/2026-04-28/18-48-48Z_artifact_ffmx-forecast-function-spec_fixer-architecture_001.md"
+  ],
+  "key_findings": [
+    "Function contract specified: forecast_ffmx() takes 7 args, returns ForecastResult dataclass with gate_decision",
+    "Sub-discovery constants table laid out for all 12 (wave, bearing) combinations — explicitly marked as educated guesses pending calibration",
+    "Token budget table covers 5 (wave, model) pairs with default fallback",
+    "Quality decay = 0.95 per generation; belief blends in at 30% weight to penalize low-belief parents",
+    "Critical override mechanism: priority=critical bypasses gate but logs to ledger for audit",
+    "5 unit tests defined as merge prerequisites — strong/weak parent, deep emergence, unknown bearing, zero baseline edge",
+    "Tuning plan is data-driven: collect 30d, compute calibration curve, do not hand-tune",
+    "Honest unknowns disclosed: sub-discovery constants, token budgets, quality decay are all uncalibrated"
+  ],
+  "manifest_truthfulness_signals": {
+    "dashboard_matches_artifact": true,
+    "honest_unknowns_disclosed": true,
+    "tuning_plan_data_driven_not_speculative": true,
+    "edge_cases_enumerated_with_behaviors": true,
+    "unit_tests_defined_concretely": true,
+    "discovered_via_field_present": true,
+    "parent_lineage_present": true
+  },
+  "discovered_work": [],
+  "discovery_scan_performed": false,
+  "discovery_scan_skipped_reason": "This task IS itself a discovery from parent. Doing a second-order discovery scan would be diminishing returns; better to return tokens to main and let synthesizer agents pick up next.",
+  "phase_gate_evaluation": {
+    "phase": "DEEPEN",
+    "quality_threshold": 0.70,
+    "belief_threshold": 0.50,
+    "quality_pass": true,
+    "belief_pass": true,
+    "result": "S — proceed. Quality 0.85 and belief 0.80 both clear DEEPEN gates."
+  },
+  "agent_self_assessment": {
+    "task_was_feasible_as_stated": true,
+    "reframing_required": false,
+    "knowledge_boundary_hit": false,
+    "spawn_followup_recommended": true,
+    "honest_about_unknowns": true,
+    "in_flight_discovery_used_well": true,
+    "areas_of_lower_confidence": [
+      "Sub-discovery constants (1.5–2.0 for W1; 0.5–1.0 for W2/W3) — placeholders until measured",
+      "Quality decay factor 0.95 — chosen for monotonicity and gentle penalty; could be 0.85 or 0.99",
+      "T-units convention — explicitly flagged in spec as 'must read calculator's convention'",
+      "Whether 30d shadow is enough data for tuning — could need 60d if traffic is sparse"
+    ]
+  },
+  "mutation_discipline": {
+    "baseline_measured": true,
+    "baseline_value": "44.4 (FFMx T0)",
+    "baseline_path": "forensics/mutation-baselines/ffmx-T0-baseline-2026-04-28.json",
+    "audit_complete": true,
+    "fix_applied": false,
+    "post_fix_measured": false,
+    "publish_status": "spec_locked",
+    "note": "Spec only. Implementation will require its own measure-fix-measure cycle. Tuning plan in spec is the explicit MmfMm protocol per FGR."
+  },
+  "primary_citations": [
+    "forensics/manifests/2026-04-28/18-46-41Z_manifest_wire-discovery-execution-pipeline_fixer-architecture_max_velocity_001.json — parent architecture, Section 5",
+    "forensics/FFMX-EQUATION-SPECIFICATION.md — equation locked at FFMx = (A * Q * E^k) / T with k=1.5",
+    "forensics/manifests/2026-04-28/182500Z_manifest_design-ffmx-equation-w1_stigmergy-scout_001.json — baseline 44.4 derivation"
+  ],
+  "ready_for_w2_impl": true,
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "fixer-architecture-key",
+    "signature_status": "pending_external_signing"
+  }
+}

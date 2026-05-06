@@ -1,0 +1,92 @@
+{
+  "task_id": "phase-1-critical-fixes",
+  "decision": "COMPLETED",
+  "dashboard_line": "Phase 1 complete: 3 critical blockers fixed, SDK product roadmap live",
+  "phase": "Phase 1 \u2014 Critical SDK Fixes",
+  "status": "COMPLETE",
+  "fixes_applied": [
+    {
+      "blocker": "B1 \u2014 Prompt Injection via task_id",
+      "severity": "HIGH",
+      "fix": "Sanitize newlines in task_id before template substitution (re.sub)",
+      "location": "0x_spawn_template.py:1723",
+      "status": "\u2713 FIXED"
+    },
+    {
+      "blocker": "B2 \u2014 Deprecated Queue Instructions Injected",
+      "severity": "HIGH",
+      "fix": "Replace _QUEUE_AUTONOMY_BLOCK with _FRONTIER_SCAN_BLOCK (compass navigation)",
+      "location": "0x_spawn_template.py:1132-1161",
+      "status": "\u2713 FIXED"
+    },
+    {
+      "blocker": "B3 \u2014 COC Path Hardcoded to faerie2",
+      "severity": "HIGH",
+      "fix": "Make COC path dynamic via $REPO_ROOT substitution at render time",
+      "location": "0x_spawn_template.py:1280-1287, 1760-1764",
+      "status": "\u2713 FIXED"
+    }
+  ],
+  "supporting_fixes": [
+    {
+      "issue": "Dead queue references in scout protocol",
+      "fix": "Rewrite stigmergy-scout.md Phase 2+3 to use manifest frontier scan",
+      "status": "\u2713 FIXED"
+    },
+    {
+      "issue": "0x_mission_graph.py not discoverable from faerie-vault context",
+      "fix": "Copy to ~/.claude/scripts/ for global accessibility",
+      "status": "\u2713 FIXED"
+    },
+    {
+      "issue": "Agent cards missing maps_to_official_type",
+      "fix": "Add frontmatter field to 16 agent cards with appropriate mappings",
+      "status": "\u2713 FIXED"
+    },
+    {
+      "issue": "Manifest field naming (next_task_queued) too verbose",
+      "fix": "Rename to next_task throughout codebase",
+      "status": "\u2713 FIXED"
+    },
+    {
+      "issue": "Deprecated queue-janitor agent card",
+      "fix": "Remove from ~/.claude/agents/",
+      "status": "\u2713 REMOVED"
+    }
+  ],
+  "sdk_product_team_findings": {
+    "sdk_product_lead": {
+      "agent": "fullstack-developer",
+      "output": "Identified 6 critical gaps + 3-phase completion roadmap (2026-05-02 ship-ready)",
+      "manifest": "14-50-01Z_manifest_sdk-product_fullstack-developer_001.json"
+    },
+    "sdk_implementation_specialist": {
+      "agent": "python-pro",
+      "output": "Implemented 795-line SDK harness: BundleComposer, ManifestWriter, AgentSpawner, WaveDispatcher",
+      "files": [
+        "implementation_spec.py"
+      ],
+      "manifest": "14-55-02Z_manifest_sdk-product_python-pro_001.json"
+    },
+    "sdk_quality_assurance": {
+      "agent": "code-reviewer",
+      "output": "Comprehensive audit: 3 critical + 7 secondary findings, NOT SHIP-READY until Phase 1 fixes applied",
+      "findings": "All 3 critical blockers now addressed via Phase 1",
+      "manifest": "14-54-32Z_manifest_sdk-product_code-reviewer_001.json"
+    }
+  },
+  "next_phase": "Phase 2 \u2014 Secondary Fixes & Validation (1-2 days)",
+  "phase_2_deliverables": [
+    "Enforce dashboard_line \u226480 chars (programmatic truncation)",
+    "Add startup warning when COC_CHAIN_KEY unset",
+    "Wire prescan_cache.py into spawn template sibling detection",
+    "Validate manifest schema compliance across all recent manifests",
+    "Run full compass loop test (W1\u2192W2 with manifest discovery)"
+  ],
+  "investigation_label": "sdk-product-v1",
+  "compass_edge": "S",
+  "next_task": "phase-2-secondary-fixes",
+  "timestamp": "2026-04-28T11:00:35.784268",
+  "quality_score": 0.95,
+  "belief_index": 0.92
+}

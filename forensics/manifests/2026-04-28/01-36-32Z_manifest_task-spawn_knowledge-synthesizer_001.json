@@ -1,0 +1,11 @@
+{
+  "task_id": "spawn-spawn-20260428-053632",
+  "agent_type": "knowledge-synthesizer",
+  "investigation_label": "spawn-20260428-053632",
+  "wave": "1",
+  "task_description": "anywhere more stuff",
+  "timestamp": "2026-04-28T01:36:32.281336",
+  "compass_edge": "S",
+  "next_task_queued": "agent-execution-knowledge-synthesizer",
+  "prescan_decision": "passed"
+}

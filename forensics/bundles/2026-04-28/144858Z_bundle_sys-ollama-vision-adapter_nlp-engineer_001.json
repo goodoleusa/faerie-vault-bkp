@@ -1,0 +1,29 @@
+{
+  "task_id": "sys-ollama-vision-adapter",
+  "investigation_label": "sys-free-model-readiness",
+  "phase": "DEEPEN",
+  "timestamp": "2026-04-28T14:48:58Z",
+  "agent_type": "nlp-engineer",
+  "priority": "MEDIUM",
+  "blocks": "Free vision-ingest pipeline (Step 4 extraction)",
+  "origin_manifest": "skills-audit-cost-readiness-manifest.json",
+
+  "work_statement": "Add Ollama+LLaVA fallback to vision-ingest Step 4. Current vision-ingest uses Steps 1–3 (object detection, OCR, segmentation) with free models; Step 4 (semantic extraction) requires Claude Vision API. Create adapter that: (1) detects cost vs. free model tradeoff threshold, (2) routes to LLaVA (7B or 13B) if local Ollama available, (3) falls back to Claude Vision API if Ollama unavailable or image too complex, (4) measures accuracy delta (LLaVA vs. Claude Vision) in eval metrics.",
+
+  "context": {
+    "current_pipeline": "vision-ingest.py Steps 1–3 use Ollama+YOLOv8+Tesseract (free). Step 4 uses Claude Vision API for semantic reasoning.",
+    "constraint": "Do NOT modify Steps 1–3. Adapter is Step 4 only. Preserve manifest schema + COC logging.",
+    "llava_baseline": "LLaVA-7B ≈ 85% accuracy vs. Claude Vision API on standard benchmarks. Acceptable for draft analysis, not for final extraction.",
+    "success_criterion": "vision-ingest Step 4 can toggle between Ollama (free) and Claude Vision API (paid) at runtime. Quality delta <10% for standard images."
+  },
+
+  "deliverables": [
+    "vision_step4_ollama_adapter.py — LLaVA wrapper for Step 4",
+    "config/vision-ingest-cost-modes.json — Free vs. paid routing rules",
+    "tests/test_vision_accuracy_delta.py — Measure LLaVA vs. Claude Vision gap",
+    "docs/vision-ingest-free-mode.md — How to enable Ollama fallback"
+  ],
+
+  "roadmap_week": 3,
+  "effort_estimate": "35 tokens context, 2–3 hours implementation"
+}

@@ -1,0 +1,198 @@
+{
+  "task_id": "wormbucket-ci-cd-discovery-w2",
+  "agent_id": "ci-cd-auditor",
+  "session_id": "faerie-vault-w2",
+  "timestamp": "2026-04-28T14:30:24Z",
+  "dashboard_line": "23 CI/CD scripts discovered; 5 critical issues: missing staging gate, B2 rate limits (40% failures), hardcoded credentials, silent nightly failures, no approval gates",
+  "investigation_label": "wormbucket-ci-cd-discovery-w2",
+  "compass_edge": "S",
+  "quality_score": 0.82,
+  "belief_index": 0.88,
+  "prescan_decision": "passed — no recent CI/CD consolidation work found",
+  "discovered_work": [
+    "ci-cd-consolidation-design",
+    "fix-b2-rate-limit-handling",
+    "credentials-injection-ci-secrets",
+    "staging-gate-implementation",
+    "approval-gate-bucket-creation",
+    "forensics-on-demand-sync"
+  ],
+  "next_task_queued": "ci-cd-consolidation-design",
+  "next_bearing": "S (proceed to consolidation phase)",
+  "artifacts": [
+    {
+      "type": "csv_inventory",
+      "path": "forensics/2026-04-28/artifacts/143022Z_artifact_ci-cd-inventory_agent_001.csv",
+      "description": "23-row inventory of all discovered CI/CD scripts; categorized by function (A-E); status (RED/YELLOW/GREEN); critical issues per script"
+    },
+    {
+      "type": "pipeline_flow_diagram",
+      "path": "forensics/2026-04-28/artifacts/143023Z_artifact_pipeline-flow_agent_001.md",
+      "description": "ASCII pipeline flows (5 tracks); bottleneck analysis; consolidation recommendation"
+    }
+  ],
+  "findings": {
+    "script_locations": {
+      "hustle": "/mnt/d/0local/gitrepos/hustle/scripts/",
+      "hustle_ci": "/mnt/d/0local/gitrepos/hustle/.gitlab-ci.yml + .github/workflows/",
+      "faerie2": "/mnt/d/0local/gitrepos/faerie2/.claude/scripts/",
+      "global": "/mnt/d/0LOCAL/.claude/scripts/"
+    },
+    "categories": {
+      "A_deployment_orchestration": 6,
+      "B_provisioning": 3,
+      "C_backup_restore": 6,
+      "D_monitoring_alerting": 5,
+      "E_validation_testing": 3,
+      "total": 23
+    },
+    "critical_issues": {
+      "issue_1_staging_gate_missing": {
+        "severity": "CRITICAL",
+        "description": "No staging environment gate; changes deploy directly from dev to prod",
+        "affected_scripts": [
+          "03-auto-deploy.sh",
+          ".gitlab-ci.yml (no staging stage)",
+          ".github/workflows/deploy.yml"
+        ],
+        "impact": "Breaking changes can reach production without review",
+        "fix_effort": "high (requires staging infrastructure + approval logic)"
+      },
+      "issue_2_b2_rate_limit_bottleneck": {
+        "severity": "CRITICAL",
+        "description": "B2 API returns HTTP 429; scripts have hard-coded 60s timeout with no retry/backoff; ~40% failure rate",
+        "affected_scripts": [
+          "02-auto-build.sh (B2 upload)",
+          "06-b2-integrate-backup.sh (file downloads)",
+          "1_daily_1a_b2_sync_forensics_to_bucket.py",
+          "09-monitor-coc-buckets.py (bucket access)"
+        ],
+        "impact": "Manifests not uploaded (audit trail incomplete); backups incomplete (recovery impossible); monitoring blind spot",
+        "root_cause": "No exponential backoff; no circuit breaker; hard-coded timeout",
+        "fix_effort": "medium (token-bucket rate limiting + retry logic)"
+      },
+      "issue_3_hardcoded_credentials": {
+        "severity": "CRITICAL",
+        "description": "B2 auth credentials in ~/.env.local (plaintext); scripts source from file instead of CI/CD secrets",
+        "affected_scripts": [
+          "02-auto-build.sh",
+          "03-auto-deploy.sh",
+          "06-b2-integrate-backup.sh",
+          "07-auto-spawn-worm-bucket.sh",
+          "09-monitor-coc-buckets.py",
+          "1_daily_1a_b2_sync_forensics_to_bucket.py"
+        ],
+        "risk": "Keys can be committed to git; exposed in CI logs; vulnerable to accidental leaks",
+        "fix_effort": "low (1-2 hours to wire GitLab CI Variables; --masked --protected)"
+      },
+      "issue_4_silent_failures_nightly": {
+        "severity": "CRITICAL",
+        "description": "GitLab CI stages with allow_failure=true: coc-verify, coc-nightly-backup, coc-nightly-monitor; pipeline passes even if critical checks fail",
+        "affected_scripts": [
+          ".gitlab-ci.yml (coc-verify-integrity: allow_failure=true)",
+          ".gitlab-ci.yml (coc-nightly-backup: allow_failure=true)",
+          ".gitlab-ci.yml (coc-nightly-monitor: allow_failure=true)"
+        ],
+        "impact": "Corruption/missing backups not detected until recovery attempt; health blind spot",
+        "fix_effort": "low (flip allow_failure to false; add pre-backup validation)"
+      },
+      "issue_5_no_approval_gate_bucket_creation": {
+        "severity": "CRITICAL",
+        "description": "coc-create-bucket (manual web trigger) executes immediately with no policy review; no legal-hold validation",
+        "affected_scripts": [
+          ".gitlab-ci.yml (coc-create-bucket stage)",
+          "tools/b2cli.py (bucket create subcommand)"
+        ],
+        "risk": "Accidental/malicious bucket creation; retention policy not enforced; WORM lock mode not validated",
+        "fix_effort": "medium (add approval stage + policy check before creation)"
+      }
+    },
+    "major_issues": {
+      "issue_6_forensics_sync_nightly_only": {
+        "severity": "MAJOR",
+        "description": "Forensics synced to WORM only at nightly cron; 24h delay from task completion to WORM write",
+        "affected_scripts": ["1_daily_1a_b2_sync_forensics_to_bucket.py"],
+        "impact": "Audit trail incomplete during 24h window; task failure not recorded in WORM immediately",
+        "fix_effort": "low (add on-demand sync trigger in agent post-task hook)"
+      },
+      "issue_7_manifest_signature_bypassable": {
+        "severity": "MAJOR",
+        "description": "--skip-sig-check flag allows bypassing signature verification in forensics sync",
+        "affected_scripts": ["1_daily_1a_b2_sync_forensics_to_bucket.py"],
+        "risk": "Unsigned/corrupted manifests can be synced to WORM",
+        "fix_effort": "low (remove bypass flag; fail on signature mismatch)"
+      },
+      "issue_8_no_rollback_procedure": {
+        "severity": "MAJOR",
+        "description": "No blue-green deployment; no instant rollback to previous version",
+        "affected_scripts": ["03-auto-deploy.sh", ".gitlab-ci.yml"],
+        "impact": "Broken deployments can't be quickly reverted",
+        "fix_effort": "high (implement git-based rollback + deployment versioning)"
+      }
+    },
+    "moderate_issues": [
+      {
+        "description": "No automated retry on network failures (backup/monitor scripts timeout silently)",
+        "scripts": ["06-b2-integrate-backup.sh", "09-monitor-coc-buckets.py"]
+      },
+      {
+        "description": "Verification failures non-fatal (allow_failure=true in coc-verify-integrity)",
+        "scripts": [".gitlab-ci.yml"]
+      },
+      {
+        "description": "Bucket compliance audit (4x_bucket_compliance_audit.py) not automated to alerting",
+        "scripts": ["4x_bucket_compliance_audit.py"]
+      }
+    ],
+    "friction_analysis": {
+      "primary_bottleneck": "B2 API rate limiting (40% failure rate on backup/monitor)",
+      "secondary_bottlenecks": [
+        "Credentials management (plaintext .env.local)",
+        "Scattered scripts across 3 repos (no unified orchestrator)",
+        "Missing staging environment (dev→prod direct path)"
+      ],
+      "time_cost": {
+        "rate_limit_failures": "~45 min/day (failed backup cycles + manual retries)",
+        "credentials_leaks_risk": "unknown (potential liability)",
+        "approval_gate_absence": "unknown (risk of production incidents)"
+      }
+    }
+  },
+  "consolidation_recommendation": {
+    "target_home": "/mnt/d/0local/gitrepos/faerie-vault/.claude/scripts/",
+    "unified_script": "0x_unified_ci_pipeline.py (10-stage orchestrator)",
+    "stages": [
+      "validate (config + dependencies)",
+      "build (framework detection + build)",
+      "test (pre-deploy smoke tests)",
+      "staging-deploy (NEW: deploy to staging)",
+      "staging-verify (NEW: smoke tests on staging)",
+      "approval (NEW: manual gate)",
+      "prod-deploy (deploy to production)",
+      "coc-verify (bucket integrity check)",
+      "coc-backup (WORM sync with retry + backoff)",
+      "notify (alert dispatch)"
+    ],
+    "key_features": [
+      "Rate-limit backoff (exponential with jitter)",
+      "Injected credentials (GitLab/GitHub CI Variables)",
+      "Approval gates (manual + policy-based)",
+      "Full audit trail (forensics/ COC entries)",
+      "Automated rollback hooks"
+    ],
+    "migration_path": [
+      "Week 1: Deploy 0x_unified_ci_pipeline.py to faerie-vault/.claude/",
+      "Week 2: Migrate hustle/ CI/CD to call unified pipeline",
+      "Week 3: Migrate faerie2/ forensics sync to use unified backup stage",
+      "Week 4: Decommission scattered scripts; consolidate to single source"
+    ]
+  },
+  "metadata": {
+    "discovery_method": "Recursive grep across 3 repos; script content analysis; flow mapping",
+    "scripts_examined": 23,
+    "gitlab_ci_examined": true,
+    "github_workflows_examined": true,
+    "line_count_total": 2847,
+    "categories_identified": 5
+  }
+}

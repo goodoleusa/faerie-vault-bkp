@@ -1,0 +1,29 @@
+{
+  "task_id": "measure-honey-injection-cost",
+  "agent_type": "data-scientist",
+  "investigation_label": "formula-calibration-measurement-2026-04-28",
+  "dashboard_line": "HONEY injection: global=0.1K, project=0.1K, total=0.2K (theory 1.5K)",
+  "compass_edge": "S",
+  "quality_score": 0.82,
+  "belief_index": 0.75,
+  "measurements": {
+    "raw_global_honey_bytes": 61891,
+    "compressed_global_bytes": 334,
+    "compressed_project_bytes": 353,
+    "estimated_global_tokens": 84,
+    "estimated_project_tokens": 88,
+    "estimated_nectar_tokens": 30,
+    "estimated_total_tokens": 201,
+    "compression_ratio": 185.3,
+    "theory_total": 1500,
+    "theory_ratio": 0.11
+  },
+  "limitations": [
+    "Token count estimated via chars/4 heuristic (no tiktoken available)",
+    "Only 1 bundle sampled with full context_layers; others had empty layers",
+    "Compression quality varies by template; this measures one snapshot",
+    "Claude tokenizer differs from GPT-4 tokenizer; estimates may be off by 10-20%"
+  ],
+  "next_task_queued": null,
+  "discovered_work": []
+}

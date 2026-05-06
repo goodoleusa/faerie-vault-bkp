@@ -1,0 +1,42 @@
+{
+  "task_id": "phase2-shadow-mode",
+  "agent_type": "python-pro",
+  "agent_run_id": "phase2-shadow-mode-2026-04-28",
+  "investigation_label": "phase2-shadow-mode",
+  "dashboard_line": "Phase 2 wired: context_pressure+phase_gate_prob; 21% baseline agree, bias fix needed",
+  "compass_edge": "S",
+  "next_task_queued": "phase-3-bias-calibration-per-phase",
+  "status": "complete",
+  "quality_score": 0.91,
+  "belief_index": 0.90,
+  "files_modified": [
+    {
+      "path": "/mnt/d/0local/gitrepos/faerie2/.claude/scripts/0x_mission_graph.py",
+      "changes": "Added context_pressure(), phase_gate_probability(), log_phase2_shadow_to_session_metrics(); constants _CP_C_MID/_CP_K/_PG_*/PHASE_HARD_THRESHOLDS; wired into spawn_mode() (pressure log) and query_mode topology (phase_gate log)"
+    },
+    {
+      "path": "/mnt/d/0LOCAL/.claude/scripts/0x_spawn_template.py",
+      "changes": "Added _log_cp_entry() helper; wired into assemble_bundle() after f(0) log; logs context_pressure per spawn to session-metrics"
+    },
+    {
+      "path": "forensics/session-metrics/{date}.json",
+      "changes": "New entry shape: phase2_shadow=true, type=context_pressure|phase_gate, formula-specific fields"
+    }
+  ],
+  "implementation_notes": {
+    "behavioral_change": "none",
+    "context_pressure_integration": "spawn_mode() + assemble_bundle(); fill_tokens is proxy estimate (bundle_tokens for spawn_template, open_targets*500 for mission_graph); actual fill requires API response wiring in Phase 3",
+    "phase_gate_integration": "query_mode topology only; fires for tasks carrying quality_score+belief_index in manifests; future Phase 3 will wire into phase-advance check in regen_mode",
+    "calibration_finding": "default bias=-0.1 yields 21% overall agreement (all sig_more_lenient); per-phase bias [-0.35,-0.47,-0.555,-0.585] yields 75-93% agreement; T=10 recommended (sharp step matches hard threshold behavior)",
+    "zero_circular_imports": true,
+    "all_syntax_checks": "PASS",
+    "disagreement_type_distribution": {
+      "sig_more_lenient": "100% of disagreements",
+      "sig_more_strict": "0%",
+      "interpretation": "sigmoid systematically more permissive than AND-logic hard thresholds; captures quality-belief trade-off that hard thresholds discard"
+    }
+  },
+  "artifact_path": "forensics/artifacts/2026-04-28/05-28-47Z_phase2-shadow-instrumentation_python-pro_001.md",
+  "prescan_decision": "passed -- stale or absent",
+  "ts": "2026-04-28T05:28:47Z"
+}

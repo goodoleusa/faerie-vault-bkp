@@ -1,0 +1,29 @@
+{
+  "task_id": "sys-prometheus-token-metering",
+  "investigation_label": "sys-free-model-readiness",
+  "phase": "DEEPEN",
+  "timestamp": "2026-04-28T14:48:59Z",
+  "agent_type": "machine-learning-engineer",
+  "priority": "MEDIUM",
+  "blocks": "Cost-aware deployment decisions (FFMx measurement for open models)",
+  "origin_manifest": "skills-audit-cost-readiness-manifest.json",
+
+  "work_statement": "Build Prometheus metrics exporter for token cost tracking across Claude API + open models. Faerie2 measures FFMx (context utilization efficiency) for Claude; open models need equivalent token-per-task metrics. Create exporter that: (1) hooks manifest writes to extract token counts (input_tokens, output_tokens, cache usage), (2) emits Prometheus metrics per agent_type + model + investigation_label, (3) calculates cost per manifest (Claude API tokens vs. Ollama inference cost), (4) enables FFMx dashboard for open models vs. Claude baseline.",
+
+  "context": {
+    "current_metrics": "faerie2 tracks context_fill, manifest_truthfulness, belief_index. FFMx (context × discovery_yield / token_burn) is Claude-specific.",
+    "prometheus_scope": "Lightweight exporter, NOT full Prometheus infrastructure. Expose metrics via /metrics endpoint on localhost:9090.",
+    "cost_inputs": "Claude API: token prices per model. Ollama: free (but measure GPU inference time for cost simulation).",
+    "success_criterion": "Prometheus dashboard shows FFMx comparison: Claude Agent() vs. Ollama (llama2-70b) + Celery bridge for same tasks. Goal: ±10% accuracy."
+  },
+
+  "deliverables": [
+    "prometheus_token_exporter.py — Manifest → Prometheus metrics bridge",
+    "metrics/token_cost.prom — Prometheus metric definitions",
+    "dashboards/ffmx-comparison.json — Grafana dashboard for cost tracking",
+    "docs/token-metering-setup.md — How to enable metrics collection"
+  ],
+
+  "roadmap_week": 4,
+  "effort_estimate": "30 tokens context, 2 hours implementation"
+}

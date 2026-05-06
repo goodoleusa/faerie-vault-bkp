@@ -1,0 +1,42 @@
+{
+  "task_id": "phase1-instrumentation",
+  "agent_type": "python-pro",
+  "agent_run_id": "phase1-instrumentation-2026-04-28",
+  "investigation_label": "mathematical-formula-audit",
+  "dashboard_line": "Phase 1 wired: f0+aged_score+coherence_entropy; measure-only, zero behavior change",
+  "compass_edge": "S",
+  "next_task_queued": "phase-2-shadow-mode-context-pressure-and-phase-gates",
+  "status": "complete",
+  "quality_score": 0.92,
+  "belief_index": 0.88,
+  "files_modified": [
+    {
+      "path": "/mnt/d/0LOCAL/.claude/scripts/0x_spawn_template.py",
+      "changes": "Added compute_f0(), log_f0_to_session_metrics(); wired into assemble_bundle() post-assembly; logs to forensics/session-metrics/{date}.json"
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/faerie2/.claude/scripts/0x_reputation_summary.py",
+      "changes": "Added aged_score(); wired into build_summary() per agent; outputs aged_score, aged_score_days_since_eval, aged_score_interpretation fields"
+    },
+    {
+      "path": "/mnt/d/0LOCAL/gitrepos/faerie2/.claude/scripts/0x_mission_graph.py",
+      "changes": "Added mission_coherence(); wired into --query topology output with HIGHLY_FOCUSED/BALANCED/FRAGMENTED assessment"
+    }
+  ],
+  "implementation_notes": {
+    "behavioral_change": "none",
+    "f0_integration_point": "assemble_bundle() post-assembly; token estimate is heuristic (main_tokens=bundle.total_tokens, agent_tokens=4x heuristic); Phase 2 will wire actual API token counts",
+    "aged_score_integration_point": "build_summary() per agent; last_updated parsed from card frontmatter; falls back to 0.0 days if absent",
+    "coherence_integration_point": "--query topology only; not yet in dashboard-json or regen output",
+    "known_gaps": [
+      "f0 agent_tokens estimate is 4x heuristic — actual API response token counts not yet wired",
+      "aged_score last_updated parsing requires REPUTATION block to have last_updated field — older cards without it get days_since=0 (no decay applied)",
+      "coherence metric only shows in --query topology, not in --query dashboard-json or --dashboard html yet"
+    ],
+    "zero_circular_imports": true,
+    "all_syntax_checks": "PASS",
+    "all_unit_tests": "PASS"
+  },
+  "prescan_decision": "passed -- stale or absent",
+  "ts": "2026-04-28T14:00:00Z"
+}

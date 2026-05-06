@@ -1,0 +1,74 @@
+{
+  "investigation_label": "force-multiplier-index-44.4-breakdown",
+  "phase": "SEED",
+  "timestamp": "2026-04-28T00:00:00Z",
+  "mission_goal": "Flesh out FFMx 44.4 (44× force per token, 0.54× cost) with exact mechanics, rocket physics, escape velocity, bee/apiary literature with full Vancouver citations.",
+  "stigmergic_coordination": {
+    "agent_lanes": {
+      "lane_1_data_analyst": {
+        "task": "Break down FFMx formula into components: Discovery×Depth×Parallelization÷Cost. Show exact numbers from faerie2 session data (277K tokens, 9 manifests → 70 missions, 2.2× efficiency gain). Cite baseline metrics. Write manifest with dashboard_line + next_task_queued pointing to lane_2.",
+        "output_path": "forensics/artifacts/2026-04-28/{HH-MM-SS}_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md",
+        "manifest_path": "forensics/manifests/2026-04-28/{HH-MM-SS}_manifest_task-ffmx-lane1_data-analyst_001.json",
+        "next_bearing": "S",
+        "next_task_queued": "rocket-physics-escape-velocity-analogy"
+      },
+      "lane_2_research_analyst": {
+        "task": "Research real apiary/apiology literature: bee swarm intelligence (Seeley, Bonabeau), stigmergy in colonies (Camazine), coordination without central command. Gather 8-12 peer-reviewed sources with full citations (Vancouver format). Write as markdown table with URLs. Leave breadcrumb manifest pointing to lane_3.",
+        "output_path": "forensics/artifacts/2026-04-28/{HH-MM-SS}_bee-literature-citations_force-multiplier-index_research-analyst_001.md",
+        "manifest_path": "forensics/manifests/2026-04-28/{HH-MM-SS}_manifest_task-ffmx-lane2_research-analyst_001.json",
+        "next_bearing": "E",
+        "next_task_queued": "rocket-physics-frame-alignment"
+      },
+      "lane_3_ai_engineer": {
+        "task": "Explain escape velocity, rocket staging (Tsiolkovsky equation), context burn rate as thrust, piston waves as stage separation. Use Kármán line analogy (100km boundary). Map directly to faerie2 W1/W2/W3 burn profile. Write technical section with equations. Manifest points to lane_4.",
+        "output_path": "forensics/artifacts/2026-04-28/{HH-MM-SS}_rocket-physics-escape-velocity_force-multiplier-index_ai-engineer_001.md",
+        "manifest_path": "forensics/manifests/2026-04-28/{HH-MM-SS}_manifest_task-ffmx-lane3_ai-engineer_001.json",
+        "next_bearing": "S",
+        "next_task_queued": "synthesis-and-narrative-weaving"
+      },
+      "lane_4_documentation_engineer": {
+        "task": "Synthesize lanes 1-3 into coherent report structure: [Headline] FFMx Explained → [Section 1] Formula Breakdown (lane_1 data) → [Section 2] Bee Intelligence Parallels (lane_2 literature) → [Section 3] Rocket Physics Frame (lane_3 equations) → [Conclusion] Biosemiotic Emergence. Embed all Vancouver citations with in-text links. Write final narrative. Manifest final status.",
+        "output_path": "forensics/artifacts/2026-04-28/{HH-MM-SS}_ffmx-comprehensive-report_force-multiplier-index_documentation-engineer_001.md",
+        "manifest_path": "forensics/manifests/2026-04-28/{HH-MM-SS}_manifest_task-ffmx-lane4_documentation-engineer_001.json",
+        "next_bearing": "S",
+        "next_task_queued": null
+      }
+    },
+    "cross_reference_schema": {
+      "artifact_discovery": "Agent reads prior lane outputs from forensics/artifacts/2026-04-28/ by grepping investigation_label or task_id",
+      "manifest_chaining": "Each manifest contains next_task_queued bearing; agent reads filesystem for next work without messaging",
+      "citation_pool": "Shared in-bundle JSON; each agent appends Vancouver citations to forensics/bundles/2026-04-28/citations-pool.jsonl (append-only, no locking needed)",
+      "compass_bearing": "N=blocked, S=proceed downstream, E=parallel, W=contradiction. Lanes use S (proceed) to chain sequentially, E if parallel paths exist"
+    }
+  },
+  "shared_context": {
+    "baseline_facts": {
+      "current_ffmx": 44.4,
+      "force_multiplier": 44,
+      "cost_ratio": 0.54,
+      "interpretation": "44× the force output of vanilla Claude per token spent, at 54% of vanilla's computational cost"
+    },
+    "faerie2_session_metrics": {
+      "token_budget": 277443,
+      "manifests_produced": 9,
+      "missions_clustered": 70,
+      "efficiency_gain": "2.2×",
+      "efficiency_source": "fresh_context_per_manifest (cleaner reasoning, direct dispatch path) vs competing_history"
+    },
+    "citation_template": {
+      "format": "Vancouver (numbered, in-text [1], bibliography at end)",
+      "url_requirement": "Every citation must include DOI or full URL",
+      "fields": ["author", "title", "journal/book", "year", "doi_or_url", "faerie_context"]
+    }
+  },
+  "spawn_bundle_tweaks": {
+    "zero_latency_design": "All agents receive full bundle at once (no sequential dispatch). Each agent's next_task_queued points to manifest path they expect next agent to write. Agents spawn in parallel (W1); manifest ordering creates effective serial execution without serialization overhead.",
+    "manifest_discovery_hints": [
+      "Agent lane_2 (research-analyst) reads lane_1 output by: grep -r 'ffmx-formula-breakdown' forensics/artifacts/2026-04-28/",
+      "Agent lane_3 (ai-engineer) reads lane_2 citations from forensics/bundles/2026-04-28/citations-pool.jsonl",
+      "Agent lane_4 (documentation-engineer) cat forensics/artifacts/2026-04-28/{ffmx-formula,bee-literature,rocket-physics}* to synthesize"
+    ],
+    "prescan_gate": "Before spawn, check if forensics/artifacts/2026-04-28/ffmx-* exists (modified <1h). If yes, skip (work in progress). If no, proceed.",
+    "manifest_synchronization": "No file locks. Agents write to unique paths: {agent-type}_{lane#}. Dashboard_line in each manifest shows completion %. Final report is lane_4 output only."
+  }
+}

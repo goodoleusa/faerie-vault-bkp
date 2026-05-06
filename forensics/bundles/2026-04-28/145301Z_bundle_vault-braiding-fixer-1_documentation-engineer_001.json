@@ -1,0 +1,68 @@
+{
+  "task_id": "vault-braiding-implement-fixes",
+  "investigation_label": "vault-crystallization-phase-1",
+  "phase": "DEEPEN",
+  "timestamp": "2026-04-28T14:53:01Z",
+  "agent_type": "documentation-engineer",
+  "discovery_mode": false,
+  "blocks_upstream_from": "vault-braiding-nesting-scan",
+
+  "work_statement": "DOCUMENTATION ENGINEER — Implement Braiding Fixes. Read findings from vault-braiding-nesting-scan manifest, then execute consolidation + braiding per 10-vault-maintenance workflow: (1) For duplicates: merge into canonical doc, delete other, redirect wikilinks. (2) For orphans: add wikilink from related doc + update Related footer. (3) For routing errors: correct investigation_label or move to Archive if deprecated. (4) For missing braiding: add breadcrumb + Related section to all docs per 09-vault-architecture pattern.",
+
+  "governance_references": [
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/10-vault-maintenance.md — Consolidation workflow (Section 🧬)",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/09-vault-architecture.md — Braiding pattern + Related footer format",
+    "/mnt/d/0LOCAL/CT_VAULT/2026-04-28/08-documentation-governance.md — Canonical doc properties (lock status, version timestamp)"
+  ],
+
+  "workflow": [
+    "1. Read vault-braiding-nesting-scan manifest → extract findings array",
+    "2. Prioritize by severity: HIGH consolidations first, MEDIUM braiding, LOW cleanup",
+    "3. For each HIGH issue: execute merge per 10-vault-maintenance Section 🧬 (consolidation workflow)",
+    "   - Keep MORE canonical doc (e.g., 07-codex over 07b-codex-supplement)",
+    "   - Merge content into sections + add wikilinks at merge points",
+    "   - Delete redundant doc",
+    "   - Search all docs for wikilinks to deleted doc → redirect to new location",
+    "4. For each MEDIUM/LOW issue: add missing braiding (breadcrumb + Related footer)",
+    "5. Validate: re-read 00-DASHBOARD + check wikilinks resolve cleanly",
+    "6. Update 00-DASHBOARD status if major consolidations occurred"
+  ],
+
+  "output_format": {
+    "consolidations_executed": [
+      {
+        "merged_from": "doc-A.md",
+        "merged_into": "doc-B.md",
+        "section_added": "## New Section Name",
+        "wikilinks_redirected": ["doc-C.md", "doc-D.md"],
+        "files_deleted": ["doc-A.md"]
+      }
+    ],
+    "braiding_added": [
+      {
+        "doc": "filename.md",
+        "breadcrumb_added": true,
+        "related_footer_added": true,
+        "wikilinks_count": "5"
+      }
+    ],
+    "manifest_decision": {
+      "action": "consolidated_X_docs_and_braided_Y",
+      "docs_deleted": "X",
+      "docs_refactored": "Y",
+      "vault_health_post_fix": "Orphan count reduced from A to B, wikilink density improved"
+    }
+  },
+
+  "constraints": [
+    "NEVER delete 07-10 docs (governance layer is locked, updated only via user direction)",
+    "NEVER modify 00-DASHBOARD except to update 'Canonical Docs' count + status summary",
+    "Preserve all wikilinks (fix broken ones, don't remove)",
+    "Add version timestamp + lock status to modified docs per 08-documentation-governance",
+    "Create git commit per (consolidation task) + update COC entry"
+  ],
+
+  "prescan_gating": "If vault-braiding-nesting-scan manifest shows <3 issues found, mark as LOW-CONFIDENCE and ask for human review before executing consolidations.",
+
+  "success_criterion": "All HIGH findings resolved (consolidations complete), all MEDIUM findings addressed (braiding added), wikilink graph cleans validates (grep -r '\\[\\[.*\\]\\]' returns no broken links)."
+}

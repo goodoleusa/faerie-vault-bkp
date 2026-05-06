@@ -1,0 +1,89 @@
+{
+  "task_id": "forensics-arch-date-first",
+  "agent_id": "python-pro",
+  "agent_run_id": "python-pro-2026-04-28T19-05-00Z",
+  "investigation_label": "forensics-architecture-migration",
+  "wave": "W2",
+  "session_phase": "DEEPEN",
+  "timestamp_utc": "2026-04-28T19:05:00Z",
+  "dashboard_line": "Date-first forensics dirs created; 89 files need migration, 5 root-loose, 0 misplaced",
+  "status": "complete",
+  "decision": "COMPLETED",
+  "compass_edge": "S",
+  "next_task_queued": "forensics-arch-migrate-files",
+  "next_bearing_agent": "python-pro",
+  "next_bearing_rationale": "Structure verified. 89 files in old type-first layout need copying to new date-first tree. Discovery agent should execute git mv operations with full COC logging. Root-level loose files (5) also need placement decision.",
+  "quality_score": 0.82,
+  "belief_index": 0.85,
+  "belief_components": {
+    "dashboard_line_truthfulness": 0.92,
+    "next_bearing_accuracy": 0.85,
+    "assumption_validity": 0.80,
+    "failure_honesty": 0.82
+  },
+  "prescan_decision": "passed — no prior date-first structure existed; all new directories are greenfield",
+  "work_performed": {
+    "directories_created": 18,
+    "dates_covered": ["2026-04-26", "2026-04-27", "2026-04-28"],
+    "types_per_date": ["manifests", "pollen", "artifacts", "bundles", "coc-entries", "honey-renders"],
+    "gitkeep_placed": true
+  },
+  "placement_audit": {
+    "correct_location_new_date_first": 18,
+    "needs_migration_old_type_first": 89,
+    "misplaced_type_violations": 0,
+    "root_level_loose": 5,
+    "special_folders_keep_as_is": 4
+  },
+  "root_level_loose_files": [
+    "forensics/8x_ephemeral_capture.py",
+    "forensics/EPHEMERAL-CAPTURE-ARCHITECTURE.md",
+    "forensics/EPHEMERAL-CAPTURE-SUMMARY.md",
+    "forensics/FFMX-EQUATION-SPECIFICATION.md",
+    "forensics/HOOK-CONFIG-TEMPLATE.json"
+  ],
+  "special_folders_no_move": [
+    "forensics/mutation-baselines/",
+    "forensics/time-tracking/"
+  ],
+  "files_not_moved": "NO FILES MOVED — per task spec, migration deferred to discovery agent. Old type-first structure (forensics/manifests/, forensics/artifacts/, forensics/bundles/) still intact.",
+  "manifest_schema_additions_status": "DEFERRED — backfilling honey_version_used + honey_rendering_context + honey_render_fidelity into 89 existing manifests is risky (JSON mutation under audit conditions). Logged as next_task_queued for follow-on agent.",
+  "honey_version_used": "v1.0-static",
+  "honey_rendering_context": {
+    "audience": null,
+    "nectar_fragments_injected": 0,
+    "pollen_edges_active": 0
+  },
+  "honey_render_fidelity": null,
+  "discovered_work": [
+    {
+      "task_id": "forensics-arch-migrate-files",
+      "description": "Execute git mv of 89 files from type-first to date-first layout; update all artifact_path references in manifests",
+      "compass_edge": "S",
+      "agent_type": "python-pro",
+      "priority": "HIGH",
+      "estimated_tokens": 15000
+    },
+    {
+      "task_id": "forensics-arch-backfill-schema",
+      "description": "Add honey_version_used + honey_rendering_context + honey_render_fidelity to all 89 existing manifests atomically",
+      "compass_edge": "E",
+      "agent_type": "python-pro",
+      "priority": "MEDIUM",
+      "estimated_tokens": 8000
+    },
+    {
+      "task_id": "forensics-arch-place-root-loose",
+      "description": "Classify and move 5 root-level loose files in forensics/ to correct date/type subfolder",
+      "compass_edge": "E",
+      "agent_type": "python-pro",
+      "priority": "LOW",
+      "estimated_tokens": 3000
+    }
+  ],
+  "verification_commands": {
+    "list_todays_manifests": "ls forensics/2026-04-28/manifests/",
+    "find_all_manifests_ever": "find forensics -path '*/manifests/*' -not -name '.gitkeep'",
+    "verify_structure": "find forensics -maxdepth 3 -type d | sort"
+  }
+}

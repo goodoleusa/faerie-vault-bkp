@@ -1,0 +1,173 @@
+{
+  "task_id": "vault-enhancement-docs-suite",
+  "investigation_label": "vault-enhancement-2026-04-28",
+  "wave": 2,
+  "agent_type": "documentation-engineer",
+  "priority": "high",
+  "created_at": "2026-04-28T10:15:00Z",
+
+  "mission": {
+    "title": "Create 4-Doc Suite + Templates + Sync Verification",
+    "description": "Build complete documentation architecture for CT_VAULT/2026-04-28 as 'dashboard of all dashboards'",
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Create 4 Missing Documentation Files",
+        "deliverables": [
+          "02-settings-sync-strategy.md (~800 words)",
+          "03-mcp-server-architecture.md (~1000 words)",
+          "04-mcp-deployment-vps.md (~1200 words)",
+          "05-mcp-deployment-zimaboard.md (~1200 words)"
+        ],
+        "locations": [
+          "/mnt/d/0local/CT_VAULT/2026-04-28/",
+          "/mnt/d/0local/faerie-vault/2026-04-28/"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "Create QuickAdd Templates",
+        "deliverables": [
+          "templates/investigation-report.md",
+          "templates/agent-update.md",
+          "templates/deployment-log.md",
+          "templates/settings-sync-check.md"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "Verify Dual-Vault Sync",
+        "deliverables": [
+          "Both vaults contain identical files",
+          "Git diff shows zero changes after rsync"
+        ]
+      }
+    ]
+  },
+
+  "requirements": {
+    "structure": {
+      "all_docs": {
+        "frontmatter": {
+          "task_id": "vault-enhancement-{doc-number}",
+          "investigation_label": "vault-enhancement-2026-04-28",
+          "status": "in_progress",
+          "created": "2026-04-28"
+        },
+        "breadcrumb": "[[00-DASHBOARD]] > [[{doc-number}]] > [related]",
+        "navigation_table": "Links to previous/next docs in series",
+        "wikilinks": "All cross-references using [[...]] format"
+      },
+      "templates": {
+        "no_empty_files": true,
+        "all_must_have_usable_content": true,
+        "frontmatter_required": true
+      }
+    },
+    "content_requirements": {
+      "02_settings_sync": {
+        "word_count": 800,
+        "sections": [
+          "Overview of ~/.claude/ sync strategy",
+          "Hook configuration details",
+          "Manual sync procedures",
+          "Troubleshooting common issues"
+        ],
+        "related_docs": ["01-forensic-governance", "03-mcp-server-architecture"]
+      },
+      "03_mcp_architecture": {
+        "word_count": 1000,
+        "sections": [
+          "Performance design principles",
+          "Connection pooling strategy",
+          "Async message handling",
+          "Compass graph integration",
+          "Architecture diagrams (ASCII markdown)"
+        ],
+        "related_docs": ["02-settings-sync-strategy", "04-mcp-deployment-vps"]
+      },
+      "04_vps_deployment": {
+        "word_count": 1200,
+        "sections": [
+          "DigitalOcean/Linode setup",
+          "nginx reverse proxy configuration",
+          "systemd service file",
+          "Health checks and monitoring",
+          "Troubleshooting guide",
+          "Performance tuning"
+        ],
+        "related_docs": ["03-mcp-server-architecture", "05-mcp-deployment-zimaboard"]
+      },
+      "05_zimaboard_deployment": {
+        "word_count": 1200,
+        "sections": [
+          "ZimaBoard hardware prerequisites",
+          "ZimaOS installation",
+          "Docker containerization",
+          "Local network configuration",
+          "Auto-restart and log aggregation",
+          "Monitoring setup"
+        ],
+        "related_docs": ["04-mcp-deployment-vps"]
+      }
+    }
+  },
+
+  "template_specifications": {
+    "investigation_report": {
+      "description": "For documenting frontier scans and discovery results",
+      "sections": ["Goals", "Findings", "Next Steps", "Related Tasks"],
+      "auto_populate": ["date", "investigation_label", "task_id"]
+    },
+    "agent_update": {
+      "description": "For tracking agent reputation and domain mastery",
+      "sections": ["Agent Name", "Domains", "Belief Index", "Recent Manifests", "Reputation Trend"],
+      "auto_populate": ["timestamp", "agent_name"]
+    },
+    "deployment_log": {
+      "description": "For tracking deployment phases and status",
+      "sections": ["Timestamp", "Target", "Phase", "Pre-Flight Checklist", "Post-Flight Verification", "Rollback Procedure"],
+      "auto_populate": ["date", "timestamp"]
+    },
+    "settings_sync_check": {
+      "description": "For verifying ~/.claude/ settings are in sync",
+      "sections": ["Source Files", "Target Files", "Diff Summary", "Action Log"],
+      "auto_populate": ["date"]
+    }
+  },
+
+  "sync_verification": {
+    "source": "/mnt/d/0local/CT_VAULT/2026-04-28/",
+    "target": "/mnt/d/0local/faerie-vault/2026-04-28/",
+    "verification_method": "git diff (zero changes after rsync)",
+    "files_to_sync": [
+      "00-DASHBOARD.md",
+      "01-forensic-governance.md",
+      "02-settings-sync-strategy.md",
+      "03-mcp-server-architecture.md",
+      "04-mcp-deployment-vps.md",
+      "05-mcp-deployment-zimaboard.md",
+      "templates/*"
+    ]
+  },
+
+  "context": {
+    "design_principles": [
+      "faerie2 f(0) orchestration — zero main burden",
+      "stigmergy-first — manifests drive navigation",
+      "forensic-logged — all artifacts audit-trailed"
+    ],
+    "mission_status": "W2 CRUISE phase — SDK readiness + MCP go-live",
+    "importance": "CT_VAULT becomes 'dashboard of all dashboards' for live system status"
+  },
+
+  "acceptance_criteria": [
+    "All 4 docs (02-05) complete with required word counts",
+    "All docs have breadcrumbs, wikilinks, navigation tables",
+    "4 QuickAdd templates created with no empty files",
+    "CT_VAULT/2026-04-28 and faerie-vault/2026-04-28 are identical",
+    "All files follow COC filename schema",
+    "Manifests written to forensics/ for each task_id",
+    "Investigation labels consistent across all docs"
+  ]
+}

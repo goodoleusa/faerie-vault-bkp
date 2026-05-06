@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-28T14:18:24.567210",
+  "mutation": "terminology-cleanup + ephemeral-capture",
+  "measurements": {
+    "terminology": {
+      "phase_in_session_flow": 12,
+      "phase_in_quality_gates": 0,
+      "phase_in_major_stages": 0,
+      "wave_usage": 377,
+      "sprint_usage": 73,
+      "session_usage": 288
+    },
+    "ephemeral_capture": {
+      "transcripts": 0,
+      "responses": 0,
+      "bash_output": 0,
+      "errors": 0,
+      "cot": 0,
+      "prompts": 0,
+      "total_artifacts": 0
+    },
+    "ffmx": {
+      "avg_tokens_per_artifact": null,
+      "avg_quality_score": null,
+      "avg_belief_index": null,
+      "manifests_with_compass_edges": 46,
+      "monkeybranching_depth": 0
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "task_id": "manifest-schema-wiring-critical-w2",
+  "investigation_label": "system-consolidation-sprint",
+  "wave": "2",
+  "agent_type": "python-pro",
+  "phase": "EXECUTE",
+  "priority": "CRITICAL",
+  "created_utc": "2026-04-28T18:30:01Z",
+
+  "ffff_framework": {
+    "findings_goal": "0x_spawn_template.py currently writes 4 fields (task_id, timestamp, dashboard_line, next_task_queued); MISSING 7 fields that agents need to emit",
+    "flags_goal": "CRITICAL: quality_score, belief_index fields not computed anywhere → manifests cannot gate via compass edges → phase gates broken system-wide",
+    "flow_goal": "Downstream agents cannot trust manifest quality → discovery protocol fails → compass navigation stalls → missions pile up in NORTH edge (unblocked prerequisites forever)",
+    "friction_goal": "Quality gate at 0.70 is unenforced → bad work proceeds to south edge → causes rework downstream → FFMx tanks"
+  },
+
+  "critical_context": {
+    "audit_finding": "7 CRITICAL violations: quality_score, belief_index, dashboard_line, discovered_work, honey_version_used, honey_rendering_context, honey_render_fidelity are UNUSED in manifests",
+    "root_cause": "0x_spawn_template.py (the spawn-contract enforcer) doesn't compute these fields",
+    "system_impact": "BLOCKS all downstream missions: phase gates don't work, compass edges not validated, FFMX metrics unreliable",
+    "discovered_work": [
+      "task-fix-0x-spawn-template-manifest-path",
+      "task-extend-manifest-writer-with-honey-fields",
+      "task-deprecate-claude-memory-forensics-paths"
+    ]
+  },
+
+  "implementation_scope": {
+    "file_to_fix": "/mnt/d/0local/gitrepos/faerie2/.claude/scripts/0x_spawn_template.py",
+    "fields_to_wire": [
+      "quality_score (inferred from artifacts + agent reputation)",
+      "belief_index (average of 4 honesty signals: self-admission of uncertainty, prior-session accuracy, manifest truthfulness, cross-citation fidelity)",
+      "dashboard_line (≤80 chars summary of outcome)",
+      "discovered_work (array of task_ids found via frontier scan)",
+      "honey_version_used (which HONEY.md version rendered context?)",
+      "honey_rendering_context (audience + nectar fragments + pollen edges)",
+      "honey_render_fidelity (quality score of HONEY rendering itself)"
+    ],
+    "phase_gate_logic": "IF (quality_score ≥ 0.70 AND belief_index ≥ 0.70) THEN compass_edge=S ELSE IF (quality_score ≥ 0.70 AND belief_index < 0.70) THEN compass_edge=E ELSE IF (belief_index ≥ 0.70 AND quality_score < 0.70) THEN compass_edge=W ELSE compass_edge=N"
+  },
+
+  "success_criteria": {
+    "all_manifests": "Every manifest written on or after fix includes all 11 required fields",
+    "phase_gate_validation": "New manifests with compass_edge=N/S/E/W are routable; agents respect compass edges in frontier scan",
+    "backward_compatibility": "Old manifests still readable; new schema doesn't break COC chain",
+    "compass_edge": "S if all manifests pass validation; N if discovery reveals more blockers"
+  },
+
+  "next_task_queued": "coc-consolidation-design-phase-2-w2"
+}
