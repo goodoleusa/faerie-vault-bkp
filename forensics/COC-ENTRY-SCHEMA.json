@@ -1,0 +1,420 @@
+{
+  "version": "1.0",
+  "date_created": "2026-05-06T14:30:00Z",
+  "title": "Chain of Custody (COC) Entry Schema — Canonical Format",
+  "description": "Official schema for COC entries logged to forensics/coc.jsonl and forensics/master-coc.jsonl",
+  "purpose": "Forensic auditability: every mutation tracked, hash-chained, and immutable",
+
+  "entry_template": {
+    "type": "enum(tool_call|manifest_write|vault_sync|operation|promotion|import)",
+    "timestamp": "ISO8601 datetime (UTC)",
+    "ts": "alias for timestamp (legacy compat)",
+    "operation": "string describing the action",
+    "agent_id": "string agent name or 'system'",
+    "session_id": "string session identifier",
+    "task_id": "string or null (task being executed)",
+    "mission": "string or null (mission context)",
+    "file_path": "string absolute path to artifact",
+    "file_type": "enum(manifest|artifact|bundle|vault|coc|ephemeral)",
+    "hash_before": "sha256 hex string (previous state)",
+    "hash_after": "sha256 hex string (current state)",
+    "hash_method": "string 'sha256' or other algorithm",
+    "prev_entry_hash": "sha256 of previous COC entry (chain link)",
+    "entry_hash": "sha256 of this entry (self-identifier)",
+    "status": "enum(success|warning|error|partial_sync|corrupted|rollback)",
+    "metadata": "object containing operation-specific fields",
+    "sig": "ED25519 signature (optional, for critical entries)",
+    "sig_type": "string 'ed25519' or other (optional)"
+  },
+
+  "entry_types": [
+    {
+      "type": "tool_call",
+      "description": "Logged when Claude tool (Read, Write, Bash, etc.) is invoked",
+      "triggered_by": "PreToolUse hook or PostToolUse hook",
+      "example": {
+        "type": "tool_call",
+        "timestamp": "2026-05-06T14:30:45Z",
+        "operation": "Write",
+        "agent_id": "documentation-engineer",
+        "session_id": "20260506w1",
+        "task_id": "sync-vault-coc-design",
+        "mission": "vault-infrastructure-overhaul",
+        "file_path": "/mnt/d/0local/gitrepos/faerie2/forensics/SYNC-COC-ARCHITECTURE.md",
+        "file_type": "artifact",
+        "hash_before": "previous_sha256_or_genesis",
+        "hash_after": "new_file_sha256",
+        "hash_method": "sha256",
+        "prev_entry_hash": "sha256_of_prior_entry",
+        "entry_hash": "computed_sha256_of_this_entry",
+        "status": "success",
+        "metadata": {
+          "tool": "Write",
+          "file_size_bytes": 12847,
+          "lines_written": 287
+        }
+      },
+      "fields": {
+        "required": ["type", "timestamp", "operation", "agent_id", "file_path", "hash_after", "prev_entry_hash", "entry_hash", "status"],
+        "optional": ["task_id", "mission", "hash_before", "metadata", "sig"]
+      }
+    },
+    {
+      "type": "manifest_write",
+      "description": "Logged when agent writes a manifest (task output)",
+      "triggered_by": "Agent writes to forensics/manifests/{YYYY-MM-DD}/ or forensics/ephemeral/{date}/{task_id}/",
+      "example": {
+        "type": "manifest_write",
+        "timestamp": "2026-05-06T14:35:20Z",
+        "operation": "write_manifest",
+        "agent_id": "documentation-engineer",
+        "session_id": "20260506w1",
+        "task_id": "sync-vault-coc-design",
+        "mission": "vault-infrastructure-overhaul",
+        "file_path": "/mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-06/sync-vault-coc-design/20260506T143520Z_manifest_vault-infrastructure-overhaul_documentation-engineer_20260506w1.json",
+        "file_type": "manifest",
+        "hash_before": "genesis",
+        "hash_after": "manifest_sha256",
+        "hash_method": "sha256",
+        "prev_entry_hash": "prior_entry_hash",
+        "entry_hash": "this_entry_hash",
+        "status": "success",
+        "metadata": {
+          "manifest_status": "final",
+          "dashboard_line": "Design complete; ready for implementation",
+          "quality_score": 0.89,
+          "belief_index": 0.92,
+          "discovered_work_count": 3
+        }
+      },
+      "fields": {
+        "required": ["type", "timestamp", "agent_id", "task_id", "mission", "file_path", "hash_after", "prev_entry_hash", "entry_hash"],
+        "optional": ["quality_score", "belief_index", "dashboard_line"]
+      }
+    },
+    {
+      "type": "vault_sync",
+      "description": "Logged when sync-vaults-with-coc.py injects metadata into vault file",
+      "triggered_by": "PostToolUse hook or SessionStart sync operation",
+      "example": {
+        "type": "vault_sync",
+        "timestamp": "2026-05-06T14:36:10Z",
+        "operation": "inject_metadata",
+        "agent_id": "documentation-engineer",
+        "session_id": "20260506w1",
+        "task_id": "sync-vault-coc-design",
+        "mission": "vault-infrastructure-overhaul",
+        "file_path": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/mission-graph/sync-vault-coc-design.md",
+        "file_type": "vault",
+        "hash_before": "vault_file_sha256_before_injection",
+        "hash_after": "vault_file_sha256_after_injection",
+        "hash_method": "sha256",
+        "prev_entry_hash": "prior_entry_hash",
+        "entry_hash": "this_entry_hash",
+        "status": "success",
+        "metadata": {
+          "frontmatter_fields_injected": ["task_id", "mission", "compass_bearing", "manifest_synced_at", "dashboard_line", "quality_score"],
+          "manifest_association_method": "task_id_match",
+          "manifest_path": "forensics/manifests/2026-05-06/20260506T143520Z_manifest_vault-infrastructure-overhaul_documentation-engineer.json",
+          "wikilinks_checked": 3,
+          "wikilinks_valid": 3,
+          "wikilinks_broken": 0,
+          "frontmatter_valid": true
+        }
+      },
+      "fields": {
+        "required": ["type", "timestamp", "operation", "agent_id", "file_path", "hash_before", "hash_after", "metadata", "prev_entry_hash", "entry_hash"],
+        "optional": ["task_id", "mission"]
+      }
+    },
+    {
+      "type": "operation",
+      "description": "Logged for high-level operations (spawn, promotion, sync session)",
+      "triggered_by": "Deliberate logging via 0x_coc_writer.py --log-operation",
+      "example": {
+        "type": "operation",
+        "timestamp": "2026-05-06T14:40:00Z",
+        "operation": "sync_vaults_complete",
+        "agent_id": "system",
+        "session_id": "20260506w1",
+        "mission": "vault-infrastructure-overhaul",
+        "prev_entry_hash": "prior_hash",
+        "entry_hash": "this_entry_hash",
+        "status": "success",
+        "metadata": {
+          "sync_session": "20260506T144000Z",
+          "vaults_scanned": 2,
+          "files_changed": 8,
+          "files_synced": 8,
+          "hashes_verified": 8,
+          "wikilinks_checked": 23,
+          "wikilinks_valid": 23,
+          "coc_entries_appended": 8,
+          "duration_seconds": 12.34
+        }
+      },
+      "fields": {
+        "required": ["type", "timestamp", "operation", "prev_entry_hash", "entry_hash"],
+        "optional": ["agent_id", "mission", "metadata"]
+      }
+    },
+    {
+      "type": "promotion",
+      "description": "Logged when file promoted from ephemeral/ to canonical forensics/ location",
+      "triggered_by": "0x_promote_to_forensics.py hook",
+      "example": {
+        "type": "promotion",
+        "timestamp": "2026-05-06T14:35:25Z",
+        "operation": "promote_manifest",
+        "agent_id": "documentation-engineer",
+        "task_id": "sync-vault-coc-design",
+        "mission": "vault-infrastructure-overhaul",
+        "file_path": "/mnt/d/0local/gitrepos/faerie2/forensics/manifests/2026-05-06/20260506T143520Z_manifest_vault-infrastructure-overhaul_documentation-engineer.json",
+        "file_type": "manifest",
+        "hash_before": "ephemeral_version_hash",
+        "hash_after": "canonical_symlink_hash",
+        "hash_method": "sha256",
+        "prev_entry_hash": "prior_hash",
+        "entry_hash": "this_hash",
+        "status": "success",
+        "metadata": {
+          "source": "forensics/ephemeral/2026-05-06/sync-vault-coc-design/...",
+          "destination": "forensics/manifests/2026-05-06/...",
+          "promotion_type": "symlink"
+        }
+      },
+      "fields": {
+        "required": ["type", "timestamp", "operation", "file_path", "hash_after", "prev_entry_hash", "entry_hash"],
+        "optional": ["agent_id", "task_id", "mission"]
+      }
+    },
+    {
+      "type": "import",
+      "description": "Logged when external data imported into forensics/",
+      "triggered_by": "0x_data_importer.py or manual import scripts",
+      "example": {
+        "type": "import",
+        "timestamp": "2026-05-06T10:00:00Z",
+        "operation": "import_evaluation_results",
+        "agent_id": "system",
+        "mission": null,
+        "file_path": "/mnt/d/0local/gitrepos/faerie2/forensics/evals/2026-05-06/...",
+        "file_type": "artifact",
+        "hash_before": "genesis",
+        "hash_after": "imported_data_hash",
+        "hash_method": "sha256",
+        "prev_entry_hash": "prior_hash",
+        "entry_hash": "this_hash",
+        "status": "success",
+        "metadata": {
+          "source": "external_eval_system",
+          "source_format": "json",
+          "records_imported": 147
+        }
+      },
+      "fields": {
+        "required": ["type", "timestamp", "operation", "file_path", "hash_after", "metadata", "prev_entry_hash", "entry_hash"],
+        "optional": ["agent_id"]
+      }
+    }
+  ],
+
+  "hash_chain_mechanics": {
+    "description": "How entries form an immutable chain",
+    "algorithm": [
+      {
+        "step": 1,
+        "action": "Read last entry from coc.jsonl",
+        "result": "last_entry_hash (or 'genesis' if file empty)"
+      },
+      {
+        "step": 2,
+        "action": "Create new entry; set prev_entry_hash = last_entry_hash",
+        "fields": {
+          "prev_entry_hash": "last_entry_hash",
+          "type": "...",
+          "timestamp": "...",
+          "operation": "...",
+          "status": "..."
+        }
+      },
+      {
+        "step": 3,
+        "action": "Compute entry_hash = SHA256(canonical_json(entry excluding entry_hash, sig, sig_type))",
+        "canonical_json": "Sort keys; use separators=(',', ':')"
+      },
+      {
+        "step": 4,
+        "action": "Set entry['entry_hash'] = computed hash",
+        "example": "\"entry_hash\": \"abc123def456...\""
+      },
+      {
+        "step": 5,
+        "action": "Append to coc.jsonl as single JSON line",
+        "format": "{...json...}\\n (one entry per line, newline-separated)"
+      }
+    ],
+    "verification": {
+      "step": 1,
+      "action": "Read entire coc.jsonl",
+      "check": "For each entry, recompute hash; verify matches entry_hash field"
+    },
+    "immutability_guarantee": "If any prior entry modified, hash chain breaks at that point. Detection: recomputed_hash ≠ stored_hash"
+  },
+
+  "status_field_semantics": {
+    "success": "Operation completed as intended; all invariants maintained",
+    "warning": "Operation completed; non-critical issues present (e.g., missing optional field, partial sync)",
+    "error": "Operation failed; some invariants violated; manual review required",
+    "partial_sync": "Sync completed for some files; others skipped (e.g., no manifest found)",
+    "corrupted": "Integrity check failed (hash mismatch); file may have been tampered",
+    "rollback": "Critical error occurred; all changes rolled back; system state unchanged"
+  },
+
+  "metadata_field_schemas": {
+    "tool_call_metadata": {
+      "tool": "string (Read|Write|Edit|Bash|Agent)",
+      "file_size_bytes": "integer",
+      "lines_written": "integer or null",
+      "lines_read": "integer or null",
+      "execution_time_ms": "float or null"
+    },
+    "manifest_write_metadata": {
+      "manifest_status": "string (draft|in_progress|final|blocked|error)",
+      "dashboard_line": "string (≤80 chars)",
+      "quality_score": "float (0.0-1.0) or null",
+      "belief_index": "float (0.0-1.0) or null",
+      "discovered_work_count": "integer or null",
+      "token_used": "integer or null",
+      "token_allocated": "integer or null"
+    },
+    "vault_sync_metadata": {
+      "frontmatter_fields_injected": "string[]",
+      "manifest_association_method": "string (task_id_match|basename_similarity|timestamp_proximity|none)",
+      "manifest_path": "string absolute path or null",
+      "wikilinks_checked": "integer",
+      "wikilinks_valid": "integer",
+      "wikilinks_broken": "integer",
+      "frontmatter_valid": "boolean",
+      "broken_links": "string[] or null"
+    },
+    "operation_metadata": {
+      "sync_session": "string ISO8601 datetime",
+      "vaults_scanned": "integer",
+      "files_changed": "integer",
+      "files_synced": "integer",
+      "hashes_verified": "integer",
+      "wikilinks_checked": "integer",
+      "wikilinks_valid": "integer",
+      "coc_entries_appended": "integer",
+      "duration_seconds": "float"
+    },
+    "promotion_metadata": {
+      "source": "string absolute path",
+      "destination": "string absolute path",
+      "promotion_type": "string (symlink|copy|move)"
+    }
+  },
+
+  "validation_rules": {
+    "type_field": {
+      "required": true,
+      "enum": ["tool_call", "manifest_write", "vault_sync", "operation", "promotion", "import"],
+      "rejection_rule": "Unknown type → reject entry, log error"
+    },
+    "timestamp_field": {
+      "required": true,
+      "format": "ISO8601 datetime (YYYY-MM-DDTHH:MM:SSZ)",
+      "rejection_rule": "Invalid format → reject entry"
+    },
+    "prev_entry_hash_field": {
+      "required": true,
+      "format": "sha256 hex string or 'genesis'",
+      "validation": "Must match last_entry_hash from prior entry",
+      "rejection_rule": "Mismatch → reject entry; possible tampering"
+    },
+    "entry_hash_field": {
+      "required": true,
+      "format": "sha256 hex string",
+      "validation": "Recompute from canonical entry; must match stored value",
+      "rejection_rule": "Mismatch → reject entry; possible tampering"
+    },
+    "file_path_field": {
+      "required": true,
+      "format": "absolute path string",
+      "validation": "Must be accessible and readable",
+      "rejection_rule": "Inaccessible path → warn, but allow entry (forensic logging may outpace file availability)"
+    },
+    "hash_after_field": {
+      "required": true,
+      "format": "sha256 hex string",
+      "validation": "Verify matches actual SHA256 of file_path",
+      "rejection_rule": "Hash mismatch → status='corrupted'; preserve entry but flag for review"
+    }
+  },
+
+  "atomicity_and_rollback": {
+    "principle": "COC writes are append-only; never delete or modify prior entries",
+    "write_protocol": [
+      "Open coc.jsonl in append mode",
+      "Write new entry as single line",
+      "Flush and fsync",
+      "Close file",
+      "Verify write succeeded (re-read last line; match entry_hash)"
+    ],
+    "failure_handling": "If write fails: error logged; no partial entry left in file; system consistent"
+  },
+
+  "signature_field": {
+    "type": "optional",
+    "format": "ED25519 signature",
+    "when_used": "Critical operations (e.g., promotion, import, system operations)",
+    "signing_key_location": "~/.faerie/coc-signing-key.ed25519 (managed by security team)",
+    "verification": "Signatures verified before accepting entry; mismatch → reject"
+  },
+
+  "querying_coc": {
+    "use_cases": [
+      {
+        "name": "Find all operations on file",
+        "query": "grep '\"file_path\": \"/path/to/file\"' forensics/coc.jsonl",
+        "result": "All COC entries mentioning this file (creation, modifications, promotions, syncs)"
+      },
+      {
+        "name": "Find all work by agent",
+        "query": "grep '\"agent_id\": \"documentation-engineer\"' forensics/coc.jsonl",
+        "result": "All operations performed by this agent"
+      },
+      {
+        "name": "Find all work in mission",
+        "query": "grep '\"mission\": \"vault-infrastructure-overhaul\"' forensics/coc.jsonl",
+        "result": "All operations tagged with this mission"
+      },
+      {
+        "name": "Trace hash chain",
+        "query": "Read coc.jsonl; for each entry, verify entry_hash matches prior prev_entry_hash",
+        "result": "Integrity verification; reports where chain breaks (if corrupted)"
+      },
+      {
+        "name": "Find errors/warnings",
+        "query": "grep '\"status\": \"error\"' forensics/coc.jsonl",
+        "result": "All failed operations; useful for incident investigation"
+      }
+    ]
+  },
+
+  "references": {
+    "coc_writer_script": "scripts/0x_coc_writer.py",
+    "coc_finalizer_script": "scripts/0x_coc_finalizer.py",
+    "forensic_log": "forensics/master-coc.jsonl (append-only source of truth)",
+    "related_design": "SYNC-COC-ARCHITECTURE.md"
+  },
+
+  "version_history": [
+    {
+      "version": "1.0",
+      "date": "2026-05-06",
+      "changes": "Initial schema; unified vault_sync + manifest_write types; hash_method field; mission field"
+    }
+  ]
+}

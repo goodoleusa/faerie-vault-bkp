@@ -1,0 +1,404 @@
+{
+  "version": "1.0",
+  "date_created": "2026-05-06T14:30:00Z",
+  "description": "Canonical mapping rules for injecting manifest metadata into vault frontmatter during sync-vaults-with-coc.py execution",
+  "purpose": "Enable vault files to carry forensic context without duplicating data; preserve one-way flow from faerie2/forensics → vault",
+
+  "injection_rules": [
+    {
+      "source_field": "task_id",
+      "vault_frontmatter_field": "task_id",
+      "data_type": "string",
+      "required": false,
+      "condition": "manifest found AND task_id non-null",
+      "description": "Link vault doc to forensic artifact; enables wikilink → manifest lookups",
+      "example": {
+        "source": { "task_id": "sync-vault-coc-design" },
+        "injected": { "task_id": "sync-vault-coc-design" }
+      },
+      "impact": "Enables backlinks: [[sync-vault-coc-design]] resolves to manifest"
+    },
+    {
+      "source_field": "mission",
+      "vault_frontmatter_field": "mission",
+      "data_type": "string",
+      "required": false,
+      "condition": "manifest found AND mission non-null",
+      "description": "Mission field (semantic clustering); critical for agent discovery routing",
+      "example": {
+        "source": { "mission": "vault-infrastructure-overhaul" },
+        "injected": { "mission": "vault-infrastructure-overhaul" }
+      },
+      "impact": "Agents scan vault for mission=X; enables stigmergic routing via filesystem"
+    },
+    {
+      "source_field": "compass_edge",
+      "vault_frontmatter_field": "compass_bearing",
+      "data_type": "string (N|S|E|W)",
+      "required": false,
+      "condition": "manifest found AND compass_edge non-null",
+      "description": "Compass bearing (navigation direction in mission DAG)",
+      "normalization": "Normalize variant field names: compass_edge, compass_bearing, bearing → compass_bearing",
+      "example": {
+        "source": { "compass_edge": "S" },
+        "injected": { "compass_bearing": "S", "bearing_icon": "🔓" }
+      },
+      "impact": "Vault files become navigation nodes; Obsidian graph shows bearing semantics",
+      "bearing_symbols": {
+        "N": "⛓️ North (unblock predecessors)",
+        "S": "🔓 South (conclude/ship)",
+        "E": "➡️ East (parallel work)",
+        "W": "⬅️ West (return to baseline)"
+      }
+    },
+    {
+      "source_field": "agent_type",
+      "vault_frontmatter_field": "agent_type",
+      "data_type": "string",
+      "required": false,
+      "condition": "manifest found AND agent_type non-null",
+      "description": "Which agent archetype performed the work",
+      "example": {
+        "source": { "agent_type": "documentation-engineer" },
+        "injected": { "agent_type": "documentation-engineer" }
+      },
+      "impact": "Attribution; enables queries like 'work by documentation-engineer this week'"
+    },
+    {
+      "source_field": "timestamp",
+      "vault_frontmatter_field": "manifest_synced_at",
+      "data_type": "ISO8601 datetime",
+      "required": false,
+      "condition": "manifest found AND timestamp non-null",
+      "description": "When manifest was created (forensic timestamp for ordering)",
+      "example": {
+        "source": { "timestamp": "2026-05-06T14:30:45Z" },
+        "injected": { "manifest_synced_at": "2026-05-06T14:30:45Z" }
+      },
+      "impact": "Vault file can be ordered by forensic work event; not by file mtime"
+    },
+    {
+      "source_field": "dashboard_line",
+      "vault_frontmatter_field": "dashboard_line",
+      "data_type": "string (≤80 chars)",
+      "required": false,
+      "condition": "manifest found AND dashboard_line non-null AND length <= 80",
+      "description": "One-line summary of task (agent's self-reported status snapshot)",
+      "truncation": "If > 80 chars, truncate + append '…'",
+      "example": {
+        "source": { "dashboard_line": "Design phase complete; hash tracking + COC integration ready for review" },
+        "injected": { "dashboard_line": "Design phase complete; hash tracking + COC integration ready for…" }
+      },
+      "impact": "Quick preview of work status without opening manifest"
+    },
+    {
+      "source_field": "status",
+      "vault_frontmatter_field": "manifest_status",
+      "data_type": "string (draft|in_progress|final|blocked)",
+      "required": false,
+      "condition": "manifest found AND status non-null",
+      "description": "Task completion state (used for downstream routing decisions)",
+      "valid_values": ["draft", "in_progress", "final", "blocked", "error"],
+      "example": {
+        "source": { "status": "final" },
+        "injected": { "manifest_status": "final" }
+      },
+      "impact": "Vault files reflect task readiness; agents respect status=final for shipping"
+    },
+    {
+      "source_field": "quality_score",
+      "vault_frontmatter_field": "quality_score",
+      "data_type": "float (0.0-1.0)",
+      "required": false,
+      "condition": "manifest found AND quality_score present",
+      "description": "Eval-derived quality metric (0=low, 1=high)",
+      "example": {
+        "source": { "quality_score": 0.87 },
+        "injected": { "quality_score": 0.87 }
+      },
+      "impact": "Enables filtering high-quality work; visible in vault search"
+    },
+    {
+      "source_field": "belief_index",
+      "vault_frontmatter_field": "belief_index",
+      "data_type": "float (0.0-1.0)",
+      "required": false,
+      "condition": "manifest found AND belief_index present",
+      "description": "Agent confidence in findings (0=low, 1=high)",
+      "example": {
+        "source": { "belief_index": 0.92 },
+        "injected": { "belief_index": 0.92 }
+      },
+      "impact": "Highlights uncertain findings for manual review"
+    },
+    {
+      "source_field": "mission_choice",
+      "vault_frontmatter_field": "mission_choice",
+      "data_type": "object { choice, rationale, alternatives_considered, confidence }",
+      "required": false,
+      "condition": "manifest found AND mission_choice present",
+      "description": "Agent's decision-making context (why this mission choice?)",
+      "structure": {
+        "choice": "string (mission name)",
+        "rationale": "string (≤200 chars: why this choice)",
+        "alternatives_considered": "string[] (other options considered)",
+        "confidence": "float (0.0-1.0: agent certainty)"
+      },
+      "example": {
+        "source": {
+          "mission_choice": {
+            "choice": "vault-infrastructure-overhaul",
+            "rationale": "COC + sync unification unblocks manifest→vault flow; prerequisites cleared",
+            "alternatives_considered": ["vault-path-consolidation", "frontmatter-validation-wiring"],
+            "confidence": 0.88
+          }
+        },
+        "injected": {
+          "mission_choice": {
+            "choice": "vault-infrastructure-overhaul",
+            "rationale": "COC + sync unification unblocks manifest→vault flow; prerequisites cleared",
+            "alternatives_considered": ["vault-path-consolidation", "frontmatter-validation-wiring"],
+            "confidence": 0.88
+          }
+        }
+      },
+      "impact": "Future analysis: what decisions do agents make? Why? Builds decision corpus"
+    },
+    {
+      "source_field": "discovered_work",
+      "vault_frontmatter_field": "discovered_work_summary",
+      "data_type": "object { count, entries[] }",
+      "required": false,
+      "condition": "manifest found AND discovered_work present AND is array",
+      "description": "Next unblocked work identified by agent (discovery summary, not full list)",
+      "truncation": "Show top 3 entries by bearing priority (N > S > E > W)",
+      "structure": {
+        "count": "integer (total discovered tasks)",
+        "entries": "object[] (first 3 entries: {task_id, mission, bearing, rationale})"
+      },
+      "example": {
+        "source": {
+          "discovered_work": [
+            {"task_id": "sync-vault-coc-integration", "mission": "vault-infrastructure-overhaul", "bearing": "S", "rationale": "Implement design"},
+            {"task_id": "hash-verification-testing", "mission": "vault-infrastructure-overhaul", "bearing": "E", "rationale": "Parallel validation"}
+          ]
+        },
+        "injected": {
+          "discovered_work_summary": {
+            "count": 2,
+            "entries": [
+              {"task_id": "sync-vault-coc-integration", "bearing": "S"},
+              {"task_id": "hash-verification-testing", "bearing": "E"}
+            ]
+          }
+        }
+      },
+      "impact": "Vault file shows next steps without reading manifest; navigation cues"
+    }
+  ],
+
+  "immutability_tracking": {
+    "description": "Hash fields added by sync script to vault frontmatter",
+    "fields": [
+      {
+        "field": "doc_hash",
+        "source": "SHA256(frontmatter + body before injection)",
+        "purpose": "Baseline for detecting post-sync corruption",
+        "lifecycle": "Created once (pre-sync); verified post-sync; stored in COC"
+      },
+      {
+        "field": "doc_hash_after_sync",
+        "source": "SHA256(frontmatter + body after injection)",
+        "purpose": "Post-sync state; compared to COC entry for integrity",
+        "lifecycle": "Created after injection; stored in COC; verified on read"
+      },
+      {
+        "field": "sync_timestamp",
+        "source": "datetime.now() during sync",
+        "purpose": "When this sync occurred (distinct from manifest_synced_at)",
+        "lifecycle": "Created once per sync; immutable"
+      }
+    ]
+  },
+
+  "conditional_injection_logic": {
+    "description": "Pseudocode for determining when to inject fields",
+    "algorithm": [
+      {
+        "step": 1,
+        "action": "Check if manifest found for this file",
+        "condition": "manifest_data != null AND manifest_valid",
+        "decision": {
+          "true": "Proceed to step 2",
+          "false": "Skip injection; log warning; mark file as 'no_manifest'"
+        }
+      },
+      {
+        "step": 2,
+        "action": "Validate manifest against schema",
+        "condition": "manifest_schema_valid(manifest_data)",
+        "decision": {
+          "true": "Proceed to step 3",
+          "false": "Reject injection; preserve original frontmatter; log error"
+        }
+      },
+      {
+        "step": 3,
+        "action": "Extract required fields: mission, compass_bearing, task_id",
+        "condition": "mission non-null OR compass_bearing non-null",
+        "decision": {
+          "true": "Proceed to step 4 (inject core navigation fields)",
+          "false": "Skip full injection; inject only metadata (timestamp, agent_type)"
+        }
+      },
+      {
+        "step": 4,
+        "action": "Inject core fields + optional fields (dashboard_line, status, quality_score)",
+        "condition": "All injections pass schema validation",
+        "decision": {
+          "true": "Proceed to step 5 (COC logging)",
+          "false": "Revert all injections; log error; preserve original"
+        }
+      },
+      {
+        "step": 5,
+        "action": "Write COC entry documenting all injections",
+        "condition": "COC write succeeds atomically",
+        "decision": {
+          "true": "Mark sync success; update baseline hashes",
+          "false": "Rollback all vault changes; raise error (blocking)"
+        }
+      }
+    ]
+  },
+
+  "field_validation_rules": {
+    "task_id": {
+      "pattern": "^[a-z0-9_-]+$",
+      "max_length": 100,
+      "required": false
+    },
+    "mission": {
+      "pattern": "^[a-z0-9_-]+$",
+      "max_length": 100,
+      "required": false,
+      "importance": "critical (enables routing)"
+    },
+    "compass_bearing": {
+      "enum": ["N", "S", "E", "W"],
+      "required": false
+    },
+    "agent_type": {
+      "pattern": "^[a-z-]+$",
+      "max_length": 50,
+      "required": false
+    },
+    "manifest_synced_at": {
+      "format": "ISO8601",
+      "required": false
+    },
+    "dashboard_line": {
+      "max_length": 80,
+      "required": false
+    },
+    "manifest_status": {
+      "enum": ["draft", "in_progress", "final", "blocked", "error"],
+      "required": false
+    },
+    "quality_score": {
+      "type": "float",
+      "min": 0.0,
+      "max": 1.0,
+      "required": false
+    },
+    "belief_index": {
+      "type": "float",
+      "min": 0.0,
+      "max": 1.0,
+      "required": false
+    }
+  },
+
+  "error_handling": {
+    "scenarios": [
+      {
+        "error": "Manifest not found",
+        "detection": "find_associated_manifest() returns None",
+        "action": "Skip injection; continue sync",
+        "log_level": "WARNING",
+        "coc_status": "partial_sync"
+      },
+      {
+        "error": "Field type mismatch",
+        "detection": "Validation fails (e.g., quality_score not a float)",
+        "action": "Skip field; continue with other fields",
+        "log_level": "WARNING",
+        "coc_status": "partial_sync"
+      },
+      {
+        "error": "Frontmatter validation fails",
+        "detection": "8x_vault_frontmatter_validator rejects file",
+        "action": "Revert all injections; preserve original",
+        "log_level": "ERROR",
+        "coc_status": "skipped"
+      },
+      {
+        "error": "COC write fails",
+        "detection": "coc.jsonl append operation fails",
+        "action": "Rollback all vault changes; raise error (blocking)",
+        "log_level": "CRITICAL",
+        "coc_status": "rollback"
+      },
+      {
+        "error": "Hash mismatch (corruption detected)",
+        "detection": "hash_after != expected_hash",
+        "action": "Log error; preserve file; skip COC entry",
+        "log_level": "ERROR",
+        "coc_status": "corrupted"
+      }
+    ]
+  },
+
+  "success_metrics": {
+    "metrics": [
+      {
+        "name": "injection_success_rate",
+        "definition": "files_injected / files_changed",
+        "target": ">= 0.95",
+        "rationale": "Most files should inject successfully; <5% acceptable errors"
+      },
+      {
+        "name": "field_coverage",
+        "definition": "avg(fields_injected_per_file) / avg(fields_available_per_manifest)",
+        "target": ">= 0.80",
+        "rationale": "Inject majority of available fields"
+      },
+      {
+        "name": "mission_field_population",
+        "definition": "files_with_mission_field / files_changed",
+        "target": ">= 0.90",
+        "rationale": "Mission field critical for routing; should be present in 90%+"
+      },
+      {
+        "name": "coc_chain_integrity",
+        "definition": "all_entry_hashes_match_prev_entry_hash",
+        "target": "100%",
+        "rationale": "Hash chain must be unbroken"
+      },
+      {
+        "name": "schema_compliance",
+        "definition": "injected_frontmatter_passes_validator",
+        "target": "100%",
+        "rationale": "All injected files must pass schema"
+      }
+    ]
+  },
+
+  "references": {
+    "vault_frontmatter_validator": "hooks/8x_vault_frontmatter_validator.py",
+    "coc_format": "forensics/master-coc.jsonl",
+    "manifest_format": "forensics/manifests/2026-05-XX/*_manifest_*.json",
+    "mission_graph_sync": "scripts/0x_mission_graph_sync.py",
+    "related_design": "SYNC-COC-ARCHITECTURE.md"
+  }
+}
