@@ -1,0 +1,22 @@
+{
+  "new-note-folder": "00-SHARED/Queue",
+  "new-note-template": "",
+  "prepend-archive-date": true,
+  "prepend-archive-format": "YYYY-MM-DD",
+  "show-checkboxes": true,
+  "hide-card-count": false,
+  "hide-date-display": false,
+  "link-date-to-daily-note": false,
+  "show-relative-date": true,
+  "date-trigger": "@",
+  "time-trigger": "@@",
+  "date-format": "YYYY-MM-DD",
+  "time-format": "HH:mm",
+  "max-archive-size": 50,
+  "tag-colors": [
+    { "tagKey": "#faerie", "color": "#7c3aed", "backgroundColor": "#7c3aed20" },
+    { "tagKey": "#criticalexposure", "color": "#dc2626", "backgroundColor": "#dc262620" },
+    { "tagKey": "#cybertemplate", "color": "#2563eb", "backgroundColor": "#2563eb20" },
+    { "tagKey": "#data-analysis-engine", "color": "#059669", "backgroundColor": "#05966920" }
+  ]
+}

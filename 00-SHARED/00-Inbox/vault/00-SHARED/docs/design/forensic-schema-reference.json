@@ -1,0 +1,384 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Forensic System Schema Reference",
+  "description": "JSON schemas for all forensic COC, manifest, and evidence types",
+  "version": "1.0",
+  "date": "2026-04-07",
+  "definitions": {
+    "coc_entry_base": {
+      "type": "object",
+      "description": "Common fields for all COC entries",
+      "properties": {
+        "entry_id": {
+          "type": "string",
+          "pattern": "^COC-\\d{5}$",
+          "description": "Sequential COC entry ID (COC-00001, COC-00002, ...)"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "genesis",
+            "ingest",
+            "transform",
+            "promote",
+            "crystallize",
+            "agent_run",
+            "agent_version_bump",
+            "session_open",
+            "session_close",
+            "export",
+            "vault_sync"
+          ],
+          "description": "Type of forensic event"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO8601 timestamp (UTC)"
+        },
+        "actor": {
+          "type": "string",
+          "description": "Who performed the action (agent type, system, user)"
+        },
+        "action": {
+          "type": "string",
+          "description": "Specific action name (init_investigation, ingest_phase_5, etc.)"
+        },
+        "scope": {
+          "type": "string",
+          "pattern": "^investigation-.*$",
+          "description": "Investigation ID scope (investigation-2026-04-07, etc.)"
+        },
+        "data": {
+          "type": "object",
+          "description": "Event-specific data (varies by type)"
+        },
+        "entry_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "description": "SHA256 hash of this entry (excluding entry_hash and sig)"
+        },
+        "prev_entry_hash": {
+          "type": "string",
+          "pattern": "^(genesis|sha256:[a-f0-9]{64})$",
+          "description": "SHA256 hash of previous entry (or 'genesis' for first entry)"
+        },
+        "sig": {
+          "type": "string",
+          "description": "PGP signature or placeholder (UNSIGNED_*, PGP_SIGNED)"
+        }
+      },
+      "required": [
+        "entry_id",
+        "type",
+        "ts",
+        "actor",
+        "action",
+        "scope",
+        "data",
+        "entry_hash",
+        "prev_entry_hash",
+        "sig"
+      ]
+    },
+    "coc_entry_genesis": {
+      "allOf": [
+        {"$ref": "#/definitions/coc_entry_base"},
+        {
+          "properties": {
+            "type": {"const": "genesis"},
+            "data": {
+              "type": "object",
+              "properties": {
+                "manifest_file": {
+                  "type": "string",
+                  "pattern": "^forensics/manifests/genesis_manifest\\.json$"
+                },
+                "manifest_hash": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                },
+                "file_count": {"type": "integer", "minimum": 1},
+                "total_size_gb": {"type": "number", "minimum": 0.001}
+              },
+              "required": ["manifest_file", "manifest_hash", "file_count"]
+            }
+          }
+        }
+      ]
+    },
+    "coc_entry_ingest": {
+      "allOf": [
+        {"$ref": "#/definitions/coc_entry_base"},
+        {
+          "properties": {
+            "type": {"const": "ingest"},
+            "data": {
+              "type": "object",
+              "properties": {
+                "files_added": {"type": "integer", "minimum": 1},
+                "total_size_mb": {"type": "number", "minimum": 0.1},
+                "manifest_file": {"type": "string"},
+                "manifest_hash": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                },
+                "hash_collisions": {"type": "integer", "minimum": 0},
+                "phase_duration_seconds": {"type": "number", "minimum": 0}
+              },
+              "required": ["files_added", "manifest_hash"]
+            }
+          }
+        }
+      ]
+    },
+    "coc_entry_promote": {
+      "allOf": [
+        {"$ref": "#/definitions/coc_entry_base"},
+        {
+          "properties": {
+            "type": {"const": "promote"},
+            "data": {
+              "type": "object",
+              "properties": {
+                "finding": {"type": "string"},
+                "source": {"type": "string"},
+                "nectar_entry": {"type": "string"},
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": ["finding", "confidence"]
+            }
+          }
+        }
+      ]
+    },
+    "coc_entry_crystallize": {
+      "allOf": [
+        {"$ref": "#/definitions/coc_entry_base"},
+        {
+          "properties": {
+            "type": {"const": "crystallize"},
+            "data": {
+              "type": "object",
+              "properties": {
+                "sources": {
+                  "type": "array",
+                  "items": {"type": "string"},
+                  "description": "NECTAR entries that were integrated"
+                },
+                "result": {"type": "string"},
+                "result_hash": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                }
+              },
+              "required": ["sources", "result"]
+            }
+          }
+        }
+      ]
+    },
+    "coc_entry_export": {
+      "allOf": [
+        {"$ref": "#/definitions/coc_entry_base"},
+        {
+          "properties": {
+            "type": {"const": "export"},
+            "data": {
+              "type": "object",
+              "properties": {
+                "bundle_file": {"type": "string"},
+                "bundle_hash": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                },
+                "signature": {"type": "string"},
+                "pgp_key": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{16}$"
+                },
+                "b2_location": {
+                  "type": "string",
+                  "pattern": "^s3://.*$|^b2://.*$"
+                },
+                "b2_worm_enabled": {"type": "boolean"}
+              },
+              "required": ["bundle_file", "bundle_hash", "b2_location"]
+            }
+          }
+        }
+      ]
+    },
+    "manifest_file_entry": {
+      "type": "object",
+      "description": "Entry in a hash manifest (genesis, rawdata, evidence)",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "File path (relative to evidence root)"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA256 hash (lowercase, no prefix)"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes"
+        },
+        "mtime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time (ISO8601)"
+        }
+      },
+      "required": ["path", "sha256", "size_bytes"]
+    },
+    "manifest": {
+      "type": "object",
+      "description": "Hash manifest (genesis_manifest.json, rawdata_manifest_*.json, evidence_manifest.json)",
+      "properties": {
+        "manifest_id": {
+          "type": "string",
+          "enum": ["genesis", "rawdata", "evidence"],
+          "description": "Manifest type"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Manifest creation timestamp"
+        },
+        "run_id": {
+          "type": "string",
+          "pattern": "^RUN-\\d{3}$",
+          "description": "Ingest run ID (only for rawdata manifests)"
+        },
+        "file_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "total_size_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "files": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/manifest_file_entry"},
+          "description": "All files in manifest"
+        },
+        "manifest_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA256 hash of entire manifest (optional, computed afterward)"
+        }
+      },
+      "required": ["manifest_id", "ts", "file_count", "total_size_bytes", "files"]
+    },
+    "reasoning_entry": {
+      "type": "object",
+      "description": "Entry in reasoning.jsonl (agent analysis step)",
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Agent type (data-scientist, security-auditor, etc.)"
+        },
+        "phase": {
+          "type": "string",
+          "description": "Pipeline phase (STAT_ANALYST, EVIDENCE_ASSESSOR, etc.)"
+        },
+        "run_id": {
+          "type": "string",
+          "pattern": "^run-[0-9]{8}-\\d{3}$",
+          "description": "Unique run identifier"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "data_file": {"type": "string"},
+            "data_hash": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "findings_file": {"type": "string"},
+            "findings_hash": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "partial", "failed"]
+        },
+        "note": {
+          "type": "string",
+          "description": "Human-readable summary of findings"
+        }
+      },
+      "required": ["agent", "phase", "ts", "status"]
+    }
+  },
+  "examples": {
+    "coc_entry_genesis": {
+      "entry_id": "COC-00001",
+      "type": "genesis",
+      "ts": "2026-04-07T14:23:47Z",
+      "actor": "system",
+      "action": "init_investigation",
+      "scope": "investigation-2026-04-07",
+      "data": {
+        "manifest_file": "forensics/manifests/genesis_manifest.json",
+        "manifest_hash": "sha256:abc123def456...",
+        "file_count": 658,
+        "total_size_gb": 5.37
+      },
+      "entry_hash": "sha256:def456ghi789...",
+      "prev_entry_hash": "genesis",
+      "sig": "UNSIGNED_BASELINE"
+    },
+    "manifest_genesis": {
+      "manifest_id": "genesis",
+      "ts": "2026-04-07T14:23:47Z",
+      "file_count": 658,
+      "total_size_bytes": 5368709120,
+      "files": [
+        {
+          "path": "raw/evidence_001.pdf",
+          "sha256": "abc123def456...",
+          "size_bytes": 1024,
+          "mtime": "2026-04-06T10:00:00Z"
+        }
+      ]
+    },
+    "reasoning_entry": {
+      "agent": "data-scientist",
+      "phase": "STAT_ANALYST",
+      "run_id": "run-20260407-003",
+      "ts": "2026-04-07T16:12:33Z",
+      "input": {
+        "data_file": "scripts/audit_results/analysis_input.json",
+        "data_hash": "sha256:input123..."
+      },
+      "output": {
+        "findings_file": "scripts/audit_results/stat_results.json",
+        "findings_hash": "sha256:output456..."
+      },
+      "status": "success",
+      "note": "Hypothesis 1 confidence → 0.87 (+0.05)"
+    }
+  }
+}

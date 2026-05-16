@@ -1,0 +1,8 @@
+{
+  "_comment": "Copy to ~/.claude/faerie-env.json and edit paths. Install scripts can generate this for you.",
+  "faerie_project_root": "D:\\path\\to\\your\\product\\repo",
+  "flowsearch_repo": "D:\\path\\to\\flowsearch",
+  "faerie_vault_shared": "D:\\path\\to\\flowsearch\\ObsidianVault\\00-SHARED",
+  "claude_hooks_state": "",
+  "vault_drops": ""
+}

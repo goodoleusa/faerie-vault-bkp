@@ -1,0 +1,35 @@
+{
+  "hierarchy-up-field-names": "parent,up",
+  "hierarchy-down-field-names": "child,down",
+  "hierarchy-same-field-names": "sibling,same",
+  "hierarchy-next-field-names": "next",
+  "hierarchy-prev-field-names": "prev",
+  "renderAlias": true,
+  "backgroundColor": "#1a1a2e",
+  "baseNodeStyle": {
+    "prefix": "",
+    "backgroundColor": "#00d4ff",
+    "fillStyle": "solid",
+    "textColor": "#000000",
+    "borderColor": "#1a1a2e",
+    "fontSize": 20,
+    "fontFamily": 3,
+    "maxLabelLength": 30,
+    "roughness": 0,
+    "strokeWidth": 1,
+    "strokeStyle": "solid"
+  },
+  "centralNodeStyle": {
+    "backgroundColor": "#ffd700",
+    "fillStyle": "solid",
+    "textColor": "#000000",
+    "borderColor": "#1a1a2e",
+    "fontSize": 24,
+    "fontFamily": 3,
+    "maxLabelLength": 40
+  },
+  "inferAllLinksAsSiblings": false,
+  "showFolderNodes": false,
+  "showAttachments": false,
+  "showVirtualNodes": true
+}

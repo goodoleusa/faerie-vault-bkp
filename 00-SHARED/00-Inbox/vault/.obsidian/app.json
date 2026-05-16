@@ -1,0 +1,27 @@
+{
+  "defaultViewMode": "preview",
+  "foldHeading": true,
+  "foldIndent": true,
+  "showLineNumber": false,
+  "spellcheck": false,
+  "strictLineBreaks": false,
+  "readableLineLength": true,
+  "promptDelete": true,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "newFileFolderPath": "00-SHARED/Human-Inbox",
+  "attachmentFolderPath": "./attachments",
+  "showUnsupportedFiles": true,
+  "deleteUnlinkedAttachments": "always",
+  "newLinkFormat": "relative",
+  "livePreview": false,
+  "propertiesInDocument": "source",
+  "openBehavior": "file:00-SHARED/ONBOARDING/00-START-HERE",
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
+}

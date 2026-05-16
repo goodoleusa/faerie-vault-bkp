@@ -1,0 +1,91 @@
+{
+  "version": "2.0-with-tags",
+  "effective_date": "2026-04-25",
+  "change_summary": "Added tags field for manifest categorization and discovery",
+  
+  "manifest_schema": {
+    "type": "object",
+    "required": ["task_id", "agent_run_id", "status", "ts"],
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": ["in-progress", "draft", "final"],
+        "description": "Manifest status progression"
+      },
+      "task_id": {
+        "type": "string",
+        "pattern": "^task-|^session-",
+        "description": "Task or session identifier from queue"
+      },
+      "agent_run_id": {
+        "type": "string",
+        "description": "Unique run ID for forensic tracking"
+      },
+      "agent": {
+        "type": "string",
+        "description": "Agent type (general-purpose, python-pro, documentation-engineer, etc.)"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "bugfix", "enhancement", "documentation", "code-review",
+            "audit", "evaluation", "infrastructure", "system-design",
+            "data-ingest", "security-audit", "manifest-upgrade",
+            "queue-ops", "schema", "retrofit", "validation",
+            "archive", "policy", "investigation", "synthesis",
+            "general"
+          ]
+        },
+        "description": "Categorical tags for discovery and filtering",
+        "examples": ["bugfix", "evaluation", "infrastructure"]
+      },
+      "ts": {
+        "type": "string",
+        "format": "iso8601",
+        "description": "Timestamp of manifest creation"
+      },
+      "output_path": {
+        "type": "string",
+        "description": "Path to full agent output (if any)"
+      },
+      "dashboard_line": {
+        "type": "string",
+        "maxLength": 80,
+        "description": "One-line summary for main context"
+      },
+      "findings": {
+        "type": "object",
+        "description": "Agent findings and analysis results"
+      },
+      "next_task_queued": {
+        "type": ["string", "null"],
+        "description": "Next task ID if chaining"
+      }
+    }
+  },
+  
+  "tag_definitions": {
+    "bugfix": "Bug fix or error correction",
+    "enhancement": "Feature addition or improvement",
+    "documentation": "Doc writing, editing, or updates",
+    "code-review": "Code review or refactoring",
+    "audit": "Forensic or compliance audit",
+    "evaluation": "Agent performance evaluation",
+    "infrastructure": "System infra or orchestration work",
+    "system-design": "Architecture or design decisions",
+    "data-ingest": "Data ingestion or processing",
+    "security-audit": "Security analysis or hardening",
+    "manifest-upgrade": "Manifest schema or structure changes",
+    "queue-ops": "Queue management or task dispatch",
+    "schema": "Data schema or format definitions",
+    "retrofit": "Retroactive updates to existing data",
+    "validation": "Validation, testing, or verification",
+    "archive": "Archival or cleanup operations",
+    "policy": "Policy definition or enforcement",
+    "investigation": "Investigation or research work",
+    "synthesis": "Synthesis or composition of findings",
+    "general": "General or uncategorized work"
+  }
+}

@@ -1,0 +1,382 @@
+---
+excalidraw-plugin: parsed
+tags: [excalidraw, faerie-diagram, memory, topology]
+doc_hash: sha256:f9ec4221bc7456a434a7a86965a320093b2c2e32fef72591e9d30be0671e9f72
+hash_ts: 2026-04-25T01:10:53Z
+hash_method: body-sha256-v1
+---
+
+# Text Elements
+
+HONEY
+
+crystallized · ≤5K tokens · rarely changes
+
+NECTAR
+
+validated · append-only · grows across sessions
+
+pollen
+
+ephemeral · session notes · cleared at /handoff
+
+/crystallize
+
+/handoff
+
+forensics/
+
+immutable · hash-chained · never deleted
+
+# Embedded files
+
+# Drawing
+```json
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "pollen-bar",
+      "type": "rectangle",
+      "x": 120,
+      "y": 400,
+      "width": 520,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "#f0f9ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": null,
+      "seed": 4001
+    },
+    {
+      "id": "pollen-label",
+      "type": "text",
+      "x": 340,
+      "y": 410,
+      "width": 80,
+      "height": 24,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "pollen",
+      "fontFamily": 1,
+      "fontSize": 16,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4002
+    },
+    {
+      "id": "pollen-desc",
+      "type": "text",
+      "x": 200,
+      "y": 438,
+      "width": 360,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#555555",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "ephemeral · session notes · cleared at /handoff",
+      "fontFamily": 1,
+      "fontSize": 11,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4003
+    },
+    {
+      "id": "nectar-bar",
+      "type": "rectangle",
+      "x": 160,
+      "y": 280,
+      "width": 440,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "#dbeafe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": null,
+      "seed": 4010
+    },
+    {
+      "id": "nectar-label",
+      "type": "text",
+      "x": 350,
+      "y": 290,
+      "width": 80,
+      "height": 24,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "NECTAR",
+      "fontFamily": 1,
+      "fontSize": 16,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4011
+    },
+    {
+      "id": "nectar-desc",
+      "type": "text",
+      "x": 220,
+      "y": 318,
+      "width": 320,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#555555",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "validated · append-only · grows across sessions",
+      "fontFamily": 1,
+      "fontSize": 11,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4012
+    },
+    {
+      "id": "honey-bar",
+      "type": "rectangle",
+      "x": 220,
+      "y": 160,
+      "width": 320,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "#bfdbfe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": null,
+      "seed": 4020
+    },
+    {
+      "id": "honey-label",
+      "type": "text",
+      "x": 350,
+      "y": 170,
+      "width": 80,
+      "height": 24,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "HONEY",
+      "fontFamily": 1,
+      "fontSize": 16,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4021
+    },
+    {
+      "id": "honey-desc",
+      "type": "text",
+      "x": 248,
+      "y": 198,
+      "width": 264,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#555555",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "crystallized · ≤5K tokens · rarely changes",
+      "fontFamily": 1,
+      "fontSize": 11,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4022
+    },
+    {
+      "id": "arrow-pollen-nectar",
+      "type": "arrow",
+      "x": 380,
+      "y": 400,
+      "width": 0,
+      "height": -40,
+      "angle": 0,
+      "strokeColor": "#3B82F6",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": null,
+      "seed": 4030,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow-pollen-nectar-label",
+      "type": "text",
+      "x": 390,
+      "y": 376,
+      "width": 80,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#3B82F6",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "/handoff",
+      "fontFamily": 1,
+      "fontSize": 11,
+      "textAlign": "left",
+      "verticalAlign": "middle",
+      "seed": 4031
+    },
+    {
+      "id": "arrow-nectar-honey",
+      "type": "arrow",
+      "x": 380,
+      "y": 280,
+      "width": 0,
+      "height": -40,
+      "angle": 0,
+      "strokeColor": "#3B82F6",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": null,
+      "seed": 4032,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow-nectar-honey-label",
+      "type": "text",
+      "x": 390,
+      "y": 256,
+      "width": 100,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#3B82F6",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "/crystallize",
+      "fontFamily": 1,
+      "fontSize": 11,
+      "textAlign": "left",
+      "verticalAlign": "middle",
+      "seed": 4033
+    },
+    {
+      "id": "forensics-box",
+      "type": "rectangle",
+      "x": 60,
+      "y": 60,
+      "width": 220,
+      "height": 60,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {"type": 3, "value": 4},
+      "seed": 4040
+    },
+    {
+      "id": "forensics-label",
+      "type": "text",
+      "x": 70,
+      "y": 68,
+      "width": 200,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "forensics/",
+      "fontFamily": 1,
+      "fontSize": 13,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4041
+    },
+    {
+      "id": "forensics-desc",
+      "type": "text",
+      "x": 70,
+      "y": 90,
+      "width": 200,
+      "height": 18,
+      "angle": 0,
+      "strokeColor": "#555555",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "text": "immutable · hash-chained",
+      "fontFamily": 1,
+      "fontSize": 10,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "seed": 4042
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#FFFFFF",
+    "gridSize": 20,
+    "gridColor": {"Bold": "#C9C9C9", "Regular": "#EDEDED"},
+    "theme": "light"
+  },
+  "files": {}
+}
+```
+%%

@@ -1,0 +1,226 @@
+{
+  "manifest_version": "2.0",
+  "description": "Design docs copy strategy: sequential numbering for vault evolution visibility, original names for git-tracked faerie2/docs",
+  "generated": "2026-04-07T12:00:00Z",
+  "copy_operations": [
+    {
+      "seq": 1,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/ARCHITECTURE.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/ARCHITECTURE.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/001-ARCHITECTURE.md",
+      "created": "2026-04-06T03:14:05Z",
+      "category": "foundational",
+      "reason": "System architecture master doc"
+    },
+    {
+      "seq": 2,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/STATE-OF-SYSTEM-2026-04-06.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/STATE-OF-SYSTEM-2026-04-06.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/002-STATE-OF-SYSTEM-2026-04-06.md",
+      "created": "2026-04-06T03:14:05Z",
+      "category": "status",
+      "reason": "System state snapshot @ publication eve"
+    },
+    {
+      "seq": 3,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/AUTO-HANDOFF-SYSTEM.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/AUTO-HANDOFF-SYSTEM.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/003-AUTO-HANDOFF-SYSTEM.md",
+      "created": "2026-04-07T10:05:56Z",
+      "category": "orchestration",
+      "reason": "Faerie session-end automation design"
+    },
+    {
+      "seq": 4,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/forensic-system-design.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/forensic-system-design.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/004-forensic-system-design.md",
+      "created": "2026-04-07T10:12:47Z",
+      "category": "forensics",
+      "reason": "COC, hash chains, three-store architecture"
+    },
+    {
+      "seq": 5,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/artifact-registry-design.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/artifact-registry-design.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/005-artifact-registry-design.md",
+      "created": "2026-04-07T10:12:48Z",
+      "category": "artifact_management",
+      "reason": "Evidence/artifact versioning + lineage tracking"
+    },
+    {
+      "seq": 6,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/DELIVERY-SUMMARY.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/DELIVERY-SUMMARY.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/006-DELIVERY-SUMMARY.md",
+      "created": "2026-04-07T10:12:49Z",
+      "category": "project",
+      "reason": "Faerie2 delivery scope + stakeholder comms"
+    },
+    {
+      "seq": 7,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/forensic-implementation-checklist.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/forensic-implementation-checklist.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/007-forensic-implementation-checklist.md",
+      "created": "2026-04-07T10:12:50Z",
+      "category": "implementation",
+      "reason": "Forensic integration checklist per phase"
+    },
+    {
+      "seq": 8,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/FORENSIC-SYSTEM-INDEX.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/FORENSIC-SYSTEM-INDEX.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/008-FORENSIC-SYSTEM-INDEX.md",
+      "created": "2026-04-07T10:12:50Z",
+      "category": "forensics",
+      "reason": "Forensic subsystem roadmap + references"
+    },
+    {
+      "seq": 9,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/CANONICAL-WRITE-LOCATIONS.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/CANONICAL-WRITE-LOCATIONS.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/009-CANONICAL-WRITE-LOCATIONS.md",
+      "created": "2026-04-07T10:12:51Z",
+      "category": "memory_system",
+      "reason": "Three-file memory system (HONEY/NECTAR/INBOX) design & routing"
+    },
+    {
+      "seq": 10,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/AGENT-LIFECYCLE-DETAIL.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/AGENT-LIFECYCLE-DETAIL.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/010-AGENT-LIFECYCLE-DETAIL.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "agent",
+      "reason": "Complete agent lifecycle (startup → training → self-update)"
+    },
+    {
+      "seq": 11,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/PISTON-MULTI-SESSION-DESIGN.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/PISTON-MULTI-SESSION-DESIGN.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/011-PISTON-MULTI-SESSION-DESIGN.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "orchestration",
+      "reason": "Multi-session piston (wave) execution model"
+    },
+    {
+      "seq": 12,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/PISTON-MULTI-SESSION-PHASE2-ROADMAP.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/PISTON-MULTI-SESSION-PHASE2-ROADMAP.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/012-PISTON-MULTI-SESSION-PHASE2-ROADMAP.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "roadmap",
+      "reason": "Phase 2 roadmap: piston enhancements + multi-agent sync"
+    },
+    {
+      "seq": 13,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/TOKEN-OPTIMIZATION-ADVANCED.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/TOKEN-OPTIMIZATION-ADVANCED.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/013-TOKEN-OPTIMIZATION-ADVANCED.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "optimization",
+      "reason": "Advanced token optimization patterns & cache strategy"
+    },
+    {
+      "seq": 14,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/ORCHESTRATION-AUTONOMY.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/ORCHESTRATION-AUTONOMY.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/014-ORCHESTRATION-AUTONOMY.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "orchestration",
+      "reason": "Agent autonomy + minimal-instruction dispatch model"
+    },
+    {
+      "seq": 15,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/DURABLE-STATE-LOADER.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/DURABLE-STATE-LOADER.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/015-DURABLE-STATE-LOADER.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "state_management",
+      "reason": "Session state recovery from HONEY/NECTAR (warm start)"
+    },
+    {
+      "seq": 16,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/AGENTS-ALIGNMENT.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/AGENTS-ALIGNMENT.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/016-AGENTS-ALIGNMENT.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "agent",
+      "reason": "Faerie2 agent roster + alignment matrix"
+    },
+    {
+      "seq": 17,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/faerie-task-sync-bridge-design.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/faerie-task-sync-bridge-design.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/017-faerie-task-sync-bridge-design.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "orchestration",
+      "reason": "Faerie ↔ queue bridge (Option B design)"
+    },
+    {
+      "seq": 18,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/investigator-onboarding.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/investigator-onboarding.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/018-investigator-onboarding.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "collaboration",
+      "reason": "Investigator + collaborator onboarding checklist"
+    },
+    {
+      "seq": 19,
+      "source": "/mnt/d/0local/gitrepos/faerie2/docs/script-consolidation-log.md",
+      "target_git_tracked": "/mnt/d/0local/gitrepos/faerie2/docs/script-consolidation-log.md",
+      "target_vault": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/019-script-consolidation-log.md",
+      "created": "2026-04-07T10:12:52Z",
+      "category": "scripting",
+      "reason": "Script tier reorganization history (0x-9x naming)"
+    }
+  ],
+  "copy_instructions": {
+    "for_git_tracked": "Copy to faerie2/docs/ with ORIGINAL FILENAMES (no sequence numbers) — these are version-controlled",
+    "for_vault": "Copy to CyberOps-UNIFIED/00-SHARED/Design-Narratives/ with SEQUENTIAL NUMBERS prepended (NNN-filename.md) — shows evolution",
+    "sequence_order": "By creation timestamp, oldest first (001 = earliest created doc)",
+    "naming_pattern_git": "{filename}.md (unchanged)",
+    "naming_pattern_vault": "{NNN}-{filename}.md (sequential prefix shows evolution order)"
+  },
+  "validation_checklist": {
+    "before_copy": [
+      "Verify vault target path exists: /mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/",
+      "Confirm faerie2/docs/ is canonical source (all docs present, no gaps)",
+      "Check for any new .md files in faerie2/docs/ since manifest generation"
+    ],
+    "during_copy": [
+      "Use rsync or cp -p to preserve timestamps",
+      "Rename files on vault copy: add {NNN}- prefix",
+      "Do NOT rename files in faerie2/docs/ source (remains canonical with original names)",
+      "Log each copy: timestamp + source + both targets"
+    ],
+    "after_copy": [
+      "Verify all 19 files present in vault Design-Narratives/ (001-019-*.md)",
+      "Verify all 19 files present in faerie2/docs/ with ORIGINAL NAMES (unchanged)",
+      "Cross-check: faerie2 source filenames should NOT have sequence numbers",
+      "Cross-check: vault filenames MUST have sequence numbers",
+      "Update vault 00-SHARED/INDEX.md to reference Design-Narratives/ folder"
+    ]
+  },
+  "summary": {
+    "total_files": 19,
+    "categories": {
+      "foundational": 1,
+      "status": 1,
+      "orchestration": 3,
+      "forensics": 2,
+      "artifact_management": 1,
+      "project": 1,
+      "implementation": 1,
+      "memory_system": 1,
+      "agent": 2,
+      "roadmap": 1,
+      "optimization": 1,
+      "state_management": 1,
+      "collaboration": 1,
+      "scripting": 1
+    },
+    "git_tracked_path": "/mnt/d/0local/gitrepos/faerie2/docs/",
+    "vault_path": "/mnt/d/0LOCAL/0-ObsidianTransferring/CyberOps-UNIFIED/00-SHARED/Design-Narratives/"
+  }
+}

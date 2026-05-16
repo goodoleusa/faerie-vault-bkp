@@ -1,0 +1,12 @@
+{
+  "baseFontSize": 19,
+  "theme": "moonstone",
+  "cssTheme": "Prism",
+  "enabledCssSnippets": [
+    "agent-formatting"
+  ],
+  "interfaceFontFamily": "",
+  "textFontFamily": "",
+  "monospaceFontFamily": "",
+  "baseFontSizeAction": true
+}

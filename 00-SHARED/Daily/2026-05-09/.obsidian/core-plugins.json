@@ -1,0 +1,15 @@
+{
+  "graph": true,
+  "backlink": true,
+  "outgoing-link": true,
+  "tag-pane": true,
+  "outline": true,
+  "word-count": true,
+  "file-recovery": true,
+  "templates": true,
+  "note-composer": true,
+  "command-palette": true,
+  "switcher": true,
+  "search": true,
+  "bookmarks": true
+}

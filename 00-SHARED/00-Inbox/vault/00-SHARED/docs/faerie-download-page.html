@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>faerie — Download</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* Hero */
+        .hero { text-align: center; margin-bottom: 60px; }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        .hero p { 
+            font-size: 1.25rem; 
+            color: #71717a;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Version Badge */
+        .version { 
+            display: inline-block;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.875rem;
+            color: #a78bfa;
+            margin-bottom: 24px;
+        }
+        
+        /* Auto-detect */
+        .auto-detect {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .auto-detect-label { color: #71717a; font-size: 0.875rem; }
+        .auto-detect-value { color: #a78bfa; font-weight: 600; }
+        
+        /* Product Grid */
+        .products { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
+        
+        @media (max-width: 640px) {
+            .products { grid-template-columns: 1fr; }
+        }
+        
+        /* Product Card */
+        .product {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .product:hover {
+            border-color: #a78bfa;
+            background: #1f1f23;
+            transform: translateY(-2px);
+        }
+        .product.selected {
+            border-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.1);
+        }
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+        .product-name { font-weight: 600; font-size: 1.125rem; margin-bottom: 4px; }
+        .product-desc { font-size: 0.875rem; color: #71717a; }
+        .product-features {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .feature-tag {
+            font-size: 0.75rem;
+            background: #27272a;
+            color: #a1a1aa;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        /* OS Selector */
+        .os-section { margin-bottom: 40px; }
+        .os-label { 
+            font-size: 0.875rem; 
+            color: #71717a; 
+            margin-bottom: 12px;
+            display: block;
+        }
+        .os-options { display: flex; gap: 12px; flex-wrap: wrap; }
+        .os-btn {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 8px;
+            padding: 12px 20px;
+            color: #e4e4e7;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .os-btn:hover { border-color: #3f3f46; }
+        .os-btn.selected { 
+            border-color: #a78bfa; 
+            background: rgba(167, 139, 250, 0.1);
+        }
+        .os-icon { font-size: 1.25rem; }
+        
+        /* Download Button */
+        .download-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #0a0a0f;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .download-btn:hover { opacity: 0.9; transform: scale(1.01); }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #27272a;
+            color: #52525b;
+            font-size: 0.875rem;
+        }
+        .footer a { color: #a78bfa; text-decoration: none; }
+        
+        /* Command for install */
+        .install-cmd {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #a78bfa;
+            margin-top: 16px;
+            display: none;
+        }
+        .install-cmd.show { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <span class="version">v0.5.0</span>
+            <h1>faerie</h1>
+            <p>Persistent memory and agent orchestration for Claude Code</p>
+        </div>
+        
+        <!-- Auto-detect -->
+        <div class="auto-detect">
+            <span class="auto-detect-label">Detected:</span>
+            <span class="auto-detect-value" id="detected">Windows + Claude CLI</span>
+        </div>
+        
+        <!-- Products -->
+        <div class="os-label">Choose your product</div>
+        <div class="products">
+            <div class="product selected" data-product="cli" onclick="selectProduct('cli')">
+                <div class="product-icon">🔮</div>
+                <div class="product-name">Claude CLI</div>
+                <div class="product-desc">Terminal/headless</div>
+                <div class="product-features">
+                    <span class="feature-tag">Skills</span>
+                    <span class="feature-tag">Commands</span>
+                    <span class="feature-tag">Hooks</span>
+                    <span class="feature-tag">MCP</span>
+                </div>
+            </div>
+            <div class="product" data-product="desktop" onclick="selectProduct('desktop')">
+                <div class="product-icon">🖥️</div>
+                <div class="product-name">Claude Desktop</div>
+                <div class="product-desc">Desktop app</div>
+                <div class="product-features">
+                    <span class="feature-tag">Skills</span>
+                    <span class="feature-tag">Commands</span>
+                    <span class="feature-tag">MCP</span>
+                </div>
+            </div>
+            <div class="product" data-product="vscode" onclick="selectProduct('vscode')">
+                <div class="product-icon">📓</div>
+                <div class="product-name">VS Code</div>
+                <div class="product-desc">Extension</div>
+                <div class="product-features">
+                    <span class="feature-tag">Skills</span>
+                    <span class="feature-tag">Commands</span>
+                    <span class="feature-tag">MCP</span>
+                </div>
+            </div>
+            <div class="product" data-product="web" onclick="selectProduct('web')">
+                <div class="product-icon">🌐</div>
+                <div class="product-name">Web</div>
+                <div class="product-desc">Browser</div>
+                <div class="product-features">
+                    <span class="feature-tag">Skills</span>
+                    <span class="feature-tag">Commands</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- OS Selector -->
+        <div class="os-section">
+            <span class="os-label">Choose your OS</span>
+            <div class="os-options">
+                <button class="os-btn selected" data-os="windows" onclick="selectOS('windows')">
+                    <span class="os-icon">🪟</span> Windows
+                </button>
+                <button class="os-btn" data-os="macos" onclick="selectOS('macos')">
+                    <span class="os-icon">🍎</span> macOS
+                </button>
+                <button class="os-btn" data-os="linux" onclick="selectOS('linux')">
+                    <span class="os-icon">🐧</span> Linux
+                </button>
+            </div>
+        </div>
+        
+        <!-- Download -->
+        <button class="download-btn" onclick="download()">Download faerie for Windows + CLI</button>
+        
+        <!-- Install Command -->
+        <div class="install-cmd" id="install-cmd">
+            <span id="cmd-text">cp -r faerie ~/.claude/plugins/</span>
+        </div>
+        
+        <div class="footer">
+            <p>Source: <a href="#">github.com/faerie/faerie</a></p>
+            <p>MIT License</p>
+        </div>
+    </div>
+    
+    <script>
+        let selectedProduct = 'cli';
+        let selectedOS = 'windows';
+        
+        // Auto-detect
+        function detect() {
+            const ua = navigator.userAgent;
+            let os = 'windows';
+            if (ua.indexOf('Mac') !== -1) os = 'macos';
+            else if (ua.indexOf('Linux') !== -1) os = 'linux';
+            
+            // Detect Claude product (simplified)
+            let product = 'cli'; // Default
+            
+            const labels = {
+                'windows': 'Windows',
+                'macos': 'macOS', 
+                'linux': 'Linux'
+            };
+            
+            document.getElementById('detected').textContent = `${labels[os]} + Claude CLI`;
+            selectOS(os);
+        }
+        
+        function selectProduct(p) {
+            selectedProduct = p;
+            document.querySelectorAll('.product').forEach(el => {
+                el.classList.toggle('selected', el.dataset.product === p);
+            });
+            updateButton();
+        }
+        
+        function selectOS(os) {
+            selectedOS = os;
+            document.querySelectorAll('.os-btn').forEach(el => {
+                el.classList.toggle('selected', el.dataset.os === os);
+            });
+            updateButton();
+        }
+        
+        function updateButton() {
+            const btn = document.querySelector('.download-btn');
+            const osLabels = { windows: 'Windows', macos: 'macOS', linux: 'Linux' };
+            const productLabels = { 
+                cli: 'CLI', 
+                desktop: 'Desktop', 
+                vscode: 'VS Code',
+                web: 'Web'
+            };
+            btn.textContent = `Download faerie for ${osLabels[selectedOS]} + ${productLabels[selectedProduct]}`;
+            
+            // Show install command
+            const cmdEl = document.getElementById('install-cmd');
+            let cmd = '';
+            if (selectedOS === 'windows') {
+                cmd = selectedProduct === 'cli' 
+                    ? 'copy .claude-plugin %USERPROFILE%\\.claude\\plugins\\faerie'
+                    : 'copy .claude-plugin "%APPDATA%\\Claude\\plugins\\faerie"';
+            } else if (selectedOS === 'macos') {
+                cmd = 'cp -r .claude-plugin ~/.claude/plugins/faerie';
+            } else {
+                cmd = 'cp -r .claude-plugin ~/.config/Claude/plugins/faerie';
+            }
+            document.getElementById('cmd-text').textContent = cmd;
+        }
+        
+        function download() {
+            const filename = `faerie-${selectedOS}-${selectedProduct}.zip`;
+            alert(`Download: ${filename}\n\n(This would download the actual bundle)`);
+        }
+        
+        detect();
+    </script>
+</body>
+</html>

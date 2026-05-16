@@ -1,0 +1,8 @@
+/* Hive PDF Export — plugin styles */
+
+/* Settings tab info paragraph */
+.hive-pdf-info {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  margin-top: 0.5em;
+}

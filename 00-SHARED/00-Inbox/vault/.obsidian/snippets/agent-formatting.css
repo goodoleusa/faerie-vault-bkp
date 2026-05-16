@@ -1,0 +1,95 @@
+/* agent-formatting.css — Agent output styling for CyberOps-UNIFIED vault */
+/* Written: 2026-03-29 | Purpose: Blueprint note rendering + agent output clarity */
+
+/* ─── Frontmatter / Properties ─────────────────────────────────── */
+.metadata-container {
+  font-size: 0.85em;
+  opacity: 0.9;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 0.5em;
+  margin-bottom: 1em;
+}
+
+/* ─── Code blocks — monospace for analysis outputs ─────────────── */
+.markdown-preview-view pre,
+.markdown-source-view pre {
+  font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", monospace;
+  font-size: 0.82em;
+  background: var(--background-secondary);
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+}
+
+/* ─── Callout severity levels ───────────────────────────────────── */
+.callout[data-callout="critical"],
+.callout[data-callout="CRITICAL"] {
+  --callout-color: 220, 38, 38;    /* red-600 */
+  --callout-icon: alert-octagon;
+}
+
+.callout[data-callout="high"],
+.callout[data-callout="HIGH"] {
+  --callout-color: 234, 88, 12;    /* orange-600 */
+  --callout-icon: alert-triangle;
+}
+
+.callout[data-callout="finding"] {
+  --callout-color: 37, 99, 235;    /* blue-600 */
+  --callout-icon: search;
+}
+
+.callout[data-callout="droplet"] {
+  --callout-color: 124, 58, 237;   /* violet-600 */
+  --callout-icon: droplets;
+}
+
+.callout[data-callout="analysis"] {
+  --callout-color: 5, 150, 105;    /* emerald-600 */
+  --callout-icon: bar-chart-2;
+}
+
+.callout[data-callout="agent"] {
+  --callout-color: 2, 132, 199;    /* sky-600 */
+  --callout-icon: cpu;
+}
+
+/* ─── Blueprint note titles ─────────────────────────────────────── */
+.markdown-preview-view h1:first-of-type {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.25em;
+}
+
+/* ─── Mermaid diagrams — constrain width, add border ───────────── */
+.mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 0.5em;
+}
+
+/* ─── Dataview tables in agent outputs ──────────────────────────── */
+.dataview.table-view-table {
+  font-size: 0.88em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.dataview.table-view-table th {
+  background: var(--background-secondary);
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 2px solid var(--background-modifier-border);
+}
+
+.dataview.table-view-table td {
+  padding: 3px 8px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* ─── Agent-status tag pills ────────────────────────────────────── */
+a.tag[href="#status/in-progress"] { background: #854d0e22; color: #ca8a04; }
+a.tag[href="#status/final"]       { background: #14532d22; color: #16a34a; }
+a.tag[href="#status/draft"]       { background: #1e3a5f22; color: #2563eb; }
+a.tag[href="#priority/HIGH"]      { background: #7c2d1222; color: #ea580c; }
+a.tag[href="#priority/CRITICAL"]  { background: #450a0a22; color: #dc2626; }

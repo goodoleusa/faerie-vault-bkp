@@ -1,0 +1,556 @@
+/* 03-penpot-brutalist.css
+   Penpot-inspired professional brutalism.
+   Dark-first. Heavy type. Neon pistachio accent on deep purple.
+   Depth through CONTRAST, not shadows. Bold geometric shapes.
+
+   Enable ONE palette snippet at a time:
+     01-mission-control    = navy/gold, professional, light-only
+     02-vaporwave-jewel    = pistachio/teal/purple, retro polish, light+dark
+     03-penpot-brutalist   = dark-first brutalism, neon accents, heavy type
+*/
+
+/* ══════════════════════════════════════════════════════════════════
+   LIGHT THEME — clean white, high contrast, brutalist structure
+   ═══════════════════════════════════════════════════════════════ */
+.theme-light {
+  --lab-page-bg:         #fafafa;
+  --lab-card-bg:         #ffffff;
+  --lab-card-border:     #e0e0e0;
+  --lab-card-shadow:     none;
+  --lab-divider:         #d0d0d0;
+  --lab-sidebar-bg:      #f2f2f2;
+
+  --lab-h1-color:        #111111;
+  --lab-h1-underline:    #93C572;
+  --lab-h2-bg:           #111111;
+  --lab-h2-bg-flat:      #111111;
+  --lab-h2-text:         #93C572;
+  --lab-h3-color:        #333333;
+  --lab-h3-accent:       #4ECDC4;
+  --lab-body-text:       #1a1a1a;
+  --lab-link-color:      #2D1B69;
+  --lab-link-underline:  #93C572;
+  --lab-code-bg:         #f0f0f0;
+  --lab-code-text:       #2D1B69;
+
+  --lab-active:          #93C572;
+  --lab-active-bg:       #e8f5e2;
+  --lab-warning:         #e6a817;
+  --lab-warning-bg:      #fef8e2;
+  --lab-critical:        #E85D75;
+  --lab-critical-bg:     #fde8ed;
+  --lab-info:            #4ECDC4;
+  --lab-info-bg:         #e2f5f3;
+  --lab-neutral:         #888888;
+  --lab-neutral-bg:      #f0f0f0;
+
+  --lab-tier1:           #E85D75;
+  --lab-tier2:           #e6a817;
+  --lab-tier3:           #4ECDC4;
+  --lab-tier4:           #888888;
+
+  --lab-findings:        #93C572;
+  --lab-flags:           #e6a817;
+  --lab-friction:        #E85D75;
+  --lab-flow:            #4ECDC4;
+  --lab-ffff-dark:       #111111;
+
+  --lab-gold:            #93C572;
+  --lab-gold-soft:       #e8f5e2;
+  --lab-accent-bar:      #111111;
+  --lab-tag-radius:      4px;
+  --lab-checkbox:        #93C572;
+
+  --lab-kanban-high:     #E85D75;
+  --lab-kanban-med:      #4ECDC4;
+  --lab-kanban-low:      #93C572;
+  --lab-kanban-done:     #888888;
+
+  --lab-shadow-sm:       none;
+  --lab-shadow-md:       none;
+  --lab-shadow-lg:       0 0 0 2px var(--lab-card-border);
+  --lab-shadow-pop:      0 0 0 3px #111111;
+  --lab-shadow-glow:     0 0 0 2px #93C572;
+  --lab-shadow-inset:    inset 0 2px 0 rgba(0,0,0,0.05);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   DARK THEME — THE MAIN EVENT. Deep black. Neon accents. Brutal.
+   ═══════════════════════════════════════════════════════════════ */
+.theme-dark {
+  --lab-page-bg:         #0a0a0f;
+  --lab-card-bg:         #141419;
+  --lab-card-border:     rgba(147, 197, 114, 0.08);
+  --lab-card-shadow:     none;
+  --lab-divider:         rgba(147, 197, 114, 0.06);
+  --lab-sidebar-bg:      #0d0d12;
+
+  --lab-h1-color:        #93C572;
+  --lab-h1-underline:    #93C572;
+  --lab-h2-bg:           #93C572;
+  --lab-h2-bg-flat:      #93C572;
+  --lab-h2-text:         #0a0a0f;
+  --lab-h3-color:        #4ECDC4;
+  --lab-h3-accent:       #4ECDC4;
+  --lab-body-text:       #e0e0e0;
+  --lab-link-color:      #93C572;
+  --lab-link-underline:  rgba(147, 197, 114, 0.3);
+  --lab-code-bg:         #1a1a22;
+  --lab-code-text:       #4ECDC4;
+
+  --lab-active:          #93C572;
+  --lab-active-bg:       rgba(147, 197, 114, 0.08);
+  --lab-warning:         #e6a817;
+  --lab-warning-bg:      rgba(230, 168, 23, 0.08);
+  --lab-critical:        #E85D75;
+  --lab-critical-bg:     rgba(232, 93, 117, 0.08);
+  --lab-info:            #4ECDC4;
+  --lab-info-bg:         rgba(78, 205, 196, 0.08);
+  --lab-neutral:         #666666;
+  --lab-neutral-bg:      #1a1a1f;
+
+  --lab-tier1:           #E85D75;
+  --lab-tier2:           #e6a817;
+  --lab-tier3:           #4ECDC4;
+  --lab-tier4:           #555555;
+
+  --lab-findings:        #93C572;
+  --lab-flags:           #e6a817;
+  --lab-friction:        #E85D75;
+  --lab-flow:            #4ECDC4;
+  --lab-ffff-dark:       #0a0a0f;
+
+  --lab-gold:            #93C572;
+  --lab-gold-soft:       rgba(147, 197, 114, 0.06);
+  --lab-accent-bar:      #93C572;
+  --lab-tag-radius:      4px;
+  --lab-checkbox:        #93C572;
+
+  --lab-kanban-high:     #E85D75;
+  --lab-kanban-med:      #4ECDC4;
+  --lab-kanban-low:      #93C572;
+  --lab-kanban-done:     #444444;
+
+  --lab-shadow-sm:       none;
+  --lab-shadow-md:       none;
+  --lab-shadow-lg:       0 0 0 1px rgba(147, 197, 114, 0.12);
+  --lab-shadow-pop:      0 0 0 2px #93C572;
+  --lab-shadow-glow:     0 0 12px rgba(147, 197, 114, 0.15);
+  --lab-shadow-inset:    inset 0 1px 0 rgba(147, 197, 114, 0.05);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   WIRING — same structure as other palettes, different aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+
+.view-content { background-color: var(--lab-page-bg); }
+.workspace-leaf-content[data-type="file-explorer"] { background: var(--lab-sidebar-bg); }
+
+/* H1 — massive, bold, underlined */
+.markdown-preview-view h1,
+.markdown-rendered h1 {
+  color: var(--lab-h1-color);
+  border-bottom: 4px solid var(--lab-h1-underline);
+  padding-bottom: 8px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-size: 1.8em;
+}
+
+/* H2 — INVERTED header bars. Brutalist. */
+.wide-page .markdown-preview-view h2,
+.dashboard .markdown-preview-view h2,
+.markdown-rendered h2 {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+  padding: 10px 16px;
+  border-radius: 0;
+  margin-top: 32px;
+  font-size: 0.88em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* H3 — teal, left-aligned, tight */
+.wide-page .markdown-preview-view h3,
+.dashboard .markdown-preview-view h3,
+.markdown-rendered h3 {
+  color: var(--lab-h3-color);
+  border-left: 4px solid var(--lab-h3-accent);
+  padding-left: 10px;
+  font-size: 0.92em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Cards — no shadow, just borders. Depth through contrast. */
+.wide-page .markdown-preview-view h2 ~ *:not(h2):not(h1):not(hr),
+.dashboard .markdown-preview-view h2 ~ *:not(h2):not(h1):not(hr) {
+  background: var(--lab-card-bg);
+  border-left: 1px solid var(--lab-card-border);
+  border-right: 1px solid var(--lab-card-border);
+  padding: 6px 16px;
+}
+
+.wide-page .markdown-preview-view hr,
+.dashboard .markdown-preview-view hr {
+  background: var(--lab-card-bg);
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid var(--lab-divider);
+}
+
+/* Links — neon underline */
+.internal-link {
+  color: var(--lab-link-color);
+  border-bottom: 2px solid var(--lab-link-underline);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.1s ease;
+}
+.internal-link:hover {
+  border-bottom-color: var(--lab-link-color);
+}
+
+/* Blockquotes — bold accent bar */
+blockquote {
+  border-left: 5px solid var(--lab-accent-bar);
+  background: var(--lab-gold-soft);
+  border-radius: 0;
+  padding: 12px 16px;
+  color: var(--lab-body-text);
+  font-weight: 500;
+}
+
+/* Inline code — pill shape, monospace neon */
+code:not(pre code) {
+  background: var(--lab-code-bg);
+  color: var(--lab-code-text);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.86em;
+  font-weight: 600;
+  border: 1px solid var(--lab-card-border);
+}
+
+/* Dataview tables */
+.dataview.table-view-table thead tr {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+}
+.dataview.table-view-table tbody tr { background: var(--lab-card-bg); }
+.dataview.table-view-table tbody tr:nth-child(even) { background: var(--lab-page-bg); }
+.dataview.table-view-table td { border-bottom: 1px solid var(--lab-card-border); padding: 10px 14px; }
+.dataview.table-view-table { border-radius: 0; overflow: hidden; border: 1px solid var(--lab-card-border); }
+
+/* Callouts */
+.callout[data-callout="pipeline"]         { background: var(--lab-active-bg); border-radius: 0; }
+.callout[data-callout="insight"]          { background: var(--lab-info-bg); border-radius: 0; }
+.callout[data-callout="gap"]             { background: var(--lab-warning-bg); border-radius: 0; }
+.callout[data-callout="critical"]         { background: var(--lab-critical-bg); border-radius: 0; }
+.callout[data-callout="technique"]        { background: var(--lab-active-bg); border-radius: 0; }
+.callout[data-callout="first-impression"] { background: var(--lab-gold-soft); border-radius: 0; }
+.callout[data-callout="hypothesis"]       { background: var(--lab-info-bg); border-radius: 0; }
+.callout[data-callout="null"]            { background: var(--lab-neutral-bg); opacity: 0.7; border-radius: 0; }
+
+/* FFFF callouts — hard borders */
+.callout[data-callout="findings"] {
+  background: var(--lab-active-bg);
+  border-left: 5px solid var(--lab-findings);
+  border-radius: 0;
+}
+.callout[data-callout="flags"] {
+  background: var(--lab-warning-bg);
+  border-left: 5px solid var(--lab-flags);
+  border-radius: 0;
+}
+.callout[data-callout="friction"] {
+  background: var(--lab-critical-bg);
+  border-left: 5px solid var(--lab-friction);
+  border-radius: 0;
+}
+.callout[data-callout="flow"] {
+  background: var(--lab-info-bg);
+  border-left: 5px solid var(--lab-flow);
+  border-radius: 0;
+}
+
+/* Tags — square pills, bold */
+.tag {
+  border-radius: var(--lab-tag-radius);
+  padding: 2px 10px;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tag[href="#dashboard"]        { background: var(--lab-info-bg);     color: var(--lab-info); }
+.tag[href="#evidence"]         { background: var(--lab-warning-bg);  color: var(--lab-warning); }
+.tag[href="#task"]             { background: var(--lab-active-bg);   color: var(--lab-active); }
+.tag[href="#hypothesis"]       { background: var(--lab-critical-bg); color: var(--lab-critical); }
+.tag[href="#faerie"]           { background: rgba(107, 63, 160, 0.1); color: #6B3FA0; }
+.tag[href="#criticalexposure"] { background: var(--lab-critical-bg); color: var(--lab-critical); }
+
+/* Checkboxes */
+input[type="checkbox"] { accent-color: var(--lab-checkbox); }
+
+/* Scrollbar — minimal */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(147, 197, 114, 0.2); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: rgba(147, 197, 114, 0.4); }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   BUTTONS — brutalist, high contrast, no softness
+   ═══════════════════════════════════════════════════════════════ */
+
+button.mod-cta {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+  border: 2px solid var(--lab-h2-bg-flat);
+  border-radius: 0;
+  padding: 8px 24px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  transition: all 0.1s ease;
+}
+button.mod-cta:hover {
+  background: transparent;
+  color: var(--lab-h1-color);
+  border-color: var(--lab-h1-color);
+}
+
+button:not(.mod-cta) {
+  background: var(--lab-card-bg);
+  border: 1px solid var(--lab-card-border);
+  border-radius: 0;
+  transition: all 0.1s ease;
+}
+button:not(.mod-cta):hover {
+  border-color: var(--lab-info);
+  color: var(--lab-info);
+}
+
+/* Toggle switches */
+.checkbox-container {
+  border-radius: 4px;
+}
+.checkbox-container.is-enabled {
+  background-color: var(--lab-active) !important;
+}
+
+/* Inputs */
+input[type="text"], input[type="search"], textarea {
+  border-radius: 0;
+  border: 2px solid var(--lab-card-border);
+}
+input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
+  border-color: var(--lab-info);
+  outline: none;
+  box-shadow: var(--lab-shadow-glow);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   KANBAN — bold column headers, clean cards
+   ═══════════════════════════════════════════════════════════════ */
+
+.kanban-plugin__lane-header-wrapper {
+  border-radius: 0;
+  padding: 8px 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85em;
+}
+.kanban-plugin__lane:nth-child(1) .kanban-plugin__lane-header-wrapper {
+  background: var(--lab-kanban-high);
+  color: #ffffff;
+}
+.kanban-plugin__lane:nth-child(2) .kanban-plugin__lane-header-wrapper {
+  background: var(--lab-kanban-med);
+  color: #0a0a0f;
+}
+.kanban-plugin__lane:nth-child(3) .kanban-plugin__lane-header-wrapper {
+  background: var(--lab-kanban-low);
+  color: #0a0a0f;
+}
+.kanban-plugin__lane:nth-child(4) .kanban-plugin__lane-header-wrapper {
+  background: var(--lab-kanban-done);
+  color: #e0e0e0;
+}
+
+.kanban-plugin__item {
+  background: var(--lab-card-bg);
+  border: 1px solid var(--lab-card-border);
+  border-radius: 0;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+}
+.kanban-plugin__board { background: var(--lab-page-bg); }
+.kanban-plugin__lane { background: var(--lab-card-bg); border-radius: 0; margin: 0 2px; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   MERMAID — BOLD shapes, thick lines, clear color coding
+   Shapes = meaning. Color = category. Weight = importance.
+   ═══════════════════════════════════════════════════════════════ */
+
+.mermaid svg {
+  max-width: 100%;
+  border-radius: 0;
+  background: var(--lab-card-bg);
+  padding: 24px;
+  border: 2px solid var(--lab-card-border);
+}
+
+/* Rectangles = PROCESS — teal fill, bold border */
+.mermaid .node rect {
+  fill: color-mix(in srgb, var(--lab-info) 15%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 3px;
+  rx: 4;
+  ry: 4;
+}
+
+/* Circles = STATE — pistachio */
+.mermaid .node circle {
+  fill: color-mix(in srgb, var(--lab-findings) 20%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+  stroke-width: 3px;
+}
+
+/* Diamonds = DECISION — rose */
+.mermaid .node polygon {
+  fill: color-mix(in srgb, var(--lab-critical) 12%, var(--lab-card-bg));
+  stroke: var(--lab-critical);
+  stroke-width: 3px;
+}
+
+/* Node text — HEAVY */
+.mermaid .nodeLabel {
+  color: var(--lab-body-text);
+  font-weight: 800;
+  font-size: 0.88em;
+  letter-spacing: 0.01em;
+}
+
+/* Edges — THICK, teal */
+.mermaid .flowchart-link {
+  stroke: var(--lab-info);
+  stroke-width: 3.5px;
+}
+.mermaid marker path {
+  fill: var(--lab-info);
+}
+
+/* Edge labels — clean badges */
+.mermaid .edgeLabel {
+  background-color: var(--lab-page-bg);
+  color: var(--lab-body-text);
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  font-weight: 700;
+  border: 1px solid var(--lab-card-border);
+}
+
+/* Subgraphs — strong borders, labeled clearly */
+.mermaid .cluster rect {
+  fill: rgba(78, 205, 196, 0.04);
+  stroke: var(--lab-info);
+  stroke-width: 2px;
+  rx: 0;
+  ry: 0;
+}
+.mermaid .cluster span {
+  color: var(--lab-info);
+  font-weight: 800;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Sequence diagram */
+.mermaid .actor {
+  fill: color-mix(in srgb, var(--lab-info) 12%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 2px;
+}
+.mermaid .messageLine0, .mermaid .messageLine1 {
+  stroke: var(--lab-info);
+  stroke-width: 2px;
+}
+.mermaid .messageText {
+  fill: var(--lab-body-text);
+  font-weight: 600;
+}
+
+/* Gantt */
+.mermaid .task {
+  fill: color-mix(in srgb, var(--lab-info) 20%, var(--lab-card-bg));
+  stroke: var(--lab-info);
+  stroke-width: 2px;
+}
+.mermaid .done0, .mermaid .done1 {
+  fill: color-mix(in srgb, var(--lab-findings) 15%, var(--lab-card-bg));
+  stroke: var(--lab-findings);
+}
+.mermaid .crit0, .mermaid .crit1 {
+  fill: color-mix(in srgb, var(--lab-critical) 15%, var(--lab-card-bg));
+  stroke: var(--lab-critical);
+}
+
+/* State diagram */
+.mermaid .stateGroup rect {
+  fill: color-mix(in srgb, #6B3FA0 8%, var(--lab-card-bg));
+  stroke: #6B3FA0;
+  stroke-width: 2px;
+  rx: 0;
+  ry: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   NAVIGATION — minimal, functional
+   ═══════════════════════════════════════════════════════════════ */
+
+.nav-file-title:hover, .nav-folder-title:hover {
+  background: rgba(147, 197, 114, 0.06);
+}
+.nav-file-title.is-active {
+  background: rgba(147, 197, 114, 0.1);
+  box-shadow: inset 3px 0 0 var(--lab-active);
+}
+
+.workspace-tab-header.is-active {
+  border-bottom: 2px solid var(--lab-active);
+}
+
+.modal-container .modal {
+  background: var(--lab-card-bg);
+  border: 2px solid var(--lab-card-border);
+  border-radius: 0;
+}
+
+.tooltip {
+  background: var(--lab-h2-bg-flat);
+  color: var(--lab-h2-text);
+  border-radius: 0;
+  padding: 4px 10px;
+  font-weight: 600;
+}
+
+/* Graph view */
+.graph-view.color-fill { color: var(--lab-info); }
+.graph-view.color-circle { color: var(--lab-findings); }
+.graph-view.color-line { color: var(--lab-card-border); }
+.graph-view.color-text { color: var(--lab-body-text); }
+.graph-view.color-fill-highlight { color: var(--lab-findings); }

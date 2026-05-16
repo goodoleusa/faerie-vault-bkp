@@ -1,0 +1,279 @@
+{
+  "main": {
+    "id": "b19bb8bdd44d723f",
+    "type": "split",
+    "children": [
+      {
+        "id": "bca640739a6da88c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5baa77520b8910c7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00-SHARED/Hive/piston-rocket-physics.md",
+                "mode": "preview",
+                "source": true,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "piston-rocket-physics"
+            }
+          },
+          {
+            "id": "f9155d66c2fec880",
+            "type": "leaf",
+            "state": {
+              "type": "mk-space",
+              "state": {
+                "path": "00-SHARED"
+              },
+              "icon": "lucide-file",
+              "title": "00-SHARED"
+            }
+          }
+        ],
+        "stacked": true
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e54278727cfb4065",
+    "type": "split",
+    "children": [
+      {
+        "id": "2559efb4713e6eab",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5340921160888f6b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "1cee3bcb9b097dea",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "emergence",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ee57bb5c97faf071",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "735133d984bc8a61",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Navigator"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 354.50341796875
+  },
+  "right": {
+    "id": "89de937dc58718ee",
+    "type": "split",
+    "children": [
+      {
+        "id": "9a57fd73d0b3702d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "73446b3882a5aa4e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "68147610abdb844a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": true,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "8c49648fb8b18621",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "f3ba3cd17ab262ad",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "00-SHARED/Hive/piston-rocket-physics.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of piston-rocket-physics"
+            }
+          },
+          {
+            "id": "af6e5a6937f8586d",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "00-SHARED/Human-Inbox/Untitled 1.md"
+              },
+              "icon": "lucide-info",
+              "title": "File properties for Untitled 1"
+            }
+          },
+          {
+            "id": "58002a3ef0967c94",
+            "type": "leaf",
+            "state": {
+              "type": "copilot-chat-view",
+              "state": {},
+              "icon": "message-square",
+              "title": "Copilot"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "daily-notes:Open today's daily note": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "mermaid-tools:Open Mermaid Toolbar": false,
+      "copilot:Open Copilot Chat": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-kanban:Create new board": false,
+      "obsidian42-brat:BRAT": false
+    }
+  },
+  "active": "5baa77520b8910c7",
+  "lastOpenFiles": [
+    "00-SHARED/Onboarding/forensic-signing-2026-04-26.md",
+    "00-SHARED/Onboarding/forensic-signing-implementation.md",
+    "00-SHARED/Onboarding/forensic-signing-implementation.md.tmp.382994.1777167865912",
+    "00-SHARED/Architecture/piston-waves.md",
+    "00-SHARED/Hive/piston-rocket-physics.md",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.excalidraw.dark.svg",
+    "00-SHARED/Hive/assets/what-is-faerie-115059.excalidraw",
+    "00-SHARED/Hive/assets/what-is-faerie-115059.dark.svg",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.excalidraw.md",
+    "00-SHARED/docs/templates/script-header.py.tmpl",
+    "00-SHARED/docs/templates",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/INDEX.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/14-citation-backlinks.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/13-loop-gap-dual-state-fix.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/12-anti-fab-validators.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/11-confab-class-taxonomy.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/10-multi-session-heartbeat.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/09-prereq-preflight-self-release.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/08-stigmergic-clustering.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/07-mission-primary-refactor.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/06-mission-auto-promotion.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/05-mission-as-tag.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/04-convergence-detector-hook.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/03-compass-surface-contradictions.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/02-auto-edge-inferrer.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0/01-idea-compass.md",
+    "00-SHARED/docs/PSEUDOSYSTEM-2.0",
+    "00-SHARED/docs/narrative/README.md",
+    "00-SHARED/docs/narrative/INVESTIGATION-NARRATIVE.md",
+    "00-SHARED/docs/narrative/F0-EVAL-2026-04-20.md",
+    "00-SHARED/docs/narrative",
+    "00-SHARED/docs/membench/MEMBENCH-VISUAL-GUIDE.md",
+    "00-SHARED/docs/membench/MEMBENCH-STRATEGY.md",
+    "00-SHARED/docs/membench/MEMBENCH-QUICK-REFERENCE.md",
+    "00-SHARED/docs/membench",
+    "00-SHARED/docs/install/Write-FaerieEnvFiles.ps1",
+    "00-SHARED/docs/install/windows_backup_task.ps1",
+    "00-SHARED/docs/install/vanilla_settings_template.json",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.excalidraw.light.png",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.excalidraw.light.svg",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.excalidraw.dark.png",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.dark.png",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.dark.svg",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.light.png",
+    "00-SHARED/Hive/assets/what-is-faerie-115114.light.svg",
+    "00-SHARED/Hive/assets/what-is-faerie-115059.dark.png"
+  ]
+}

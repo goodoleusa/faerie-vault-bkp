@@ -1,0 +1,15 @@
+{
+  "lintOnSave": true,
+  "displayChanged": true,
+  "foldersToIgnore": [".obsidian"],
+  "rules": {
+    "yaml-title": {"enabled": false},
+    "trailing-spaces": {"enabled": true},
+    "empty-line-around-headers": {"enabled": true},
+    "consecutive-blank-lines": {"enabled": true, "maximumNumberOfConsecutiveBlankLines": 1},
+    "space-after-list-markers": {"enabled": true},
+    "remove-trailing-spaces-in-blockquotes": {"enabled": true},
+    "yaml-key-sort": {"enabled": false},
+    "force-yaml-escape": {"enabled": false}
+  }
+}

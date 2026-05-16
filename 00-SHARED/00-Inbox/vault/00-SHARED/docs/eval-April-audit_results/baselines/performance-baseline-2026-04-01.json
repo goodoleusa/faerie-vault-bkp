@@ -1,0 +1,324 @@
+{
+  "_run": {
+    "agent": "performance-eval",
+    "date": "2026-04-01T00:00:00Z",
+    "session_id": "baseline-2026-04-01",
+    "model": "claude-sonnet-4-6",
+    "note": "First formal training-readiness baseline. Data sources: run-benchmarks.json, token-context-log.json, subagent-roster.json, training-log.jsonl, all agent cards. No beat_last comparison (first baseline of this type)."
+  },
+
+  "token_metrics": {
+    "avg_turn_cost_k": 11,
+    "avg_turn_cost_source": "estimated — environment.md documents 11K/turn for heavy sessions; no per-session instrumentation exists yet",
+    "context_per_task_k": {
+      "measured": 85,
+      "measured_n": 1,
+      "estimated_multi_agent": "150-250 (3-5x single-agent estimate at 42K/min x session length)",
+      "measured_task": "OSINT-BREADCRUMB-001 (osint_pipeline, 2 min, single agent)"
+    },
+    "cache_hit_rate": "unknown — not captured in any run; breadcrumb checkpoints identified as high-cache-potential (stable early-session reads)",
+    "cache_optimization_identified": true,
+    "cache_opportunity_detail": "Stable files loaded early in session (tier1_smoking_gun.json, promotion_log.json for evidence-curator; checkpoint JSONL for data-engineer) are ideal cache targets. Estimated savings: $0.15-0.30/curation session if loaded as first context block.",
+    "model_routing": {
+      "sonnet": "data-engineer, research-analyst, context-manager, membot, workflow-orchestrator, token-optimizer, report-writer, knowledge-synthesizer, task-distributor, performance-eval",
+      "opus": "evidence-curator, data-scientist",
+      "haiku": "not currently assigned to any specialist — documented as bulk/simple routing target in rules",
+      "haiku_opportunity": "Profiling (data-scientist fast-path), bulk dedup checks, health_check.py canary runs"
+    },
+    "instrumentation_gap": "3 of 4 token-context-log runs have context_used_k=unknown. context_per_task cannot be trended without instrumentation. PROP-001 (prop-20260319-001) proposes turn-based estimation as stopgap.",
+    "prop_pending_that_would_fix_this": "prop-20260330-001 (session_stop_hook context capture)"
+  },
+
+  "agent_health": {
+    "agents_active": 29,
+    "agents_with_training_history": 12,
+    "tasks_completed_recent_30d": 11,
+    "completion_rate": "91%",
+    "completion_rate_source": "10/11 runs in run-benchmarks.json marked outcome=success or pass; 1 partial_success (sprint-20260315-010)",
+    "avg_task_score_recent": 0.927,
+    "avg_task_score_breakdown": {
+      "session_sprint": 0.925,
+      "multi_task_session": 0.938,
+      "data_ingest": 0.930,
+      "osint_pipeline": 0.925,
+      "ops": 0.920,
+      "validation_sprint": 0.970,
+      "handoff": 0.983
+    },
+    "beat_last_rate": "75% across token-context-log runs (3/4); 78% across all run-benchmarks.json runs with beat_last field",
+    "rework_rate": "7% (1 rework agent in sprint-20260315-010 out of ~15 total agents that run)",
+    "blocked_rate": "13% (2 blocked agents in sprint-20260315-010; 0 in all subsequent runs)",
+    "avg_task_duration_sec": {
+      "data_ingest": 33,
+      "osint_pipeline": 120,
+      "ops": 240,
+      "multi_task_session": "unknown — not instrumented"
+    },
+    "coc_integrity": "0 mismatches in last 4 measured runs (sprint-0315-0109, sprint-20260315-014, sprint-20260319-002, OSINT-BREADCRUMB-001)"
+  },
+
+  "agent_scores": {
+    "data-engineer": {
+      "last_score": 0.97,
+      "prev_score": 0.92,
+      "last_training_date": "2026-03-30",
+      "training_context": "on_the_job_redemption",
+      "status": "healthy",
+      "beat_last": true,
+      "delta": 0.05,
+      "note": "Strongest recent mover. Redeemed from 0.92 gap. Schema consistency (blocking rule) and git SHA resolution (blocking rule) are active enforcement items from 2026-03-22 near-miss."
+    },
+    "research-analyst": {
+      "last_score": 1.00,
+      "prev_score": 0.60,
+      "last_training_date": "2026-03-19",
+      "training_context": "on_the_job_redemption (autotune)",
+      "status": "healthy",
+      "beat_last": true,
+      "delta": 0.40,
+      "note": "Dramatic redemption. Score 1.00 — ceiling risk (HONEY mth00037: first run >=0.95 = criteria too easy). Consider tightening source_diversity KPI definition."
+    },
+    "evidence-curator": {
+      "last_score": 0.97,
+      "prev_score": 0.93,
+      "last_training_date": "2026-03-23",
+      "training_context": "on_the_job_redemption",
+      "status": "healthy",
+      "beat_last": true,
+      "delta": 0.04,
+      "note": "Runs on opus. Ceiling at 0.97 — slight degradation risk (individual curator instances scored 0.93-0.97 in sprint-20260319-002). MEM block enforcement gap (PROP-005) unresolved."
+    },
+    "data-scientist": {
+      "last_score": 0.94,
+      "prev_score": 0.93,
+      "last_training_date": "2026-03-19",
+      "training_context": "on_the_job (beat_last)",
+      "status": "healthy",
+      "beat_last": true,
+      "delta": 0.01,
+      "note": "Runs on opus. Marginal improvement. Statistical rigor KPI high (Bonferroni, pre-registration, Bayesian complement all applied). Headroom for growth narrow — criteria may need raising."
+    },
+    "membot": {
+      "last_score": 1.00,
+      "prev_score": 0.00,
+      "last_training_date": "2026-03-19",
+      "training_context": "training (train-015)",
+      "status": "healthy_ceiling_risk",
+      "beat_last": true,
+      "note": "Score 1.00 — criteria need tightening per mth00037. Deployment scores from handoff runs: 0.97-1.00 (handoff-hooks-health-check, handoff-2026-03-28-seg4, handoff-OSINT-BREADCRUMB-001). Consistent high performer."
+    },
+    "knowledge-synthesizer": {
+      "last_score": 0.834,
+      "prev_score": 0.00,
+      "last_training_date": "2026-03-19",
+      "training_context": "training (train-013)",
+      "status": "below_target",
+      "beat_last": false,
+      "target": 0.85,
+      "gap": -0.016,
+      "note": "Did NOT beat target (0.834 vs 0.85 target). Bayesian prior formalization is the documented gap. Candidate for next training run with tightened cross-project detection drill."
+    },
+    "performance-eval": {
+      "last_score": 0.940,
+      "prev_score": 0.910,
+      "last_training_date": "2026-03-23",
+      "training_context": "on_the_job",
+      "status": "healthy",
+      "beat_last": true,
+      "delta": 0.030,
+      "note": "This agent. Deployment score confirmed in training-log.jsonl redemption entry (0.91). train-014 score 0.90."
+    },
+    "workflow-orchestrator": {"last_score": 1.00, "training_date": "2026-03-19", "status": "healthy_ceiling_risk", "note": "train-003+006, 1.00. Criteria likely need tightening."},
+    "memory-keeper": {"last_score": 1.00, "training_date": "2026-03-19", "status": "healthy_ceiling_risk", "note": "train-004, 1.00. High KPI floor in deployment."},
+    "context-manager": {"last_score": 0.985, "training_date": "2026-03-19", "status": "healthy", "note": "train-010 best_score 0.985. Strong."},
+    "error-coordinator": {"last_score": 0.92, "training_date": "2026-03-19", "status": "healthy", "note": "train-008, beat target 0.85."},
+    "task-distributor": {"last_score": 0.91, "training_date": "2026-03-19", "status": "healthy", "note": "train-007, beat target 0.85. Wave-based routing validated."},
+    "report-writer": {"last_score": 0.94, "training_date": "2026-03-19", "status": "healthy", "note": "train-005, beat target 0.88. Communication-budget constraint."},
+    "python-pro": {"last_score": 0.92, "training_date": "2026-03-18", "status": "healthy", "note": "Deployment only (ops task). No formal training run."},
+    "agents_no_training": ["admin-sync", "coc-manager", "evalbot", "frontend-design", "fullstack-developer", "ipfs-publisher", "security-auditor", "spiderfoot", "team-builder", "token-optimizer", "vision-ingest", "evidence-analyst"]
+  },
+
+  "training_candidates": [
+    {
+      "agent_type": "knowledge-synthesizer",
+      "last_training": "2026-03-19",
+      "last_score": 0.834,
+      "target": 0.85,
+      "gap": -0.016,
+      "recent_success_rate": "N/A (no deployment runs logged)",
+      "priority": "HIGH",
+      "recommended_constraint": "evidence-budget with cross-project detection focus",
+      "rationale": "Only agent in training log that did NOT beat target. Gap is specific and documented (Bayesian prior formalization, cross-project detection). Training ROI: +0.016 closes gap; tightening criteria to 0.88 would set meaningful ceiling."
+    },
+    {
+      "agent_type": "research-analyst",
+      "last_training": "2026-03-19",
+      "last_score": 1.00,
+      "target": 0.85,
+      "gap": null,
+      "recent_success_rate": "95% (0.95 in sprint-20260319-002 deployment)",
+      "priority": "MED",
+      "recommended_constraint": "raise source_diversity ceiling — strict type definitions enforced; target 0.90 with 7+ source types",
+      "rationale": "Score 1.00 on criteria that were defined at 0.85 target. Per mth00037: ceiling reached = criteria too easy. Tighten before next run or score is meaningless. Deployment (0.95) more diagnostic than training."
+    },
+    {
+      "agent_type": "membot",
+      "last_training": "2026-03-19",
+      "last_score": 1.00,
+      "target": 0.90,
+      "gap": null,
+      "recent_success_rate": "98% (avg of 3 handoff deployment scores: 1.0, 0.98, 0.97)",
+      "priority": "MED",
+      "recommended_constraint": "raise criteria — add brief_quality stress test (3+ HIGH flags, competing destinations, dedup edge case); target 0.90 on new criteria",
+      "rationale": "Consistent 0.97-1.00 in deployment. Criteria are at ceiling. Training value only comes from raising the bar."
+    },
+    {
+      "agent_type": "data-scientist",
+      "last_training": "2026-03-19",
+      "last_score": 0.94,
+      "target": null,
+      "gap": null,
+      "recent_success_rate": "94% (1 deployment run)",
+      "priority": "LOW",
+      "recommended_constraint": "adversarial confound injection — add deliberate false correlation to dataset; target 0.95 on confounder-detection KPI",
+      "rationale": "Current score healthy. Marginal gain (+0.01) suggests near ceiling on current criteria. Growth opportunity: test ability to detect adversarially injected confounders before running standard battery."
+    },
+    {
+      "agent_type": "token-optimizer",
+      "last_training": null,
+      "last_score": null,
+      "target": null,
+      "gap": null,
+      "recent_success_rate": "N/A (no logged runs)",
+      "priority": "LOW",
+      "recommended_constraint": "baseline first — no training history; establish KPIs around context reduction per session",
+      "rationale": "7 rule proposals pending in eval-rule-proposals.json, all pending_human_review. Token-optimizer agent card exists but no training or deployment runs logged. The proposals would benefit from an active agent managing them."
+    }
+  ],
+
+  "system_health": {
+    "queue_state": "unknown — no queue file found at standard paths from this working directory (hustle repo, not main investigation repo)",
+    "honey_budget": {
+      "last_crystallized": "2026-03-29",
+      "lines": 174,
+      "budget_lines": 200,
+      "status": "87% — approaching budget (26 lines headroom)",
+      "pressure": "MED — crystallization not required yet but building"
+    },
+    "nectar_budget": "unbounded — append-only, not constrained",
+    "review_inbox": "unbounded — append-only",
+    "agents_md_tokens": 1378,
+    "agents_md_budget_tokens": 2000,
+    "agents_md_status": "69% — healthy headroom",
+    "forensic_integrity": {
+      "coc_mismatches_recent": 0,
+      "hash_chain": "verified in OSINT-BREADCRUMB-001",
+      "beat_last_verifier_script": "MISSING — beat_last_verifier.py not found at ~/.claude/hooks/state/; manual fallback used in all runs since prop-20260319-002 filed",
+      "coc_status": "healthy — no mismatches detected"
+    },
+    "pending_rule_proposals": 7,
+    "proposals_status": "all pending_human_review — none applied",
+    "subagent_roster_coverage": "sparse — only 7 entries from 2026-03-14/15 with training=true; deployment runs not consistently logged"
+  },
+
+  "blockers_or_gaps": [
+    {
+      "id": "gap-001",
+      "description": "beat_last_verifier.py missing — all beat_last checks use manual comparison since 2026-03-19",
+      "severity": "MED",
+      "fix": "Implement prop-20260319-002 (beat_last_verifier.py script)",
+      "impact": "Every agent beat-last verification requires manual lookup in training-log.jsonl + training_queue.json"
+    },
+    {
+      "id": "gap-002",
+      "description": "context_used_k not instrumented — 3/4 token-context-log runs are 'unknown'; trend analysis impossible",
+      "severity": "MED",
+      "fix": "Implement prop-20260330-001 (session_stop_hook context capture) or prop-20260319-001 (turn-based estimate)",
+      "impact": "Cannot establish token efficiency trend baseline; cache optimization proposals lack cost anchors"
+    },
+    {
+      "id": "gap-003",
+      "description": "training_queue.json not found at ~/.claude/hooks/state/training_queue.json — training queue state unknown",
+      "severity": "LOW",
+      "fix": "Verify path; may have been created under different filename or not yet created for this repo",
+      "impact": "Cannot confirm which agents have on_the_job_eligible=true status"
+    },
+    {
+      "id": "gap-004",
+      "description": "7 rule proposals pending_human_review since 2026-03-15 to 2026-03-30 — none applied",
+      "severity": "LOW",
+      "fix": "Human review of eval-rule-proposals.json; props 001-002 are highest ROI (context calibration + instrumentation)",
+      "impact": "Token efficiency improvements blocked on human review gate"
+    },
+    {
+      "id": "gap-005",
+      "description": "MEM block enforcement gap in evidence-curator (PROP-005) — untagged prose not promoted by memory-keeper",
+      "severity": "MED",
+      "fix": "Add enforcement note to evidence-curator agent card (PROP-005 specifies exact change)",
+      "impact": "Structured evidence analysis written to scratch but never promoted to NECTAR; silent memory loss risk"
+    },
+    {
+      "id": "gap-006",
+      "description": "12 agent types have no training history (admin-sync, coc-manager, evalbot, frontend-design, fullstack-developer, ipfs-publisher, security-auditor, spiderfoot, team-builder, token-optimizer, vision-ingest, evidence-analyst)",
+      "severity": "LOW",
+      "fix": "Prioritize baseline training runs for token-optimizer and security-auditor (highest ROI given system complexity)",
+      "impact": "These agents have no performance floor; quality and behavior unvalidated"
+    }
+  ],
+
+  "token_efficiency_vs_target": {
+    "current_avg_context_k": "85K measured (1 run); multi-agent estimated 150-250K",
+    "target_context_k": "Not formally established — this baseline establishes the first data point",
+    "efficiency_rating": "BASELINE — insufficient data for vs-target comparison",
+    "best_efficiency_run": "OSINT-BREADCRUMB-001: 85K / 2 min / single agent = 42K/min",
+    "proposed_target_for_next_run": "Multi-agent session under 200K context; single-agent pipeline under 100K"
+  },
+
+  "next_steps": [
+    {
+      "priority": 1,
+      "action": "Implement beat_last_verifier.py (prop-20260319-002) — blocks automated OTJ learning pipeline",
+      "owner": "python-pro",
+      "estimated_effort": "1 ops task, ~30 min"
+    },
+    {
+      "priority": 2,
+      "action": "Add context_k estimation to session_stop_hook or faerie footer (prop-20260319-001 or prop-20260330-001) — blocks token trend analysis",
+      "owner": "python-pro",
+      "estimated_effort": "1 ops task, ~20 min"
+    },
+    {
+      "priority": 3,
+      "action": "Training run: knowledge-synthesizer — only agent below target (0.834 vs 0.85); constraint: evidence-budget with cross-project detection drill",
+      "owner": "performance-eval (design) + knowledge-synthesizer (execution)",
+      "estimated_effort": "1 training session, 4 iterations"
+    },
+    {
+      "priority": 4,
+      "action": "Tighten KPI criteria for agents at ceiling (research-analyst, membot, workflow-orchestrator, memory-keeper) — scores of 1.00 on easy criteria are not informative",
+      "owner": "performance-eval",
+      "estimated_effort": "Config update to agent cards; no training run needed"
+    },
+    {
+      "priority": 5,
+      "action": "Human review of 7 pending rule proposals in eval-rule-proposals.json — highest ROI: prop-001 (context calibration) and prop-004 (evidence-curator cache optimization)",
+      "owner": "human",
+      "estimated_effort": "30 min review + approve/reject"
+    },
+    {
+      "priority": 6,
+      "action": "Establish training baselines for untrained agents: token-optimizer and security-auditor are highest-value targets",
+      "owner": "performance-eval (design)",
+      "estimated_effort": "2 training sessions"
+    }
+  ],
+
+  "eval_design_for_next_run": {
+    "type": "before_after",
+    "hypothesis": "After implementing context_k instrumentation (prop-20260319-001), avg measured context_used_k for multi-agent sessions will be <200K",
+    "primary_kpi": "context_used_k",
+    "comparison": "This baseline (estimated 150-250K) vs next instrumented multi-agent run",
+    "pre_registered": true,
+    "secondary_kpis": ["beat_last_rate", "completion_rate"]
+  }
+}

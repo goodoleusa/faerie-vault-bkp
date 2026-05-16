@@ -1,0 +1,10 @@
+{
+  "id": "hive-pdf",
+  "name": "Hive PDF Export",
+  "version": "1.2.0",
+  "minAppVersion": "0.15.0",
+  "description": "Export the active note to a Hive-styled PDF with smart-sized Mermaid diagrams. Uses mmdc + pandoc + xelatex via WSL. Includes diagram template insertion (.excalidraw.md), Hive Launchpad, and Excalidraw Toolkit.",
+  "author": "goodoleusa",
+  "authorUrl": "https://github.com/goodoleusa",
+  "isDesktopOnly": true
+}

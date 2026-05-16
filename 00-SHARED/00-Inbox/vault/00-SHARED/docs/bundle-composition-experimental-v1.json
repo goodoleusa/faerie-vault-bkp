@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "schema_version": "1.0",
+    "created": "2026-04-24",
+    "purpose": "Tuning config for experimental bundle formula. Read by 7x_spawn_template.py _assemble_experimental_bundle(). Do not hand-edit tokens — token counts are computed at assemble time from actual file reads.",
+    "linked_script": "scripts/7x_spawn_template.py",
+    "routing_policy": "docs/agent-routing-policy.json"
+  },
+
+  "formula_name": "experimental-v1",
+
+  "tuning_knobs": {
+    "HONEY_mode": "scoped-full",
+    "HONEY_tag_match": "agent_type_keywords",
+    "HONEY_max_tokens": 2000,
+    "NECTAR_lines": 50,
+    "NECTAR_tag_filter": true,
+    "NECTAR_max_tokens": 2500,
+    "pollen_lines": 80,
+    "pollen_sibling_count": 2,
+    "pollen_max_tokens": 1200,
+    "droplet_inject_top_N": 5,
+    "droplet_relevance_strategy": "tag_overlap_then_recency",
+    "droplet_max_tokens": 800,
+    "hesitation_trigger": true,
+    "hesitation_signal": "hesitation before recommendation triggers droplet re-read",
+    "total_target_tokens": 9700
+  },
+
+  "token_budget": {
+    "HONEY": 2000,
+    "NECTAR": 2500,
+    "pollen": 1200,
+    "droplets": 800,
+    "overhead_boilerplate": 1200,
+    "total_cap": 10000,
+    "soft_warn_at": 9700
+  },
+
+  "bundle_structure": [
+    {
+      "component": "HONEY",
+      "source": "project_honey_then_global_honey",
+      "inject_as": "CONTEXT: Methods and Identity",
+      "truncation_strategy": "keep_tagged_sections_first",
+      "tag_match_field": "agent_type_keywords"
+    },
+    {
+      "component": "NECTAR",
+      "source": "global_nectar_tail",
+      "inject_as": "CONTEXT: Recent Validated Findings",
+      "truncation_strategy": "tail_N_then_tag_filter",
+      "tag_match_field": "task_keywords"
+    },
+    {
+      "component": "pollen",
+      "source": "session_pollen_plus_siblings",
+      "inject_as": "CONTEXT: Active Session Notes",
+      "truncation_strategy": "tail_N",
+      "sibling_pollen_count": 2
+    },
+    {
+      "component": "droplets",
+      "source": "vault_droplets_live",
+      "inject_as": "CONTEXT: High-Signal Insights (Droplets)",
+      "truncation_strategy": "top_N_by_relevance_score",
+      "relevance_score": "tag_overlap_count_then_recency"
+    }
+  ],
+
+  "notes": [
+    "Experimental formula is gated to explorer, synthesizer, architect, knowledge-synthesizer, research-analyst by agent-routing-policy.json.",
+    "Forensics, evidence, coc-manager agents are ALWAYS conservative — this config never applies to them.",
+    "Token budget math: sum of component budgets (2000+2500+1200+800) = 6500 + 1200 overhead = 7700 soft floor; 10K hard cap.",
+    "Target 9.7K was specified in task; achieved by tuning NECTAR_lines=50 vs conservative tail-30.",
+    "Hesitation trigger is a behavioral signal, not a runtime gate — injected as an instruction into the bundle text."
+  ]
+}

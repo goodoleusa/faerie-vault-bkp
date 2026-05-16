@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "purpose": "Agent integration config — programmatic blueprint type selection",
+    "updated": "2026-03-29",
+    "writer": "fullstack-developer agent"
+  },
+  "blueprint_folder": "00-SHARED/Hive/blueprints/",
+  "output_folder": "00-SHARED/Agent-Outbox/",
+  "auto_frontmatter": true,
+  "supported_types": [
+    "analysis",
+    "report",
+    "dashboard",
+    "brief",
+    "evidence",
+    "finding",
+    "design",
+    "droplet",
+    "session_manifest",
+    "agent_evolution"
+  ],
+  "formatting": {
+    "analysis": {
+      "template": "blueprint_analysis.md",
+      "prefix": "analysis-",
+      "output_subfolder": "analysis/"
+    },
+    "report": {
+      "template": "blueprint_report.md",
+      "prefix": "report-",
+      "output_subfolder": "reports/"
+    },
+    "dashboard": {
+      "template": "blueprint_dashboard.md",
+      "prefix": "dashboard-",
+      "output_subfolder": "dashboards/"
+    },
+    "brief": {
+      "template": "blueprint_brief.md",
+      "prefix": "brief-",
+      "output_subfolder": "briefs/"
+    },
+    "evidence": {
+      "template": "blueprint_evidence.md",
+      "prefix": "evidence-",
+      "output_subfolder": "evidence/"
+    },
+    "finding": {
+      "template": "blueprint_finding.md",
+      "prefix": "finding-",
+      "output_subfolder": "findings/"
+    },
+    "design": {
+      "template": "blueprint_design_insight.md",
+      "prefix": "design-",
+      "output_subfolder": "design/"
+    },
+    "droplet": {
+      "template": "blueprint_droplet.md",
+      "prefix": "droplet-",
+      "output_subfolder": "droplets/"
+    },
+    "session_manifest": {
+      "template": "blueprint_session_manifest.md",
+      "prefix": "session-",
+      "output_subfolder": "session-briefs/"
+    },
+    "agent_evolution": {
+      "template": "blueprint_agent_evolution.md",
+      "prefix": "agent-evolution-",
+      "output_subfolder": "agent-evolution/"
+    }
+  },
+  "hotkeys": {
+    "create_from_blueprint": "Mod+Shift+N",
+    "apply_blueprint": "Mod+Shift+B",
+    "update_blueprint_notes": "Mod+Shift+U",
+    "dataview_refresh": "Mod+Shift+R"
+  },
+  "dataview_queries_folder": "00-SHARED/Dashboards/queries/"
+}

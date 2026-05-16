@@ -1,0 +1,24 @@
+{
+  "userHierarchies": [
+    {
+      "up": ["parent", "up"],
+      "same": ["sibling", "same"],
+      "down": ["child", "down"]
+    }
+  ],
+  "CSVPaths": "",
+  "indexNote": ["HOME"],
+  "defaultView": true,
+  "showNameOrType": true,
+  "showRelationType": true,
+  "noPathMessage": "No path to home",
+  "trailSeperator": "→",
+  "respectReadableLineLength": true,
+  "gridDotColor": true,
+  "addDendronNotes": false,
+  "dendronNoteDelimiter": ".",
+  "useAllMetadata": true,
+  "limitTrailCheckboxes": [],
+  "debugMode": false,
+  "superDebugMode": false
+}
