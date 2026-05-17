@@ -554,3 +554,137 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# ---------------------------------------------------------------------------
+# JSON to Markdown Converter for Vault Compatibility
+# ---------------------------------------------------------------------------
+# Converts eval/test JSON files to dataview-readable markdown format
+
+
+def convert_json_to_md(json_path: str, output_dir: str = None) -> Optional[str]:
+    """Convert eval/test JSON to dataview-readable markdown."""
+    import re
+    
+    with open(json_path) as f:
+        data = json.load(f)
+    
+    # Handle test result format
+    if 'test_run_id' in data:
+        return _convert_test_result_to_md(json_path, data, output_dir)
+    
+    # Handle eval/framework format
+    if '_run' in data:
+        return _convert_eval_to_md(json_path, data, output_dir)
+    
+    # Not a recognized format - leave as-is
+    return None
+
+
+def _convert_test_result_to_md(json_path: str, data: dict, output_dir: str = None) -> str:
+    run_id = data.get('test_run_id', '')
+    timestamp = data.get('timestamp_utc', '')[:10]
+    verdict = data.get('verdict', 'UNKNOWN')
+    blockers = data.get('blocker_count', 0)
+    
+    fm = f"""---
+type: test-result
+test_run_id: {run_id}
+date: {timestamp}
+verdict: {verdict}
+blocker_count: {blockers}
+---
+
+# Test Result — {timestamp}
+
+**Run ID:** {run_id}  
+**Verdict:** `{verdict}`  
+**Blockers:** {blockers}
+
+## API Contract Validation
+
+| Check | Result | Note |
+|-------|--------|------|
+"""
+    
+    api = data.get('api_contract_validation', {})
+    for key, val in api.items():
+        result = val.get('result', 'N/A')
+        note = val.get('note', val.get('rate', ''))
+        fm += f"| {key} | {result} | {note} |\n"
+    
+    # Security Audit
+    sec = data.get('security_audit', {})
+    if sec:
+        fm += "\n## Security Audit\n\n| Check | Result | Severity |\n|-------|--------|----------|\n"
+        for key, val in sec.items():
+            result = val.get('result', 'N/A')
+            severity = val.get('severity', '-')
+            fm += f"| {key} | {result} | {severity} |\n"
+    
+    name = os.path.basename(json_path).replace('.json', '')
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        out_path = os.path.join(output_dir, f"{name}.md")
+    else:
+        out_path = json_path.replace('.json', '.md')
+    
+    with open(out_path, 'w') as f:
+        f.write(fm)
+    
+    print(f"[convert] wrote: {out_path}")
+    return out_path
+
+
+def _convert_eval_to_md(json_path: str, data: dict, output_dir: str = None) -> str:
+    run = data.get('_run', {})
+    summary = data.get('summary', {})
+    
+    phase = run.get('phase', 'unknown')
+    timestamp = run.get('timestamp', '')
+    date = timestamp[:10] if timestamp else datetime.now().strftime('%Y-%m-%d')
+    git_commit = run.get('git_commit', '')[:7] if run.get('git_commit') else ''
+    
+    fm = f"""---
+type: eval
+phase: {phase}
+date: {date}
+git_commit: {git_commit}
+total_scripts_checked: {summary.get('total_scripts_checked', 0)}
+total_violations: {summary.get('total_violations', 0)}
+---
+
+# {phase.replace('-', ' ').title()} — {date}
+
+**Run:** `{git_commit}`  
+**Total Scripts:** {summary.get('total_scripts_checked', 0)}  
+**Violations:** {summary.get('total_violations', 0)}
+
+## Summary
+
+| Metric | Count |
+|--------|-------|
+| Scripts Checked | {summary.get('total_scripts_checked', 0)} |
+| Scripts Dir Total | {summary.get('scripts_dir_total', 0)} |
+| Hooks State Total | {summary.get('hooks_state_total', 0)} |
+| Tier Prefix Violations | {summary.get('tier_prefix_violations', 0)} |
+"""
+    
+    # Add violations if present
+    if data.get('scripts_analysis', {}).get('violations'):
+        fm += "\n## Script Violations\n\n| Script | Reason | Tier |\n|--------|--------|-----|\n"
+        for v in data['scripts_analysis']['violations']:
+            fm += f"| {v.get('script', '')} | {v.get('reason', '')} | {v.get('tier', '')} |\n"
+    
+    name = os.path.basename(json_path).replace('.json', '')
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        out_path = os.path.join(output_dir, f"{name}.md")
+    else:
+        out_path = json_path.replace('.json', '.md')
+    
+    with open(out_path, 'w') as f:
+        f.write(fm)
+    
+    print(f"[convert] wrote: {out_path}")
+    return out_path
