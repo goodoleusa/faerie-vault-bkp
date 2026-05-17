@@ -12,17 +12,23 @@ Sync responsibilities:
 3. Sync from external faerie2 repo to vault
 4. Update crystallizer index
 5. Validate plugin configs
-6. Generate vault health report
+6. API rate limiting for external calls
+7. Generate vault health report
 
 Environment:
-  FAERIE_REPO   - path to faerie2 repo (optional, for external sync)
-  FAERIE_VAULT - path to vault (default: this repo)
+  FAERIE_REPO   - path to faerie2 repo (for external sync)
+  FAERIE_VAULT  - path to vault (default: this repo)
+  OPENAI_API_KEY - for OpenAI API calls (optional)
+  ANTHROPIC_API_KEY - for Anthropic API calls (optional)
+  GITHUB_TOKEN  - for GitHub API calls (optional)
+  TAVILY_TOKEN  - for Tavily API calls (optional)
 
 Usage:
   python3 9x_obsidian_vault_sync.py --scan
   python3 9x_obsidian_vault_sync.py --convert-json
   python3 9x_obsidian_vault_sync.py --routeintents
   python3 9x_obsidian_vault_sync.py --sync-external
+  python3 9x_obsidian_vault_sync.py --rate-limits  # Show current rate limits
   python3 9x_obsidian_vault_sync.py --all
 """
 
@@ -32,9 +38,98 @@ import json
 import os
 import re
 import sys
+import threading
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, List
+from functools import wraps
+
+# ---------------------------------------------------------------------------
+# API Rate Limiter (Token-Aware)
+# ---------------------------------------------------------------------------
+# Prevents API rate limit hammering with sensible defaults
+# Uses tokens from env vars: OPENAI_API_KEY, ANTHROPIC_API_KEY, GITHUB_TOKEN, TAVILY_TOKEN
+
+# Default limits per provider (calls per period)
+API_RATE_LIMITS = {
+    "openai": {"calls": 50, "period": 60},      # 50/min for GPT-4
+    "anthropic": {"calls": 50, "period": 60},     # 50/min for Claude
+    "github": {"calls": 60, "period": 60},     # 60/min
+    "tavily": {"calls": 15, "period": 60},     # 15/min free tier
+    "default": {"calls": 10, "period": 60},     # 10/min fallback
+}
+
+# Available tokens (check env vars)
+ACTIVE_TOKENS = {
+    "openai": bool(os.environ.get("OPENAI_API_KEY")),
+    "anthropic": bool(os.environ.get("ANTHROPIC_API_KEY")),
+    "github": bool(os.environ.get("GITHUB_TOKEN")),
+    "tavily": bool(os.environ.get("TAVILY_TOKEN")),
+}
+
+# Rate limiter state per provider
+_rate_limiters = {}
+
+
+def _get_rate_limiter(provider: str):
+    """Get or create rate limiter for provider."""
+    global _rate_limiters
+    if provider not in _rate_limiters:
+        cfg = API_RATE_LIMITS.get(provider, API_RATE_LIMITS["default"])
+        _rate_limiters[provider] = {
+            "calls": [],
+            "max_calls": cfg["calls"],
+            "period": cfg["period"],
+            "lock": threading.Lock(),
+        }
+    return _rate_limiters[provider]
+
+
+def check_rate_limit(provider: str = "default") -> tuple[bool, float]:
+    """Check if API call allowed. Returns (allowed, wait_seconds)."""
+    limiter = _get_rate_limiter(provider)
+    now = time.time()
+    
+    with limiter["lock"]:
+        # Clean old calls
+        limiter["calls"] = [t for t in limiter["calls"] if now - t < limiter["period"]]
+        
+        if len(limiter["calls"]) < limiter["max_calls"]:
+            limiter["calls"].append(now)
+            return True, 0.0
+        
+        # Calculate wait time
+        oldest = min(limiter["calls"])
+        wait = max(0.0, limiter["period"] - (now - oldest))
+        return False, wait
+
+
+def rate_limited(provider: str = "default"):
+    """Decorator to rate-limit a function."""
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            allowed, wait = check_rate_limit(provider)
+            if not allowed and wait > 0:
+                print(f"[rate-limit] Waiting {wait:.1f}s for {provider}...")
+                time.sleep(wait)
+                allowed, _ = check_rate_limit(provider)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+
+def show_rate_limits():
+    """Display current rate limit configuration."""
+    print("API Rate Limits:")
+    print(f"  Provider    | Calls/Period | Active Token")
+    print(f"  ------------|--------------|-------------")
+    for prov, cfg in API_RATE_LIMITS.items():
+        active = "✓" if ACTIVE_TOKENS.get(prov, False) else "-"
+        print(f"  {prov:11} | {cfg['calls']:3}/ {int(cfg['period']):2}s   | {active}")
+    print(f"\nActive providers: {sum(ACTIVE_TOKENS.values())}")
+
 
 # ---------------------------------------------------------------------------
 # Config
@@ -528,10 +623,15 @@ def main():
     parser.add_argument("--crystallizer", action="store_true", help="Update crystallizer index")
     parser.add_argument("--validate-plugins", action="store_true", help="Validate plugin config")
     parser.add_argument("--sync-external", action="store_true", help="Sync from external faerie2 repo")
+    parser.add_argument("--rate-limits", action="store_true", help="Show API rate limits")
     parser.add_argument("--health", action="store_true", help="Show health report")
     parser.add_argument("--all", action="store_true", help="Run all sync tasks")
     
     args = parser.parse_args()
+    
+    if args.rate_limits:
+        show_rate_limits()
+        return 0
     
     if not any(vars(args).values()):
         parser.print_help()
