@@ -22,6 +22,8 @@ Environment:
   ANTHROPIC_API_KEY - for Anthropic API calls (optional)
   GITHUB_TOKEN  - for GitHub API calls (optional)
   TAVILY_TOKEN  - for Tavily API calls (optional)
+  WANDB_API_KEY - for W&B tracking (optional)
+  OPENROUTER_API_KEY - for OpenRouter multi-LLM (optional)
 
 Usage:
   python3 9x_obsidian_vault_sync.py --scan
@@ -57,6 +59,8 @@ API_RATE_LIMITS = {
     "anthropic": {"calls": 50, "period": 60},     # 50/min for Claude
     "github": {"calls": 60, "period": 60},     # 60/min
     "tavily": {"calls": 15, "period": 60},     # 15/min free tier
+    "wandb": {"calls": 30, "period": 60},     # 30/min
+    "openrouter": {"calls": 60, "period": 60},     # 60/min
     "default": {"calls": 10, "period": 60},     # 10/min fallback
 }
 
@@ -66,6 +70,8 @@ ACTIVE_TOKENS = {
     "anthropic": bool(os.environ.get("ANTHROPIC_API_KEY")),
     "github": bool(os.environ.get("GITHUB_TOKEN")),
     "tavily": bool(os.environ.get("TAVILY_TOKEN")),
+    "wandb": bool(os.environ.get("WANDB_API_KEY")),
+    "openrouter": bool(os.environ.get("OPENROUTER_API_KEY")),
 }
 
 # Rate limiter state per provider
