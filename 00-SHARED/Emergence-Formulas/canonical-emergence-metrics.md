@@ -2,9 +2,17 @@
 type: system-reference
 title: Canonical Emergence Formulas
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-18
 tags: [emergence, formulas, faerie2, experimental, crystallized]
-parent: ../../Dashboards.md
+promotion_state: capture
+source_path: "80-Publications/canonical-emergence-metrics.md"
+source_hash: "sha256:721b4880d933f393994578923c7d437c99219cb81b03922f1e376b48dd17deb2"
+doc_hash: "sha256:"
+hash_ts: 2026-05-18T00:00:00Z
+hash_method: body-sha256-v1
+cloud_path: ""
+promoted_to: ""
+promoted_at: ""
 ---
 
 > [↑ Dashboards](../../Dashboards.md) · [⌂ Hive](../Hive.md)

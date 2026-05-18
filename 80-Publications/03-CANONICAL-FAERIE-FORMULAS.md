@@ -1,10 +1,18 @@
 ---
 type: canonical-formulas
-status: active
+title: Faerie2 Canonical Formulas
 created: 2026-05-05
-updated: 2026-05-05T23:00:00Z
-validation: comprehensive (synthesized from 4 sources)
-tags: [formulas, mutable-parameters, ffmx, piston, mutation-discipline]
+updated: 2026-05-18
+tags: [emergence, formulas, mutable-parameters, ffmx, piston, mutation-discipline]
+promotion_state: capture
+source_path: "vault-native"
+source_hash: "sha256:55b61620ef57f6e7c27824e38daf0e9b95fc946a2c9e75329ba359f318c8dcc0"
+doc_hash: "sha256:"
+hash_ts: 2026-05-18T00:00:00Z
+hash_method: body-sha256-v1
+cloud_path: ""
+promoted_to: ""
+promoted_at: ""
 ---
 
 # Faerie2 Canonical Formulas

@@ -2,9 +2,9 @@
   "schema_version": "1.0.0",
   "mission": "vault-infrastructure-overhaul",
   "generated_by": "knowledge-synthesizer",
-  "generated_at": "2026-05-06T00:00:00Z",
+  "generated_at": "2026-05-18",
   "obsidian_minimum_version": "1.12.0",
-  "install_order_rationale": "Dataview must load first (provides index API). Blueprint and Breadcrumbs depend on index. QuickAdd depends on Templates folder. Excalidraw and Meta-Bind are independent. Load order: Dataview → Breadcrumbs → Blueprint → QuickAdd → Meta-Bind → Excalidraw → Search (core, always available).",
+  "install_order_rationale": "Dataview must load first (provides index API). Blueprint and Breadcrumbs depend on index. QuickAdd depends on Templates folder. Excalidraw and Meta-Bind are independent. Load order: Dataview \u2192 Breadcrumbs \u2192 Blueprint \u2192 QuickAdd \u2192 Meta-Bind \u2192 Excalidraw \u2192 Search (core, always available).",
   "plugins": [
     {
       "id": "dataview",
@@ -26,8 +26,8 @@
       "faerie_purpose": "Powers dashboard queries (mission manifest tables, agent output feeds, quality score heatmaps). Core dependency for all table views in 00-SHARED/Dashboards/.",
       "validation": {
         "test_query": "```dataview\nTABLE file.name, status FROM \"10-Investigations\" SORT file.mtime DESC LIMIT 5\n```",
-        "expected_result": "Table renders with file names and status fields — no 'Dataview: failed to query' error",
-        "pass_criteria": "Table appears with ≥0 rows and no error message in 5 seconds"
+        "expected_result": "Table renders with file names and status fields \u2014 no 'Dataview: failed to query' error",
+        "pass_criteria": "Table appears with \u22650 rows and no error message in 5 seconds"
       },
       "peer_dependencies": [],
       "known_conflicts": [],
@@ -43,11 +43,24 @@
       "config": {
         "userHiers": [
           {
-            "up": ["north", "parent"],
-            "same": ["east", "west"],
-            "down": ["south", "child"],
-            "next": ["south"],
-            "prev": ["north"]
+            "up": [
+              "north",
+              "parent"
+            ],
+            "same": [
+              "east",
+              "west"
+            ],
+            "down": [
+              "south",
+              "child"
+            ],
+            "next": [
+              "south"
+            ],
+            "prev": [
+              "north"
+            ]
           }
         ],
         "showBCs": true,
@@ -61,7 +74,7 @@
       },
       "faerie_purpose": "Compass-edge navigation. Reads north/south/east/west frontmatter fields and renders breadcrumb trail + prev/next navigation. Enables human navigation of mission-graph DAG without needing to know file paths.",
       "validation": {
-        "test_query": "Open any file with `north: [[some-file]]` frontmatter — breadcrumb trail must appear at top of document showing hierarchy",
+        "test_query": "Open any file with `north: [[some-file]]` frontmatter \u2014 breadcrumb trail must appear at top of document showing hierarchy",
         "expected_result": "Breadcrumb trail visible: 'parent > current > child'. Prev/Next buttons functional. Clicking a breadcrumb level navigates to that file.",
         "pass_criteria": "Trail visible in both edit and preview mode; prev/next navigate correctly"
       },
@@ -76,7 +89,7 @@
       "fallback_if_disabled": "Manual wikilink navigation only. Mission-graph traversal requires knowing file names."
     },
     {
-      "id": "obsidian-blueprints",
+      "id": "blueprint",
       "name": "Blueprint",
       "community_id": "obsidian-blueprints",
       "version": ">=0.6.0",
@@ -89,11 +102,13 @@
       },
       "faerie_purpose": "Agent output formatting templates. Agents write manifests; Blueprint defines how they render in the vault. Blueprint files in Blueprints/ folder define structured note layouts for investigation entities, mission nodes, findings.",
       "validation": {
-        "test_query": "Open Blueprints/ folder — blueprint files (.blueprint or .md with blueprint frontmatter) must be listed. Create a new note from a Blueprint via command palette.",
+        "test_query": "Open Blueprints/ folder \u2014 blueprint files (.blueprint or .md with blueprint frontmatter) must be listed. Create a new note from a Blueprint via command palette.",
         "expected_result": "Command palette shows 'Blueprint: Create from...' command. Selecting a blueprint creates a new note with pre-filled frontmatter.",
         "pass_criteria": "Blueprint note created in correct folder with correct frontmatter template applied"
       },
-      "peer_dependencies": ["dataview"],
+      "peer_dependencies": [
+        "dataview"
+      ],
       "known_conflicts": [
         {
           "plugin": "obsidian-linter",
@@ -136,37 +151,13 @@
       },
       "faerie_purpose": "Injects standardized frontmatter on note creation; routes new notes to correct folders; provides mission_choice daily note template. Daily template carries mission_choice field that agents use for routing.",
       "validation": {
-        "test_query": "Cmd/Ctrl+P → 'QuickAdd: Daily Note' — new file should open in 00-Inbox with today's date and mission_choice frontmatter field present",
+        "test_query": "Cmd/Ctrl+P \u2192 'QuickAdd: Daily Note' \u2014 new file should open in 00-Inbox with today's date and mission_choice frontmatter field present",
         "expected_result": "New file created at 00-Inbox/YYYY-MM-DD-daily.md with type, status, tags, created, updated, mission_choice frontmatter",
         "pass_criteria": "File created, frontmatter complete, mission_choice field present (even if empty)"
       },
       "peer_dependencies": [],
       "known_conflicts": [],
       "fallback_if_disabled": "Manual frontmatter entry on every new note. Daily templates not automatically applied."
-    },
-    {
-      "id": "obsidian-meta-bind-plugin",
-      "name": "Meta Bind",
-      "community_id": "obsidian-meta-bind-plugin",
-      "version": ">=0.12.0",
-      "install_order": 5,
-      "required": false,
-      "config": {
-        "enableSyntaxHighlighting": true,
-        "enableJsInputFields": false,
-        "viewFields": {
-          "showNoteFieldBreadcrumb": true
-        }
-      },
-      "faerie_purpose": "Interactive frontmatter widgets. Renders inline input fields for mission_choice, status, bearing. Users can update frontmatter via UI controls in preview mode rather than editing raw YAML.",
-      "validation": {
-        "test_query": "Add `INPUT[text:mission_choice]` to any note in preview mode — an inline text input must appear bound to the mission_choice frontmatter field",
-        "expected_result": "Input widget renders. Typing in it updates the frontmatter mission_choice value in real time.",
-        "pass_criteria": "Widget renders, frontmatter updates on input, no console errors"
-      },
-      "peer_dependencies": [],
-      "known_conflicts": [],
-      "fallback_if_disabled": "Direct YAML frontmatter editing only. No inline widgets."
     },
     {
       "id": "obsidian-excalidraw-plugin",
@@ -184,7 +175,7 @@
       },
       "faerie_purpose": "Visual mission graph diagrams. Agents or humans can draw mission-graph topology, entity relationship diagrams, and investigation timelines as Excalidraw files embedded in vault notes.",
       "validation": {
-        "test_query": "Cmd/Ctrl+P → 'Excalidraw: Create new drawing' — Excalidraw canvas must open in the Excalidraw/ folder",
+        "test_query": "Cmd/Ctrl+P \u2192 'Excalidraw: Create new drawing' \u2014 Excalidraw canvas must open in the Excalidraw/ folder",
         "expected_result": "Canvas opens, drawing tools available. Embedding in a note via ![[drawing.excalidraw]] renders inline.",
         "pass_criteria": "Drawing created, embeddable in notes, renders in preview"
       },
@@ -192,7 +183,7 @@
       "known_conflicts": [
         {
           "plugin": "breadcrumbs",
-          "issue": "See Breadcrumbs entry — edge rendering overlap in graph view",
+          "issue": "See Breadcrumbs entry \u2014 edge rendering overlap in graph view",
           "resolution": "Disable Excalibrain hierarchical edges (not Excalidraw)"
         }
       ],
@@ -207,20 +198,52 @@
       "required": true,
       "config": {
         "searchOnStartup": false,
-        "indexedFields": ["type", "status", "mission", "bearing", "task_id", "tags"]
+        "indexedFields": [
+          "type",
+          "status",
+          "mission",
+          "bearing",
+          "task_id",
+          "tags"
+        ]
       },
       "faerie_purpose": "Full-text and frontmatter search across all vault notes. Critical for finding specific agent outputs by task_id, mission, or bearing without needing to know the file path.",
       "validation": {
-        "test_query": "Cmd/Ctrl+Shift+F → search for 'mission:vault-infrastructure-overhaul' — should return relevant notes",
+        "test_query": "Cmd/Ctrl+Shift+F \u2192 search for 'mission:vault-infrastructure-overhaul' \u2014 should return relevant notes",
         "expected_result": "Search results panel shows notes with matching frontmatter field values",
         "pass_criteria": "At least 1 result when searching for known frontmatter values"
       },
       "peer_dependencies": [],
       "known_conflicts": [],
-      "fallback_if_disabled": "Core plugin — always available in Obsidian"
+      "fallback_if_disabled": "Core plugin \u2014 always available in Obsidian"
+    },
+    {
+      "id": "juggl",
+      "name": "Juggl",
+      "version": "latest",
+      "required": true,
+      "purpose": "Interactive graph visualization for mission graph exploration",
+      "install_step": 7
+    },
+    {
+      "id": "obsidian-linter",
+      "name": "Linter",
+      "version": "latest",
+      "required": true,
+      "purpose": "Enforces frontmatter schema + consistent note formatting",
+      "install_step": 8
     }
   ],
-  "load_order": ["dataview", "breadcrumbs", "obsidian-blueprints", "quickadd", "obsidian-meta-bind-plugin", "obsidian-excalidraw-plugin"],
+  "load_order": [
+    "dataview",
+    "breadcrumbs",
+    "blueprint",
+    "quickadd",
+    "obsidian-excalidraw-plugin",
+    "search",
+    "juggl",
+    "obsidian-linter"
+  ],
   "conflict_matrix": {
     "breadcrumbs_x_excalibrain": {
       "severity": "low",
@@ -237,6 +260,7 @@
     "manifest_sync": "0x_manifest_to_vault_sync.py writes final manifests as vault notes. Dataview indexes them within 5 seconds.",
     "frontmatter_validator": "8x_vault_frontmatter_validator.py enforces schema (type, status, tags, created, updated, doc_hash) on all PreToolUse Write/Edit hooks.",
     "mission_routing": "QuickAdd daily template mission_choice field + Breadcrumbs north/south/east/west fields together enable full compass navigation.",
-    "hash_chain": "5x_vault_mutation_tracker.py fires on PostFileWrite, writes doc_hash to frontmatter + appends COC entry. Ensures forensic integrity."
+    "hash_chain": "5x_vault_mutation_tracker.py fires on PostFileWrite, writes doc_hash to frontmatter + appends COC entry. Ensures forensic integrity.",
+    "audit_2026_05_18": "removed aspirational obsidian-meta-bind-plugin; added juggl + obsidian-linter; fixed blueprint id"
   }
 }

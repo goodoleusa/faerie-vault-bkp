@@ -45,7 +45,7 @@ Check each item. Items marked REQUIRED must pass. Items marked OPTIONAL are enha
 - [ ] **REQUIRED** `faerie-vault/.obsidian/plugins/dataview/data.json` present and valid
 - [ ] **REQUIRED** `faerie-vault/.obsidian/plugins/breadcrumbs/data.json` present with compass hierarchy defined
 - [ ] **REQUIRED** `faerie-vault/.obsidian/plugins/quickadd/data.json` present with daily+mission templates
-- [ ] **REQUIRED** `faerie-vault/.obsidian/snippets/compass-graph-colors.css` present
+- [ ] **REQUIRED** `faerie-vault/.obsidian/snippets/compass-graph.css` present
 - [ ] **REQUIRED** `faerie-vault/.obsidian/workspace.json` opens to `00-START-HERE.md` on first launch
 - [ ] **OPTIONAL** ct-vault gets its own `.obsidian/` config (investigation data vault settings)
 

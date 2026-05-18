@@ -1,11 +1,18 @@
 ---
-date: 2026-05-03
-title: "Emergence Quality Metrics + Membench Bridge System"
-author: ai-engineer
 type: system-design
-status: final
+title: "Emergence Quality Metrics + Membench Bridge System"
+created: 2026-05-03
+updated: 2026-05-18
 tags: [emergence, quality-gates, membench, evaluation, release-readiness]
-vault_path: "00-SHARED/Hive/emergence-quality-metrics-system-20260503.md"
+promotion_state: capture
+source_path: "vault-native"
+source_hash: "sha256:61966ddaf9d1829d1b0addaef85e0dedd405082f90757f0ee8e2194671b9c486"
+doc_hash: "sha256:"
+hash_ts: 2026-05-18T00:00:00Z
+hash_method: body-sha256-v1
+cloud_path: ""
+promoted_to: ""
+promoted_at: ""
 ---
 
 # Emergence Quality Metrics + Membench Bridge System
