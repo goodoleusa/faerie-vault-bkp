@@ -95,7 +95,9 @@ actions:
 
 ## 💎 Lifecycle ladder
 
-> Read the crystals, not the volume. See [[../HELP/crystallization-workflow|crystallization workflow]].
+> Read the crystals, not the volume. See [[../HELP/crystallization-workflow|crystallization workflow]] and [[../Faerie-System-Internals/Sync-Scripts/PROMOTION-PIPELINE|promotion pipeline]].
+
+**Time tiers (volume → crystal):**
 
 - 📌 **Today** — atomic notes: [[../Daily/_index|Daily/]]
 - 🗓️ **This week** — [[../Weekly/_index|Weekly digests]]
@@ -103,6 +105,15 @@ actions:
 - ⚓ **Anchor set** — [[../Anchors/_index|Anchors/]] (permanent principles)
 - 🍯 **Honey droplets** — [[../Honey/_index|Honey/]] (crystallized memory)
 - 📜 **Charters** — [[../Charters/_index|Charters/]] (declared intent)
+
+**Promotion pipeline (ephemeral → canonical, mirrors `faerie2/forensics/`):**
+
+- 🌼 **Ephemeral** — [[../Ephemeral/_index|Ephemeral/]] (agent scratch, only writable path)
+- 📌 **Manifests** — [[../Manifests/_index|Manifests/]] (work cells, symlink overlay)
+- ⬡ **Artifacts** — [[../Artifacts/_index|Artifacts/]] (work products, symlink overlay)
+- 📦 **Bundles** — [[../Bundles/_index|Bundles/]] (spawn context, symlink overlay)
+- 🔗 **COC entries** — [[../COC-Entries/_index|COC-Entries/]] (hash-chained audit)
+- 🧑 **Human** — [[../Human/_index|Human/]] (your annotations, parallel COC chain)
 
 ```dataviewjs
 const today = new Date().toISOString().slice(0,10);
