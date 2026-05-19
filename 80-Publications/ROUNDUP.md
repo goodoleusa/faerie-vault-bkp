@@ -32,8 +32,9 @@ Four cross-linked docs from the 2026-05-19 ad-hoc stigmergic coordination sessio
 | [`POTEMKIN-FAERIE-FIELD-REPORT.md`](POTEMKIN-FAERIE-FIELD-REPORT.md) | Forensic field report | Cite when the question is *did the pattern actually work*. Full session timeline, observed failure modes, quantified throughput/cost deltas, failure-mode → faerie-component mapping. |
 | [`ORCHESTRATOR-OBSERVATIONS.md`](ORCHESTRATOR-OBSERVATIONS.md) | First-person practitioner notes | Cite when the question is *what does it feel like to run*. Honest first-person observation layer with specific pre-/during-/post-spawn tweaks. |
 | [`FOR-SKEPTICS-zero-confabulation.md`](FOR-SKEPTICS-zero-confabulation.md) | Skeptic-facing methodology explainer | Cite when the question is *can the 0% confabulation / 100% manifest-truthfulness numbers be trusted*. Explains the citability + promotion-gate model end-to-end. |
+| [`MONKEYBRANCHING-2-AGENT-FIELD-REPORT.md`](MONKEYBRANCHING-2-AGENT-FIELD-REPORT.md) | Field report companion (2-agent variant) | Cite alongside POTEMKIN for the 5→N progression. Charter-first + atomic claims + cap N=2-3 = stigmergic coordination without throughput-for-cleanup tradeoff. |
 
-All four reference the canonical reputation/COC infrastructure (`docs/22-AGENT-CARD-REPUTATION-SCHEMA.md`, `forensics/ORGANIZATION.md`, `scripts/9x_reputation_tracker.py`) so a reader can verify the empirical claims from the same evidence chain.
+All five reference the canonical reputation/COC infrastructure (`docs/22-AGENT-CARD-REPUTATION-SCHEMA.md`, `forensics/ORGANIZATION.md`, `scripts/9x_reputation_tracker.py`) so a reader can verify the empirical claims from the same evidence chain.
 
 ---
 
