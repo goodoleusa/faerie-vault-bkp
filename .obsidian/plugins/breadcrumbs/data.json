@@ -2,108 +2,143 @@
   "is_dirty": false,
   "edge_fields": [
     {
-      "label": "up"
+      "label": "N"
     },
     {
-      "label": "down"
+      "label": "S"
     },
     {
-      "label": "same"
+      "label": "E"
     },
     {
-      "label": "next"
-    },
-    {
-      "label": "prev"
+      "label": "W"
     }
   ],
   "edge_field_groups": [
     {
       "label": "ups",
       "fields": [
-        "up"
+        "N"
       ]
     },
     {
       "label": "downs",
       "fields": [
-        "down"
+        "S"
       ]
     },
     {
       "label": "sames",
       "fields": [
-        "same"
-      ]
-    },
-    {
-      "label": "nexts",
-      "fields": [
-        "next"
+        "E"
       ]
     },
     {
       "label": "prevs",
       "fields": [
-        "prev"
+        "W"
+      ]
+    },
+    {
+      "label": "nexts",
+      "fields": []
+    },
+    {
+      "label": "all-bearings",
+      "fields": [
+        "N",
+        "S",
+        "E",
+        "W"
       ]
     }
   ],
   "implied_relations": {
     "transitive": [
       {
-        "name": "",
+        "name": "n-inverse-s",
         "rounds": 1,
         "chain": [
           {
-            "field": "up"
+            "field": "N"
           }
         ],
-        "close_field": "down",
+        "close_field": "S",
         "close_reversed": true
       },
       {
-        "name": "",
+        "name": "s-inverse-n",
         "rounds": 1,
         "chain": [
           {
-            "field": "down"
+            "field": "S"
           }
         ],
-        "close_field": "up",
+        "close_field": "N",
         "close_reversed": true
       },
       {
-        "name": "",
+        "name": "e-symmetric",
         "rounds": 1,
         "chain": [
           {
-            "field": "same"
+            "field": "E"
           }
         ],
-        "close_field": "same",
+        "close_field": "E",
         "close_reversed": true
       },
       {
-        "name": "",
+        "name": "co-siblings-via-N",
         "rounds": 1,
         "chain": [
           {
-            "field": "next"
+            "field": "N"
+          },
+          {
+            "field": "N"
           }
         ],
-        "close_field": "prev",
-        "close_reversed": true
+        "close_field": "E",
+        "close_reversed": false
       },
       {
-        "name": "",
+        "name": "cousins-via-S",
         "rounds": 1,
         "chain": [
           {
-            "field": "prev"
+            "field": "S"
+          },
+          {
+            "field": "S"
           }
         ],
-        "close_field": "next",
+        "close_field": "E",
+        "close_reversed": false
+      },
+      {
+        "name": "aunt-uncle",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "N"
+          },
+          {
+            "field": "E"
+          }
+        ],
+        "close_field": "N",
+        "close_reversed": false
+      },
+      {
+        "name": "grandparent",
+        "rounds": 2,
+        "chain": [
+          {
+            "field": "N"
+          }
+        ],
+        "close_field": "N",
         "close_reversed": true
       }
     ]
@@ -234,8 +269,8 @@
           "ups",
           "downs",
           "sames",
-          "nexts",
-          "prevs"
+          "prevs",
+          "nexts"
         ],
         "lock_view": false,
         "lock_path": ""
@@ -324,5 +359,35 @@
   },
   "_bc_migrations": {
     "tree_ups_with_downs_default": true
-  }
+  },
+  "limitJumpToFirstFields": [
+    "N",
+    "S",
+    "E",
+    "W"
+  ],
+  "limitWriteBC": [
+    "N",
+    "S",
+    "E",
+    "W"
+  ],
+  "writeBCsInline": true,
+  "_faerie_field_value_relations": [
+    {
+      "field": "charter_ref",
+      "implies_field": "N",
+      "rationale": "charter_ref -> implied N upstream to charter note"
+    },
+    {
+      "field": "charter_ref",
+      "implies_sibling_field": "E",
+      "rationale": "notes sharing charter_ref are E parallel"
+    },
+    {
+      "field": "cluster_prefix",
+      "implies_sibling_field": "E",
+      "rationale": "shared cluster_prefix -> E sibling"
+    }
+  ]
 }
