@@ -3,10 +3,13 @@ type: dashboard
 tier: anchors
 title: "Anchors — Proposed / Promoted / Rejected"
 status: live
-derived_from:
-  - "CyberOps-UNIFIED/00-SHARED/Dashboards/.claude-garbage-Mission-Control.md"
+N: '[00-Home](00-Home.md)'
+E: ['[01-Today](01-Today.md)', '[02-Missions-Emergent](02-Missions-Emergent.md)', '[04-Eval-Dimensions](04-Eval-Dimensions.md)', '[05-Stigmergy](05-Stigmergy.md)']
+W: '[00-Home](00-Home.md)'
 tags: [dashboard, anchors, governance]
 ---
+
+> **🐝 Navigate:** [00 Home](00-Home.md) · [01 Today](01-Today.md) · [02 Missions](02-Missions-Emergent.md) · [03 Anchors](03-Anchors.md) · [04 Eval Dimensions](04-Eval-Dimensions.md) · [05 Stigmergy](05-Stigmergy.md)
 
 # Anchors
 
@@ -19,31 +22,5 @@ TABLE WITHOUT ID
   mission AS "Mission",
   suggested_patch AS "Patch"
 FROM #anchor
-SORT status ASC, file.mtime DESC
-```
-
-## Promoted (active in system prompt)
-
-```dataview
-LIST file.link + " — " + default(suggested_patch, "(no patch text)")
-FROM #anchor
-WHERE status = "promoted"
-SORT file.mtime DESC
-```
-
-## Awaiting review
-
-```dataview
-LIST file.link + " — proposed " + dateformat(file.mtime, "MMM dd")
-FROM #anchor
-WHERE status = "proposed"
-SORT file.mtime ASC
-```
-
-## Rejected (kept for audit)
-
-```dataview
-LIST file.link + " — " + default(rejection_reason, "(no reason)")
-FROM #anchor
-WHERE status = "rejected"
+SORT status ASC
 ```

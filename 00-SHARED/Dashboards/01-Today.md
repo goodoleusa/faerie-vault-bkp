@@ -4,53 +4,26 @@ tier: daily
 title: "Today — Manifests by Mission Cluster"
 status: live
 cssclasses: [wide-page]
-derived_from:
-  - "CyberOps-UNIFIED/00-SHARED/Daily-Dashboards/2026-04-28/00-DASHBOARD.md"
-  - "CyberOps-UNIFIED/00-SHARED/00-META/DASHBOARD-INDEX.md"
+N: '[00-Home](00-Home.md)'
+E: ['[02-Missions-Emergent](02-Missions-Emergent.md)', '[03-Anchors](03-Anchors.md)', '[04-Eval-Dimensions](04-Eval-Dimensions.md)', '[05-Stigmergy](05-Stigmergy.md)']
+W: '[00-Home](00-Home.md)'
 tags: [dashboard, daily]
 ---
+
+> **🐝 Navigate:** [00 Home](00-Home.md) · [01 Today](01-Today.md) · [02 Missions](02-Missions-Emergent.md) · [03 Anchors](03-Anchors.md) · [04 Eval Dimensions](04-Eval-Dimensions.md) · [05 Stigmergy](05-Stigmergy.md)
 
 # Today — Manifests by Mission Cluster
 
 Today's manifests grouped by `cluster_prefix` (first 3 w4w slots per dead-reckoning ontology).
 Each row shows trail summary + displacement + alignment.
 
-> See [[00-Home]] for f(0) overview · [[02-Missions-Emergent]] for cross-day clusters.
-
----
-
-## By cluster_prefix (today only)
-
 ```dataview
 TABLE WITHOUT ID
   file.link AS "Manifest",
-  bearing AS "→",
-  displacement AS "Δ",
-  alignment AS "Align",
-  dashboard_line AS "Trail"
-FROM "forensics/manifests"
-WHERE date(file.mtime) >= date(today)
-GROUP BY cluster_prefix
-SORT cluster_prefix ASC, file.mtime DESC
-```
-
-## Unclustered (no cluster_prefix field — legacy)
-
-```dataview
-LIST file.link + " — " + default(mission, "(no mission)")
-FROM "forensics/manifests"
-WHERE date(file.mtime) >= date(today) AND !cluster_prefix
-SORT file.mtime DESC
-LIMIT 20
-```
-
-## Bearing distribution (today)
-
-```dataview
-TABLE WITHOUT ID
+  cluster_prefix AS "Cluster",
   bearing AS "Bearing",
-  length(rows) AS "Count"
-FROM "forensics/manifests"
-WHERE date(file.mtime) >= date(today)
-GROUP BY bearing
+  trail_summary AS "Trail"
+FROM "00-SHARED/session-manifests"
+WHERE file.cday = date(today)
+SORT cluster_prefix ASC
 ```
