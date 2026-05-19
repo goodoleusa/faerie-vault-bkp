@@ -5,7 +5,7 @@ status: draft
 tier: onboarding
 tags: [tutorial, hive-plugin, latticework, faerie-onboarding, '#path/onboarding']
 path-step: 2
-summary: "The hive plugin turns Obsidian into a creative collaboration substrate with AI work flowing in as canonical truth and humans annotating freely on top. Builds on Latticework's text-reference + marginalia primitives, extends them with faerie bearings (N/S/E/W), compass overlay (Juggl), and a bidirectional MCP feedback loop so your annotations steer the next AI session."
+summary: "The hive plugin turns Obsidian into a creative collaboration substrate with AI work flowing in as canonical truth and humans annotating freely on top. Builds on Latticework's text-reference + annotations primitives, extends them with faerie bearings (N/S/E/W), compass overlay (Juggl), and a bidirectional MCP feedback loop so your annotations steer the next AI session."
 N: '[00 Home](../Dashboards/00-Home.md)'
 S: ['[Hive Plugin Reference](hive-plugin-reference.md)']
 E: ['[Latticework Cheatsheet](Latticework-Cheatsheet.md)', '[Visual Language Glossary](../../forensics/glossary/VISUAL-LANGUAGE.md)']
@@ -21,7 +21,7 @@ This isn't a dashboard plugin. It's a **creative cognitive substrate**. AI work 
 
 ## What problem does this solve?
 
-Reading an AI-authored mission graph in Obsidian today gives you the data, but it doesn't give you a place to **think alongside the AI**. Vanilla Obsidian separates annotation (margin notes, comments) from editing (wikilinks, embeds). You either modify the AI's note (breaks the forensic chain) or sit beside it and take separate notes (loses the connection).
+Reading an AI-authored mission graph in Obsidian today gives you the data, but it doesn't give you a place to **think alongside the AI**. Vanilla Obsidian separates annotation (annotations, comments) from editing (wikilinks, embeds). You either modify the AI's note (breaks the forensic chain) or sit beside it and take separate notes (loses the connection).
 
 [Latticework](https://www.matthewsiu.com/Latticework) (Siu & Matuschak, 2024) solved this for personal knowledge management:
 
@@ -61,7 +61,7 @@ You can drag any card around. Add your own cards (free-text thoughts, questions,
 
 This is the Kinopio model applied to forensic work: real data underneath, free thinking on top, both preserved forever.
 
-### 3. Intertextual engagement — trail-refs + marginalia (Latticework-extended)
+### 3. Intertextual engagement — trail-refs + annotations (Latticework-extended)
 
 Read a manifest. Spot a passage that connects to another note. Select it, hit `CMD+Shift+H`. A picker asks: which bearing?
 
@@ -83,7 +83,7 @@ Latticework's primitives are the foundation. The hive plugin extends each:
 | Latticework primitive | Hive extension | Faerie semantics |
 |---|---|---|
 | Text reference (`CMD+Shift+H`) | Bearing-tagged trail-ref | Each ref is N/S/E/W typed |
-| Marginalia (margin notes on backlinks) | **MCP-fed marginalia** | Your margin notes land in `vault/00-SHARED/Marginalia/{date}/*.md` AND POST to the faerie MCP server. On the next AI session, your annotations appear in the agent's system prompt as `human_annotations` — first-class steering signals. |
+| Annotations on backlinks | **MCP-fed annotations** | Your annotations land in `vault/Human/{date}/*.md` AND POST to the faerie MCP server. On the next AI session, your annotations appear in the agent's system prompt as `human_annotations` — first-class steering signals. |
 | Adjacent-panel peek (`CMD+Hover+Click`) | Same | Unchanged — peek is good. |
 | Highlights | Bearing-colored highlights | Each highlight inherits its bearing's color in the visual language palette. |
 | Collapse/expand (`Shift+Click`, `CMD+Shift+S`) | Same | Unchanged. |
@@ -137,10 +137,10 @@ Latticework's primitives are the foundation. The hive plugin extends each:
 1. Read an AI-authored manifest
 2. Find a passage that concerns you — `CMD+Shift+H`, pick W (baseline question)
 3. The selection becomes a W-tagged ref with amber styling
-4. Click on the backlink in the bottom pane → add a marginalia note: "this assumption needs re-validation, the data from yesterday contradicts it"
-5. Marginalia auto-syncs to `vault/00-SHARED/Marginalia/{date}/m-{ts}.md`
-6. Plugin POSTs to `faerie_record_marginalia` on the MCP server
-7. Next conversation: agent's system prompt includes your marginalia in `{{ human_annotations }}`
+4. Click on the backlink in the bottom pane → add a annotation: "this assumption needs re-validation, the data from yesterday contradicts it"
+5. Annotations auto-sync to `vault/Human/{date}/a-{ts}.md`
+6. Plugin POSTs to `faerie_record_annotation` on the MCP server
+7. Next conversation: agent's system prompt includes your annotations in `{{ human_annotations }}`
 8. Agent's first response acknowledges your concern and shifts approach
 
 ### Spatial brainstorming with real data

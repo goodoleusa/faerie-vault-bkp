@@ -1,0 +1,4 @@
+{
+  "_comment": "Append 'hive' to .obsidian/community-plugins.json on next Obsidian open, or merge manually",
+  "plugins_to_enable": ["hive"]
+}

@@ -1,27 +1,30 @@
 ---
-type: index
-status: active
-created: 2026-03-28
-updated: 2026-03-28
-tags:
-  - templates
-  - index
-  - redirect
-doc_hash: sha256:8cfcb3bad0585102108e4ec4ed33c046df61391112e75ccb170fa69b640bea94
-hash_ts: 2026-03-29T16:10:51Z
-hash_method: body-sha256-v1
+type: dir-index
+title: "Templates — Obsidian core templates (no Templater)"
+emoji: "🧩"
+N: ['[../Dashboards/00-Home](../Dashboards/00-Home.md)']
+S: ['[../Daily/_index](../Daily/_index.md)']
+E: ['[../Snippets](../Snippets)']
+W: ['[../HELP/crystallization-workflow](../HELP/crystallization-workflow.md)']
+tags: [dir-index, templates]
 ---
 
-# Templates (00-SHARED)
+# 🧩 Templates
 
-Templates are centralized at vault root `/Templates/`. See [[Templates/_index|Templates Index]] for the full catalog.
+Basic frontmatter shells for the core Obsidian Templates plugin. **No
+Templater syntax** — these are pure markdown stubs so they survive both
+core-Templates and Templater installs.
 
-Blueprints (`.blueprint` format) are at vault root `/Blueprints/`. See [[Blueprints/_index|Blueprints Index]] for the full catalog.
+Each file ending in `-basic.md` is a copy-paste seed: open, replace
+placeholders, save into the right canonical folder (Daily/, Charters/,
+Honey/, etc).
 
----
+## Available templates
 
-## Files in This Folder
-
-| File | Status |
-|---|---|
-| [[00-SHARED/templates/design-session-template\|design-session-template]] | Also available at [[Templates/design-session-template]]. Canonical copy is in `/Templates/`. |
+```dataviewjs
+const pages = dv.pages('"00-SHARED/Templates"')
+  .where(p => p.file.name !== '_index')
+  .sort(p => p.file.name);
+dv.table(['Template', 'Purpose'],
+  pages.map(p => [dv.fileLink(p.file.path), p.summary ?? '']));
+```

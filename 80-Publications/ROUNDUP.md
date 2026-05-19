@@ -15,10 +15,25 @@ doc_hash: pending
 
 > [← Publications](80-Publications.md)
 
-# Publications Roundup — 2026-05-17
+# Publications Roundup — 2026-05-19
 
 **Purpose:** Single entry point to find publication-worthy docs organized by your intent mode.  
-**Last updated:** 2026-05-17
+**Last updated:** 2026-05-19
+
+---
+
+## 🆕 New (2026-05-19) — Stigmergy session field package
+
+Four cross-linked docs from the 2026-05-19 ad-hoc stigmergic coordination session. Citable as a coherent set; together they form a publication-grade argument for stigmergy as the coordination substrate for AI agent teams.
+
+| Doc | Genre | Use it to… |
+|---|---|---|
+| [`STIGMERGY-FOR-AGENT-TEAMS.md`](STIGMERGY-FOR-AGENT-TEAMS.md) | Technical narrative / position piece | Cite in an application or pitch where the question is *why does this pattern matter*. Walks through six concrete Agent Teams bugs and how stigmergy maps onto each, with a three-tier proposal for what Anthropic could ship. |
+| [`POTEMKIN-FAERIE-FIELD-REPORT.md`](POTEMKIN-FAERIE-FIELD-REPORT.md) | Forensic field report | Cite when the question is *did the pattern actually work*. Full session timeline, observed failure modes, quantified throughput/cost deltas, failure-mode → faerie-component mapping. |
+| [`ORCHESTRATOR-OBSERVATIONS.md`](ORCHESTRATOR-OBSERVATIONS.md) | First-person practitioner notes | Cite when the question is *what does it feel like to run*. Honest first-person observation layer with specific pre-/during-/post-spawn tweaks. |
+| [`FOR-SKEPTICS-zero-confabulation.md`](FOR-SKEPTICS-zero-confabulation.md) | Skeptic-facing methodology explainer | Cite when the question is *can the 0% confabulation / 100% manifest-truthfulness numbers be trusted*. Explains the citability + promotion-gate model end-to-end. |
+
+All four reference the canonical reputation/COC infrastructure (`docs/22-AGENT-CARD-REPUTATION-SCHEMA.md`, `forensics/ORGANIZATION.md`, `scripts/9x_reputation_tracker.py`) so a reader can verify the empirical claims from the same evidence chain.
 
 ---
 

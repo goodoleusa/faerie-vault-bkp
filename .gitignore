@@ -43,3 +43,69 @@ Thumbs.db
 
 # Node modules in plugins (build artifacts, never commit)
 .obsidian/plugins/*/node_modules/
+
+# ───────────────────────────────────────────────────────────────────────────
+# VAULT PURITY RULE — Markdown only, plus Obsidian settings/config.
+#
+# Anything that isn't .md (or under .obsidian/) is ignored by default.
+# Add explicit !-rules at the bottom for any deliberate exception
+# (e.g. an .excalidraw.md is a markdown wrapper and IS allowed because
+# it ends in .md). Non-readable files belong in a repo, not the vault.
+# ───────────────────────────────────────────────────────────────────────────
+
+# Ignore everything by default…
+*
+# …but keep all directories so we can descend
+!*/
+# …and explicitly allow only markdown files
+!*.md
+# …and the gitignore itself
+!.gitignore
+# …and Obsidian config (rules above already prune the noisy parts)
+!.obsidian/
+!.obsidian/**
+
+# Hard-deny anything else that managed to land
+*.canvas
+*.excalidraw
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.json
+*.jsonl
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.docx
+*.pptx
+*.html
+*.htm
+*.py
+*.sh
+*.js
+*.ts
+*.tsx
+*.jsx
+*.css
+*.yaml
+*.yml
+*.toml
+*.lock
+*.claim
+*.done
+*.mission
+*.bak
+*.log
+
+# Allow the deny-list to be overridden ONLY for the .obsidian config tree
+!.obsidian/**/*.json
+!.obsidian/**/*.css
+!.obsidian/**/*.js
+!.obsidian/**/*.html
