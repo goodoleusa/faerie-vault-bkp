@@ -1,0 +1,144 @@
+{
+  "_comment": "Faerie-canonical Obsidian Linter settings. Drop these values into .obsidian/plugins/obsidian-linter/data.json (merge, don't replace — preserve user-set fields). Optimized for: markdown links in frontmatter (not wikilinks), single-line inline arrays, multiple quote styles tolerated, relative paths with ../, Breadcrumbs hierarchy fields preserved untouched.",
+  "_format_examples_for_breadcrumbs": {
+    "_breadcrumbs_hierarchy_uses_NSEW_not_updown": "Faerie's canonical bearing vocabulary is N/S/E/W. Register N/S/E/W as the four Breadcrumbs hierarchy axes in .obsidian/plugins/breadcrumbs/data.json userHiers. Semantics: N=unblock(parent/prerequisite), S=ship(child/deliverable), E=parallel(sibling/sister), W=baseline(prev/anchor).",
+    "single_parent_N": "N: '[00 Home](00-Home.md)'",
+    "multiple_siblings_inline_E": "E: ['[01 Today](01-Today.md)', '[02 Missions](02-Missions-Emergent.md)']",
+    "ship_children_S": "S: ['[Anchor 003](anchor-003.md)', '[Anchor 004](anchor-004.md)']",
+    "baseline_W": "W: '[Anchor Base 2026-05-01](anchor-base-2026-05-01.md)'",
+    "cross_folder_relative": "N: '[Investigation Home](../Dashboards/00-Investigation-Home.md)'",
+    "double_quotes_also_ok": "S: \"[Anchor](03-Anchors.md)\"",
+    "note": "Linter must NOT touch these. Format is fully under faerie control. Wikilinks NOT used — markdown links are canonical for linter compatibility."
+  },
+  "ruleConfigs": {
+    "yaml-key-sort": {
+      "enabled": false,
+      "_why": "Sorting frontmatter keys reshuffles up/down/same/prev order which breaks navigation reading order."
+    },
+    "format-yaml-array": {
+      "enabled": true,
+      "default-array-style": "single-line",
+      "_why": "Default to inline arrays: down: [a, b, c] instead of multi-line. Per user preference.",
+      "force-single-line-array-style": [
+        "N", "S", "E", "W",
+        "tags", "aliases", "cssclasses",
+        "depends_on", "deliverables_address_prefix",
+        "intent_address", "actual_address", "cluster_prefix",
+        "trail", "discovered_work",
+        "authors", "references"
+      ],
+      "force-multi-line-array-style": [
+        "_never_force_multi"
+      ]
+    },
+    "escape-yaml-special-characters": {
+      "enabled": true,
+      "try-to-escape-single-line-arrays": false,
+      "_why": "Don't auto-escape — our values are deliberately formatted as markdown links and quoted paths. We do our own escaping."
+    },
+    "force-yaml-escape": {
+      "enabled": false,
+      "force-yaml-escape-keys": "",
+      "_why": "Off — would mangle our markdown-link frontmatter values."
+    },
+    "yaml-title": {
+      "enabled": false,
+      "_why": "Title is part of our schema; linter rewriting it would clobber our charter / dashboard title format."
+    },
+    "yaml-title-alias": {
+      "enabled": false
+    },
+    "insert-yaml-attributes": {
+      "enabled": false,
+      "_why": "We declare the full schema explicitly per dashboard / charter / manifest type. No auto-insertion."
+    },
+    "remove-yaml-keys": {
+      "enabled": false,
+      "_why": "Charters/manifests carry custom keys (charter_id, intent_address, etc) that the linter doesn't know. Removing them = data loss."
+    },
+    "move-tags-to-yaml": {
+      "enabled": true,
+      "how-to-handle-existing-tags": "Nothing"
+    },
+    "move-math-block-indicators-to-their-own-line": {
+      "enabled": false
+    },
+    "convert-bullet-list-markers": {
+      "enabled": true,
+      "_why": "Normalize body bullets to '-' but doesn't touch frontmatter."
+    },
+    "consecutive-blank-lines": {
+      "enabled": true
+    },
+    "trailing-spaces": {
+      "enabled": true,
+      "two-space-line-break": true
+    },
+    "heading-blank-lines": {
+      "enabled": true,
+      "bottom": true,
+      "empty-line-after-yaml": true
+    },
+    "no-bare-urls": {
+      "enabled": false,
+      "_why": "Off — our charters and manifests reference URLs verbatim and we want them bare in some contexts."
+    },
+    "remove-multiple-spaces": {
+      "enabled": true
+    },
+    "remove-consecutive-list-markers": {
+      "enabled": true
+    },
+    "remove-empty-list-markers": {
+      "enabled": true
+    },
+    "convert-spaces-to-tabs": {
+      "enabled": false,
+      "_why": "Keep spaces — Dataview tables break on tabs."
+    },
+    "rules-runner": {
+      "enabled": false
+    },
+    "format-tags-in-yaml": {
+      "enabled": true,
+      "_why": "Tags-only formatter; doesn't touch our hierarchy fields."
+    },
+    "add-blank-line-after-yaml": {
+      "enabled": true
+    },
+    "yaml-timestamp": {
+      "enabled": false,
+      "_why": "We control timestamps in frontmatter explicitly (created, eta, last_updated). Linter timestamps would race our values."
+    },
+    "force-rule-pattern": {
+      "enabled": false
+    }
+  },
+  "commonStyles": {
+    "aliasArrayStyle": "single-line",
+    "tagArrayStyle": "single-line",
+    "minimumNumberOfDollarSignsToBeAMathBlock": 2,
+    "escapeCharacter": "\""
+  },
+  "lintOnSave": true,
+  "displayChanged": false,
+  "foldersToIgnore": [
+    "forensics",
+    ".faerie-cache",
+    "Archive"
+  ],
+  "filesToIgnore": [],
+  "displayLintOnFileChangeNotice": false,
+  "lintOnFileChange": false,
+  "ruleConfigsForAnnotation": {
+    "_documentation": "When Linter encounters a faerie-flavored note (charter/manifest/dashboard), it should leave frontmatter alone except for the safe operations enabled above. Body markdown gets normalized; YAML hierarchy + custom keys are sacrosanct."
+  },
+  "_faerie_canon_notes": [
+    "Markdown links in frontmatter: up: '[Note](Note.md)' or up: \"[Note](path/to/Note.md)\". Single OR double quotes both fine.",
+    "Relative paths welcome: ../Other-Folder/Note.md works.",
+    "Inline arrays default: down: ['[A](A.md)', '[B](B.md)']. Multi-line only if explicitly preferred.",
+    "Reserved hierarchy fields: up, down, same, prev, next — keep these inline-array-formatted.",
+    "Reserved faerie fields (NEVER strip/rewrite): charter_id, charter_ref, intent_address, actual_address, cluster_prefix, alignment, trail, bearing, displacement, heading_start, heading_end.",
+    "Linter ignores forensics/ folder entirely (canonical record is sacred)."
+  ]
+}
