@@ -93,6 +93,37 @@ actions:
 
 ---
 
+## 💎 Lifecycle ladder
+
+> Read the crystals, not the volume. See [[../HELP/crystallization-workflow|crystallization workflow]].
+
+- 📌 **Today** — atomic notes: [[../Daily/_index|Daily/]]
+- 🗓️ **This week** — [[../Weekly/_index|Weekly digests]]
+- 📆 **This month** — [[../Monthly/_index|Monthly digests]]
+- ⚓ **Anchor set** — [[../Anchors/_index|Anchors/]] (permanent principles)
+- 🍯 **Honey droplets** — [[../Honey/_index|Honey/]] (crystallized memory)
+- 📜 **Charters** — [[../Charters/_index|Charters/]] (declared intent)
+
+```dataviewjs
+const today = new Date().toISOString().slice(0,10);
+const week = (() => {
+  const d = new Date(); d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  const wk = Math.ceil((((d - yearStart) / 86400000) + 1)/7);
+  return `${d.getUTCFullYear()}-W${String(wk).padStart(2,'0')}`;
+})();
+const month = today.slice(0,7);
+dv.table(['Tier','Pointer'], [
+  ['📌 Daily', `[[../Daily/${today}/_index|${today}]]`],
+  ['🗓️ Weekly', `[[../Weekly/${week}/_index|${week}]]`],
+  ['📆 Monthly', `[[../Monthly/${month}/_index|${month}]]`],
+  ['⚓ Anchors', '[[../Anchors/_index|view set]]'],
+  ['🍯 Honey', '[[../Honey/_index|view droplets]]'],
+]);
+```
+
+---
+
 ## FFFF (today)
 
 - **Findings:** see [[01-Today]]
