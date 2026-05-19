@@ -1,0 +1,3 @@
+[submodule ".obsidian/plugins/hive"]
+	path = .obsidian/plugins/hive
+	url = git@github.com:Persistech/swarmy-hive-plugin.git
