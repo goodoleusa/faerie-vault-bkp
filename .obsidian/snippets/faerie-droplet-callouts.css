@@ -1,0 +1,36 @@
+/* faerie-droplet-callouts.css — > [!droplet] amber teardrop styling
+ * 🍯 droplets are crystallized HONEY entries; render as amber teardrop block.
+ */
+
+.callout[data-callout="droplet"] {
+  --callout-color: 255, 179, 0;
+  --callout-icon: lucide-droplet;
+  background: linear-gradient(135deg, #FFD93D 0%, #FFB300 100%);
+  border-left: none;
+  border-radius: 0 60% 30% 30% / 0 30% 50% 30%;
+  padding: 16px 20px;
+  position: relative;
+}
+
+.callout[data-callout="droplet"] .callout-title {
+  color: #5c3a00;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.callout[data-callout="droplet"] .callout-title::before {
+  content: "🍯 ";
+}
+
+/* White highlight (single, top-left) */
+.callout[data-callout="droplet"]::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 14px;
+  width: 10px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  filter: blur(2px);
+}
