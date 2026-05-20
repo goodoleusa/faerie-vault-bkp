@@ -41,8 +41,8 @@ Thumbs.db
 .obsidian/plugins/share-note/data.json
 .obsidian/plugins/copilot/data.json
 
-# Node modules in plugins (build artifacts, never commit)
-.obsidian/plugins/*/node_modules/
+# Node modules anywhere — never commit, reinstall from package.json
+**/node_modules/
 
 # ───────────────────────────────────────────────────────────────────────────
 # VAULT PURITY RULE — Markdown only, plus Obsidian settings/config.
