@@ -13,16 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-SHARED/Dashboards/00-Home.md",
+                "file": "00-Publications/F0-ARXIV-SCAN-2026-05-24.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "00-Home"
+              "title": "F0-ARXIV-SCAN-2026-05-24"
             }
           }
-        ],
-        "currentTab": 0
+        ]
       }
     ],
     "direction": "vertical"
@@ -217,46 +216,48 @@
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
       "obsidian-excalidraw-plugin:New drawing": false,
-      "juggl:Juggl global graph": false
+      "juggl:Juggl global graph": false,
+      "obsidian42-brat:BRAT": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "6dafe77d10b34b53",
   "lastOpenFiles": [
-    "00-Inbox/55-EMERGENCE-AND-MUTATION-GLOSSARY.md",
-    "00-Inbox/88-DASHBOARD-ICON-GLOSSARY.md",
-    "00-Inbox/CT_VAULT/ct-vault/vault-org-linkage.excalidraw.json",
-    "00-Inbox/CT_VAULT/ct-vault/eval-report-faerie-T100.md",
-    "00-Inbox/CT_VAULT/ct-vault",
-    "00-Inbox/CT_VAULT/2026-04-29/01-baseline-eval-narrative.md",
-    "00-Inbox/CT_VAULT/2026-04-29",
-    "00-Inbox/CT_VAULT/2026-04-28/templates/settings-sync-check.md",
-    "00-Inbox/CT_VAULT/2026-04-28/templates/investigation-report.md",
-    "00-Inbox/CT_VAULT/2026-04-28/templates/deployment-log.md",
-    "00-Inbox/CT_VAULT/2026-04-28/templates/agent-update.md",
-    "00-Inbox/CT_VAULT/2026-04-28/templates",
-    "00-Inbox/CT_VAULT/2026-04-28/10-vault-maintenance.md",
-    "00-Inbox/CT_VAULT/2026-04-28/09-vault-architecture.md",
-    "00-Inbox/CT_VAULT/2026-04-28/08-documentation-governance.md",
-    "00-Inbox/CT_VAULT/2026-04-28/07-work-hierarchy-codex.md",
-    "00-Inbox/CT_VAULT/2026-04-28/06-investigation-id-governance.md",
-    "00-Inbox/CT_VAULT/2026-04-28/05-mcp-deployment-zimaboard.md",
-    "00-Inbox/CT_VAULT/2026-04-28/04-mcp-deployment-vps.md",
-    "00-Inbox/CT_VAULT/2026-04-28/03-mcp-server-architecture.md",
-    "00-Inbox/CT_VAULT/2026-04-28/02-settings-sync-strategy.md",
-    "00-Inbox/CT_VAULT/2026-04-28/01-forensic-governance.md",
-    "00-Inbox/CT_VAULT/2026-04-28/00-DASHBOARD.md",
-    "00-Inbox/CT_VAULT/2026-04-28",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING/2026-04-28-mathematical-formulas/README.md",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING/2026-04-28-mathematical-formulas/python-drop-ins.md",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING/2026-04-28-mathematical-formulas/implementation-roadmap.md",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING/2026-04-28-mathematical-formulas/formulas-proposed-11.md",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING/2026-04-28-mathematical-formulas/formulas-current-11.md",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING/2026-04-28-mathematical-formulas",
-    "00-Inbox/CT_VAULT/00-SHARED/ONBOARDING",
-    "00-Inbox/CT_VAULT/00-SHARED",
-    "00-Inbox/CT_VAULT",
-    "00-Inbox/faerie-vault/ONBOARDING/2026-04-29-b2-setup/B2-SETUP-CHECKLIST.md",
-    "00-Inbox/faerie-vault/ONBOARDING/2026-04-29-b2-setup",
-    "00-Inbox/faerie-vault/mission-graph/wave2-python-pro-forensic-result.md"
+    "MOBILE-OBSIDIAN-PREP.md",
+    "MOBILE-OBSIDIAN-PREP.md.tmp.1079.fc25cc7fa7ac",
+    "00-SHARED/Emergence-Formulas/sedq8frVK",
+    "00-SHARED/Emergence-Formulas/sedXjHPPd",
+    "00-SHARED/finalize/sedbefXio",
+    "00-Publications/sedEUeUxT",
+    "00-Inbox/sedi7oDoD",
+    "00-Publications/Ad Hoc Stigmergic System POTEMKIN-FAERIE-FIELD-REPORT.md",
+    "00-Publications/00-Anthropic Application STIGMERGY-FOR-AGENT-TEAMS.md",
+    "00-Publications/F0-ARXIV-SCAN-2026-05-24.md",
+    "00-SHARED/Dashboards/00-Home.md",
+    "00-SHARED/Dashboards/02-Missions-Emergent.md",
+    "00-SHARED/Dashboards/01-Today.md",
+    "00-Publications/2026-04-28/onboarding-substrate-template-new-models.md",
+    "00-Publications/2026-04-28/cultural-compatibility-gaps-and-fixes.md",
+    "00-Publications/2026-04-28/cost-breakdown-claude-vs-open-models.md",
+    "00-Publications/2026-04-28/182244Z_formula-audit-full-report_audit-formulas-w1.5_scout_001.md",
+    "00-Publications/2026-04-28/18-48-48Z_artifact_ffmx-forecast-function-spec_fixer-architecture_001.md",
+    "00-Publications/2026-04-28/18-46-45Z_artifact_wire-discovery-execution-pipeline_code-reviewer_001.md",
+    "00-Publications/2026-04-28/18-42-38Z_artifact_wire-discovery-execution-pipeline_fixer-architecture_001.md",
+    "00-Publications/2026-04-28/18-38-00Z_artifact_wire-formula-gates-w2_fixer-implementation_001.md",
+    "00-Publications/2026-04-28/150200Z_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md",
+    "00-Publications/2026-04-28/150055Z_artifact_blueprint-landscape-audit-findings_documentation-engineer_001.md",
+    "00-Publications/2026-04-28/150045Z_artifact_blueprint-landscape-audit-phase1_documentation-engineer_001.md",
+    "00-Publications/2026-04-28/15-42-01Z_bundle-compression-code-review_code-reviewer_002.md",
+    "00-Publications/2026-04-28/143502Z_bundle-compression-analysis_bundle-compression-v1_data-analyst_001.md",
+    "00-Publications/2026-04-28/142800Z_artifact_map-spawn-integration-w1_scout_001.md",
+    "00-Publications/2026-04-28/14-54-32Z_test-results_sdk-product_code-reviewer_001.md",
+    "00-Publications/2026-04-28/14-44-21Z_validation-framework_velocity-acceleration_data-analyst_001.md",
+    "00-Publications/2026-04-28/14-32-18Z_ffmx-comprehensive-report_force-multiplier-index_documentation-engineer_001.md",
+    "00-Publications/2026-04-28/14-44-21Z_validation-framework_velocity-acceleration_data-analyst_001.json",
+    "00-Publications/2026-04-28/053017Z_orchestration-velocity-audit_spawn-20260428-053017_code-reviewer_001.md",
+    "00-Publications/2026-04-28/04-52-03Z_rocket-physics-escape-velocity_force-multiplier-index_ai-engineer_001.md",
+    "00-Publications/2026-04-28",
+    "00-Publications",
+    "00-Inbox/CT_VAULT/ct-vault/vault-org-linkage.excalidraw.json"
   ]
 }

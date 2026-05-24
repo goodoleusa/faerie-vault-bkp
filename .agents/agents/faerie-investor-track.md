@@ -34,7 +34,7 @@ Always check these first:
 
 | Source | What It Provides |
 |--------|-----------------|
-| `80-Publications/ROUNDUP.md` | Executive summary |
+| `00-Publications/ROUNDUP.md` | Executive summary |
 | `00-SHARED/DAE-Evolution-Narrative.md` | Long-term vision |
 | `00-SHARED/PIPELINE-DESIGN.md` | Architecture value |
 | `docs/ENVIRONMENT-VARIABLES.md` | Technical setup cost |

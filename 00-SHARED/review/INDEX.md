@@ -18,8 +18,8 @@ east: [[../finalize]]
 
 | Doc | Focus |
 |-----|-------|
-| [[80-Publications/emergence-quality-metrics-system]] | Quality of emergence scoring |
-| [[80-Publications/canonical-emergence-metrics]] | Metrics definitions |
+| [[00-Publications/emergence-quality-metrics-system]] | Quality of emergence scoring |
+| [[00-Publications/canonical-emergence-metrics]] | Metrics definitions |
 
 ## Governance & Schema
 

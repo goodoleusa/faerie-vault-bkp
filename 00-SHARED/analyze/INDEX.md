@@ -18,9 +18,9 @@ south: [[../learn-explore]]
 
 | Doc | What it measures | Priority |
 |-----|-----------------|----------|
-| [[80-Publications/eval-report-2026-05-04]] | System eval, composite 0.797 | ⭐ PRIMARY |
-| [[80-Publications/emergence-quality-metrics-system]] | Emergence quality framework | ⭐ PRIMARY |
-| [[80-Publications/canonical-emergence-metrics]] | Canonical emergence metrics | Secondary |
+| [[00-Publications/eval-report-2026-05-04]] | System eval, composite 0.797 | ⭐ PRIMARY |
+| [[00-Publications/emergence-quality-metrics-system]] | Emergence quality framework | ⭐ PRIMARY |
+| [[00-Publications/canonical-emergence-metrics]] | Canonical emergence metrics | Secondary |
 
 ## Dimension Scores (from latest eval)
 

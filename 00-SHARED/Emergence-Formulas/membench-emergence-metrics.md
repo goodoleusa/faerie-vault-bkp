@@ -79,6 +79,6 @@ All three composites should be ≥ 0.70 for a healthy emergence session.
 ## References
 
 - [[canonical-emergence-metrics]] — FFMx formula + quality gates
-- [[80-Publications/emergence-quality-metrics-system]] — 6-gate release readiness framework
+- [[00-Publications/emergence-quality-metrics-system]] — 6-gate release readiness framework
 - HONEY.md mth00420-422 — crystallized formulas
 - eval_ab.py — H1/H2/H3 hypotheses using M3/M5/M12 signals

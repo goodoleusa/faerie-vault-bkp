@@ -1,0 +1,48 @@
+/* swarmy-palette.css — Master palette seed for all swarmy snippets.
+ * Prism-compatible: declares vars at :root, overrides --background-primary
+ * in .theme-light only (never touch --callout-blend-mode).
+ */
+
+:root {
+  /* Compass bearings */
+  --swarmy-jasper:    #C73E1D;  /* N — north red */
+  --swarmy-emerald:   #2E8540;  /* S — south green */
+  --swarmy-coral:     #FF8E3C;  /* E — east orange */
+  --swarmy-amber:     #FFB300;  /* W — west gold */
+
+  /* Structural */
+  --swarmy-parchment: #F9F1E0;
+  --swarmy-gold:      #D4A017;
+
+  /* Jewel tones — vaporwave palette */
+  --swarmy-amethyst:  #8B5CF6;
+  --swarmy-teal:      #0891B2;
+  --swarmy-crimson:   #DB2777;
+  --swarmy-green:     #059669;
+  --swarmy-amber2:    #D97706;
+
+  /* Text */
+  --swarmy-ink:       #2E1A47;
+  --swarmy-ink-soft:  #7C5CBF;
+}
+
+/* Apply warm ivory background in light mode */
+.theme-light {
+  --background-primary: #FDFAF5;
+  --background-primary-alt: #F5EFE6;
+  --background-secondary: #EDE9E0;
+}
+
+/* Custom hive callout */
+.callout[data-callout="hive"] {
+  --callout-color: 212, 160, 23;
+  --callout-icon: lucide-hexagon;
+}
+.callout[data-callout="honey"] {
+  --callout-color: 217, 119, 6;
+  --callout-icon: lucide-droplets;
+}
+.callout[data-callout="charter"] {
+  --callout-color: 199, 62, 29;
+  --callout-icon: lucide-scroll-text;
+}

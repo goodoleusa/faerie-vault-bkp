@@ -20,7 +20,7 @@ west: [[../finalize]]
 |---------------|-------|
 | Get started fast | → [[QUICKSTART]] |
 | Understand what faerie is | → [[00-SHARED/QUICKSTART]] |
-| Publications overview | → [[80-Publications/ROUNDUP]] |
+| Publications overview | → [[00-Publications/ROUNDUP]] |
 
 ## Key Insights (Quick)
 

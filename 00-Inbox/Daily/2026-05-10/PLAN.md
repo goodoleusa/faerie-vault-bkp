@@ -50,7 +50,7 @@ Build faerie2 into the **global OpenHands-equivalent config + SDK integration la
 
 | # | Task | Details |
 |---|------|---------|
-| 3.1 | **Define canonical paths** | Global config folder, vault folder(s), global forensics (`/mnt/d/0LOCAL/0forensics`), repo forensics (`forensics/`), eval data/reports, `80-Publications` (hot research outputs — emergence, membench, stigmergy, mutation, RAP, biological principles), WANDB project path, OpenRouter config path. |
+| 3.1 | **Define canonical paths** | Global config folder, vault folder(s), global forensics (`/mnt/d/0LOCAL/0forensics`), repo forensics (`forensics/`), eval data/reports, `00-Publications` (hot research outputs — emergence, membench, stigmergy, mutation, RAP, biological principles), WANDB project path, OpenRouter config path. |
 | 3.2 | **Create `.env.example`** | All path variables documented with defaults. Include: `FAERIE_REPO_ROOT`, `FAERIE_VAULT_ROOT`, `FAERIE_GLOBAL_CONFIG`, `FAERICS_GLOBAL_DIR`, `FAERIE_REPO_FORENSICS`, `FAERIE_EVAL_DATA_DIR`, `FAERIE_EVAL_REPORTS_DIR`, `FAERIE_PUBLICATIONS_DIR`, `FAERIE_WANDB_PROJECT`, `FAERIE_OPENROUTER_CONFIG`, `FAERIE_COC_DIR`, `FAERIE_SCRIPTS_DIR`, `FAERIE_MEMBENCH_DIR`. |
 | 3.3 | **Create `.env.local`** | Populated version (not committed). Actual paths for current machine. |
 | 3.4 | **Eval report canonical locations** | Eval reports write to BOTH: (a) repo `forensics/evals/` and (b) global `/mnt/d/0LOCAL/0forensics/evals/` (via symlink or dual-write). Same for COC entries. |
@@ -154,7 +154,7 @@ ZimaBoard LangChain (remote, via API)
 | `infrastructure/vps/` | **TO BE CREATED** — VPS deployment configs and startup scripts |
 | `forensics/` | Repo forensics (COC, evals, artifacts) |
 | `/mnt/d/0LOCAL/0forensics/` | Global forensics (mirrored/symlinked from repo) |
-| `/mnt/d/0local/gitrepos/faerie-vault/80-Publications/` | Hot research outputs (emergence, membench, stigmergy, mutation, RAP) |
+| `/mnt/d/0local/gitrepos/faerie-vault/00-Publications/` | Hot research outputs (emergence, membench, stigmergy, mutation, RAP) |
 | `/mnt/d/0local/gitrepos/faerie-vault/` | Vault root (investigation hub + findings archive) |
 
 ---

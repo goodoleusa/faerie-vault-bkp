@@ -35,7 +35,7 @@ Always check these first:
 | `03-Agents/Agent-Performance.md` | Performance data |
 | `00-SHARED/Dashboards/` | Live metrics |
 | `forensics/manifests/` | Raw agent outputs |
-| `80-Publications/*eval*.md` | Eval results |
+| `00-Publications/*eval*.md` | Eval results |
 
 ## Research Process
 

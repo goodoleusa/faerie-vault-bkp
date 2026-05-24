@@ -4,10 +4,19 @@
   "cssTheme": "Prism",
   "enabledCssSnippets": [
     "agent-formatting",
-    "compass-graph"
+    "compass-graph",
+    "swarmy-bearings",
+    "swarmy-charters",
+    "swarmy-droplet-callouts",
+    "swarmy-honeycomb-grid",
+    "swarmy-trail-dataview",
+    "swarmy-waggle-dance",
+    "swarmy-anchor-pin",
+    "swarmy-alignment-bullseye",
+    "swarmy-palette"
   ],
-  "interfaceFontFamily": "",
-  "textFontFamily": "",
-  "monospaceFontFamily": "",
+  "interfaceFontFamily": "DM Sans",
+  "textFontFamily": "Plus Jakarta Sans",
+  "monospaceFontFamily": "JetBrains Mono",
   "baseFontSizeAction": true
 }

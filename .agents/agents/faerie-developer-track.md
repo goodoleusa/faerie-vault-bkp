@@ -74,8 +74,8 @@ print(result)
 pip install faerie
 
 # Configure
-export FAERIE_REPO=/path/to/faerie2
-export FAERIE_VAULT=/path/to/faerie-vault
+export SWARMY_REPO=/path/to/faerie2
+export SWARMY_VAULT=/path/to/faerie-vault
 ```
 
 ## Integration Points

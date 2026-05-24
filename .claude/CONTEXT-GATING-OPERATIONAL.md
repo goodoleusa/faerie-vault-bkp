@@ -10,7 +10,7 @@
 
 Before: `/spawn --wave 1` allowed agents to launch at 85% context (violates WAVE_1_SPAWN_MAX_CONTEXT_PCT=70%). No presend gate. Users could spawn blind into compact zone.
 
-After: `/spawn` reads altimeter.json (current context %), reads faerie2-formulas.json wave thresholds, auto-gates wave, prevents RED ALERT spawns.
+After: `/spawn` reads altimeter.json (current context %), reads swarmy-formulas.json wave thresholds, auto-gates wave, prevents RED ALERT spawns.
 
 ---
 
@@ -18,7 +18,7 @@ After: `/spawn` reads altimeter.json (current context %), reads faerie2-formulas
 
 1. **User invokes:** `/spawn "analyze this" --wave 2`
 2. **read_altimeter()** fetches ~/.claude/altimeter.json → context_pct (live measurement)
-3. **read_formulas()** fetches faerie2-formulas.json → WAVE_*_SPAWN_MAX_CONTEXT_PCT thresholds
+3. **read_formulas()** fetches swarmy-formulas.json → WAVE_*_SPAWN_MAX_CONTEXT_PCT thresholds
 4. **auto_determine_wave()** applies gates:
    - If context < 70% → W1 LIFTOFF (cheap parallel haiku)
    - If 70% ≤ context < 80% → W2 CRUISE (selective haiku)
@@ -33,7 +33,7 @@ After: `/spawn` reads altimeter.json (current context %), reads faerie2-formulas
 
 **File:** `0x_spawn.py` (mth00106 implementation)  
 **Called by:** `/spawn` skill at invocation  
-**Read-only dependencies:** altimeter.json (Claude CLI metrics), faerie2-formulas.json (governance)  
+**Read-only dependencies:** altimeter.json (Claude CLI metrics), swarmy-formulas.json (governance)  
 **Output:** Wave selected, presend warning if violated, RED ALERT if imminent
 
 ---
@@ -54,7 +54,7 @@ After: `/spawn` reads altimeter.json (current context %), reads faerie2-formulas
 To adjust wave thresholds (e.g., test WAVE_1_SPAWN_MAX_CONTEXT_PCT = 75 instead of 70):
 
 1. **Measure baseline** (3 sessions at current 70%): cache_hit_rate, agents_parallelism, compact_frequency
-2. **Edit:** faerie2-formulas.json, change WAVE_1_SPAWN_MAX_CONTEXT_PCT.current to 75
+2. **Edit:** swarmy-formulas.json, change WAVE_1_SPAWN_MAX_CONTEXT_PCT.current to 75
 3. **Measure mutation** (3 sessions at new 75%): collect same metrics
 4. **Analyze:** Did cache_hit_rate improve? Did parallelism increase? Did compacts decrease?
 5. **Decision:** ACCEPT (update baseline to 75) | REVERT (baseline stays 70) | ITERATE (try 72%)
@@ -64,7 +64,7 @@ To adjust wave thresholds (e.g., test WAVE_1_SPAWN_MAX_CONTEXT_PCT = 75 instead 
 
 ## See Also
 
-- `faerie2-formulas.json` — All mutable parameters + baselines
+- `swarmy-formulas.json` — All mutable parameters + baselines
 - `0x_bundle_emission_pressure.sh` — Incentivizes agents to emit bundles when context >30% (paired equilibrium mechanism)
 - `/spawn` skill — User-facing interface
 - `MUTATION-CYCLE-GUIDE.md` (mth00087) — Framework for safe formula mutations

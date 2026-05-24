@@ -18,17 +18,17 @@ north: [[../review]]
 
 | Doc | Status | Use for |
 |-----|--------|---------|
-| [[80-Publications/ROUNDUP]] | ⭐ START HERE | Full publication index |
-| [[80-Publications/80-AUTONOMY-SYCOPHANCY-FRAMEWORK]] | Active | Core framework |
-| [[80-Publications/4x-RESEARCH-PAPER-OUTLINE]] | Active | Paper structure |
+| [[00-Publications/ROUNDUP]] | ⭐ START HERE | Full publication index |
+| [[00-Publications/80-AUTONOMY-SYCOPHANCY-FRAMEWORK]] | Active | Core framework |
+| [[00-Publications/4x-RESEARCH-PAPER-OUTLINE]] | Active | Paper structure |
 
 ## Research Papers
 
 | Doc | What's here |
 |-----|------------|
-| [[80-Publications/02-CANONICAL-GLOSSARY]] | Complete terminology |
-| [[80-Publications/03-CANONICAL-FAERIE-FORMULAS]] | Formula reference |
-| [[80-Publications/nectar-narrative]] | NECTAR explanation |
+| [[00-Publications/02-CANONICAL-GLOSSARY]] | Complete terminology |
+| [[00-Publications/03-CANONICAL-FAERIE-FORMULAS]] | Formula reference |
+| [[00-Publications/nectar-narrative]] | NECTAR explanation |
 
 ## Key Narratives
 

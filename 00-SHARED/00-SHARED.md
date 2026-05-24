@@ -51,7 +51,7 @@ west: [[finalize]]
 
 - **Quickstart:** → [[QUICKSTART]]
 - **Vault schema:** → [[VAULT-SCHEMA]]
-- **Publications:** → [[80-Publications/ROUNDUP]]
+- **Publications:** → [[00-Publications/ROUNDUP]]
 
 ---
 

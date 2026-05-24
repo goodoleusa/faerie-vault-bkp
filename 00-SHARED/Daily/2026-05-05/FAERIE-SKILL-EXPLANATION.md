@@ -292,4 +292,4 @@ These are future improvements, not core to "light + sticky" design.
 - [Fast Roundup Design](./FAERIE-SKILL-REFACTOR-SUMMARY.md) — technical deep-dive
 - [AGENTS.md Deprecation](./AGENTS-MD-DEPRECATION.md) — why we moved to manifests
 - [Forensics Architecture](./FORENSICS-ARCHITECTURE-CANONICAL.md) — artifact storage + paths
-- [Living Formulas](../faerie-vault/80-Publications/formula-living-system-narrative.md) — signal scoring
+- [Living Formulas](../faerie-vault/00-Publications/formula-living-system-narrative.md) — signal scoring

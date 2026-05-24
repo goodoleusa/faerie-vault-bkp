@@ -119,7 +119,7 @@ T=2: Scout B completes deeper work, emits their own bundle
 To adjust threshold (e.g., test BUNDLE_EMISSION_CONTEXT_THRESHOLD = 40 instead of 30):
 
 1. **Baseline (3 sessions at 30%):** bundles_emitted_per_agent, main_context_burden, discovery_speed
-2. **Edit:** faerie2-formulas.json, change to 40%
+2. **Edit:** swarmy-formulas.json, change to 40%
 3. **Mutation (3 sessions at 40%):** collect same metrics
 4. **Analyze:** Did more bundles emit? Did main context stay lighter? Did discovery slow?
 5. **Decision:** ACCEPT (higher threshold = even lighter main) | REVERT (30% is optimal)
@@ -128,7 +128,7 @@ To adjust threshold (e.g., test BUNDLE_EMISSION_CONTEXT_THRESHOLD = 40 instead o
 
 ## See Also
 
-- `faerie2-formulas.json` — BUNDLE_EMISSION_CONTEXT_THRESHOLD + all mutable parameters
+- `swarmy-formulas.json` — BUNDLE_EMISSION_CONTEXT_THRESHOLD + all mutable parameters
 - `0x_bundle_emission_pressure.sh` — Presend hook implementation
 - `SPAWNING-DISCIPLINE.md` (mth00090) — Agent autonomy + bundle emission
 - `CONTEXT-GATING-OPERATIONAL.md` (mth00106) — Wave gates (paired mechanism)

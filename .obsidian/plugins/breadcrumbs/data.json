@@ -12,13 +12,27 @@
     },
     {
       "label": "W"
+    },
+    {
+      "label": "blueprint"
+    },
+    {
+      "label": "mission"
+    },
+    {
+      "label": "charter_ref"
+    },
+    {
+      "label": "chain_prev"
     }
   ],
   "edge_field_groups": [
     {
       "label": "ups",
       "fields": [
-        "N"
+        "N",
+        "blueprint",
+        "charter_ref"
       ]
     },
     {
@@ -30,13 +44,15 @@
     {
       "label": "sames",
       "fields": [
-        "E"
+        "E",
+        "mission"
       ]
     },
     {
       "label": "prevs",
       "fields": [
-        "W"
+        "W",
+        "chain_prev"
       ]
     },
     {
@@ -50,6 +66,15 @@
         "S",
         "E",
         "W"
+      ]
+    },
+    {
+      "label": "system",
+      "fields": [
+        "blueprint",
+        "charter_ref",
+        "mission",
+        "chain_prev"
       ]
     }
   ],
@@ -140,6 +165,73 @@
         ],
         "close_field": "N",
         "close_reversed": true
+      },
+      {
+        "name": "blueprint-instance-co-sibling",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "blueprint"
+          },
+          {
+            "field": "blueprint"
+          }
+        ],
+        "close_field": "E",
+        "close_reversed": false
+      },
+      {
+        "name": "charter-ref-sibling",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "charter_ref"
+          },
+          {
+            "field": "charter_ref"
+          }
+        ],
+        "close_field": "E",
+        "close_reversed": false
+      },
+      {
+        "name": "mission-sibling",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "mission"
+          },
+          {
+            "field": "mission"
+          }
+        ],
+        "close_field": "E",
+        "close_reversed": false
+      },
+      {
+        "name": "chain-prev-inverse",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "chain_prev"
+          }
+        ],
+        "close_field": "S",
+        "close_reversed": true
+      },
+      {
+        "name": "niece-nephew",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "E"
+          },
+          {
+            "field": "S"
+          }
+        ],
+        "close_field": "N",
+        "close_reversed": false
       }
     ]
   },
@@ -336,7 +428,7 @@
     },
     "freeze_implied_edges": {
       "default_options": {
-        "destination": "frontmatter",
+        "destination": "dataview-inline",
         "included_fields": [],
         "use_alias": true
       }
@@ -372,7 +464,6 @@
     "E",
     "W"
   ],
-  "writeBCsInline": true,
   "_faerie_field_value_relations": [
     {
       "field": "charter_ref",

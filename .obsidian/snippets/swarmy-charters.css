@@ -1,0 +1,51 @@
+/* swarmy-charters.css — parchment frame for type: charter notes
+ * Jasper-red 4px outline + gold wax-seal corner per VISUAL-LANGUAGE.md.
+ */
+
+:root {
+  --swarmy-parchment: #F9F1E0;
+  --swarmy-gold: #D4A017;
+  --swarmy-jasper: #C73E1D;
+}
+
+/* Apply when YAML frontmatter `type: charter` is present.
+ * Prism + Obsidian expose this via body[data-type="charter"] when the
+ * Style Settings / metadata-class plugin is active. Falls back to class. */
+body[data-type="charter"] .markdown-preview-view,
+body[data-type="charter"] .markdown-source-view,
+.charter-frame {
+  background: var(--swarmy-parchment);
+  border: 4px solid var(--swarmy-jasper);
+  border-radius: 6px;
+  padding: 28px 32px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Gold wax seal — bottom-right corner */
+body[data-type="charter"] .markdown-preview-view::after,
+.charter-frame::after {
+  content: "";
+  position: absolute;
+  right: -14px;
+  bottom: -14px;
+  width: 56px;
+  height: 56px;
+  background: radial-gradient(circle at 35% 30%, #F4C430 0%, var(--swarmy-gold) 60%, #8B6914 100%);
+  border-radius: 50%;
+  border: 2px solid var(--swarmy-jasper);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Curled top-right corner (scroll motif) */
+body[data-type="charter"] .markdown-preview-view::before,
+.charter-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(225deg, var(--swarmy-parchment) 50%, var(--swarmy-jasper) 51%);
+  border-bottom-left-radius: 32px;
+}
