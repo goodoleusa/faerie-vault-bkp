@@ -223,6 +223,9 @@
   },
   "active": "6dafe77d10b34b53",
   "lastOpenFiles": [
+    "00-Publications/patent/SUPPORTING-DOCS.pdf",
+    "00-Publications/patent/SERVICE-LICENSE-AGREEMENT-DRAFT.pdf",
+    "00-Publications/patent/PATENT-APPLICATION-DRAFT.pdf",
     "00-Publications/whitepapers/forensic-coc-v2-rekor.md",
     "00-Publications/whitepapers/forensic-coc-v2-phase-1-kickoff.md",
     "00-Publications/whitepapers/forensic-coc-merkle-rollup-sidecars.md",
@@ -243,8 +246,6 @@
     "MOBILE-OBSIDIAN-PREP.md",
     "MOBILE-OBSIDIAN-PREP.md.tmp.1079.fc25cc7fa7ac",
     "00-SHARED/Emergence-Formulas/sedq8frVK",
-    "00-SHARED/Emergence-Formulas/sedXjHPPd",
-    "00-SHARED/finalize/sedbefXio",
     "00-Publications/Ad Hoc Stigmergic System POTEMKIN-FAERIE-FIELD-REPORT.md",
     "00-Publications/00-Anthropic Application STIGMERGY-FOR-AGENT-TEAMS.md",
     "00-Publications/F0-ARXIV-SCAN-2026-05-24.md",
@@ -261,7 +262,6 @@
     "00-Publications/2026-04-28/18-38-00Z_artifact_wire-formula-gates-w2_fixer-implementation_001.md",
     "00-Publications/2026-04-28/150200Z_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md",
     "00-Publications/2026-04-28/150055Z_artifact_blueprint-landscape-audit-findings_documentation-engineer_001.md",
-    "00-Publications/2026-04-28/150045Z_artifact_blueprint-landscape-audit-phase1_documentation-engineer_001.md",
-    "00-Publications/2026-04-28/15-42-01Z_bundle-compression-code-review_code-reviewer_002.md"
+    "00-Publications/2026-04-28/150045Z_artifact_blueprint-landscape-audit-phase1_documentation-engineer_001.md"
   ]
 }
