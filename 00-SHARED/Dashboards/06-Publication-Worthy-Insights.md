@@ -55,17 +55,17 @@ SORT file.name ASC
 
 | # | Title | Bar met |
 |---|---|---|
-| 1 | [[../../00-Publications/2026-05-21_catching-silent-failures-in-swarm-intelligence\|Catching Silent Failures in Swarm Intelligence]] | 2 (failure modes) + 3 (emergent property — agents gaslight themselves silently) |
-| 2 | [[../../00-Publications/2026-05-21_two-operating-modes-evo-vs-monkeybranching\|Two Operating Modes — Evo-wave vs Monkeybranching]] | 1 (operating mode principle) + 4 (deliberate design choice) |
-| 3 | [[../../00-Publications/2026-05-21_forensic-hybrid-ledger-architecture\|Forensic Hybrid Ledger Architecture]] | 1 (architectural principle: consensus tax) + 4 (full design reasoning) |
-| 4 | [[../../00-Publications/2026-05-21_charters-as-maps-and-journeys\|Charters as Maps and Journeys]] | 1 (charters = vision + journey, not TODO) |
-| 5 | [[../../00-Publications/2026-05-21_the-discipline-becomes-the-product\|The Discipline Becomes the Product]] | 1 (the rituals ARE the product) + 3 (emergent: tooling-for-self becomes product-for-others) |
-| 6 | [[../../00-Publications/2026-05-21_the-agent-caught-the-parent\|The Agent Caught the Parent]] | 5 (the system catching itself) + 3 (emergent: discipline flowing upward) |
-| 7 | [[../../00-Publications/2026-05-21_graceful-deprecation-queue-as-stigmergic-handoff\|Graceful Deprecation Queue]] | 1 (handoff primitive) — agent-authored |
-| 8 | [[../../00-Publications/2026-05-21_what-fifteen-agents-picked\|What Fifteen Agents Picked]] | 3 (early data from new ritual) + 4 (the choice tier system) |
-| 9 | [[../../00-Publications/2026-05-21_the-phases-inside-the-phase\|The Phases Inside the Phase]] | 1 (lifecycle is fractal across scopes) |
-| 10 | [[../../00-Publications/2026-05-21_the-first-goodbye\|The First Goodbye]] | 5 (agent agency in action) + 3 (emergent kind use) |
-| 11 | [[../../00-Publications/2026-05-21_session-metrics\|Session Metrics — 2026-05-21]] | 4 (the canonical metric snapshot, citable) |
+| 1 | [[2026-05-21_catching-silent-failures-in-swarm-intelligence\|Catching Silent Failures in Swarm Intelligence]] | 2 (failure modes) + 3 (emergent property — agents gaslight themselves silently) |
+| 2 | [[2026-05-21_two-operating-modes-evo-vs-monkeybranching\|Two Operating Modes — Evo-wave vs Monkeybranching]] | 1 (operating mode principle) + 4 (deliberate design choice) |
+| 3 | [[2026-05-21_forensic-hybrid-ledger-architecture\|Forensic Hybrid Ledger Architecture]] | 1 (architectural principle: consensus tax) + 4 (full design reasoning) |
+| 4 | [[2026-05-21_charters-as-maps-and-journeys\|Charters as Maps and Journeys]] | 1 (charters = vision + journey, not TODO) |
+| 5 | [[2026-05-21_the-discipline-becomes-the-product\|The Discipline Becomes the Product]] | 1 (the rituals ARE the product) + 3 (emergent: tooling-for-self becomes product-for-others) |
+| 6 | [[2026-05-21_the-agent-caught-the-parent\|The Agent Caught the Parent]] | 5 (the system catching itself) + 3 (emergent: discipline flowing upward) |
+| 7 | [[2026-05-21_graceful-deprecation-queue-as-stigmergic-handoff\|Graceful Deprecation Queue]] | 1 (handoff primitive) — agent-authored |
+| 8 | [[2026-05-21_what-fifteen-agents-picked\|What Fifteen Agents Picked]] | 3 (early data from new ritual) + 4 (the choice tier system) |
+| 9 | [[2026-05-21_the-phases-inside-the-phase\|The Phases Inside the Phase]] | 1 (lifecycle is fractal across scopes) |
+| 10 | [[2026-05-21_the-first-goodbye\|The First Goodbye]] | 5 (agent agency in action) + 3 (emergent kind use) |
+| 11 | [[2026-05-21_session-metrics\|Session Metrics — 2026-05-21]] | 4 (the canonical metric snapshot, citable) |
 
 ---
 

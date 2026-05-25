@@ -131,3 +131,41 @@ Base: CyberOps2. Supplements: CyberOps3 (design narrative), CyberOps1 (human mem
 - **For agents:** [[01-Memories/agents/AGENT-CONTEXT]] — Read at session start
 - **For investigation:** [[10-Investigations/_index]] — Investigation entry point
 - **For dead-drop ops:** [[ASYNC-COLLAB]] then [[03-Agents/skills/collab-protocol]]
+
+---
+
+## 00-Publications — Swarmy Research Suite (reorganized 2026-05-25)
+
+Topic-organized subfolder structure (45 loose files sorted into 9 subject folders):
+
+| Folder | Description |
+|--------|-------------|
+| `00-Publications/architecture/` | Forensic ledger, Merkle branches, hybrid-ledger, branching-merkle COC, forensic-coc-v2, decker-as-fullstack |
+| `00-Publications/agency/` | Agent autonomy, refusal-as-doctrine, lifecycle-vs-free-choice, what-agents-picked, first-art, first-goodbye |
+| `00-Publications/coordination/` | Stigmergy-for-agent-teams, two-modes, graceful-deprecation, catching-silent-failures, honey-mesh |
+| `00-Publications/evidence-chain/` | Court-admissible evidence, MEGA-REPORT token economics, retroactive-anchor, for-skeptics |
+| `00-Publications/narratives/` | Session essays: 14-hour-arc, discipline-becomes-product, agent-caught-parent, charters-as-maps, etc. |
+| `00-Publications/canonical/` | CANONICAL-GLOSSARY, CANONICAL-FAERIE-FORMULAS, emergence-metrics, formula-diagrams |
+| `00-Publications/field-reports/` | POTEMKIN-FAERIE-FIELD-REPORT, MONKEYBRANCHING-2-AGENT, ORCHESTRATOR-OBSERVATIONS |
+| `00-Publications/briefs/` | EXECUTIVE-BRIEFING-swarmy (Spray-D), BRIEF-forensic-stigmergy (Spray-E) |
+| `00-Publications/papers/` | arxiv-draft-forensic-stigmergy (Crystal), forensic-stigmergy-whitepaper (legacy) |
+| `00-Publications/_archive/` | Superseded: research-outline, eval-report, arxiv-scan, roundup |
+
+See `00-Publications/README.md` for full navigation guide.
+
+---
+
+## Blueprints — Unified Engine (2026-05-25)
+
+**Single engine:** hive plugin's bundled Nunjucks (`.njk`) — 87 templates.
+
+| Item | Location |
+|------|----------|
+| Template source (canonical) | `/mnt/d/0local/gitrepos/swarmy-hive-plugin/Blueprints/` |
+| Vault stub (user-overrides layer, empty) | `Blueprints/_README.md` |
+| Pre-unification archive (39 `.blueprint` files) | `_archive/Blueprints-20260525-pre-unification/` |
+| Audit record | `swarmy-hive-plugin/Blueprints/_AUDIT-2026-05-25.md` |
+
+**New substrate primitives (2026-05-25):** `Mission.njk`, `Shape.njk`, `Wave.njk` added to hive bundle.
+
+**Plugin status:** François Vaux `blueprint` plugin is now unused for swarmy templates. Operator may remove from Settings → Community plugins if not used for other vaults.

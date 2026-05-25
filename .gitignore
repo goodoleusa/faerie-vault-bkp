@@ -109,3 +109,11 @@ Thumbs.db
 !.obsidian/**/*.css
 !.obsidian/**/*.js
 !.obsidian/**/*.html
+
+# Inner vault Obsidian shell — content kept, app settings excluded
+00-SHARED/00-Inbox/vault/.obsidian/
+00-SHARED/00-Inbox/vault/.makemd/
+00-SHARED/00-Inbox/vault/.space/
+00-SHARED/00-Inbox/vault/FONT/
+00-SHARED/00-Inbox/vault/Tags/
+00-SHARED/00-Inbox/vault/99-Vault-Meta/
