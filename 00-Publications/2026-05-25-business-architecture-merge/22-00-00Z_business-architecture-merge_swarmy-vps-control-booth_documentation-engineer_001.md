@@ -117,8 +117,25 @@ A single hub at `swarmy.retrofuture.tech` with four mode tabs. Each tab is a thi
 ## Dev mode (live today; polish only)
 
 - OpenHands pair-edit (works)
-- Live preview pane (works for cybertemplate; add per-repo previews for `swarmy-ui` and any other in-flight project)
+- **Live preview pane via OH's built-in app-preview** (works; see "In-conversation preview vs sidecar" below). For any project type, the agent runs `npm run dev` / `astro dev` / equivalent inside the workspace; OH detects the open port and exposes it in the dev-apps sidebar of the shared conversation. Both humans on the same conversation see the same preview.
+- Sidecar containers + dedicated subdomains (today's `ct-dev.retrofuture.tech` pattern) remain the **opt-in external-share path**, not the default.
 - Agent-assist chat (works via chat-mvp)
+
+### In-conversation preview vs sidecar
+
+| Need | Use in-conversation preview | Use sidecar + subdomain |
+|:---|:---:|:---:|
+| Pair-coding for the two of us | ✅ default | — |
+| Show a client / stakeholder a live preview | — | ✅ |
+| Always-on staging that outlives a chat | — | ✅ |
+| Per-project per-conversation isolation | ✅ | — |
+| Zero extra DNS / Caddy config | ✅ | — |
+| Embeddable inside the future "Hive Room" product feature | ✅ (the primitive is already in OH) | — |
+
+Verified via `.agents/skills/openhands-sdk` SKILL.md §20 ("App preview ≠ browser tool"): OH's app preview is a port-watcher independent of the agent's browser tool. Two open questions to validate before Phase 1:
+
+1. Does OH proxy WebSocket upgrades to the sandboxed port? (Vite/Astro HMR needs this; if not, edits cause full reloads, not hot reloads.)
+2. Do two browsers on the same OH conversation see real-time-synced dev-apps sidebar state, or does each browser hold its own view?
 
 ## Sales / marketing mode (new build)
 
@@ -137,6 +154,32 @@ A single hub at `swarmy.retrofuture.tech` with four mode tabs. Each tab is a thi
 - Browse `faerie-vault` publications without leaving the booth
 - COC chain explorer — verify any artifact's hash lineage in two clicks
 - HONEY / NECTAR live view — what the system has crystallized recently
+
+# One domain, path-routed — simplification pass
+
+![Simplified domain](diagrams/06-simplified-domain.png)
+
+The current setup splits across at least two subdomains (`swarmy.retrofuture.tech`, `ct-dev.retrofuture.tech`) and would grow to 5+ under the original Phase 1–3 plan. **That's more DNS, more Caddy blocks, more OAuth gates, and more cognitive overhead than a 2-person team should carry.**
+
+Collapse to **one domain, path-routed**:
+
+| Path | What lives there | Auth |
+|:---|:---|:---|
+| `/` | Marketing / landing page | public |
+| `/app` | Customer-facing swarmy product | per-customer login |
+| `/booth` | Team control booth (dev / sales / ops / memory tabs) | GitHub OAuth (you + JescaLyn) |
+| `/booth/oh` | OpenHands editor (inside booth shell) | inherits booth auth |
+| `/share/{token}` | Short-lived external preview proxy (replaces `ct-dev.*`) | token-scoped, expires |
+| `/t/{tenant}` | Per-customer tenant routes for product instances | per-tenant |
+
+**Why this is simpler:**
+
+- Single Caddy block. Single TLS cert (or wildcard). Single OAuth gate at `/booth/*`.
+- No new DNS records when you add a project. New project = new path under `/booth`.
+- Per-project preview URLs disappear entirely — previews live in-conversation (OH dev-apps sidebar). The `/share/{token}` path covers the rare case where you need an external URL.
+- Customer tenants live under `/t/{tenant}/...` so adding a customer is one Caddy variable, not a DNS change.
+
+The original architectural merge plan below still holds — this section just collapses the *deployment surface* on top of it.
 
 # Architectural merge plan
 
@@ -184,6 +227,7 @@ This is the highest-leverage product extraction available: the thing you're alre
 - Most pair-coding tools are 2-human or human-agent, not human + agent swarm
 - The beekeeping metaphor gives every customer a stable mental model (capped/uncapped, hive/cell, nectar/honey)
 - Forensic COC means every shared session is *auditable* — a real selling point for regulated industries
+- **The live-preview primitive is already in OpenHands** — we are not building a preview engine, we are exposing one. That collapses the most expensive part of "Replit-like" feature scope to a UI wrapper.
 
 # Phased rollout
 
