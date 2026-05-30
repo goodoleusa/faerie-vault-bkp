@@ -1,0 +1,1523 @@
+# Manifest Signing Backfill Audit
+
+- Run at: `2026-05-25T15:48:37.851082+00:00`
+- Window: last `1` days (cutoff `2026-05-24T15:48:37.851082+00:00`)
+- Total manifests scanned: **279**
+  - In window: 49
+  - Older:     230
+
+## Summary by signing status
+
+| Status | Count | Note |
+|---|---|---|
+| signed (ed25519 valid form) | 36 | healthy lifecycle |
+| UNSIGNED_LEGACY | 0 | transition marker; leave as-is |
+| UNSIGNED_*_NO_KEY | 3 | provision the agent keypair to fix forward |
+| missing signed_by | 240 | lifecycle violation — inline-Write bypass |
+
+## NOT auto-backfilled (operator decision)
+
+This audit deliberately does not sign-and-promote unsigned manifests. Doing so would invalidate their COC chain (they were not sealed against their state at write time). Per-manifest the operator may:
+
+  1. Leave it (transition tier).
+  2. Stamp `signed_by: ed25519:UNSIGNED_LEGACY` to mark it permanently as pre-discipline (preserves chain provenance).
+  3. If the underlying work is reproducible: rewrite the manifest via `scripts/1a_manifest_writer.py` and let the writer auto-sign (creates a fresh chain entry).
+
+## missing (240)
+
+- `forensics/manifests/2026-05-24/2026-05-24T11-00-00Z__research-foundation-seal_documentation-engineer_pair-coding-completion.json` **[in window]**
+  - agent_type: `unknown`
+  - task_id:    `research-foundation-crystallization`
+  - mission:    `documentation.platform-narrative.crystallization`
+  - mtime:      `2026-05-24T23:49:16.852695+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/2026-05-24T10-30-00Z__agent-agency-research-program_documentation-engineer_pair-coding-completion.json` **[in window]**
+  - agent_type: `unknown`
+  - task_id:    `agent-agency-research-foundation`
+  - mission:    `research.agentic-cognition.autonomy-measurement`
+  - mtime:      `2026-05-24T23:48:02.388936+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/2026-05-24T09-45-00Z__readme-overhaul_documentation-engineer_pair-coding-completion.json` **[in window]**
+  - agent_type: `unknown`
+  - task_id:    `readme-overhaul-vision-threads`
+  - mission:    `documentation.platform-narrative.crystallization`
+  - mtime:      `2026-05-24T23:44:37.677831+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/23-33-25Z_manifest_swarmy-pair-coding-completion_P2-P3-EXECUTE.json` **[in window]**
+  - agent_type: `main`
+  - task_id:    `P2-P3-EXECUTE`
+  - mission:    `swarmy-pair-coding-completion`
+  - mtime:      `2026-05-24T23:37:22.367401+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/23-32-35Z_manifest_swarmy-pair-coding-completion_P4-P6-gh-roundtrip-prod-hardening.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `P4-P6-gh-roundtrip-prod-hardening`
+  - mission:    `swarmy-pair-coding-completion`
+  - mtime:      `2026-05-24T23:37:07.803254+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/23-20-44Z_manifest_swarmy-pair-coding-completion_cut-D-and-B.json` **[in window]**
+  - agent_type: `opus-main`
+  - task_id:    `cut-D-and-B-fast-evo`
+  - mission:    `swarmy-pair-coding-completion`
+  - mtime:      `2026-05-24T23:24:48.855079+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/23-10-39Z_manifest_swarmy-oh-unified_cut-F-shared-conv-relay.json` **[in window]**
+  - agent_type: `backend-engineer`
+  - task_id:    `cut-F-shared-conv-relay`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T23:15:11.237590+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T000000Z_manifest_swarmy-oh-unified_pair-session-layout.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `pair-session-layout-cut-A`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T23:08:26.823474+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/github-workflow-bridges/22-55-14Z_manifest_swarmy-oh-unified_github-workflow-bridges.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `github-workflow-bridges`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:59:04.668557+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/22-46-23Z_manifest_swarmy-oh-unified_creatures-v3-personality.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `creatures-v3-personality`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:50:09.942514+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T224318Z_manifest_swarmy-oh-unified_canvas-v3.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `canvas-v3`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:47:11.145272+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/chat-oh-wiring-fix/20260524T223141Z__manifest__chat.oh.wiring__swarmy-oh-unified__chat-oh-wiring-fix_general-purpose.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `chat-oh-wiring-fix`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:38:56.401306+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T223159Z_manifest_swarmy-oh-unified_mission-tab-declutter-v2_frontend-design.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `mission-tab-declutter-v2`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:35:58.537231+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/22-25-07Z_manifest_swarmy-oh-unified_mission-tab-declutter-v2.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `mission-tab-declutter-v2`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:29:02.016931+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T000000Z_manifest_swarmy-oh-unified_marriage-synthesis_knowledge-synthesizer.json` **[in window]**
+  - agent_type: `knowledge-synthesizer`
+  - task_id:    `marriage-synthesis-20260524`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T22:05:39.178392+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/21-38-56Z_manifest_swarmy-oh-unified_insights-tab-polish.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `insights-tab-polish-20260524`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T21:42:48.049662+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/120000Z_manifest_swarmy-oh-unified_recursive-canvas-edit-polish.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `recursive-canvas-edit-v2`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T21:26:35.765494+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T211852Z__stigmergic-field-viz-v1_frontend-design_swarmy-oh-unified_fe2d9a1b.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `stigmergic-field-viz-v1`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T21:22:45.813763+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T211619Z__swarmy-oh-chat_frontend-design_swarmy-oh-unified_sess01.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `swarmy-oh-chat`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T21:20:13.725510+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T194914Z__formula-playground_frontend-design_swarmy-oh-unified_pg01.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `formula-playground-v1`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T19:53:09.733230+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/19-42-24Z_manifest_swarmy-oh-unified_mission-steer-declutter.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `mission-steer-declutter-2026-05-24`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T19:46:23.210707+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T000000Z_manifest_swarmy-oh-unified_design-mode-suite_frontend-design.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `design-mode-suite`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T19:08:38.780046+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/18-57-00Z_manifest_swarmy-oh-unified_closed-loop-walker.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `closed-loop-walker`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T19:00:43.245522+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/210000Z_manifest_swarmy-oh-unified_cockpit-explanations.json` **[in window]**
+  - agent_type: `ai-engineer`
+  - task_id:    `formula-math-cockpit-explanations`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.239228+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524-231445Z__doctrinal-integration-pass-resolution__swarmy-oh-unified_doc-engineer__session-main.json` **[in window]**
+  - agent_type: `doc-engineer`
+  - task_id:    `doctrinal-integration-pass-resolution`
+  - mission:    `creatures.agency.bonds`
+  - mtime:      `2026-05-24T18:47:44.223977+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/183500Z_manifest_swarmy-oh-unified_formula-math.json` **[in window]**
+  - agent_type: `ai-engineer`
+  - task_id:    `formula-math-final`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.214884+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/18-13-40Z_manifest_swarmy-oh-unified_final-wave-caddy-infra.json` **[in window]**
+  - agent_type: `unknown`
+  - task_id:    `final-wave-caddy-infra`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.198981+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/18-04-48Z_manifest_swarmy-oh-unified_completion-choice-relay.json` **[in window]**
+  - agent_type: `relay-courier`
+  - task_id:    `completion-choice-relay`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.189070+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/18-01-20Z_manifest_swarmy-oh-unified_completion-choice-canonical.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `completion-choice-canon-2026-05-24`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.179221+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/170323Z_manifest_swarmy-oh-unified_frontend-design.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `swarmy-oh-unified-frontend-design-20260524T170323Z`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.167747+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/17-56-33Z_manifest_swarmy-oh-unified_session-potential.json` **[in window]**
+  - agent_type: `ai-engineer`
+  - task_id:    `session-potential`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.155108+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/17-43-12Z_manifest_swarmy-oh-unified_drive-hooks-C-hooks-final.json` **[in window]**
+  - agent_type: `main`
+  - task_id:    `swarmy-oh-unified-drive-hooks-C`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.142970+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/17-43-11Z_manifest_swarmy-oh-unified_drive-hooks-B-targets-meta.json` **[in window]**
+  - agent_type: `main`
+  - task_id:    `swarmy-oh-unified-drive-hooks-B`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.129032+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/17-43-10Z_manifest_swarmy-oh-unified_drive-hooks-A-formulas.json` **[in window]**
+  - agent_type: `main`
+  - task_id:    `swarmy-oh-unified-drive-hooks-A`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.119268+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/17-26-47Z_manifest_swarmy-oh-unified_mission-graph-api.json` **[in window]**
+  - agent_type: `fullstack-developer`
+  - task_id:    `mission-graph-api`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.104523+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/17-24-49Z_manifest_swarmy-oh-unified_files-created-discipline-update.json` **[in window]**
+  - agent_type: `doc-engineer`
+  - task_id:    `files-created-discipline-update`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.092482+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/16-52-33Z_manifest_swarmy-oh-unified_ai-engineer.json` **[in window]**
+  - agent_type: `ai-engineer`
+  - task_id:    `swarmy-oh-unified-ai-arch`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.084172+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/14-00-00Z_manifest_swarmy-oh-unified_final-wave-frontend-mount.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `final-wave-frontend-mount`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:47:44.072987+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/back-to-front-synthesis-blockers-2-5-6/20260524T183924Z__manifest__back-to-front-synthesis-blockers-2-5-6__swarmy-oh-unified_deprecation-rip-out_sess-final.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `back-to-front-synthesis-blockers-2-5-6`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:43:41.429251+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/back-to-front-synthesis-blockers-2-5-6/20260524T181813Z__manifest__back-to-front-synthesis-blockers-2-5-6__swarmy-oh-unified_final-wave-backend-mcp_sess-final.json` **[in window]**
+  - agent_type: `general-purpose`
+  - task_id:    `back-to-front-synthesis-blockers-2-5-6`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:22:22.413381+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T120000Z_manifest_swarmy-oh-unified_back-to-front-synthesis.json` **[in window]**
+  - agent_type: `knowledge-synthesizer`
+  - task_id:    `back-to-front-synthesis-20260524`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T18:08:46.551952+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-24/20260524T000000Z__pilot-cockpit-01_frontend-design_swarmy-oh-unified_sess01.json` **[in window]**
+  - agent_type: `frontend-design`
+  - task_id:    `pilot-cockpit-01`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T17:50:33.968574+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/swarmy-oh-unified-sdk-native/20260524T194500Z__manifest_swarmy-oh-unified-sdk-native_ai-engineer_swarmy-oh-unified_00000000.json` **[in window]**
+  - agent_type: `ai-engineer`
+  - task_id:    `swarmy-oh-unified-sdk-native`
+  - mission:    `swarmy-oh-unified`
+  - mtime:      `2026-05-24T17:49:07.497813+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/20260524T1830Z__manifest__stigmergic-scout__swarmy-unified__documentation-engineer.json` **[in window]**
+  - agent_type: `documentation-engineer`
+  - task_id:    `stigmergic-scout-agent-card`
+  - mission:    `stigmergic-scout.agent-card`
+  - mtime:      `2026-05-24T17:30:40.878993+00:00`
+  - reason:     malformed signed_by='agent:documentation-engineer'
+- `forensics/ephemeral/2026-05-23/20260524T000438Z__manifest__discipline.stack.completion__discipline-w2__authorship-check_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `authorship-check`
+  - mission:    `unknown`
+  - mtime:      `2026-05-24T00:08:26.165073+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/fold-cut/20260523T235756Z__manifest__consolidation.fold.cut__bulkheads-impl-w1__fold-cut_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `fold-cut`
+  - mission:    `consolidation.fold.cut`
+  - mtime:      `2026-05-24T00:01:44.204878+00:00`
+  - reason:     malformed signed_by='general-purpose'
+- `forensics/ephemeral/2026-05-23/crystal-momentum/20260523T235148Z__manifest__crystallization.momentum.loop__bulkheads-impl-w1__crystal-momentum_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `crystal-momentum`
+  - mission:    `crystallization.momentum.loop`
+  - mtime:      `2026-05-23T23:56:05.672990+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T233432Z__manifest__enterprise.patent.foundation__expedition-w1__file-persistence_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `file-persistence-20260523T233432Z`
+  - mission:    `enterprise.patent.foundation`
+  - mtime:      `2026-05-23T23:38:21.907182+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T23-29-33Z__manifest__bulkheads.implementation.cuts__bulkheads-impl-w1__bidirectional-sanitizer_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `bidirectional-sanitizer`
+  - mission:    `bulkheads.implementation.cuts`
+  - mtime:      `2026-05-23T23:33:50.209872+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T232939Z__manifest__bulkheads.implementation.cuts__bulkheads-impl-w1__detection-reputation-canary_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `detection-reputation-canary`
+  - mission:    `bulkheads.implementation.cuts`
+  - mtime:      `2026-05-23T23:33:43.012121+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T23-25-46Z__manifest__bulkheads.implementation.cuts__bulkheads-impl-w1__perimeter-audit_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `perimeter-audit`
+  - mission:    `bulkheads.implementation.cuts`
+  - mtime:      `2026-05-23T23:30:00.826951+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T224616Z__manifest__hooks.lean.wire__hooks-lean-w1__pre-bundle-validator_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `pre-bundle-validator-hooks-lean-w1`
+  - mission:    `unknown`
+  - mtime:      `2026-05-23T22:50:10.616025+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/20260523T180558Z__manifest__coc.v2.integration__coc-v2-w1__coc-integ-maker-p_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `coc-integ-maker-p`
+  - mission:    `merkle.rekor.anchor`
+  - mtime:      `2026-05-23T19:23:49.195482+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T180342Z__manifest__marry.ui.gaps__marry-w1__marry-ui-maker-b_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `marry-ui-maker-b`
+  - mission:    `marry.hive.canvas`
+  - mtime:      `2026-05-23T19:23:49.145512+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T18-54-27Z__manifest__precious.faerie.salvage__faerie-salvage-w1__faerie-family-analyzer_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `faerie-family-analyzer`
+  - mission:    `unknown`
+  - mtime:      `2026-05-23T19:23:49.135114+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T16-52-24Z__manifest__root.docs.update__roundup-w2__docs-update-maker-m_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `docs-update-maker-m`
+  - mission:    `root.docs.update`
+  - mtime:      `2026-05-23T19:23:01.821505+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T150948Z__manifest__charter.consolidation__roundup-w1__charter-cleanup-maker-g_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `charter-cleanup-maker-g`
+  - mission:    `charter.consolidation`
+  - mtime:      `2026-05-23T19:22:46.181585+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T15-11-00Z__manifest__deploy.verify__roundup-w1__deploy-verify-maker-i_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `deploy-verify-maker-i`
+  - mission:    `deploy.verify`
+  - mtime:      `2026-05-23T19:22:46.155481+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/scripts-skills-relationship/20260523T190004Z__manifest__precious.faerie.salvage__faerie-salvage-w1__scripts-skills-relationship_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `scripts-skills-relationship`
+  - mission:    `unknown`
+  - mtime:      `2026-05-23T19:08:16.751230+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/oh-integration-plan/20260523T185733Z__manifest__precious.faerie.salvage__faerie-salvage-w1__oh-integration-plan_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `oh-integration-plan`
+  - mission:    `precious.faerie.salvage`
+  - mtime:      `2026-05-23T19:03:09.294199+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T185534Z__manifest__precious.faerie.salvage__faerie-salvage-w1__hooks-agents-recovery_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `hooks-agents-recovery`
+  - mission:    `unknown`
+  - mtime:      `2026-05-23T19:02:55.518525+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/bundle-bridge/20260523T185531Z__manifest__precious.faerie.salvage__faerie-salvage-w1__bundle-bridge_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `bundle-bridge`
+  - mission:    `unknown`
+  - mtime:      `2026-05-23T19:01:13.507876+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T180700Z__manifest__manifest.conv.id.stamp__marry-w1__manifest-conv-id-maker-a_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `manifest-conv-id-maker-a`
+  - mission:    `marry.hive.canvas`
+  - mtime:      `2026-05-23T18:10:29.233396+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/20260523T180430Z__manifest__marry.oh.adapter__marry-w1__marry-adapter-maker-c_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `marry-adapter-maker-c`
+  - mission:    `marry.hive.canvas`
+  - mtime:      `2026-05-23T18:08:20.348924+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-24/20260523T180309Z__manifest__coc.v2.data.layer__coc-v2-w1__coc-data-maker-o_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `coc-data-maker-o`
+  - mission:    `merkle.rekor.anchor`
+  - mtime:      `2026-05-23T18:06:51.441214+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T160000Z__manifest__faerie.to.swarmy.rename__roundup-w2__rename-maker-k_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `faerie-to-swarmy-rename-maker-k`
+  - mission:    `faerie.to.swarmy.rename`
+  - mtime:      `2026-05-23T17:11:35.336452+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T165702Z__manifest__swarmy.skill.fluency__roundup-w2__skill-fluency-maker-l_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `skill-fluency-maker-l`
+  - mission:    `swarmy.skill.fluency`
+  - mtime:      `2026-05-23T16:57:24.005600+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T165142Z__manifest__sister.repo.commits__roundup-w2__sister-repo-commits-maker-n_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `sister-repo-commits-maker-n`
+  - mission:    `sister.repo.commits`
+  - mtime:      `2026-05-23T16:55:21.910731+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T151200Z__manifest__script.renumber__roundup-w1__script-renumber-maker-j_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `script-renumber-maker-j`
+  - mission:    `script.renumber`
+  - mtime:      `2026-05-23T15:27:08.781806+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/20260523T151002Z__manifest__mcp.stress.test__roundup-w1__mcp-stress-maker-h_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `mcp-stress-maker-h`
+  - mission:    `mcp.stress.test`
+  - mtime:      `2026-05-23T15:13:39.030993+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T01-57-00Z__manifest__canvas.oh.bridge__hive-foundation-w2__canvas-bridge_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `canvas-oh-bridge-maker-e`
+  - mission:    `hive-pair-coding-foundation`
+  - mtime:      `2026-05-23T01:57:46.323000+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T01-52-47Z__manifest__swarmy.rollout__hive-foundation-w2__sister-repo-rollout-maker-f_general-purpose.json`
+  - agent_type: `general-purpose`
+  - task_id:    `hive-foundation-w2-maker-f-sister-repo-rollout`
+  - mission:    `swarmy.rollout`
+  - mtime:      `2026-05-23T01:57:00.977731+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T01-46-30Z__manifest__dev.script.hardening__hive-foundation-w1__script-hardening-maker-b_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `script-hardening-maker-b`
+  - mission:    `dev.script.hardening`
+  - mtime:      `2026-05-23T01:46:08.954828+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-23/2026-05-23T01-41-04Z__manifest__swarmy.cross.project__hive-foundation-w1__cross-project-maker-c_general-purpose.json`
+  - agent_type: `unknown`
+  - task_id:    `cross-project-maker-c`
+  - mission:    `swarmy.cross.project`
+  - mtime:      `2026-05-23T01:44:47.814253+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-22/charter-sealing-wave/2026-05-22T165152Z__manifest_charter-sealing-wave_openhands-agent_charter-discipline_05-22.json`
+  - agent_type: `openhands-agent`
+  - task_id:    `charter-sealing-wave`
+  - mission:    `charter-discipline`
+  - mtime:      `2026-05-22T16:55:14.622998+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-22/docker-rename-oh-native-01/20260522T000000Z__docker-rename-oh-native-01_manifest_make-it-unbreakable_oh-session.json`
+  - agent_type: `maker`
+  - task_id:    `docker-rename-oh-native-01`
+  - mission:    `make-it-unbreakable`
+  - mtime:      `2026-05-22T14:49:42.726918+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/harness-integration-3-observables-01/2026-05-22T022403Z__manifest_harness-integration-3-observables-01_maker_harness-coc-mission-graph-eval-metrics_05-21.json`
+  - agent_type: `maker`
+  - task_id:    `harness-integration-3-observables-01`
+  - mission:    `harness-coc-mission-graph-eval-metrics`
+  - mtime:      `2026-05-22T02:28:19.808570+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/smoke_test_manifest.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-22T00:45:15.105859+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/archive/2026-05-03_charter_faerie-system-tweak_ARCHIVED.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-faerie-charter-preReg-schema`
+  - mtime:      `2026-05-22T00:45:15.073387+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/charter-coc-archival-20260504.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-coc-archival`
+  - mtime:      `2026-05-22T00:45:15.049606+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/2026-05-03_charter_faerie-ffmx-loops.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-faerie-ffmx-loops`
+  - mtime:      `2026-05-22T00:45:15.028707+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/2026-05-03_charter_dual-output-implementation.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-dual-output-implementation`
+  - mtime:      `2026-05-22T00:45:15.008786+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-03/manifest_scripts-consolidation-validation_code-reviewer_002.json`
+  - agent_type: `unknown`
+  - task_id:    `scripts-consolidation-deep-dive-validation`
+  - mission:    `mission-scripts-evolutionary-consolidation`
+  - mtime:      `2026-05-22T00:45:14.971936+00:00`
+  - reason:     no signer/agent_type field
+- `forensics/ephemeral/2026-05-21/evo-cleanup-gha-rename-stubs-01/2026-05-21T171509Z__manifest_evo-cleanup-gha-rename-stubs-01_general-purpose_swarmy-rename-and-cleanup_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `evo-cleanup-gha-rename-stubs-01`
+  - mission:    `swarmy-rename-and-cleanup`
+  - mtime:      `2026-05-21T17:19:38.452056+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/charter-schema-audit-and-fix-01/2026-05-21T171136Z__manifest_charter-schema-audit-and-fix-01_deep-diver_charter-schema-compliance_05-21.json`
+  - agent_type: `deep-diver`
+  - task_id:    `charter-schema-audit-and-fix-01`
+  - mission:    `charter-schema-compliance`
+  - mtime:      `2026-05-21T17:14:58.392763+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/mcp-server-battle-ready-and-oh-loop-close-01/2026-05-21T170914Z__manifest_mcp-server-battle-ready-and-oh-loop-close-01_general-purpose_mcp-server-battle-ready_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `mcp-server-battle-ready-and-oh-loop-close-01`
+  - mission:    `mcp-server-battle-ready`
+  - mtime:      `2026-05-21T17:12:45.302449+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/propagate-charter-discipline-to-system-docs-01/2026-05-21T165654Z__manifest_propagate-charter-discipline-to-system-docs-01_general-purpose_swarmy-production-runway_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `propagate-charter-discipline-to-system-docs-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T17:00:16.507344+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/spawn-and-charter-discipline-close-the-loop-01/2026-05-21T165135Z__manifest_spawn-and-charter-discipline-close-the-loop-01_general-purpose_swarmy-production-runway_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `spawn-and-charter-discipline-close-the-loop-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:54:57.586395+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-21/2026-05-21T165135Z__manifest_spawn-and-charter-discipline-close-the-loop-01_general-purpose_swarmy-production-runway_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `spawn-and-charter-discipline-close-the-loop-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:54:57.586395+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/formula-coverage-gaps-and-adaptation-kind-01/20260521T164126Z__manifest_formula-coverage-gaps-and-adaptation-kind-01_general-purpose_swarmy-production-runway_7165cb1f.json`
+  - agent_type: `general-purpose`
+  - task_id:    `formula-coverage-gaps-and-adaptation-kind-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:42:10.888479+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/formulas-extract-and-eval-loader-wire-01/20260521T163632Z__manifest_formulas-extract-and-eval-loader-wire-01_general-purpose_swarmy-production-runway_a1b2c3d4.json`
+  - agent_type: `general-purpose`
+  - task_id:    `formulas-extract-and-eval-loader-wire-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:40:45.680761+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/schemas-consolidation-into-one-place-01/20260521T162509Z__manifest_schemas-consolidation-into-one-place-01_general-purpose_swarmy-production-runway_qe01.json`
+  - agent_type: `general-purpose`
+  - task_id:    `schemas-consolidation-into-one-place-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:32:22.832325+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/wire-completion-choice-into-manifest-writer-01/2026-05-21T161848Z__manifest_wire-completion-choice-into-manifest-writer-01_general-purpose_agent.agency.citation-and-coc-chain-discipline.schema-lock_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `wire-completion-choice-into-manifest-writer-01`
+  - mission:    `agent.agency.citation-and-coc-chain-discipline.schema-lock`
+  - mtime:      `2026-05-21T16:22:10.442734+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/wire-completion-choice-into-manifest-writer-01/2026-05-21T161044Z__manifest_wire-completion-choice-into-manifest-writer-01_general-purpose_agent.agency.completion-ritual.three-families.thirteen-kinds_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `wire-completion-choice-into-manifest-writer-01`
+  - mission:    `agent.agency.completion-ritual.three-families.thirteen-kinds`
+  - mtime:      `2026-05-21T16:14:06.865229+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/neutralize-6choices-language-skills-01/20260521T160151Z__manifest_neutralize-6choices-language-skills-01_general-purpose_swarmy-production-runway_s8f3a2c1.json`
+  - agent_type: `general-purpose`
+  - task_id:    `neutralize-6choices-language-skills-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:05:47.146628+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/wire-completion-choice-into-manifest-writer-01/2026-05-21T160151Z__manifest_wire-completion-choice-into-manifest-writer-01_general-purpose_swarmy-production-runway_05-21.json`
+  - agent_type: `general-purpose`
+  - task_id:    `wire-completion-choice-into-manifest-writer-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:05:13.479334+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/restore-agent-agency-canonical-doc-01/20260521T160120Z__manifest_restore-agent-agency-canonical-doc-01_general-purpose_swarmy-production-runway_navshipa.json`
+  - agent_type: `general-purpose`
+  - task_id:    `restore-agent-agency-canonical-doc-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T16:05:04.418829+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/quick-evo-wandb-and-bugs-02/20260521T153535Z__manifest_quick-evo-wandb-and-bugs-02_general-purpose_swarmy-production-runway_qewb02s8.json`
+  - agent_type: `general-purpose`
+  - task_id:    `quick-evo-wandb-and-bugs-02`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T15:39:24.959495+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/quick-evo-env-metrics-charter-01/20260521T153000Z__manifest_quick-evo-env-metrics-charter-01_general-purpose_swarmy-production-runway_qev01.json`
+  - agent_type: `general-purpose`
+  - task_id:    `quick-evo-env-metrics-charter-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T15:29:48.653688+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/env-overhaul-and-vault-cleanup-01/20260521T151325Z__manifest_env-overhaul-and-vault-cleanup-01_general-purpose_swarmy-production-runway_01d53d96.json`
+  - agent_type: `general-purpose`
+  - task_id:    `env-overhaul-and-vault-cleanup-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T15:17:23.357341+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/forensics-13-to-10-consolidation-01/20260521T151142Z__manifest_forensics-13-to-10-consolidation-01_general-purpose_swarmy-production-runway_6b97c800.json`
+  - agent_type: `general-purpose`
+  - task_id:    `forensics-13-to-10-consolidation-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T15:15:29.301482+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-21/script-consolidation-pass-01/20260521T151051Z__manifest_script-consolidation-pass-01_general-purpose_swarmy-production-runway_sess-cons01.json`
+  - agent_type: `general-purpose`
+  - task_id:    `script-consolidation-pass-01`
+  - mission:    `swarmy-production-runway`
+  - mtime:      `2026-05-21T15:14:43.376748+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/skills-audit/skills-profile-evidence/_manifest__sweep.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-21T02:20:06.164386+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-16/23-28-21Z_manifest_faerie-agent_roundup-on-repo-progress--navigator-01_NAVIGATOR_001_sweep.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-21T02:20:05.535510+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-16/23-28-04Z_manifest_faerie-agent_roundup-on-repo-progress--navigator-01_NAVIGATOR_001_sweep.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-21T02:20:05.502138+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/eval-scripts-tier-promotion-01/20260521T020121Z__manifest_eval-scripts-tier-promotion-01_general-purpose_the-hive-vibe-code-collab_5ebae050.json`
+  - agent_type: `general-purpose`
+  - task_id:    `eval-scripts-tier-promotion-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T02:13:12.805182+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/eval-harness-canonical-decision-01/20260521T020220Z__manifest_eval-harness-canonical-decision-01_general-purpose_the-hive-vibe-code-collab_a1b2c3d4.json`
+  - agent_type: `general-purpose`
+  - task_id:    `eval-harness-canonical-decision-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T02:06:10.545269+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/oh-microagents-doctrine-01/20260520T200000Z__manifest_oh-microagents-doctrine-01_general-purpose_the-hive-vibe-code-collab_a1b2c3d4.json`
+  - agent_type: `general-purpose`
+  - task_id:    `oh-microagents-doctrine-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:42:02.479691+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/f0-discipline-hooks-01/20260520T013300Z__manifest_f0-discipline-hooks-01_general-purpose_the-hive-vibe-code-collab_f7bd420d.json`
+  - agent_type: `general-purpose`
+  - task_id:    `f0-discipline-hooks-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:36:16.190442+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/claude-to-openhands-migration-audit-01/20260520T214500Z__manifest_claude-to-openhands-migration-audit-01_general-purpose_the-hive-vibe-code-collab_audit01.json`
+  - agent_type: `general-purpose`
+  - task_id:    `claude-to-openhands-migration-audit-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:21:05.270669+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/emergence-metrics-01/20260521T011434Z__manifest_emergence-metrics-01_data-analyst_the-hive-vibe-code-collab_c09cd4bd.json`
+  - agent_type: `data-analyst`
+  - task_id:    `emergence-metrics-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:20:20.766181+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/formulas-audit-01/20260520T181530Z__manifest_formulas-audit-01_documentation-engineer_the-hive-vibe-code-collab_a1b2c3d4.json`
+  - agent_type: `documentation-engineer`
+  - task_id:    `formulas-audit-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:19:46.853806+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/openhands-backbone-max-01/20260521T011932Z__manifest_openhands-backbone-max-01_ai-engineer_the-hive-vibe-code-collab_551ef54f.json`
+  - agent_type: `ai-engineer`
+  - task_id:    `openhands-backbone-max-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:19:43.810241+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/f0console-tweaker-01/20260521T011244Z__manifest_f0console-tweaker-01_frontend-design_the-hive-vibe-code-collab_f0c01244.json`
+  - agent_type: `frontend-design`
+  - task_id:    `f0console-tweaker-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:16:23.927872+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/vibe-sim-and-mcp-01/20260521T010940Z__manifest_vibe-sim-and-mcp-01_general-purpose_the-hive-vibe-code-collab_op47ses8.json`
+  - agent_type: `general-purpose`
+  - task_id:    `vibe-sim-and-mcp-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:13:18.426787+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/breadcrumbs-sync-01/20260521T010903Z__manifest_breadcrumbs-sync-01_general-purpose_the-hive-vibe-code-collab_dd8c6014.json`
+  - agent_type: `general-purpose`
+  - task_id:    `breadcrumbs-sync-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:12:58.589605+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/swarmlive-wire-01/20260520T120000Z__manifest_swarmlive-wire-01_frontend-design_the-hive-vibe-code-collab_a1b2c3d4.json`
+  - agent_type: `frontend-design`
+  - task_id:    `swarmlive-wire-01`
+  - mission:    `the-hive-vibe-code-collab`
+  - mtime:      `2026-05-21T01:12:46.364718+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/dir-prune-20260520/20260520T000000Z__manifest_forensics-dir-prune_doc-consolidator_dir-prune-20260520.json`
+  - agent_type: `unknown`
+  - task_id:    `dir-prune-20260520`
+  - mission:    `forensics-pruning`
+  - mtime:      `2026-05-20T22:31:34.476379+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-20/maker-mcp-consolidation-01/20260520T000000Z__manifest_maker-mcp-consolidation-01_MAKER_collapse-the-sprawl_05-20.json`
+  - agent_type: `unknown`
+  - task_id:    `maker-mcp-consolidation-01`
+  - mission:    `collapse-the-sprawl`
+  - mtime:      `2026-05-20T16:29:58.076154+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-16/23-28-21Z_manifest_faerie-agent_roundup-on-repo-progress--navigator-01_NAVIGATOR_001.json`
+  - agent_type: `unknown`
+  - task_id:    `roundup-on-repo-progress--navigator-01`
+  - mission:    `roundup on repo progress towards deploying to vps full prod ship`
+  - mtime:      `2026-05-17T01:41:44.957939+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-16/23-28-04Z_manifest_faerie-agent_roundup-on-repo-progress--navigator-01_NAVIGATOR_001.json`
+  - agent_type: `unknown`
+  - task_id:    `roundup-on-repo-progress--navigator-01`
+  - mission:    `roundup on repo progress towards deploying to vps full prod ship`
+  - mtime:      `2026-05-17T01:41:44.943784+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/mission-architecture-enforcement/2026-04-29T09:05:00Z_manifest_mission-architecture-enforcement-agent4_data-analyst_90cf29.json`
+  - agent_type: `data-analyst`
+  - task_id:    `mission-architecture-enforcement-agent4`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T15:21:07.817934+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/phase-2-synthesis-readiness-manifest.json`
+  - agent_type: `unknown`
+  - task_id:    `phase-2-synthesis-readiness`
+  - mission:    `mission-eval-mutation-attack`
+  - mtime:      `2026-05-15T14:37:53.293016+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/manifest-index-crystallization-vault-streaming-20260504.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:37:53.113897+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/dev-eval-vault-integration-20260504.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-dev-eval-vault-integration`
+  - mtime:      `2026-05-15T14:37:53.100856+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/2026-05-03_daily_charter.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:37:53.036627+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/2026-05-03_charter_unified-dashboard.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-unified-dashboard`
+  - mtime:      `2026-05-15T14:37:52.961905+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/2026-05-03_charter_mission-honey-collab-surface.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `mission-honey-collab-surface`
+  - mtime:      `2026-05-15T14:37:52.868382+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/charters/active/2026-05-02_daily_charter.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:37:52.701749+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/mission-dev-eval-vault-integration-manifest.json`
+  - agent_type: `unknown`
+  - task_id:    `vault-folder-structure`
+  - mission:    `mission-dev-eval-vault-integration`
+  - mtime:      `2026-05-15T14:37:41.281189+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/test-script-audit/2026-05-04T095330Z__manifest_test-script-audit_documentation-engineer_faerie-architecture-optimization_05-04.json`
+  - agent_type: `documentation-engineer`
+  - task_id:    `test-script-audit`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:14.845856+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/test-parallel-work/2026-05-04T095330Z__manifest_test-parallel-work_fullstack-developer_mission-spawn-cost_05-04.json`
+  - agent_type: `fullstack-developer`
+  - task_id:    `test-parallel-work`
+  - mission:    `mission-spawn-cost`
+  - mtime:      `2026-05-15T14:36:14.666211+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/test-invalid/2026-05-04T095330Z__manifest_test-invalid_python-pro_unmissioned_05-04.json`
+  - agent_type: `python-pro`
+  - task_id:    `test-invalid`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:36:13.907584+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/test-eval-harness-fix/2026-05-04T095330Z__manifest_test-eval-harness-fix_python-pro_mission-eval-health_05-04.json`
+  - agent_type: `python-pro`
+  - task_id:    `test-eval-harness-fix`
+  - mission:    `mission-eval-health`
+  - mtime:      `2026-05-15T14:36:13.888737+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/test-blocker-discovery/2026-05-04T095330Z__manifest_test-blocker-discovery_security-auditor_mission-eval-health_05-04.json`
+  - agent_type: `security-auditor`
+  - task_id:    `test-blocker-discovery`
+  - mission:    `mission-eval-health`
+  - mtime:      `2026-05-15T14:36:13.503114+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/test-baseline-reseating/2026-05-04T095330Z__manifest_test-baseline-reseating_research-analyst_mission-eval-health_05-04.json`
+  - agent_type: `research-analyst`
+  - task_id:    `test-baseline-reseating`
+  - mission:    `mission-eval-health`
+  - mtime:      `2026-05-15T14:36:13.417920+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/semantic-tagging-framework-delivery/2026-05-04T095330Z__manifest_semantic-tagging-framework-delivery_python-pro_faerie-architecture-optimization_05-04.json`
+  - agent_type: `python-pro`
+  - task_id:    `semantic-tagging-framework-delivery`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:10.259525+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/script-ecosystem-audit/2026-05-04T095330Z__manifest_script-ecosystem-audit_documentation-engineer_infrastructure-audit_05-04.json`
+  - agent_type: `documentation-engineer`
+  - task_id:    `script-ecosystem-audit`
+  - mission:    `infrastructure-audit`
+  - mtime:      `2026-05-15T14:36:10.153458+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-publication-expansion/integration_manifest_python-pro_20260504w2.json`
+  - agent_type: `python-pro`
+  - task_id:    `pub-integration-architect-001`
+  - mission:    `mission-publication-expansion`
+  - mtime:      `2026-05-15T14:36:09.336567+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-metrics-close-gap/2026-05-04T095330Z__manifest_spawn-20260504-005531_unknown_mission-metrics-close-gap_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `spawn-20260504-005531`
+  - mission:    `mission-metrics-close-gap`
+  - mtime:      `2026-05-15T14:36:09.068464+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-metrics-close-gap/2026-05-04T095330Z__manifest_code-review-metrics-integration_code-reviewer_mission-metrics-close-gap_05-04.json`
+  - agent_type: `code-reviewer`
+  - task_id:    `code-review-metrics-integration`
+  - mission:    `mission-metrics-close-gap`
+  - mtime:      `2026-05-15T14:36:09.056105+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-mcp-chat-mvp/20260504_manifest_mission-mcp-chat-mvp_fullstack-developer.json`
+  - agent_type: `unknown`
+  - task_id:    `mcp-chat-mvp-shipping`
+  - mission:    `mission-mcp-chat-mvp`
+  - mtime:      `2026-05-15T14:36:09.041472+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-mcp-chat-mvp/2026-05-04T095330Z__manifest_mcp-chat-mvp-shipping_unknown_mission-mcp-chat-mvp_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `mcp-chat-mvp-shipping`
+  - mission:    `mission-mcp-chat-mvp`
+  - mtime:      `2026-05-15T14:36:09.031343+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-mcp-chat-mvp/2026-05-04T095330Z__manifest_mcp-chat-mvp-ship_unknown_mission-mcp-chat-mvp_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `mcp-chat-mvp-ship`
+  - mission:    `mission-mcp-chat-mvp`
+  - mtime:      `2026-05-15T14:36:09.020033+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-mcp-chat-mvp/2026-05-04T095330Z__manifest_bridge-doc-synthesis-mcp-chat-mvp-20260504_unknown_mission-mcp-chat-mvp_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `bridge-doc-synthesis-mcp-chat-mvp-20260504`
+  - mission:    `mission-mcp-chat-mvp`
+  - mtime:      `2026-05-15T14:36:09.006612+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-graph-viz-wire/2026-05-04T095330Z__manifest_spawn-20260504-005939_unknown_mission-graph-viz-wire_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `spawn-20260504-005939`
+  - mission:    `mission-graph-viz-wire`
+  - mtime:      `2026-05-15T14:36:08.974876+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-ffmx-formula-activation/2026-05-04T095330Z__manifest_ffmx-formula-activation_unknown_mission-ffmx-formula-activation_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-formula-activation`
+  - mission:    `mission-ffmx-formula-activation`
+  - mtime:      `2026-05-15T14:36:08.949336+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-ffmx-baseline-t0/2026-05-04T095330Z__manifest_baseline-capture-t0_unknown_mission-ffmx-baseline-t0_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `baseline-capture-t0`
+  - mission:    `mission-ffmx-baseline-t0`
+  - mtime:      `2026-05-15T14:36:08.888423+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-divergence-reconciliation/2026-05-04T095330Z__manifest_mcp-divergence-synthesis_knowledge-synthesizer_mission-divergence-reconciliation_05-04.json`
+  - agent_type: `knowledge-synthesizer`
+  - task_id:    `mcp-divergence-synthesis`
+  - mission:    `mission-divergence-reconciliation`
+  - mtime:      `2026-05-15T14:36:08.607091+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-divergence-reconciliation/2026-05-04T095330Z__manifest_mcp-consolidation-roadmap_fullstack-developer_mission-divergence-reconciliation_05-04.json`
+  - agent_type: `fullstack-developer`
+  - task_id:    `mcp-consolidation-roadmap`
+  - mission:    `mission-divergence-reconciliation`
+  - mtime:      `2026-05-15T14:36:08.596085+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-coc-b2-worm-consolidation/2026-05-04T095330Z__manifest_consolidation-20260504-b2-backup-audit_python-pro_mission-coc-b2-worm-consolidation_05-04.json`
+  - agent_type: `python-pro`
+  - task_id:    `consolidation-20260504-b2-backup-audit`
+  - mission:    `mission-coc-b2-worm-consolidation`
+  - mtime:      `2026-05-15T14:36:08.372561+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/mission-coc-b2-worm-consolidation/2026-05-04T095330Z__manifest_bucket-taxonomy-and-metrics_unknown_mission-coc-b2-worm-consolidation_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `bucket-taxonomy-and-metrics`
+  - mission:    `mission-coc-b2-worm-consolidation`
+  - mtime:      `2026-05-15T14:36:08.223706+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/ffmx-cross-session-synthesis/2026-05-04T095330Z__manifest_ffmx-cross-session-synthesis_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-cross-session-synthesis`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:07.895461+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/ffmx-blocker-analysis/2026-05-04T095330Z__manifest_ffmx-blocker-analysis_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-blocker-analysis`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:07.710831+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/2026-05-04T095330Z__manifest_phase-1d-integration-validation_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `phase-1d-integration-validation`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:07.306272+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/2026-05-04T095330Z__manifest_phase-1c-manifest-loading-from-forensics_fullstack-developer_maximize-ffmx_05-04.json`
+  - agent_type: `fullstack-developer`
+  - task_id:    `phase-1c-manifest-loading-from-forensics`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:06.900033+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/2026-05-04T095330Z__manifest_maker-phase-1c-clustering-validator_python-pro_faerie-architecture-optimization_05-04.json`
+  - agent_type: `python-pro`
+  - task_id:    `maker-phase-1c-clustering-validator`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:06.745014+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/2026-05-04T095329Z__manifest_ffmx-membench-coupling-analysis_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-membench-coupling-analysis`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:06.532579+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/maximize-ffmx/2026-05-04T095329Z__manifest_bridge-phase-1c-contracts-synthesis_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `bridge-phase-1c-contracts-synthesis`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:06.321426+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/fullstack-infrastructure-scan/2026-05-04T095329Z__manifest_fullstack-infrastructure-scan_fullstack-developer_mission-brief-system-completion_05-04.json`
+  - agent_type: `fullstack-developer`
+  - task_id:    `fullstack-infrastructure-scan`
+  - mission:    `mission-brief-system-completion`
+  - mtime:      `2026-05-15T14:36:05.098073+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/ffmx-round2-blocker-deep-validation/2026-05-04T095329Z__manifest_ffmx-round2-blocker-deep-validation_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-round2-blocker-deep-validation`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:04.470256+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/ffmx-quick-implementation/2026-05-04T095329Z__manifest_ffmx-quick-implementation_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-quick-implementation`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:04.429242+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/faerie-architecture-optimization/2026-05-04T095329Z__manifest_maker-ffmx-fix-phase-1b-skeleton_unknown_faerie-architecture-optimization_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `maker-ffmx-fix-phase-1b-skeleton`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:04.373306+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/faerie-architecture-optimization/2026-05-04T095329Z__manifest_ks-ffmx-cluster-synthesis_unknown_faerie-architecture-optimization_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ks-ffmx-cluster-synthesis`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:04.360873+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/faerie-architecture-optimization/2026-05-04T095329Z__manifest_knowledge-synthesizer-ffmx-definition_unknown_faerie-architecture-optimization_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `knowledge-synthesizer-ffmx-definition`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:04.345610+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/faerie-architecture-optimization/2026-05-04T095329Z__manifest_ffmx-metric-scope-fix-phase1b_unknown_faerie-architecture-optimization_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-metric-scope-fix-phase1b`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:04.327215+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/faerie-architecture-optimization/2026-05-04T095329Z__manifest_ffmx-definition-fix-phase1b-clustering_unknown_faerie-architecture-optimization_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `ffmx-definition-fix-phase1b-clustering`
+  - mission:    `faerie-architecture-optimization`
+  - mtime:      `2026-05-15T14:36:04.317453+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/eval-dims-assessment/2026-05-04T095329Z__manifest_eval-dims-E-F-G-assessment_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `eval-dims-E-F-G-assessment`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:04.240057+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/doc-crystallization-faerie2/2026-05-04T152300Z__manifest_knowledge-synthesizer-doc-crystallization-final_knowledge-synthesizer_doc-crystallization-faerie2_20260504w1.json`
+  - agent_type: `unknown`
+  - task_id:    `knowledge-synthesizer-doc-crystallization`
+  - mission:    `doc-crystallization-faerie2`
+  - mtime:      `2026-05-15T14:36:03.893825+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/doc-crystallization-faerie2/2026-05-04T151000Z__manifest_knowledge-synthesizer-doc-crystallization_knowledge-synthesizer_doc-crystallization-faerie2_20260504w1.json`
+  - agent_type: `unknown`
+  - task_id:    `knowledge-synthesizer-doc-crystallization`
+  - mission:    `doc-crystallization-faerie2`
+  - mtime:      `2026-05-15T14:36:03.761669+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/diagnostic-manifest-audit/2026-05-04T095329Z__manifest_r1-manifest-corpus-validation_unknown_maximize-ffmx_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `r1-manifest-corpus-validation`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:36:03.518206+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/backfill-discovered-work-mission-field/2026-05-04T095329Z__manifest_backfill-discovered-work-mission-field_unknown_mission-routing-unblock_05-04.json`
+  - agent_type: `unknown`
+  - task_id:    `backfill-discovered-work-mission-field`
+  - mission:    `mission-routing-unblock`
+  - mtime:      `2026-05-15T14:35:55.109782+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/2026-05-04T095329Z__manifest_mission-brief-system-completion_ai-engineer_mission-brief-system-completion_05-04.json`
+  - agent_type: `ai-engineer`
+  - task_id:    `mission-brief-system-completion`
+  - mission:    `mission-brief-system-completion`
+  - mtime:      `2026-05-15T14:35:54.979069+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-04/2026-05-04T095329Z__manifest_mission-brief-system-completion-charters_ai-engineer_mission-brief-system-completion_05-04.json`
+  - agent_type: `ai-engineer`
+  - task_id:    `mission-brief-system-completion-charters`
+  - mission:    `mission-brief-system-completion`
+  - mtime:      `2026-05-15T14:35:54.968576+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/wire-router-spawn-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `wire-router-spawn`
+  - mission:    `model-router-integration`
+  - mtime:      `2026-05-15T14:35:54.912035+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/wire-ffmx-formula_manifest_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `wire-ffmx-formula`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:54.901437+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/wire-bundle-emission-result_manifest_python-pro.json`
+  - agent_type: `python-pro`
+  - task_id:    `wire-bundle-emission`
+  - mission:    `mission-hive-infrastructure`
+  - mtime:      `2026-05-15T14:35:54.892805+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/wire-0x-hooks-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `wire-0x-hooks`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:54.883404+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/wave2-multimodel-research/wave2-multimodel-result_manifest_ai-engineer.json`
+  - agent_type: `unknown`
+  - task_id:    `wave2-multimodel-research`
+  - mission:    `mission-faerie-multi-model`
+  - mtime:      `2026-05-15T14:35:54.837857+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/wave2-coc-deletions-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:54.803549+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/velocity-audit-result_manifest_python-pro.json`
+  - agent_type: `python-pro`
+  - task_id:    `velocity-audit-sprint-013`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:54.742930+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/vault-naming-conv/16-04-27Z_manifest_vault-naming-conv_python-pro_001.json`
+  - agent_type: `python-pro`
+  - task_id:    `vault-naming-conv`
+  - mission:    `mission-vault-naming-convention`
+  - mtime:      `2026-05-15T14:35:54.733421+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/update-charters-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:54.447252+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/skills-audit/skills-statistical-analysis/_manifest_.json`
+  - agent_type: `unknown`
+  - task_id:    `skills-statistical-analysis`
+  - mission:    `skills-crystallization-audit`
+  - mtime:      `2026-05-15T14:35:54.356010+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/skills-audit/skills-profile-evidence/_manifest_.json`
+  - agent_type: `unknown`
+  - task_id:    `skills-profile-evidence`
+  - mission:    `skills-crystallization-audit`
+  - mtime:      `2026-05-15T14:35:54.323419+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/skills-audit/skills-crystallization-synthesis/_manifest_.json`
+  - agent_type: `unknown`
+  - task_id:    `skills-crystallization-synthesis`
+  - mission:    `skills-crystallization-audit`
+  - mtime:      `2026-05-15T14:35:54.290589+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/skills-audit/skills-code-quality-review/_manifest_.json`
+  - agent_type: `unknown`
+  - task_id:    `skills-code-quality-review`
+  - mission:    `skills-crystallization-audit`
+  - mtime:      `2026-05-15T14:35:54.266984+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/persist-glossary-result_manifest_documentation-engineer.json`
+  - agent_type: `unknown`
+  - task_id:    `persist-glossary-result`
+  - mission:    `documentation-infrastructure`
+  - mtime:      `2026-05-15T14:35:54.219860+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-mission-graph-exploration/synthesis-momentum-plan_manifest_.json`
+  - agent_type: `unknown`
+  - task_id:    `synthesis-momentum-plan`
+  - mission:    `mission-mission-graph-exploration`
+  - mtime:      `2026-05-15T14:35:53.745039+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-mission-graph-exploration/frontier-scan-analysis_manifest_.json`
+  - agent_type: `unknown`
+  - task_id:    `frontier-scan-analysis`
+  - mission:    `mission-mission-graph-exploration`
+  - mtime:      `2026-05-15T14:35:53.725068+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-liftoff-agent-roster-lock/evidence-analyst-baseline-validation_manifest_navigator_20260503w1.json`
+  - agent_type: `unknown`
+  - task_id:    `evidence-analyst-baseline-validation`
+  - mission:    `mission-liftoff-agent-roster-lock`
+  - mtime:      `2026-05-15T14:35:53.621887+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-graph-velocity-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `mission-graph-velocity-tracker`
+  - mission:    `faerie-observability-enhancement`
+  - mtime:      `2026-05-15T14:35:53.441744+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-faerie-mcp-ui-shipping/20260503-183001_manifest_code-review-shipping_code-reviewer.json`
+  - agent_type: `unknown`
+  - task_id:    `code-review-shipping`
+  - mission:    `mission-faerie-mcp-ui-shipping`
+  - mtime:      `2026-05-15T14:35:53.223137+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-faerie-mcp-ui-shipping/2026-05-03T182500Z_manifest_mission-faerie-mcp-ui-shipping_fullstack-developer.json`
+  - agent_type: `unknown`
+  - task_id:    `fullstack-ui-shipping`
+  - mission:    `mission-faerie-mcp-ui-shipping`
+  - mtime:      `2026-05-15T14:35:53.205235+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-faerie-ffmx-loops/2026-05-03T18-13-18.922703Z_manifest_mission-faerie-ffmx-loops_data-scientist_w1.json`
+  - agent_type: `unknown`
+  - task_id:    `mission-faerie-ffmx-synthesis-w1`
+  - mission:    `mission-faerie-ffmx-loops`
+  - mtime:      `2026-05-15T14:35:53.160660+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-faerie-emergence-loop/wire-postwaveeval-hook_manifest_wire-postwaveeval-hook_emergence-agent_001.json`
+  - agent_type: `unknown`
+  - task_id:    `wire-postwaveeval-hook`
+  - mission:    `mission-faerie-emergence-loop`
+  - mtime:      `2026-05-15T14:35:53.147382+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-faerie-emergence-loop/184851_manifest_wave-eval-capture-184851_wave-eval_ephemeral.json`
+  - agent_type: `unknown`
+  - task_id:    `wave-eval-capture-184851`
+  - mission:    `mission-faerie-emergence-loop`
+  - mtime:      `2026-05-15T14:35:53.124824+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/mission-faerie-emergence-loop/184819_manifest_wave-eval-capture-184819_wave-eval_ephemeral.json`
+  - agent_type: `unknown`
+  - task_id:    `wave-eval-capture-184819`
+  - mission:    `mission-faerie-emergence-loop`
+  - mtime:      `2026-05-15T14:35:53.116001+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/merge-output-pressure-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `merge-output-pressure-result`
+  - mission:    `eval-harness-extension`
+  - mtime:      `2026-05-15T14:35:52.901142+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/litellm-phase2-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `litellm-phase2-implementation`
+  - mission:    `mission-faerie-model-agnostic`
+  - mtime:      `2026-05-15T14:35:52.828607+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/handoff-body-update-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:52.775687+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/git-commit-retry-result_manifest_git-workflow.json`
+  - agent_type: `unknown`
+  - task_id:    `git-commit-retry-session-220525`
+  - mission:    `repository-maintenance`
+  - mtime:      `2026-05-15T14:35:52.767825+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/fix-liftoff-gate-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:52.746046+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/fix-charter-coc-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `fix-charter-coc-write-protection`
+  - mission:    `mission-faerie-coc-architecture`
+  - mtime:      `2026-05-15T14:35:52.737005+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/eval-baseline-capture-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `eval-baseline-capture-T0`
+  - mission:    `ffmx-w2-improvements`
+  - mtime:      `2026-05-15T14:35:52.720266+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/emergence-regression-diagnosis_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `emergence-regression-diagnosis`
+  - mission:    `emergence-health-regression-diagnosis`
+  - mtime:      `2026-05-15T14:35:52.693385+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/discovery-mandate-fix-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:35:52.127874+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/charter-orientation/16-11-14Z_manifest_charter-orientation_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `charter-orientation`
+  - mission:    `mission-charter-orientation-wiring`
+  - mtime:      `2026-05-15T14:33:48.624817+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/charter-faerie-sync-wiring/21-57-59Z_manifest_charter-faerie-sync-wiring_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `charter-faerie-sync-wiring`
+  - mission:    `mission-system-infrastructure-phase-c`
+  - mtime:      `2026-05-15T14:33:48.602272+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/charter-coc-migration/16-08-54Z_manifest_charter-coc-migration_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `charter-coc-migration`
+  - mission:    `mission-charter-coc-migration`
+  - mtime:      `2026-05-15T14:33:48.581159+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/bundle-template-snapshot-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `bundle-template-snapshot-v1`
+  - mission:    `mutation-discipline`
+  - mtime:      `2026-05-15T14:33:48.558067+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/agent-card-roster-result_manifest_python-pro.json`
+  - agent_type: `unknown`
+  - task_id:    `agent-card-roster-result`
+  - mission:    `model-router-documentation`
+  - mtime:      `2026-05-15T14:33:48.516584+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-05-03/adversarial-bundle-review_manifest_code-reviewer.json`
+  - agent_type: `unknown`
+  - task_id:    `adversarial-bundle-review`
+  - mission:    `system-emergence-audit`
+  - mtime:      `2026-05-15T14:33:48.471759+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-30/vault-frontmatter-coc-sync/1523-00Z_manifest_vault-frontmatter-coc-sync_data-analyst.json`
+  - agent_type: `unknown`
+  - task_id:    `vault-frontmatter-coc-sync`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:33:39.278526+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-30/vault-frontmatter-coc-sync-code-reviewer/18-08-48Z_manifest_vault-frontmatter-coc-sync_code-reviewer.json`
+  - agent_type: `unknown`
+  - task_id:    `vault-frontmatter-coc-sync`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:33:39.246054+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-30/mfw-protocol-update-1777601001/20260430_manifest_mfw-protocol-update_code-reviewer_session0.json`
+  - agent_type: `unknown`
+  - task_id:    `mfw-protocol-update`
+  - mission:    `mission-field-wire`
+  - mtime:      `2026-05-15T14:33:38.658620+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/vault-shipping-readiness/231340Z_manifest_vault-shipping-readiness_data-engineer_001.json`
+  - agent_type: `unknown`
+  - task_id:    `vault-shipping-readiness`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:54.622908+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/tags-migration-backfill/22-30-00Z_manifest_tags-migration-backfill_code-reviewer_001.json`
+  - agent_type: `unknown`
+  - task_id:    `tags-migration-backfill`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:54.228989+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/script-equilibrium-audit/23-14-36Z_manifest_script-equilibrium-audit_script-auditor_001.json`
+  - agent_type: `unknown`
+  - task_id:    `script-equilibrium-audit`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:54.180335+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/mission-architecture-enforcement/_manifest_mission-architecture-enforcement.json`
+  - agent_type: `knowledge-synthesizer`
+  - task_id:    `mission-architecture-enforcement`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:53.805807+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/hook-stdin-test/17-00-01Z_manifest_hook-stdin-test_scout_001.json`
+  - agent_type: `unknown`
+  - task_id:    `hook-stdin-test`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:53.415622+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/forensics-promotion-debug/22-18-48Z_manifest_forensics-promotion-debug_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `forensics-promotion-debug`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:53.401858+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/forensics-hook-audit/manifests/22-25-00Z_manifest_forensics-hook-audit_code-reviewer_001.json`
+  - agent_type: `code-reviewer`
+  - task_id:    `forensics-hook-audit`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:53.397306+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/forensics-backfill-misrouted/22-20-28Z_manifest_forensics-backfill-misrouted_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `forensics-backfill-misrouted`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:53.379038+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/eval-runs/22-58-20Z_manifest_smoke-phase-a-001_orchestrator_001.json`
+  - agent_type: `unknown`
+  - task_id:    `smoke-phase-a-001`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:50.887893+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/eval-comparison-baseline-rerun/23-14-32Z_manifest_eval-comparison-baseline-rerun_mlops-engineer_001.json`
+  - agent_type: `unknown`
+  - task_id:    `eval-comparison-baseline-rerun`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:50.832654+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/debug-test2/12-34-56Z_manifest_debug-task_scout_001.json`
+  - agent_type: `unknown`
+  - task_id:    `forensics-promotion-debug`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:50.755876+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/coc-promote-record-stale-symlink-replacement/2026-04-29T23-45-00Z_manifest_coc-promote-record-stale-symlink-replacement_python-pro_001.json`
+  - agent_type: `python-pro`
+  - task_id:    `coc-promote-record-stale-symlink-replacement`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:50.603128+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/coc-promote-add-flock/2026-04-29T23-45-00Z_manifest_coc-promote-add-flock_python-pro_001.json`
+  - agent_type: `python-pro`
+  - task_id:    `coc-promote-add-flock`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:50.598719+00:00`
+  - reason:     no signed_by field
+- `forensics/ephemeral/2026-04-29/benchmark-v2-intake/22-45-00Z_manifest_benchmark-v2-intake_python-pro_001.json`
+  - agent_type: `unknown`
+  - task_id:    `benchmark-v2-intake`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:32:25.835694+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-04/TASK_MANIFEST_mfw-fallback-coverage.json`
+  - agent_type: `unknown`
+  - task_id:    `mfw-fallback-coverage`
+  - mission:    `mission-v2-release-unblock`
+  - mtime:      `2026-05-15T14:31:20.290929+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-04/20260504_evidence_scripts_consolidation_deep_diver_manifest.json`
+  - agent_type: `evidence-analyst`
+  - task_id:    `scripts-consolidation-quality-gates-validation`
+  - mission:    `mission-scripts-consolidation-rap`
+  - mtime:      `2026-05-15T14:31:20.182210+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-05/2026-05-05_free_tier_model_fitness_analysis.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:31:19.777264+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-05/2026-05-05_piston_mutation_analysis.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:31:19.777264+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-05/2026-05-05_eval_history_trend_report.json`
+  - agent_type: `unknown`
+  - task_id:    `unknown`
+  - mission:    `unknown`
+  - mtime:      `2026-05-15T14:31:19.765483+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-04/2026-05-04T040200Z__manifest_frontier-index-optimization_python-pro_20260503w1.json`
+  - agent_type: `python-pro`
+  - task_id:    `frontier-index-optimization`
+  - mission:    `maximize-ffmx`
+  - mtime:      `2026-05-15T14:31:19.187278+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-03/2026-05-03-bundle-reference-manifest.json`
+  - agent_type: `code-reviewer`
+  - task_id:    `bundle-reference-pattern-validation`
+  - mission:    `mission-bundle-consumption-fix`
+  - mtime:      `2026-05-15T14:31:05.466844+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-03/20260503T235959Z__manifest_semantic-tagging-impl-complete_ai-engineer_20260503w0.json`
+  - agent_type: `ai-engineer`
+  - task_id:    `semantic-tagging-impl-complete`
+  - mission:    `mission-semantic-tagging-architecture`
+  - mtime:      `2026-05-04T03:46:17.309956+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-03/20260503T000000Z__manifest_semantic-tagging-design_documentation-engineer_20260503w0.json`
+  - agent_type: `documentation-engineer`
+  - task_id:    `semantic-tagging-design`
+  - mission:    `mission-semantic-tagging-architecture`
+  - mtime:      `2026-05-04T03:44:33.368062+00:00`
+  - reason:     no signed_by field
+- `forensics/manifests/2026-05-03/20260503T180000Z__manifest_local-provisioning-tools_fullstack-developer_20260503w1.json`
+  - agent_type: `fullstack-developer`
+  - task_id:    `local-provisioning-tools`
+  - mission:    `mission-coc-b2-worm-consolidation`
+  - mtime:      `2026-05-04T00:42:25.736889+00:00`
+  - reason:     no signed_by field
+
+## no_key (3)
+
+- `forensics/ephemeral/2026-05-21/mcp-rate-limit-telemetry-evo-wave-01/2026-05-21T191931Z__manifest_mcp-rate-limit-telemetry-evo-wave-01_claude-opus-4-7_mcp-server-battle-ready_05-21.json`
+  - agent_type: `claude-opus-4-7`
+  - task_id:    `mcp-rate-limit-telemetry-evo-wave-01`
+  - mission:    `mcp-server-battle-ready`
+  - mtime:      `2026-05-21T19:24:12.102499+00:00`
+  - reason:     keypair missing for 'claude-opus-4-7'
+- `forensics/ephemeral/2026-05-21/mcp-tool-extensions-signing-canonical-vault-01/2026-05-21T190219Z__manifest_mcp-tool-extensions-signing-canonical-vault-01_claude-opus-4-7_mcp-server-battle-ready_05-21.json`
+  - agent_type: `claude-opus-4-7`
+  - task_id:    `mcp-tool-extensions-signing-canonical-vault-01`
+  - mission:    `mcp-server-battle-ready`
+  - mtime:      `2026-05-21T19:05:41.763213+00:00`
+  - reason:     keypair missing for 'claude-opus-4-7'
+- `forensics/ephemeral/2026-05-21/unified-meta-schema-canonical-tiers-01/2026-05-21T185749Z__manifest_unified-meta-schema-canonical-tiers-01_claude-opus-4-7_unified-meta-schema-and-canonical-tiers_05-21.json`
+  - agent_type: `DEEP-DIVER+MAKER`
+  - task_id:    `unified-meta-schema-canonical-tiers-01`
+  - mission:    `unified-meta-schema-and-canonical-tiers`
+  - mtime:      `2026-05-21T19:01:11.393383+00:00`
+  - reason:     keypair missing for 'DEEP-DIVER+MAKER'
+
+## signed (36)
+
+Signature round-trip: **26 PASS** / 10 FAIL / 0 skip
+
+### Signature failures (signed_by present but verify fails)
+
+- `forensics/ephemeral/2026-05-23/2026-05-23T01-45-44Z__manifest__hive.shell.polish__hive-foundation-w1__shell-polish-maker-a_general-purpose.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-23/2026-05-23T01-45-44Z__manifest__hive.shell.polish__hive-foundation-w1__shell-polish-maker-a_general-purpose.json
+  [+] load: JSON v
+- `forensics/ephemeral/2026-05-23/2026-05-23T01-53-38Z__manifest__hive.feed.marriage__hive-foundation-w2__feed-filter-deep-link_general-purpose.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-23/2026-05-23T01-53-38Z__manifest__hive.feed.marriage__hive-foundation-w2__feed-filter-deep-link_general-purpose.json
+  [+] load: JSON
+- `forensics/ephemeral/2026-05-23/2026-05-23T22-47-57Z__manifest__hooks.lean.wire__hooks-lean-w1__roster-update_general-purpose.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-23/2026-05-23T22-47-57Z__manifest__hooks.lean.wire__hooks-lean-w1__roster-update_general-purpose.json
+  [+] load: JSON valid
+  [!] sig
+- `forensics/ephemeral/2026-05-23/20260523T232939Z__manifest__bulkheads.implementation.cuts__bulkheads-impl-w1__quarantine-replay_general-purpose.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-23/20260523T232939Z__manifest__bulkheads.implementation.cuts__bulkheads-impl-w1__quarantine-replay_general-purpose.json
+  [+] load: JS
+- `forensics/ephemeral/2026-05-21/extract-canonical-libs-signing/2026-05-21T193428Z__manifest_extract-canonical-libs-signing_MAKER_mcp-tool-extraction-ship_05-21.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-21/extract-canonical-libs-signing/2026-05-21T193428Z__manifest_extract-canonical-libs-signing_MAKER_mcp-tool-extraction-ship_05-21.jso
+- `forensics/ephemeral/2026-05-21/mcp-extract-misc/2026-05-21T193743Z__manifest_mcp-extract-misc_maker_mcp-server-tool-extraction_05-21.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-21/mcp-extract-misc/2026-05-21T193743Z__manifest_mcp-extract-misc_maker_mcp-server-tool-extraction_05-21.json
+  [+] load: JSON valid
+ 
+- `forensics/ephemeral/2026-05-21/mcp-namespace-redesign-final-01/2026-05-21T200704Z__manifest_mcp-namespace-redesign-final-01_maker_tool-namespace-redesign_05-21.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-21/mcp-namespace-redesign-final-01/2026-05-21T200704Z__manifest_mcp-namespace-redesign-final-01_maker_tool-namespace-redesign_05-21.js
+- `forensics/ephemeral/2026-05-22/charter-genesis-unified-config/2026-05-22T160413Z__manifest_charter-genesis-unified-config_monkeybranching-agent_swarmy-meta-config-unification_05-22.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-22/charter-genesis-unified-config/2026-05-22T160413Z__manifest_charter-genesis-unified-config_monkeybranching-agent_swarmy-meta-config
+- `forensics/ephemeral/2026-05-22/shape-mgmt-lifecycle/2026-05-22T165816Z__manifest_shape-mgmt-lifecycle_haiku_shape-mgmt-lifecycle_05-22.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-22/shape-mgmt-lifecycle/2026-05-22T165816Z__manifest_shape-mgmt-lifecycle_haiku_shape-mgmt-lifecycle_05-22.json
+  [+] load: JSON valid
+- `forensics/ephemeral/2026-05-25/navigator-script-consolidation-2026-05-25/2026-05-25T154657Z__manifest_navigator-script-consolidation-2026-05-25_navigator_script-consolidation-and-charter-signing-chain_05-25.json`
+  - [FAIL] /mnt/d/0local/gitrepos/faerie2/forensics/ephemeral/2026-05-25/navigator-script-consolidation-2026-05-25/2026-05-25T154657Z__manifest_navigator-script-consolidation-2026-05-25_navigator_script-c
