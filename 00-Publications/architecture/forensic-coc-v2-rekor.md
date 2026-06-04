@@ -585,3 +585,105 @@ read it. Be honest about gaps, deferred decisions, and open questions.
   - Status: "Draft — proposal" → "ACTIVE — adopted, in implementation".
   - Relocated to vault `00-Publications/` as living source of truth.
   - Added companion Phase 1 kickoff doc.
+
+
+<!-- crystallize:braid-begin -->
+# CRYSTALLIZED 2026-06-04
+
+> 1 doc(s) braided in; sources archived to `_archive-2026-06-04/`. Net-new + conflicts preserved below.
+
+<!-- braid: preamble from FORENSIC-COC-V2-MERKLE-ROLLUP-REKOR.md -->
+---
+status: ACTIVE — adopted, in implementation
+title: Forensic COC v2 — Merkle Rollups + Sigstore Rekor Anchoring
+authors: [swarmy, goodoleusa]
+created: 2026-05-23
+last_updated: 2026-05-24
+scope: swarmy's forensics/coc.jsonl — speed, accuracy, third-party time attestation
+operator_decisions:
+  forensic_auditability: HARD REQUIREMENT (no equivocation)
+  public_anchor: Sigstore Rekor (NOT L2 / blockchain)
+  rollout: backward-compat from genesis — old chain remains valid throughout
+status_per_phase:
+  phase_1_shadow_writing: PROPOSED — awaiting greenlight
+  phase_2_merkle_batching: not started
+  phase_3_rekor_pinning: not started
+  phase_4_old_chain_archival: not started
+tags: [forensics, whitepaper, architecture, sigstore, rekor, merkle, transparency-log]
+companion_docs:
+  - 80-Publications/FORENSIC-COC-V2-PHASE-1-KICKOFF.md (implementation plan for shadow-writer week 1)
+---
+
+
+<!-- BRAID-CONFLICT: h:4-genesis-backward-compat-the-migration-contract from FORENSIC-COC-V2-MERKLE-ROLLUP-REKOR.md differs from canonical — human review needed -->
+## 4. Genesis backward-compat (the migration contract)
+
+**Backward compatibility from genesis. No flag-day cutover. Old chain
+remains valid throughout.**
+
+The mechanism: a **v2 genesis block** written as the FIRST block of the new
+master chain at migration:
+
+```json
+{
+  "block_index": 0,
+  "ts": "<migration timestamp>",
+  "kind": "genesis",
+  "prev_hash": null,
+  "legacy_chain_anchor": {
+    "path": "forensics/coc.jsonl",
+    "final_entry_index": 4892,
+    "final_entry_hash": "sha256(last legacy entry)",
+    "entries_count": 4893,
+    "merkle_root_of_legacy": "sha256(merkle tree built from ALL legacy entries)"
+  },
+  "v2_design_doc": "80-Publications/FORENSIC-COC-V2-MERKLE-ROLLUP-REKOR.md",
+  "v2_design_doc_hash": "sha256(this document at time of genesis)",
+  "operator_sig": "<sig over all above by goodoleusa's key>"
+}
+```
+
+**What this gives us:**
+
+1. Legacy `coc.jsonl` is **encapsulated** by v2. v2 verification automatically
+   validates legacy too (compare `merkle_root_of_legacy` against legacy file).
+2. Walking the new chain backward eventually hits genesis; legacy chain
+   pulled to extend audit back to origin.
+3. Legacy `coc.jsonl` is never rewritten — read-only from v2 genesis on.
+4. Tools that only understand the old format keep working — read `coc.jsonl`
+   as before. Tools that understand v2 see genesis, pull legacy reference,
+   present unified history.
+5. The genesis block itself is anchored to Rekor as the FIRST anchor —
+   the very act of switching to v2 is timestamped by a third party.
+
+
+<!-- BRAID-CONFLICT: h:cron-schedule-phase-3 from FORENSIC-COC-V2-MERKLE-ROLLUP-REKOR.md differs from canonical — human review needed -->
+### Cron schedule (Phase 3+)
+
+```
+# Hourly Rekor anchor — master head to rekor.sigstore.dev
+0 * * * * /opt/faerie/deploy/scripts/cron-rekor-anchor.sh >> /var/log/rekor-anchor.log 2>&1
+
+# Daily Rekor inclusion-proof refresh — caches latest proof for offline use
+0 4 * * * /opt/faerie/deploy/scripts/cron-rekor-refresh-proofs.sh >> /var/log/rekor-refresh.log 2>&1
+```
+
+---
+
+
+<!-- BRAID-CONFLICT: h:changelog from FORENSIC-COC-V2-MERKLE-ROLLUP-REKOR.md differs from canonical — human review needed -->
+### Changelog
+
+- **2026-05-23** — Initial draft. Three-tier proposal (Merkle batch +
+  sidecar shards + L2 anchor). Operator decision matrix at end.
+- **2026-05-24** — Operator decisions locked:
+  - Forensic auditability = hard requirement
+  - Public anchor = **Sigstore Rekor** (not L2)
+  - Rollout = backward-compat from genesis
+  - Rewrote Tier C to use Rekor. Added Section 4 (genesis backward-compat).
+  - Added Section 1 (Why Rekor over L2). Renumbered sections.
+  - Status: "Draft — proposal" → "ACTIVE — adopted, in implementation".
+  - Relocated to vault `80-Publications/` as living source of truth.
+  - Added companion Phase 1 kickoff doc.
+
+<!-- crystallize:braid-end -->

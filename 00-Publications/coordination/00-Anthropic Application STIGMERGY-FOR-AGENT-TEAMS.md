@@ -175,3 +175,71 @@ I think the choice is clear, and I think the timing is now.
 - `scripts/9x_reputation_tracker.py` — the hook that verifies subagent file-write claims and writes the chain.
 
 All of the above are real artifacts from a real working system. I'd be glad to walk through any of them in detail.
+
+
+<!-- crystallize:braid-begin -->
+# CRYSTALLIZED 2026-06-04
+
+> 1 doc(s) braided in; sources archived to `_archive-2026-06-04/`. Net-new + conflicts preserved below.
+
+<!-- braid: preamble from STIGMERGY-FOR-AGENT-TEAMS.md -->
+---
+type: technical-narrative
+status: candidate-application-supporting-material
+author: jessica-terry
+title: "Stigmergy as a Coordination Substrate for AI Agent Teams"
+subtitle: "A practitioner's case for filesystem-mediated swarm coordination over message-passing — drawn from direct experience with Claude Code's Agent Teams and a parallel implementation called faerie"
+date: 2026-05-19
+---
+
+
+<!-- BRAID-CONFLICT: h:stigmergy-as-a-coordination-substrate-for-ai-agent-teams from STIGMERGY-FOR-AGENT-TEAMS.md differs from canonical — human review needed -->
+# Stigmergy as a Coordination Substrate for AI Agent Teams
+
+<!-- §what-is-stigmergy -->
+
+<!-- BRAID-CONFLICT: h:context from STIGMERGY-FOR-AGENT-TEAMS.md differs from canonical — human review needed -->
+## Context
+
+Anthropic's Claude Code includes an Agent Teams feature: a parent Claude session can spawn parallel subagents, each with its own context, and orchestrate them toward a shared goal. The feature is powerful but, as anyone who has used it in production knows, **buggy in characteristic ways**: subagents collide on file writes; the parent loses track of which subagent did what; coordination overhead grows quadratically with the team size; spawning more than three or four agents produces output that's hard to attribute, dedupe, or audit; recovery from a partial failure requires reading every subagent's transcript individually.
+
+These are not "Claude is dumb" bugs. They are **coordination-architecture bugs** — the same class of failure mode that distributed systems researchers have spent fifty years cataloging and fixing in non-AI contexts. The good news is that the fix is well-understood and has been used at scale by biological systems for hundreds of millions of years. It's called **stigmergy**, and I want to make the case here that adopting it as the coordination substrate for Agent Teams would resolve a meaningful fraction of the bugs that currently make the feature painful in real workflows.
+
+This piece is informed by:
+- Direct, daily use of Agent Teams across multiple projects.
+- Building a parallel implementation called *faerie* — a stigmergic coordination framework that has run on top of Claude Code and OpenHands for the past several months across investigations, code repositories, and an Obsidian-based collab vault.
+- A field session on 2026-05-19 in which I deliberately ran an ad-hoc Potemkin version of faerie inside Claude Code itself (no install, just filesystem conventions and discipline) and watched 8 subagents coordinate to produce real work product. The session's failure modes are documented in `POTEMKIN-FAERIE-FIELD-REPORT.md` in this repository and are referenced throughout this piece.
+
+<!-- §filesystem-as-nervous-system -->
+
+<!-- BRAID-CONFLICT: h:what-stigmergy-is-in-one-paragraph from STIGMERGY-FOR-AGENT-TEAMS.md differs from canonical — human review needed -->
+## What stigmergy is, in one paragraph
+
+Stigmergy is coordination via *environmental marker* rather than via *direct messaging*. The canonical biological example: when an ant finds food, it doesn't tell the colony directly. It deposits a pheromone trail on the ground as it returns to the nest. Other ants that encounter the trail follow it, deposit more pheromone, and reinforce the path. No ant communicates with any other ant; they all communicate *with the substrate*, asynchronously and durably. The result is robust, scalable, self-healing collective behavior with **zero central coordinator** and **no message-passing protocol**.
+
+The principle generalizes far beyond ants. Termites build complex mounds via stigmergy. Slime molds solve optimization problems via stigmergy. Wikipedia's edit model is effectively stigmergic. Build systems like Bazel and Nix are stigmergic. Git itself, when used well across a team, is stigmergic — the repository state is the coordination substrate; the team coordinates by mutating it asynchronously.
+
+For an AI agent team, the substrate is the **filesystem**, optionally augmented with a hash-chained ledger (chain of custody) for auditability. The "pheromone" is whatever an agent writes, where it writes it, and what filename it chooses.
+
+<!-- §bearing-protocol -->
+
+<!-- BRAID-CONFLICT: h:why-this-is-timely from STIGMERGY-FOR-AGENT-TEAMS.md differs from canonical — human review needed -->
+## Why this is timely
+
+I am writing this on the same day that Anthropic released Claude Opus 4.7. The model is dramatically more capable than the one I started using six months ago. Agent Teams is increasingly viable as a primary workflow. **The bottleneck is no longer model capability; it is coordination architecture.**
+
+This is the same pattern as databases in the 1990s: the bottleneck moved from query speed (a per-node concern) to consistency model (a coordination concern). The teams that solved coordination — Spanner, CockroachDB, Aurora — built the multi-decade winners. The teams that didn't ended up with single-node systems pretending to be distributed and losing data in characteristic ways.
+
+For AI agent teams, the coordination architecture that wins will be the one that:
+
+1. Doesn't require a central orchestrator (no SPOF, no bottleneck).
+2. Survives partial failure gracefully (subagents can die without poisoning the team).
+3. Produces auditable provenance for every artifact (decisions are recoverable post-hoc).
+4. Scales by adding workers, not by upgrading the manager (linear, not quadratic).
+5. Has well-understood debugging and recovery semantics (any operator can read the substrate).
+
+**Stigmergy satisfies all five.** Message-passing orchestration satisfies, at best, one (auditability, if you log every message — at the cost of #4).
+
+<!-- §manifest-contract -->
+
+<!-- crystallize:braid-end -->

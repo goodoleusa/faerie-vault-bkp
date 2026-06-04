@@ -399,3 +399,52 @@ Compact, traceable, audit-friendly.
 ---
 
 *End of Phase 1 kickoff doc. Companion to architecture paper.*
+
+
+<!-- crystallize:braid-begin -->
+# CRYSTALLIZED 2026-06-04
+
+> 1 doc(s) braided in; sources archived to `_archive-2026-06-04/`. Net-new + conflicts preserved below.
+
+<!-- braid: preamble from FORENSIC-COC-V2-PHASE-1-KICKOFF.md -->
+---
+status: READY-TO-START — awaiting operator greenlight
+title: Forensic COC v2 — Phase 1 Implementation Kickoff (Shadow Writer)
+parent_doc: 80-Publications/FORENSIC-COC-V2-MERKLE-ROLLUP-REKOR.md
+created: 2026-05-24
+last_updated: 2026-05-24
+scope: Concrete implementation plan for week 1 of v2 rollout (zero-risk shadow writing)
+tags: [forensics, implementation, phase-1, shadow-writer, merkle, sigstore]
+---
+
+
+<!-- BRAID-CONFLICT: h:1-6-cron-entry from FORENSIC-COC-V2-PHASE-1-KICKOFF.md differs from canonical — human review needed -->
+### 1.6 Cron entry
+
+```
+# Daily 03:30 UTC — v2 shadow chain divergence check
+30 3 * * * cd /opt/faerie && python3 scripts/2x_coc_v2_diff_check.py >> /var/log/coc-v2-diff.log 2>&1   # faerie-managed:coc-v2-diff
+```
+
+Added to `deploy/scripts/install-crons.sh`.
+
+
+<!-- BRAID-CONFLICT: h:8-the-go-trigger from FORENSIC-COC-V2-PHASE-1-KICKOFF.md differs from canonical — human review needed -->
+## 8. The "GO" trigger
+
+**Operator types:** "greenlight Phase 1" (or equivalent).
+
+**System spawns** a MAKER (or operator works directly) to execute the
+4-commit sequence above. Manifest written to `forensics/ephemeral/2026-05-24/`.
+
+Phase 1 begins when commit 3 lands + the flag is set on the VPS:
+```bash
+ssh vps 'cd /opt/faerie && git pull && echo COC_V2_SHADOW_WRITE=1 >> .env && bash deploy/scripts/redeploy.sh'
+```
+
+Phase 1 ends when 7 consecutive days of zero divergence are recorded.
+
+---
+
+
+<!-- crystallize:braid-end -->
