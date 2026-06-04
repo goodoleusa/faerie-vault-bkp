@@ -95,7 +95,7 @@ source_authority: >
 
 wherein the promotion decision is mathematical rather than a judgment by a language model.
 
-*Demonstrable via:* `scripts/1a_manifest_writer.py` (canonical writer, enforces gate); `forensics/schemas/formulas/honey-confidence-floor.formula.json` (gate thresholds); `forensics/coc.jsonl` (hash-chained audit log); PATENT-PROVISIONAL-19-CLAIMS-FULL.md §8.B (detailed description).
+*Demonstrable via:* `scripts/1a_manifest_writer.py` (canonical writer, enforces gate); `forensics/schemas/formulas/honey-confidence-floor.formula.json` (gate thresholds, SHA-256: `f6304de8…`); `forensics/coc.jsonl` (append-only ed25519-signed hash-chained audit log, 74 entries, SHA-256: `06e89e5c…`); Rekor anchor log_index 1630813609; B2 WORM 7-year retention (`scripts/5x_b2_realtime_uploader.py`); PATENT-PROVISIONAL-19-CLAIMS-FULL.md §8.B (detailed description). **Terminology note (2026-06-04):** Claim language uses tier names "first memory tier", "second memory tier", "third memory tier" — implementation terms "dust" (tier 1, formerly "pollen"), "silver" (tier 2, formerly "NECTAR"), "GOLD" (tier 3) are updated per nautical ontology. Claim language is substrate-neutral and unaffected by implementation term changes.
 
 ---
 
@@ -374,7 +374,7 @@ wherein the Merkle root enables inclusion proofs verifying that any specific ent
 
 wherein the branch's entire history — potentially comprising thousands of entries — is incorporated into the main ledger by a single well-formed entry of constant size, and wherein the two-parent merge structure enables inclusion proofs from the main ledger back through the Merkle root to any individual branch entry.
 
-*Demonstrable via:* `scripts/mission_graph.py merge <branch> --acceptance-manifest <path>`; `scripts/9x_manifest_verifier.py`; v2 genesis seal entry (entry_hash: b52b8bc2…) demonstrates two-parent merge from v1 Merkle root; arxiv paper Section 6.4.
+*Demonstrable via:* `scripts/mission_graph.py merge <branch> --acceptance-manifest <path>`; `scripts/9x_manifest_verifier.py`; v2 genesis seal entry (actual entry_hash: `80f56b10dd86ce53e74c0758c4d87769c4e6f85f767e9636b9fb711171079ce3`, commit `6890b4ab`) demonstrates two-parent merge from v1 Merkle root; Rekor transparency log anchor log_index 1630813609 (`https://search.sigstore.dev/?logIndex=1630813609`) provides public timestamp; arxiv paper Section 6.4. Note: the hash `b52b8bc2…` cited in earlier drafts was a stale reference — actual canonical entry is `80f56b10…` (see CITATION-PROVENANCE INT-29 and METRICS-PROVENANCE M-20).
 
 ---
 
@@ -395,7 +395,7 @@ wherein the branch's entire history — potentially comprising thousands of entr
 
 wherein the handshake provides a side-channel commitment to main without modifying the branch's chain linkage, enabling branch continuation after the handshake event.
 
-*Demonstrable via:* `scripts/mission_graph.py handshake <branch>`; public anchoring via Sigstore Rekor [Newman Z, Meyers JS, Torres-Arias S, "Sigstore: Software signing for everybody," ACM CCS 2022]; arxiv paper Section 6.5.
+*Demonstrable via:* `scripts/mission_graph.py handshake <branch>`; public anchoring via Sigstore Rekor [Newman Z, Meyers JS, Torres-Arias S, "Sigstore: Software signing for everybody," ACM CCS 2022]; actual live anchor: log_index 1630813609, uuid `108e9186…`, URL `https://search.sigstore.dev/?logIndex=1630813609` (anchors v2 genesis seal Merkle root `27c09fed…`, entry_hash `80f56b10…`, commit `6890b4ab`); B2 WORM backup via `scripts/5x_b2_realtime_uploader.py` (7-year retention); arxiv paper Section 6.5.
 
 ---
 

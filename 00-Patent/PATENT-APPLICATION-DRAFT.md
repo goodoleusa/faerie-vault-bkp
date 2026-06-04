@@ -25,7 +25,9 @@ citation_style: Vancouver endnotes (bibliography at end)
 ---
 
 # PATENT PROVISIONAL SPECIFICATION
-## Autonomous Multi-Agent Orchestration System with Hierarchical Memory Promotion, Stigmergic Filesystem Coordination, Four-Layer Enforcement Stack, and Mechanical Quality Classification
+## Autonomous Multi-Agent Orchestration System with Forensic Cryptographic Backbone, Append-Only Hash-Chained Chain-of-Custody, Stigmergic Filesystem Coordination, Four-Layer Enforcement Stack, and Mechanical Quality Classification
+
+> **BACKBONE NOTE (re-centered 2026-06-04):** The forensic cryptographic backbone — append-only ed25519-signed hash-chained COC (forensics/coc.jsonl), Merkle rollups, Rekor transparency-log anchoring, B2 WORM immutability, zero-vendor customer-key custody — is the load-bearing spine of this invention. Every other module (stigmergic orchestration, identity sovereignty, mission-graph, encrypt-to-customer delivery) inherits its integrity guarantees FROM the backbone. Prior drafts listed the forensic layer as one module among many; this re-centered draft frames it as the foundational layer all other claims build upon.
 
 **Filing type:** Provisional Application for Patent
 **Filing basis:** 35 U.S.C. § 111(b)
@@ -46,7 +48,7 @@ The inventors note that a related technical charter (`forensic-coc-v2-rekor`) co
 
 ### FIELD OF THE INVENTION
 
-This invention relates to multi-agent artificial intelligence orchestration systems, and more particularly to: (1) a hierarchical memory architecture with mechanical promotion gates between memory tiers; (2) a stigmergic agent coordination system using filesystem manifests as the sole coordination substrate; (3) a four-layer enforcement stack modeled on biological immune system defense; (4) a mechanical quality classification system using shape registries with declared target directions; and (5) a quality measurement substrate in which evaluation probes are themselves first-class shapes subject to the same mechanical classification. The invention further claims the novel combination of all five modules into a single coherent AI orchestration ecosystem.
+This invention relates to multi-agent artificial intelligence orchestration systems, and more particularly to: (1) a forensic cryptographic backbone comprising an append-only ed25519-signed hash-chained chain-of-custody ledger (COC), Merkle rollups providing constant-cost branch state compression, Rekor transparency-log anchoring for public tamper-evidence, B2 WORM immutable cloud backup, and zero-vendor customer-key custody — this backbone is the foundational spine from which all other system properties derive their integrity; (2) a hierarchical memory architecture with mechanical promotion gates between memory tiers, whose tamper-evident auditability is provided by the forensic backbone; (3) a stigmergic agent coordination system using filesystem manifests as the sole coordination substrate, all manifest writes chained into the forensic backbone; (4) a four-layer enforcement stack modeled on biological immune system defense, whose recovery audit layer reads the forensic backbone; and (5) a mechanical quality classification system using shape registries with declared target directions, whose measurement substrate is grounded in the backbone's tamper-evident records. The invention further claims the novel combination of all five modules into a single coherent AI orchestration ecosystem whose trustworthiness derives architecturally from the forensic backbone rather than from organizational policy.
 
 ---
 
@@ -94,25 +96,28 @@ Current AI system quality evaluation relies on human judgment or LLM-as-judge ap
 
 ### SUMMARY OF THE INVENTION
 
-The present invention provides an autonomous multi-agent orchestration system comprising five novel technical modules and a combination claim covering their integration:
+The present invention provides an autonomous multi-agent orchestration system built on a **Forensic Cryptographic Backbone** that is the foundational load-bearing spine from which all other system properties inherit their integrity. Five technical modules compose on top of this backbone:
 
-**Module 1 — Hierarchical Memory Architecture with Mechanical Promotion Gates**
-A three-tier memory system (pollen → NECTAR → GOLD) with a separate immutable forensic layer (forensics/), in which promotion between tiers is governed by mechanical rules: minimum confidence score (≥0.95), minimum session age (≥3 sessions), and minimum independent cross-session citation count (≥2). Promotion is executed by a canonical script (`scripts/1a_manifest_writer.py`) that writes to an append-only chain-of-custody log (`forensics/coc.jsonl`) with SHA-256 hash linking between entries.
+**Forensic Cryptographic Backbone — The Load-Bearing Spine**
+An append-only, ed25519-signed, SHA-256 hash-chained chain-of-custody ledger (`forensics/coc.jsonl`) in which each entry carries a `parent_hashes[]` DAG array linking to its predecessor(s), enabling both linear chain and two-parent merge structures. The backbone provides: (1) **append-only tamper-evidence** — modifying any historical entry invalidates all subsequent hashes, mechanically detectable by `scripts/9x_manifest_verifier.py`; (2) **Merkle rollups** — per-branch forensic trees compressed to a constant 32-byte root via `scripts/_merkle_tree.py` (14/14 tests pass, SHA-256: `79d22d9e…`), enabling branch history of arbitrary depth to be represented in a single COC entry; (3) **Rekor transparency-log anchoring** — handshake Merkle roots submitted to Sigstore Rekor (log_index 1630813609 for v2 genesis seal, entry_hash `80f56b10…`, commit `6890b4ab`), creating a public tamper-evident timestamp independent of the operator; (4) **B2 WORM immutable backup** — 7-year WORM retention via `scripts/5x_b2_realtime_uploader.py` triggered on every manifest write, making historical records irrecoverable from tampering; (5) **zero-vendor customer-key custody** — ed25519 signing keys generated server-side, delivered to customer via zero-retention pipeline, and erased from vendor storage, such that vendor cannot forge chain-of-custody signatures (Claim 7 architecture). This backbone is not a feature of the system — it is the foundation every other module writes into and reads from for its integrity guarantees.
 
-**Module 2 — Stigmergic Filesystem Coordination**
-A multi-agent coordination architecture in which agents discover each other's work and self-route to unblocked tasks exclusively through shared filesystem artifacts (manifests). No message-passing, no central orchestrator, no inter-agent API calls. Agents write manifests to a flat daily folder (`forensics/ephemeral/{YYYY-MM-DD}/`) following a deterministic filename grammar. A frontier scanner (`scripts/2d_frontier_scanner_indexed.py`) enables O(1) lookup of unblocked tasks by reading an 8KB daily index rather than scanning all manifests, reducing context cost by approximately 80% versus naive full-manifest scanning.
+**Module 1 — Hierarchical Memory Architecture with Mechanical Promotion Gates (inherits backbone)**
+A three-tier memory system (dust → silver → GOLD) with a separate immutable forensic layer (forensics/), in which promotion between tiers is governed by mechanical rules: minimum confidence score (≥0.95), minimum session age (≥3 sessions), and minimum independent cross-session citation count (≥2). Promotion is executed by a canonical script (`scripts/1a_manifest_writer.py`) that simultaneously evaluates gate criteria and appends an entry to the forensic backbone's append-only COC (`forensics/coc.jsonl`) with SHA-256 hash linking between entries and ed25519 signature. The backbone provides the tamper-evident audit trail that makes the promotion decision legally and technically defensible.
 
-**Module 3 — Four-Layer Enforcement Stack (Four-Shields)**
-A discipline enforcement architecture modeled on biological immune system defense, comprising: (a) structural prevention (wrong behavior cannot be expressed, enforced by schema and canonical writer scripts); (b) cognitive reminder (skill files auto-loaded before action); (c) reactive blocking (PostToolUse hooks reject violations at OS write boundary); and (d) recovery audit (periodic batch scans that surface escaped violations and update reputation scores). Each layer is cheaper to operate than the next, and the four layers together provide defense-in-depth that no single layer can provide alone.
+**Module 2 — Stigmergic Filesystem Coordination (inherits backbone)**
+A multi-agent coordination architecture in which agents discover each other's work and self-route to unblocked tasks exclusively through shared filesystem artifacts (manifests). No message-passing, no central orchestrator, no inter-agent API calls. Agents write manifests to a flat daily folder (`forensics/ephemeral/{YYYY-MM-DD}/`) following a deterministic filename grammar. A frontier scanner (`scripts/2d_frontier_scanner_indexed.py`) enables O(1) lookup of unblocked tasks by reading an 8KB daily index rather than scanning all manifests, reducing context cost by approximately 80% versus naive full-manifest scanning. Every manifest write is chained into the forensic backbone via PostToolUse hooks, so coordination history is tamper-evident.
 
-**Module 4 — Shape Registry with Mechanical Verdict Classification**
-A quality classification system in which every recognizable, countable pattern of work ("shape") is declared in a registry (`_meta/shapes.json`) with a `target_direction` field (increasing/decreasing/bounded/stable). A reactive hook (`scripts/shapes/_shapes_lib.py::classify_verdict`) computes mutation verdicts (beneficial/neutral/harmful/uncertain) by comparing the observed count delta to the target direction and a noise threshold. No LLM judgment in the verdict path. Quality signals are integer-comparable across sessions, enabling genetic-algorithm-style improvement selection.
+**Module 3 — Four-Layer Enforcement Stack, Four-Shields (inherits backbone)**
+A discipline enforcement architecture modeled on biological immune system defense, comprising: (a) structural prevention (wrong behavior cannot be expressed, enforced by schema and canonical writer scripts); (b) cognitive reminder (skill files auto-loaded before action); (c) reactive blocking (PostToolUse hooks reject violations at OS write boundary); and (d) recovery audit (periodic batch scans that surface escaped violations and update reputation scores). The recovery layer reads the forensic backbone's COC chain to audit enforcement history. Each layer is cheaper to operate than the next, and the four layers together provide defense-in-depth that no single layer can provide alone.
 
-**Module 5 — Membench Quality Measurement Substrate**
-A quality measurement architecture in which evaluation probes (M1 baseline retention, M8 confabulation veto, M11 honey hit rate, and their F-series internal mirrors) are themselves first-class shapes in the shape registry. This creates a closed loop between memory operations and quality measurement: memory promotion decisions directly affect probe scores, which are classified mechanically by the same shape-registry verdict system that classifies all other work patterns. The membench scorer (`scripts/3k_membench_scorer.py`) computes M3 (efficiency), SI (stigmergy index), and SBI (switchboard burden index) deterministically from fixed eval data, enabling reproducible T0 vs T1 comparison.
+**Module 4 — Shape Registry with Mechanical Verdict Classification (inherits backbone)**
+A quality classification system in which every recognizable, countable pattern of work ("shape") is declared in a registry (`_meta/shapes.json`) with a `target_direction` field (increasing/decreasing/bounded/stable). A reactive hook (`scripts/shapes/_shapes_lib.py::classify_verdict`) computes mutation verdicts (beneficial/neutral/harmful/uncertain) by comparing the observed count delta to the target direction and a noise threshold. No LLM judgment in the verdict path. Quality signals are integer-comparable across sessions, enabling genetic-algorithm-style improvement selection. Verdict records are written to the forensic backbone, making the quality history tamper-evident.
+
+**Module 5 — Membench Quality Measurement Substrate (inherits backbone)**
+A quality measurement architecture in which evaluation probes (M1 baseline retention, M8 confabulation veto, M11 silver bootstrap uptime, and their F-series internal mirrors) are themselves first-class shapes in the shape registry. This creates a closed loop between memory operations and quality measurement: memory promotion decisions directly affect probe scores, which are classified mechanically by the same shape-registry verdict system that classifies all other work patterns. The membench scorer (`scripts/3k_membench_scorer.py`) computes M3 (efficiency), SI (stigmergy index), and SBI (switchboard burden index) deterministically from fixed eval data, enabling reproducible T0 vs T1 comparison. Probe results are anchored to the backbone, providing a tamper-evident quality history.
 
 **Combination Claim — Overall Novel System**
-The novel combination of all five modules into a single coherent AI orchestration ecosystem. Individual modules may be open-sourced; the combination claim retains patent protection over the integrated system design. This combination solves a set of problems no individual module addresses alone: the memory hierarchy provides the substrate that the measurement probes assess; the stigmergic coordination enables the swarm behavior that the four-shields stack governs; the shape registry provides the verdict mechanism that drives improvement of all the above.
+The novel combination of the forensic cryptographic backbone and all five modules into a single coherent AI orchestration ecosystem where every claim of quality improvement, every coordination event, and every enforcement decision is backed by the same cryptographic substrate. Individual modules may be open-sourced; the combination claim retains patent protection over the integrated system design whose integrity derives architecturally from the forensic backbone rather than from organizational policy.
 
 ---
 
@@ -176,13 +181,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph POLLEN["Pollen Layer — Raw observations (volatile)"]
-        P1["Raw agent observations\nformatted as MEM blocks\nin manifest _evolution_log[]"]
-        P2["Session-scoped;\nnot persisted across cold starts\nwithout explicit promotion"]
+    subgraph DUST["Dust Layer — Raw observations (volatile)"]
+        D1["Raw agent observations\nformatted as MEM blocks\nin manifest _evolution_log[]"]
+        D2["Session-scoped;\nnot persisted across cold starts\nwithout explicit promotion"]
     end
 
-    subgraph NECTAR["NECTAR Layer — Validated cross-session facts (tail-30)"]
-        N1["~/.claude/NECTAR.md\n30-entry tail window\n~21K tokens injection cost"]
+    subgraph SILVER["Silver Layer — Validated cross-session facts (tail-30)"]
+        N1["~/.claude/SILVER.md\n30-entry tail window\n~21K tokens injection cost"]
         N2["Confidence: 0.70–0.94\nAge: 1–2 sessions\nCitations: 1"]
         NGATE{"Promotion Gate:\nconfidence ≥ 0.70\nAND age ≥ 1 session"}
     end
@@ -202,29 +207,29 @@ flowchart TD
     subgraph MEMBENCH["Membench Probes (shapes that measure memory health)"]
         M1["M1: Retention ≥ 0.85\nscripts/probes/M1_baseline_retention.py\nFacts in GOLD recalled in session?"]
         M8["M8: Confabulation ≤ 0.05\nscripts/probes/M8_confabulation_veto.py\nVETO if hallucination rate exceeds 5%"]
-        M11["M11: Bootstrap ≥ 0.70\nscripts/probes/M11_honey_hit_rate.py\nAgents access GOLD successfully?"]
+        M11["M11: Bootstrap ≥ 0.70\nscripts/probes/M11_honey_hit_rate.py\nAgents access GOLD/Silver successfully?"]
     end
 
-    P1 --> NGATE
+    D1 --> NGATE
     NGATE -->|"PASS: confidence≥0.70\nage≥1 session"| N1
-    NGATE -->|"FAIL: discard\nor keep in pollen"| P2
+    NGATE -->|"FAIL: discard\nor keep in dust"| D2
     N1 --> HGATE
     HGATE -->|"PASS: confidence≥0.95\nage≥3, citations≥2"| H1
-    HGATE -->|"FAIL: keep in NECTAR\ntail window"| N2
+    HGATE -->|"FAIL: keep in silver\ntail window"| N2
     H1 --> MEMBENCH
     MEMBENCH --> M1 & M8 & M11
     M1 & M8 & M11 -->|"Scores recorded as\nshape counts in\n_meta/shapes.json"| F1
     H1 --> F2
     F2 --> F3
 
-    style POLLEN fill:#f9fbe7,stroke:#827717
-    style NECTAR fill:#e8eaf6,stroke:#283593
+    style DUST fill:#f9fbe7,stroke:#827717
+    style SILVER fill:#e8eaf6,stroke:#283593
     style GOLD fill:#fff8e1,stroke:#f57f17
     style FORENSICS fill:#efebe9,stroke:#3e2723
     style MEMBENCH fill:#e0f2f1,stroke:#004d40
 ```
 
-**Technical improvement:** The mechanical promotion gates eliminate the "stale memory contamination" failure mode. A fact cannot advance to GOLD without surviving 3 independent sessions and achieving 2 cross-session citations at confidence ≥ 0.95. This is not an LLM judgment — it is a mathematical threshold enforced by the `honey-confidence-floor.formula.json` rule evaluated by the canonical writer script. The NECTAR tail window (30 entries, ~21K tokens injection cost) prevents context saturation while maintaining session continuity.
+**Technical improvement:** The mechanical promotion gates eliminate the "stale memory contamination" failure mode. A fact cannot advance to GOLD without surviving 3 independent sessions and achieving 2 cross-session citations at confidence ≥ 0.95. This is not an LLM judgment — it is a mathematical threshold enforced by the `honey-confidence-floor.formula.json` rule evaluated by the canonical writer script. The silver tail window (30 entries, ~21K tokens injection cost) prevents context saturation while maintaining session continuity. Every promotion event writes to the forensic backbone (Tier 4), creating a tamper-evident audit trail of the memory system's complete history.
 
 ---
 
@@ -232,7 +237,7 @@ flowchart TD
 
 ```mermaid
 sequenceDiagram
-    participant Queen as Main / Queen Agent
+    participant Queen as Main / Pilot Agent
     participant FS as Filesystem<br/>forensics/ephemeral/2026-05-23/
     participant A1 as Agent 1<br/>(research-analyst)
     participant A2 as Agent 2<br/>(python-pro)
@@ -240,7 +245,7 @@ sequenceDiagram
     participant IDX as Index<br/>(manifest-index.jsonl)
 
     Queen->>FS: spawn 3 agents with team_label="expedition-w1"
-    Note over Queen: No message-passing<br/>No orchestrator routing<br/>Context cost: ~60 tokens/spawn
+    Note over Queen: No message-passing<br/>No orchestrator routing<br/>Context cost: ~60 tokens/spawn<br/>(pilot = main/orchestrator agent)
 
     A1->>FS: write in-progress manifest<br/>mission=enterprise.patent.foundation<br/>bearing=S, status=in_progress
     A2->>FS: write in-progress manifest<br/>mission=enterprise.patent.foundation<br/>bearing=S, status=in_progress
@@ -260,7 +265,7 @@ sequenceDiagram
 
     Queen->>FS: reads manifests after TaskNotification<br/>(never polls — waits for notification)
     FS-->>Queen: 3 dashboard_lines (≤80 chars each)<br/>~240 tokens total
-    Note over Queen: Queen burden ≈ 60 tokens spawn<br/>+ 240 tokens read = 300 tokens total<br/>for 3-agent coordination cycle<br/>f(0) agent_share ≥ 0.90 maintained
+    Note over Queen: Pilot burden ≈ 60 tokens spawn<br/>+ 240 tokens read = 300 tokens total<br/>for 3-agent coordination cycle<br/>f(0) agent_share ≥ 0.90 maintained
 ```
 
 **Technical improvement:** This architecture eliminates the orchestrator/router bottleneck by removing the central coordinator entirely. Agents discover each other's work through the shared filesystem substrate, not through message-passing. The frontier scanner (`scripts/2d_frontier_scanner_indexed.py`) reads an 8KB daily index file rather than all manifests, reducing context cost by approximately 80% (from ~2,500KB naive to <100KB indexed). An N-agent team can coordinate at O(1) lookup cost via filename grammar matching (`ls *__{team-label}__*.json`).
@@ -323,15 +328,17 @@ flowchart TD
 
 The invention provides a four-tier memory architecture:
 
-*Tier 1 — Pollen (volatile observations):* Raw agent observations formatted as MEM blocks embedded in manifest `_evolution_log[]` arrays. These are session-scoped; they do not persist to long-term memory without passing through the promotion gates.
+*Tier 1 — Dust (volatile observations):* Raw agent observations formatted as MEM blocks embedded in manifest `_evolution_log[]` arrays. These are session-scoped; they do not persist to long-term memory without passing through the promotion gates. (Historical term: "pollen" — updated to "dust" for nautical ontology consistency.)
 
-*Tier 2 — NECTAR (validated cross-session facts):* A tail-windowed memory store (default: 30 entries, approximately 21,000 tokens injection cost at 700 tokens/entry average). Facts in NECTAR carry confidence scores in the range 0.70–0.94. The tail window (controlled by the `nectar-tail-window.formula.json` parameter, current default: 30 entries) prevents context saturation while maintaining cross-session continuity.
+*Tier 2 — Silver (validated cross-session facts):* A tail-windowed memory store (default: 30 entries, approximately 21,000 tokens injection cost at 700 tokens/entry average). Facts in silver carry confidence scores in the range 0.70–0.94. The tail window (controlled by the `silver-tail-window.formula.json` parameter, current default: 30 entries) prevents context saturation while maintaining cross-session continuity. (Historical term: "NECTAR" — updated to "silver" for nautical ontology consistency.)
 
 *Tier 3 — GOLD (crystallized permanent invariants):* A write-protected memory store containing only facts that have survived the following mechanical gate: confidence ≥ 0.95, session age ≥ 3 sessions, and independent cross-session citation count ≥ 2. These thresholds are encoded in `forensics/schemas/formulas/honey-confidence-floor.formula.json` and enforced by the canonical writer `scripts/1a_manifest_writer.py`. GOLD is stored at `~/.claude/GOLD.md` (global, all-projects) and `{repo}/GOLD.md` (project-specific). The project GOLD is read before the global GOLD; project-specific invariants take precedence.
 
-*Tier 4 — Forensics (immutable permanent selvage):* The append-only chain-of-custody log (`forensics/coc.jsonl`) stores every memory operation. Each entry carries: SHA-256 hash of the previous entry, SHA-256 hash of the current entry's data, agent identifier, tool call type, file path, bytes changed, and an ed25519 signature from the writing agent's key. The hash formula is: `entry_N.hash = SHA-256(entry_{N-1}.hash || entry_N.data)`. This chain is tamper-evident: modifying any entry breaks all subsequent hashes. The chain is backed up to WORM (Write-Once-Read-Many) cloud storage (`B2 WORM` bucket with 7-year immutable retention policy) via `scripts/5x_b2_realtime_uploader.py` triggered on every manifest write.
+*Tier 4 — Forensic Cryptographic Backbone (immutable permanent selvage — the load-bearing spine):* The append-only, ed25519-signed, SHA-256 hash-chained chain-of-custody log (`forensics/coc.jsonl`) stores every memory operation. This tier is not merely a logging layer — it is the structural foundation that provides tamper-evidence to all other tiers. Each entry carries: SHA-256 hash of the previous entry (or previous entries, via `parent_hashes[]` for merge manifests), SHA-256 hash of the current entry's data, agent identifier, tool call type, file path, bytes changed, and an ed25519 signature from the writing agent's key. The hash formula is: `entry_N.hash = SHA-256(entry_{N-1}.hash || entry_N.data)`. This chain is tamper-evident: modifying any entry breaks all subsequent hashes, detectable by `scripts/9x_manifest_verifier.py`. The backbone provides three further integrity layers beyond the local hash chain: (a) **Merkle rollup compression** — per-branch ledgers are compressed to a constant 32-byte Merkle root (`scripts/_merkle_tree.py`, M-06: 14/14 tests pass, SHA-256: `79d22d9ea7dd9bc1…`), enabling branch histories of arbitrary depth to be incorporated into the main chain via a single signed two-parent merge entry; (b) **Rekor transparency-log anchoring** — handshake Merkle roots are submitted to the public Sigstore Rekor log (actual anchor: log_index 1630813609, uuid `108e9186…`, entry_hash `80f56b10…`, commit `6890b4ab`), providing a public timestamp independent of the operator that proves specific COC state existed at a specific time; (c) **B2 WORM immutable backup** — 7-year WORM retention via `scripts/5x_b2_realtime_uploader.py` triggered on every manifest write, making historical records irrecoverable from tampering even by the operator. Customer-held ed25519 signing keys (Claim 7) complete the backbone: since private signing keys are delivered to customers and erased from vendor storage, the vendor cannot forge any historical COC entry.
 
-**Promotion mechanics:** The canonical writer (`scripts/1a_manifest_writer.py`) evaluates the promotion gate criteria when an agent attempts to promote a pollen observation to NECTAR or a NECTAR entry to GOLD. The writer is the structural shield (🛡) for this discipline — a promotion that fails the confidence/age/citation gate cannot be written; the wrong thing cannot be expressed at the schema level.
+**Promotion mechanics:** The canonical writer (`scripts/1a_manifest_writer.py`) evaluates the promotion gate criteria when an agent attempts to promote a dust observation to silver or a silver entry to GOLD. The writer is the structural shield for this discipline — a promotion that fails the confidence/age/citation gate cannot be written; the wrong thing cannot be expressed at the schema level. Every promotion simultaneously writes to the forensic backbone, so the promotion event is tamper-evidently recorded.
+
+**Why append-only JSONL beats RDBMS for forensic COC (computational analysis):** See Section 9-DB for the full analysis. Summary: O(1) tail-append vs. transactional overhead; hash-chain tamper-evidence vs. mutable rows; lock-free parallel-agent writes vs. row/table locks; plain-JSONL portability and court-readability vs. proprietary DB dumps; replay/verification speed. The forensic backbone's append-only JSONL substrate is both faster and more forensically sound than a relational database for this workload.
 
 **Technical Effect:** This architecture provides three measurable improvements: (1) elimination of stale-memory contamination by preventing sub-confidence observations from entering GOLD; (2) reduction of context window saturation from approximately 60-80% (naive injection) to approximately 10-15% (NECTAR tail-30 injection) of available token budget; (3) a measurable confabulation rate gate (M8 probe, threshold ≤ 0.05 hallucination rate) that vetoes agent operation if the memory system's accuracy falls below threshold.
 
@@ -359,7 +366,7 @@ The invention provides a stigmergic coordination architecture in which the files
 
 *In-flight cap:* The manifest index enforcer (`scripts/9a_manifest_index_enforcer.py`) gates Agent() spawns by checking that `in_flight_count + agents_to_spawn ≤ 10` (the `in-flight-manifest-cap.formula.json` maximum). This prevents queue overload while maintaining the maximum parallelism the hash-chain integrity requires (COC append latency target: ≤100ms).
 
-**Technical Effect:** The stigmergic architecture eliminates the orchestrator/router bottleneck entirely. An N-agent team coordinates through filesystem reads alone. The queen agent's burden (f(0) metric, computed as `agent_share = 1 - (main_ops / total_ops)`) targets agent_share ≥ 0.90 — meaning ≥90% of all operations are performed by subagents, leaving the main agent free for high-leverage spawning decisions rather than routing. The spawn cost to main is approximately 60 tokens per agent (baseline spawn: `cost_per_agent = 60` in `scripts/2a_spawn_pressure.py`).
+**Technical Effect:** The stigmergic architecture eliminates the orchestrator/router bottleneck entirely. An N-agent team coordinates through filesystem reads alone. The pilot agent's burden (f(0) metric, computed as `agent_share = 1 - (main_ops / total_ops)`) targets agent_share ≥ 0.90 — meaning ≥90% of all operations are performed by subagents, leaving the main agent free for high-leverage spawning decisions rather than routing. The spawn cost to main is approximately 60 tokens per agent (baseline spawn: `cost_per_agent = 60` in `scripts/2a_spawn_pressure.py`). All coordination events — including handoff signals between agents — are chained into the forensic backbone, making the coordination history tamper-evidently auditable.
 
 **Working demonstration:** `scripts/2d_frontier_scanner_indexed.py` is the operational indexed frontier scanner. `scripts/2a_spawn_pressure.py` implements the sigmoid spawn pressure formula (`pressure = sigmoid(context_pct, midpoint=0.5, steepness=8.0)`) that gates spawn decisions to context-fill level.
 
@@ -444,7 +451,7 @@ The invention provides a quality measurement architecture in which evaluation pr
 *M-series probes (canonical):*
 - **M1 (Baseline Retention, threshold ≥ 0.85):** `scripts/probes/M1_baseline_retention.py` — measures what fraction of GOLD facts are correctly recalled in the current session. Score = `found_facts / total_honey_facts`. PASS ≥ 0.85.
 - **M8 (Confabulation Veto, threshold ≤ 0.05):** `scripts/probes/M8_confabulation_veto.py` — measures hallucination rate (claims with zero supporting evidence). Score = `hallucinated_claims / total_claims`. VETO if > 0.05.
-- **M11 (Honey Bootstrap Uptime, threshold ≥ 0.70):** `scripts/probes/M11_honey_hit_rate.py` — measures what fraction of agent sessions successfully accessed GOLD.md without error. Score = `successful_honey_reads / total_honey_read_attempts`. PASS ≥ 0.70.
+- **M11 (Silver Bootstrap Uptime, threshold ≥ 0.70):** `scripts/probes/M11_honey_hit_rate.py` — measures what fraction of agent sessions successfully accessed GOLD.md / SILVER.md without error. Score = `successful_reads / total_read_attempts`. PASS ≥ 0.70. (Historical term: "Honey Bootstrap Uptime" — updated to "Silver Bootstrap Uptime" per nautical ontology.)
 - **M3 (Wave History / Efficiency):** `scripts/probes/M3_wave_history_sessions.py` — efficiency of session-over-session context reuse.
 
 *F-series internal mirrors:* The F-series (`scripts/probes/F{N}_*.py`) are internal mirrors of the M-series for self-comparison (current version vs. prior version, rather than against external benchmarks). F-metric thresholds are aliased in `_meta/swarmy.config.json::f_metric_aliases`.
@@ -473,7 +480,7 @@ The five modules are integrated through the following cross-module interactions,
 
 *Integration 3 — Shapes govern everything:* The shape registry (Module 4) governs quality assessment for all other modules. The four-shields enforcement table itself is expressed as shapes (e.g., `manifest.signed_by.missing` is a shape with `target_direction: decreasing`). Memory health is expressed as shapes (M1/M8/M11 probes). Coordination health is expressed as shapes (bearing entropy, discovery depth). The shape registry is the common measurement substrate that makes all modules comparable and composable.
 
-*Integration 4 — Forensics is the substrate:* The forensic chain-of-custody log (`forensics/coc.jsonl`) is written by Module 1 (memory promotion operations), Module 2 (manifest writes), and Module 3 (hook enforcement decisions). The hash-chain integrity formula (`hash-chain-integrity.formula.json`) governs the entire forensic layer. The forensic layer provides the tamper-evident audit trail that makes the combination's claims about quality improvements legally and technically defensible.
+*Integration 4 — Forensic Cryptographic Backbone is the load-bearing substrate:* The forensic backbone (`forensics/coc.jsonl`) is not one integration point — it is the foundational layer every other module writes into. Module 1 (memory promotion) appends to the backbone on every tier transition. Module 2 (stigmergic coordination) chains manifest writes into the backbone via PostToolUse hooks. Module 3 (four-shields) writes enforcement decisions to the backbone. Module 4 (shape registry) writes verdict history to the backbone. The backbone provides: ed25519 signatures making every entry attributable; Merkle rollup enabling parallel branch histories to be incorporated via constant-size merge entries; Rekor anchoring providing public timestamp independent of operator; B2 WORM making historical backbone records irrecoverable from tampering; zero-vendor key custody preventing even the operator from forging entries. The hash-chain integrity formula (`hash-chain-integrity.formula.json`) governs the entire forensic layer. The backbone is the reason the combination's claims about quality improvements are legally and technically defensible — not because an auditor trusts the vendor's reports, but because the backbone's mathematical structure makes tampered records detectable.
 
 *Integration 5 — Measurement closes the loop:* Module 5 probes measure the health of Modules 1, 2, and 3. The membench scorer produces a single FFMx emergence quality score (`FFMx = (A × Q × D^1.5) / T`) that summarizes system health. The sigmoid spawn pressure formula (`sigmoid(context_pct, midpoint=0.5, steepness=8.0)`) uses the FFMx trajectory to adjust spawn count. The spawn adjustment affects Module 2 coordination, which feeds Module 1 memory operations, which feeds Module 5 measurement — completing the feedback loop.
 
@@ -483,11 +490,63 @@ The five modules are integrated through the following cross-module interactions,
 
 ---
 
+---
+
+### Section 9-DB — DB-vs-JSONL Computational Analysis: Why Append-Only Hash-Chained JSONL Is the Correct Forensic Substrate
+
+> **Claim support:** This section provides computational analysis supporting the forensic backbone's design choice of append-only JSONL over a traditional RDBMS. The analysis ties directly to Claim 1 (memory COC), Claim 9 (blackboard), Claim 10 (per-branch chain), and the combination claim. It demonstrates that the chosen substrate is not a convenience preference — it is the architecturally correct substrate for the forensic integrity requirements.
+
+#### 9-DB.1 Write Performance: O(1) Tail-Append vs. Transactional Overhead
+
+**Append-only JSONL:** Every COC write is a single `O(1)` append to the tail of a flat file. The operating system's append mode (`O_APPEND`) provides atomic tail-appends on POSIX systems. No transaction log, no write-ahead log, no buffer pool management, no index update. The actual write is: `sha256(prev_hash || entry_data)` → `sign(ed25519, entry_hash)` → `write(fd, json_line + '\n')`. Three operations, zero database overhead.
+
+**Traditional RDBMS (e.g., PostgreSQL, SQLite, MySQL):** Every row insertion requires: (a) transaction begin; (b) write to WAL (write-ahead log); (c) page allocation (if needed); (d) row insertion into B-tree index; (e) index update for every indexed column; (f) transaction commit; (g) WAL flush. For a forensic COC requiring sequential integrity, the RDBMS would need an additional serial sequence guarantee, typically implemented via `SELECT MAX(id)` + row insertion under a transaction — introducing serialization points that prevent concurrent writes from different agents.
+
+**Advantage: JSONL** — O(1) append vs. O(log N) B-tree insert + transaction overhead. At 74 entries (current corpus), the difference is trivial; at 1 million entries, JSONL tail-append remains O(1) while RDBMS WAL flush becomes the bottleneck.
+
+#### 9-DB.2 Tamper-Evidence: Hash-Chain Integrity vs. Mutable Rows
+
+**Append-only JSONL with hash chain:** Each entry carries `prev_entry_hash = SHA-256(line_{N-1})`. An adversary attempting to modify entry K must also update entries K+1, K+2, … N to recompute the chain — and must do so without invalidating the ed25519 signatures on each modified entry (which requires the private signing key). Tamper detection is O(N) in a single sequential scan: `scripts/9x_manifest_verifier.py` walks the file once, recomputing each hash and verifying each signature. No database query required.
+
+**Traditional RDBMS:** Database rows are mutable by design. An attacker with database write access (or a corrupt DBA) can update any historical row without leaving a trace visible to the database engine itself. Audit logging in RDBMS systems is a software feature, not a hardware property — it can be disabled, bypassed, or its log itself tampered with. The COC's tamper-evidence in the JSONL design is a mathematical property of the hash chain, not a policy property of the database configuration.
+
+**Advantage: JSONL** — cryptographic tamper-evidence is structurally enforced, not policy-enforced.
+
+#### 9-DB.3 Parallel-Agent Write Concurrency: Lock-Free vs. Row/Table Locks
+
+**Append-only JSONL:** Multiple agents writing to the same JSONL file use POSIX `O_APPEND` mode, which provides atomic appends on POSIX-compliant filesystems. The blackboard protocol (Claim 9) adds a lightweight CLAIM/COMPLETE grammar on top: each agent tail-reads before writing, and resolves collision by timestamp priority. This provides O(F) coordination cost independent of agent count N — as proven in the Wave A sealed run (3 agents, 40 files, 8,533 insertions, zero collisions; commit `07daafe0`, SHA-256: `ef166f5c…`).
+
+**Traditional RDBMS:** Concurrent writes to a shared audit table require row-level or table-level locks. Under high concurrency, lock contention introduces serialization. PostgreSQL's MVCC reduces this, but still requires transaction isolation management and occasional vacuum overhead. For N=10+ agents writing concurrently, a shared audit table becomes a serialization bottleneck. The JSONL append-only substrate eliminates this entirely: there is no lock to contend for.
+
+**Advantage: JSONL** — lock-free O(F) coordination vs. transactional serialization.
+
+#### 9-DB.4 Portability and Court-Readability: Plain Text vs. DB Dumps
+
+**Append-only JSONL:** The COC is a plain-text file readable by any text editor, any `grep`, any `python3`, any court-appointed technical expert without database installation. Each line is self-describing JSON. The file can be attached to a legal exhibit, emailed, version-controlled in git, diffed, and verified with a single shell one-liner: `python3 -c "import json,sys; [json.loads(l) for l in open(sys.argv[1])]" forensics/coc.jsonl`. No database driver, no schema migration, no proprietary format.
+
+**Traditional RDBMS:** Producing a court-admissible export requires a `pg_dump` or `mysqldump`, an explanation of the dump format, a database administrator to verify the export's completeness, and typically a chain-of-custody argument for the export process itself (was the dump complete? was it tampered post-export?). The JSONL chain's tamper-evidence is self-contained; the RDBMS export's integrity requires additional attestation.
+
+**Advantage: JSONL** — forensic portability is structural, not procedural.
+
+#### 9-DB.5 Replay and Verification Speed
+
+**Append-only JSONL:** Chain verification is a single sequential pass over the file. At 74 entries, this runs in milliseconds. At 1 million entries, a sequential scan of a 1GB JSONL file on modern hardware takes approximately 5-10 seconds. The hash-chain verification algorithm is O(N) with a small constant — SHA-256 + ed25519 verify per line.
+
+**Traditional RDBMS:** Verifying that no row has been tampered with requires either: (a) a full table scan with re-computation of expected hashes from row content (same O(N) cost, but with database query overhead per row), or (b) an application-level hash chain stored separately — which is exactly what the JSONL implementation provides, without the database layer. Adding a hash chain on top of an RDBMS recreates the JSONL architecture inside the database, adding database overhead without gaining anything.
+
+**Advantage: JSONL** — same O(N) verification cost, without database overhead.
+
+#### 9-DB.6 Conclusion: Append-Only Hash-Chained JSONL Is Correct for This Workload
+
+The forensic COC workload is: (a) write-heavy, append-only (never update, never delete); (b) read-mostly-sequential (verification and replay are sequential scans); (c) cryptographically integrity-dependent (tamper-evidence must be a structural property, not a policy); (d) parallel-write concurrent (multiple agents write simultaneously); (e) portability-critical (court exhibits, external auditors, WORM backup). Every property of this workload favors append-only JSONL over RDBMS. A relational database is the correct substrate for workloads requiring random-access updates, complex query joins, and transactional consistency across multiple tables — none of which the forensic COC requires. Using an RDBMS for the COC would add transaction overhead, row mutability risk, lock contention, proprietary format, and database operational burden while gaining nothing. The forensic backbone's JSONL substrate is the technically correct choice for forensic COC at the claimed scale and integrity requirements.
+
+---
+
 ### BRIEF CLAIMS SUMMARY
 
 *(Formal claims are optional in provisional applications. The following claim summaries are provided as good practice to establish claim scope for the non-provisional filing. A patent attorney should refine these into formal claims before the non-provisional is filed.)*
 
-**Independent Claim 1:** A computer-implemented method for AI agent memory management comprising: maintaining a first memory tier (pollen) comprising raw session-scoped observations; maintaining a second memory tier (NECTAR) comprising validated cross-session facts subject to a tail window of N entries; maintaining a third memory tier (GOLD) comprising crystallized permanent invariants; and enforcing mechanical promotion gates between tiers comprising a minimum confidence score, a minimum session age, and a minimum independent cross-session citation count, wherein the promotion decision is executed by a canonical writer script that simultaneously appends an entry to an append-only SHA-256 hash-chained audit log.
+**Independent Claim 1 (Forensic Cryptographic Backbone + Memory Hierarchy):** A computer-implemented method for AI agent memory management comprising: (a) maintaining a forensic cryptographic backbone comprising an append-only, ed25519-signed, SHA-256 hash-chained chain-of-custody ledger with parent_hashes[] DAG edges, Merkle rollup compression of branch state, Rekor transparency-log anchoring, B2 WORM immutable backup, and zero-vendor customer-key custody — this backbone is the load-bearing spine from which all integrity properties derive; (b) maintaining a first memory tier (dust) comprising raw session-scoped observations; (c) maintaining a second memory tier (silver) comprising validated cross-session facts subject to a tail window of N entries; (d) maintaining a third memory tier (GOLD) comprising crystallized permanent invariants; and (e) enforcing mechanical promotion gates between tiers comprising a minimum confidence score, a minimum session age, and a minimum independent cross-session citation count, wherein every promotion decision is executed by a canonical writer script that simultaneously appends a signed entry to the forensic backbone's append-only hash-chained audit log, creating a tamper-evident record of every memory operation backed by WORM storage and public transparency-log anchoring.
 
 **Independent Claim 2:** A computer-implemented method for multi-agent AI coordination comprising: writing agent work records to a shared flat filesystem folder as manifests having a deterministic filename grammar encoding mission address, agent type, and timestamp; scanning a pre-computed index of manifests to discover unblocked tasks in a specified mission with a specified bearing; and routing agents to unblocked tasks without message-passing or central orchestration, wherein the filesystem is the exclusive coordination substrate.
 
@@ -503,7 +562,32 @@ The five modules are integrated through the following cross-module interactions,
 
 ### ENABLEMENT STATEMENT
 
-A person having ordinary skill in the field of computer science and AI systems engineering could construct and operate the described invention based on this specification. The working implementation is demonstrated in the `faerie2` repository, which contains all referenced scripts (`scripts/1a_manifest_writer.py`, `scripts/2d_frontier_scanner_indexed.py`, `scripts/3f_membench_probes.py`, `scripts/3k_membench_scorer.py`, `scripts/2a_spawn_pressure.py`, `scripts/shapes/_shapes_lib.py`, `scripts/shapes/audit-shapes.py`), all referenced hooks (`.openhands/hooks/9x_hook-manifest-filename-enforce.py`, `9x_hook-manifest-shape-tracking.py`, `9x_hook-manifest-sign-enforce.py`), all referenced formula JSON files (`forensics/schemas/formulas/honey-confidence-floor.formula.json`, `nectar-tail-window.formula.json`, `ffmx-emergence-quality-score.formula.json`, `sigmoid-spawn-pressure.formula.json`, `mutation-fitness-rate.formula.json`, `hash-chain-integrity.formula.json`), and all referenced skill files (`.agents/skills/four-shields/SKILL.md`, `shape-registry/SKILL.md`, `survey/SKILL.md`, `spawn/SKILL.md`).
+A person having ordinary skill in the field of computer science and AI systems engineering could construct and operate the described invention based on this specification. The working implementation is demonstrated in the `reckon` repository (formerly `faerie2`), which contains all referenced scripts (`scripts/1a_manifest_writer.py`, `scripts/2d_frontier_scanner_indexed.py`, `scripts/3f_membench_probes.py`, `scripts/3k_membench_scorer.py`, `scripts/2a_spawn_pressure.py`, `scripts/shapes/_shapes_lib.py`, `scripts/shapes/audit-shapes.py`, `scripts/_merkle_tree.py`, `scripts/9x_manifest_verifier.py`), all referenced hooks (`.openhands/hooks/9x_hook-manifest-filename-enforce.py`, `9x_hook-manifest-shape-tracking.py`, `9x_hook-manifest-sign-enforce.py`), all referenced formula JSON files (`forensics/schemas/formulas/honey-confidence-floor.formula.json`, `silver-tail-window.formula.json`, `ffmx-emergence-quality-score.formula.json`, `sigmoid-spawn-pressure.formula.json`, `mutation-fitness-rate.formula.json`, `hash-chain-integrity.formula.json`), all referenced skill files (`.agents/skills/four-shields/SKILL.md`, `shape-registry/SKILL.md`, `navigate/SKILL.md`, `spawn/SKILL.md`), and the forensic backbone artifacts (`forensics/coc.jsonl` SHA-256: `06e89e5c…`, 74 entries as of 2026-06-03; Rekor anchor log_index 1630813609 for v2 genesis seal).
+
+---
+
+### CLAIM ↔ SESSION-DATA BIDIRECTIONAL LINKS
+
+> **Navigation note:** The following table provides bidirectional links between each claim and the real session forensic data that evidences it. Every claim's evidence can be traced forward from the claim to a specific artifact (forward link); every artifact can be traced back to the claim it supports (backlink). This web enables an auditor or attorney to mechanically verify any claim's demonstrability.
+
+| Claim | Forward Link (claim → evidence artifact) | Evidence Artifact | Backward Link / Provenance | COC Chain | Rekor Anchor |
+|---|---|---|---|---|---|
+| C1 (memory hierarchy) | `docs/patent/_source/citations/INT-08__honey-confidence-floor.formula.json` | SHA-256: `f6304de8…` | METRICS-PROVENANCE M-17: confidence ≥ 0.95, age ≥ 3, citations ≥ 2 thresholds confirmed | `forensics/coc.jsonl` entry `v2-genesis-0019E60BFB98B9B10F10F560B0BE4E940` | Rekor log_index 1630813609 |
+| C1 (backbone) | `forensics/coc.jsonl` | SHA-256: `06e89e5c…` (74 entries 2026-06-03) | CITATION-PROVENANCE INT-07: live append-only COC ledger | self (is the backbone) | log_index 1630813609 (v2 genesis) |
+| C2 (stigmergic coord) | `docs/patent/_source/citations/INT-10__2d_frontier_scanner_indexed.py` | SHA-256: `d7cb1b9f…` | METRICS-PROVENANCE M-05: Wave A, 40 files, 0 collisions | `forensics/manifests/2026-05-25/collab-realtime__visionary-artisan.jsonl` SHA-256 `ef166f5c…` | — (git commit `07daafe0` is the anchor) |
+| C3 (four-shields) | `.openhands/hooks/9x_hook-manifest-filename-enforce.py` | SHA-256: `d12a75d1…` | CITATION-PROVENANCE INT-26b four-shields SKILL | `forensics/coc.jsonl` (enforcement decisions chained) | — |
+| C4 (shape registry) | `docs/patent/_source/citations/INT-18__shapes.json` | SHA-256: `94c4c761…` (21 entries) | CITATION-PROVENANCE INT-18: shape registry with 21 declared shapes | `forensics/eval/baselines/mutation-baseline-T0.json` SHA-256: `7d843c1e…` | — |
+| C5 (membench) | `docs/patent/_source/citations/INT-20a__M1_baseline_retention.py` | SHA-256: `350a85f5…` | METRICS-PROVENANCE M-11: M1/M8/M11 thresholds; FAIL state disclosed in arxiv §7.7 (infrastructure valid regardless) | `forensics/eval/refusal-cross-skill-propagation/baseline-T0.json` SHA-256 `f5e1f236…` | — |
+| C7 (zero-knowledge) | `docs/patent/_source/citations/INT-21__0b-b2-provision.py` | SHA-256: `dae8fb01…` | CITATION-PROVENANCE INT-21: payment-triggered provisioning reference impl | `forensics/coc.jsonl` (provisioning events chained) | — |
+| C9 (blackboard) | `forensics/manifests/2026-05-25/collab-realtime__visionary-artisan.jsonl` | SHA-256: `ef166f5c…` | METRICS-PROVENANCE M-05: Wave A sealed run (git commit `07daafe0`); 40 files, 0 collisions | git commit `07daafe0` (immutable git object) | — |
+| C11 (Merkle rollup) | `docs/patent/_source/citations/INT-11___merkle_tree.py` | SHA-256: `04c5cade…` | METRICS-PROVENANCE M-06: 14/14 tests pass; `forensics/tests/test_merkle_roundtrip.py` SHA-256 `79d22d9e…` | `forensics/coc.jsonl` (rollup entries chained) | — |
+| C12 (two-parent merge) | `forensics/coc.jsonl` entry entry_hash `80f56b10…` | entry_hash: `80f56b10dd86ce53…` | CITATION-PROVENANCE INT-29: actual v2 genesis seal (b52b8bc2 not found; 80f56b10 confirmed) | git commit `6890b4ab` | Rekor log_index 1630813609 |
+| C13 (handshake anchor) | Sigstore Rekor log_index 1630813609 | uuid: `108e9186…` | CITATION-PROVENANCE EXT-02: Sigstore Rekor [Newman, Meyers, Torres-Arias, ACM CCS 2022] | `forensics/coc.jsonl` (handshake entries chained) | log_index 1630813609 ✓ live |
+| C14 (bundle context) | `docs/patent/_source/citations/INT-15__cost-formula-baseline-T0-20260503.json` | SHA-256: `d44aa89f…` | METRICS-PROVENANCE M-01: mean 61.53 tokens/agent, drift 4.4% | `forensics/eval/baselines/cost-formula-baseline-T0-20260503.json` | — |
+| C16 (refusal framework) | `docs/patent/_source/citations/INT-16__refusal-propagation-baseline-T0.json` | SHA-256: `f5e1f236…` (T0) / `e2d6193b…` (T1) | METRICS-PROVENANCE M-07: 2 → 8 lifecycle skills (+6 delta) | git commit `07daafe0` (T1 seal) | — |
+| C19 (folder convention) | `forensics/coc.jsonl` promotion events | SHA-256: `06e89e5c…` | CITATION-PROVENANCE INT-07: COC ledger contains promotion events | `forensics/coc.jsonl` | log_index 1630813609 |
+
+> **Backlink protocol:** Any attorney or auditor can traverse this table in reverse: given an artifact SHA-256, search CITATION-PROVENANCE.md for the INT-XX entry, which names the claim. Given a claim number, find its table row above, then follow the forward link to the artifact path. The forensic backbone (`forensics/coc.jsonl`) provides the immutable time-ordered record of when each artifact was created or written.
 
 ---
 

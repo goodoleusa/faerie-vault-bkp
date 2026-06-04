@@ -16,6 +16,10 @@ citation_style: Vancouver endnotes
 >
 > Open questions for attorney are flagged in Section 7 throughout this document.
 > A consolidated list appears at the end.
+>
+> **TERMINOLOGY NOTE (2026-06-04, nautical ontology update):** This source document uses the original implementation tier names: "pollen" (Tier 1, volatile), "NECTAR" (Tier 2, validated tail-windowed), "HONEY" (Tier 3, crystallized), and "queen" (main/pilot agent). Updated canonical terms are: "dust" (Tier 1), "silver" (Tier 2), "GOLD" (Tier 3), "pilot" (main agent). **Claim language in PATENT-CLAIMS-MASTER.md uses substrate-neutral tier descriptions ("first memory tier", "second memory tier", "third memory tier") and is unaffected by implementation term changes.** This source file is preserved verbatim as the historical first-draft authority. All substantive updates are in PATENT-CLAIMS-MASTER.md and PATENT-APPLICATION-DRAFT.md.
+>
+> **FORENSIC BACKBONE NOTE (2026-06-04):** The forensic cryptographic backbone (append-only ed25519-signed hash-chained COC, Merkle rollups, Rekor anchoring at log_index 1630813609, B2 WORM, zero-vendor key custody) is now formally framed as the load-bearing spine of Claim 1 and the combination claim. All other modules inherit their integrity from this backbone. See PATENT-APPLICATION-DRAFT.md §BACKBONE NOTE for full re-centering narrative.
 
 ---
 
@@ -142,7 +146,7 @@ Formal USPTO drawings are not required for provisional applications. The followi
 
 **Figure 1 — Four-Shields Lifecycle Enforcement Stack.** Shows the four-layer enforcement architecture: structural layer (schema enforcement, canonical writer script), cognitive layer (keyword-triggered skill files), reactive layer (PostToolUse hooks at OS write boundary), and recovery layer (periodic audit cron). Illustrates the cheaper-earlier cost gradient. Source: PATENT-APPLICATION-DRAFT.md Figure 1; implementing script: `scripts/1a_manifest_writer.py` (structural), `.openhands/hooks/9x_hook-manifest-filename-enforce.py` (reactive).
 
-**Figure 2 — Memory Orchestration Hierarchy.** Shows the four-tier memory architecture: pollen (volatile session observations), NECTAR (validated tail-windowed cross-session facts), HONEY (crystallized permanent invariants), and forensics (immutable append-only audit layer). Shows mechanical promotion gates between tiers with threshold criteria. Source: PATENT-APPLICATION-DRAFT.md Figure 2.
+**Figure 2 — Memory Orchestration Hierarchy.** Shows the four-tier memory architecture: dust/pollen (volatile session observations, Tier 1), silver/NECTAR (validated tail-windowed cross-session facts, Tier 2), GOLD/HONEY (crystallized permanent invariants, Tier 3), and forensics — the **Forensic Cryptographic Backbone** (immutable append-only ed25519-signed hash-chained COC, Merkle rollups, Rekor anchoring, B2 WORM). The backbone is the load-bearing spine: all promotion events chain into it; Rekor anchors provide public tamper-evidence; B2 WORM provides 7-year immutability. Source: PATENT-APPLICATION-DRAFT.md Figure 2.
 
 **Figure 3 — Stigmergic Agent Coordination via Filesystem Manifests.** Shows the sequence diagram of multi-agent coordination without message-passing: queen spawns agents with ~60-token context cost each; agents write manifests to the shared daily folder; agents read the frontier index to discover unblocked work; queen reads dashboard lines (~20 tokens each) after TaskNotification. Source: PATENT-APPLICATION-DRAFT.md Figure 3.
 
@@ -207,13 +211,13 @@ The invention provides a four-tier memory architecture governing how agent obser
 
 **Tier 1 — Pollen (volatile observations):** Raw session-scoped observations embedded in manifest `_evolution_log[]` arrays. Session-scoped; do not persist without passing promotion gates.
 
-**Tier 2 — NECTAR (validated cross-session facts):** A tail-windowed memory store (default 30 entries, approximately 21,000 tokens injection cost at 700 tokens per entry average). Facts carry confidence scores 0.70-0.94. The tail window prevents context saturation while maintaining continuity.
+**Tier 2 — Silver (formerly NECTAR, validated cross-session facts):** A tail-windowed memory store (default 30 entries, approximately 21,000 tokens injection cost at 700 tokens per entry average). Facts carry confidence scores 0.70-0.94. The tail window prevents context saturation while maintaining continuity.
 
-**Tier 3 — HONEY (crystallized permanent invariants):** Write-protected. Promotion gate: confidence >= 0.95 AND session age >= 3 sessions AND independent cross-session citation count >= 2. These thresholds are encoded in `forensics/schemas/formulas/honey-confidence-floor.formula.json` and enforced by the canonical writer `scripts/1a_manifest_writer.py`. Stored at `~/.claude/HONEY.md` (global, all projects) and `{repo}/HONEY.md` (project-specific; project HONEY takes precedence).
+**Tier 3 — GOLD (formerly HONEY, crystallized permanent invariants):** Write-protected. Promotion gate: confidence >= 0.95 AND session age >= 3 sessions AND independent cross-session citation count >= 2. These thresholds are encoded in `forensics/schemas/formulas/honey-confidence-floor.formula.json` (SHA-256: `f6304de8…`) and enforced by the canonical writer `scripts/1a_manifest_writer.py`. Stored at `~/.claude/GOLD.md` (global, all projects) and `{repo}/GOLD.md` (project-specific; project GOLD takes precedence).
 
-**Tier 4 — Forensics (immutable permanent selvage):** The COC ledger (Section 8.A) records every memory operation. The promotion pipeline simultaneously writes to HONEY, appends to the COC, and triggers WORM backup.
+**Tier 4 — Forensic Cryptographic Backbone (immutable permanent selvage — the load-bearing spine):** The append-only, ed25519-signed, SHA-256 hash-chained COC ledger (`forensics/coc.jsonl`, 74 entries as of 2026-06-03, SHA-256: `06e89e5c…`) is the structural foundation providing tamper-evidence to all other tiers. The promotion pipeline simultaneously writes to GOLD, appends a signed entry to the backbone COC, and triggers B2 WORM backup (7-year retention). Merkle rollups (`scripts/_merkle_tree.py`, 14/14 tests) compress branch histories to constant-size roots. Rekor transparency-log anchoring (log_index 1630813609 for v2 genesis seal) provides public tamper-evidence independent of operator. Zero-vendor key custody (Claim 7) ensures vendor cannot forge historical entries.
 
-**Measurement integration:** M-series evaluation probes (M1: baseline retention >= 0.85; M8: confabulation veto <= 0.05; M11: honey bootstrap uptime >= 0.70) are themselves first-class shapes in the shape registry, creating a closed loop in which memory architecture changes mechanically affect probe scores without requiring human evaluation.
+**Measurement integration:** M-series evaluation probes (M1: baseline retention >= 0.85; M8: confabulation veto <= 0.05; M11: silver bootstrap uptime >= 0.70, formerly "honey bootstrap") are themselves first-class shapes in the shape registry, creating a closed loop in which memory architecture changes mechanically affect probe scores without requiring human evaluation. Probe results are chained into the backbone, making quality history tamper-evident.
 
 ---
 

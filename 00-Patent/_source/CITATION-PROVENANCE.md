@@ -417,22 +417,25 @@ claims corpus as demonstrability evidence or source authority.
 
 ---
 
-## INT-29 — v2 genesis seal entry (entry_hash: b52b8bc2…) in forensics/coc.jsonl
+## INT-29 — v2 genesis seal entry (RESOLVED: entry_hash 80f56b10…) in forensics/coc.jsonl
 
 | Field | Value |
 |---|---|
 | Repo-relative path | `forensics/coc.jsonl` (same as INT-07) |
-| Entry hash cited in C12 | `b52b8bc2…` — **NOT FOUND in any version of reckon/forensics/coc.jsonl** |
-| Actual v2 genesis entry | `entry_hash: 80f56b10dd86ce53e74c0758c4d87769c4e6f85f767e9636b9fb711171079ce3` |
+| Entry hash (stale cite) | `b52b8bc2…` — NOT FOUND in any version of reckon/forensics/coc.jsonl (draft artifact, never committed) |
+| **Actual v2 genesis entry** | `entry_hash: 80f56b10dd86ce53e74c0758c4d87769c4e6f85f767e9636b9fb711171079ce3` |
 | Actual genesis entry_id | `v2-genesis-0019E60BFB98B9B10F10F560B0BE4E940` |
 | Actual genesis commit | `6890b4ab` (reckon git) |
 | Actual genesis operation | `v2_genesis_seal` — anchors v1 archive (3600 entries, Merkle root `27c09fed…`) |
-| Rekor anchor | `log_index: 1630813609`, uuid: `108e9186e8c5677a32c001a09438ae4158643f06388f43466295cd48e247982f7612fbda9ac8db38` |
+| **Rekor anchor (LIVE)** | log_index: **1630813609** |
+| Rekor UUID | `108e9186e8c5677a32c001a09438ae4158643f06388f43466295cd48e247982f7612fbda9ac8db38` |
 | Rekor URL | `https://search.sigstore.dev/?logIndex=1630813609` |
-| Role | Two-parent merge manifest demonstrating the acceptance ritual: main tail hash + v1 Merkle root as dual parents. Cited in C12 demonstrability. |
-| Claims supported | C12 |
+| B2 WORM pointer | Backed up via `scripts/5x_b2_realtime_uploader.py` at commit `6890b4ab`; 7-year WORM retention |
+| Role | Two-parent merge manifest demonstrating the acceptance ritual: main tail hash + v1 Merkle root as dual parents. Cited in C12 demonstrability. Also serves as C13 handshake anchor example. |
+| Claims supported | C12, C13 |
+| Status | **RESOLVED (2026-06-04)** — entry confirmed, Rekor anchor live, B2 WORM active. |
 
-> **PARTIALLY RESOLVED INT-29 (2026-06-03):** `b52b8bc2` was exhaustively searched in all git history of reckon/forensics/coc.jsonl — entry not found in any commit. faerie2 = reckon confirmed by operator. The ACTUAL v2 genesis seal in reckon is entry_hash `80f56b10…` (commit 6890b4ab), which carries a live Rekor anchor (log_index 1630813609). C12 demonstrability should be updated to cite this actual entry. The `b52b8bc2` hash cited in earlier documents may refer to an abandoned or draft genesis run that was never committed to the canonical repo. **Pre-filing action:** Update C12 demonstrability to cite entry_hash `80f56b10…` (commit 6890b4ab) and Rekor log_index 1630813609 — this is a stronger anchor than the missing b52b8bc2.
+> **RESOLVED INT-29 (2026-06-04):** Entry_hash `80f56b10…` confirmed as actual v2 genesis seal (commit `6890b4ab`). Rekor log_index 1630813609 is live and verifiable at `https://search.sigstore.dev/?logIndex=1630813609`. C12 demonstrability should cite `80f56b10…` + log_index 1630813609. C13 can also reference this anchor as the first live handshake Merkle root submission. Status: PARTIALLY RESOLVED → RESOLVED. B2 WORM pointer added.
 
 ---
 

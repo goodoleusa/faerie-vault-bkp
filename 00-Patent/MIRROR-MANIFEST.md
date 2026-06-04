@@ -1,18 +1,25 @@
 ---
 title: "MIRROR-MANIFEST — reckon/docs/patent ↔ faerie-vault/00-Patent"
-date: 2026-06-03
-mission: patent-complete
-agent: patent-complete-agent
-status: RESOLVED — all files match
+date: 2026-06-04
+mission: patent.forensic-backbone.recenter
+agent: claude-sonnet-4-6
+status: RESOLVED — all files match (updated 2026-06-04)
 ---
 
 # MIRROR-MANIFEST
 
 **Canonical authority:** `reckon/docs/patent/_source/` (and `_source/citations/` subdir). faerie-vault is the mirror. [Canonical path moved from reckon/business/patent/ on 2026-06-04]
 
-**Mirror structure created 2026-06-03; canonical path updated 2026-06-04:** `faerie-vault/00-Patent/_source/` mirrors `reckon/docs/patent/_source/` exactly (57 files, 0 mismatches).
+**Mirror structure updated 2026-06-04 (backbone re-center sprint):** `faerie-vault/00-Patent/_source/` mirrors `reckon/docs/patent/_source/` exactly.
 
-**Top-level vault files** (`faerie-vault/00-Patent/CITATION-PROVENANCE.md`, `METRICS-PROVENANCE.md`, `PATENT-CLAIMS-MASTER.md`) also updated to match canonical repo versions.
+**Files updated in this sprint (2026-06-04):**
+- `METRICS-PROVENANCE.md` — M-19 ASSERTION-ONLY → VERIFIED (Rekor log_index 1630813609); M-20 → VERIFIED (entry_hash 80f56b10); M-12 → PARTIALLY VERIFIED
+- `CITATION-PROVENANCE.md` — INT-29 PARTIALLY RESOLVED → RESOLVED (Rekor anchor + B2 WORM added)
+- `PATENT-CLAIMS-MASTER.md` — C12 demonstrability updated (80f56b10 + Rekor); C13 Rekor anchor added; C1 terminology note added
+- `PATENT-PROVISIONAL-19-CLAIMS-FULL.md` — backbone note + terminology update added; Tier 2/3/4 descriptions updated
+- `PATENT-APPLICATION-DRAFT.md` (top-level) — forensic backbone re-centered as load-bearing spine; DB-vs-JSONL analysis added (Section 9-DB); dust/silver terminology; claim↔session-data bidirectional links table
+
+**Top-level vault files** (`faerie-vault/00-Patent/CITATION-PROVENANCE.md`, `METRICS-PROVENANCE.md`, `PATENT-CLAIMS-MASTER.md`, `PATENT-APPLICATION-DRAFT.md`) updated to match canonical repo versions.
 
 ---
 
@@ -24,17 +31,17 @@ status: RESOLVED — all files match
 | `_source/BAA-TEMPLATE.md` | `a369535181343a9d…` | `a369535181343a9d…` | MATCH |
 | `_source/BIBLIOGRAPHY-VERIFIED.md` | `353d1edc7b1f2947…` | `353d1edc7b1f2947…` | MATCH |
 | `_source/BLURBS-BRAINSTORM.md` | `2724578a6f8a30e0…` | `2724578a6f8a30e0…` | MATCH |
-| `_source/CITATION-PROVENANCE.md` | `451150eefad21079…` | `451150eefad21079…` | MATCH |
+| `_source/CITATION-PROVENANCE.md` | `74d9c279c9c2ee23…` | `74d9c279c9c2ee23…` | MATCH |
 | `_source/DPA-TEMPLATE.md` | `78772c7a1e678268…` | `78772c7a1e678268…` | MATCH |
 | `_source/ELA-COMPLIANCE-ADDENDUM.md` | `e258ed31d9c05cc9…` | `e258ed31d9c05cc9…` | MATCH |
 | `_source/ELA-DRAFT.md` | `beb6054f7b3b4566…` | `beb6054f7b3b4566…` | MATCH |
-| `_source/METRICS-PROVENANCE.md` | `86da3b609611f2de…` | `86da3b609611f2de…` | MATCH |
+| `_source/METRICS-PROVENANCE.md` | `dbb5ca41922524ce…` | `dbb5ca41922524ce…` | MATCH |
 | `_source/OPEN-QUESTIONS.md` | `484e606ebe8e77fe…` | `484e606ebe8e77fe…` | MATCH |
 | `_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md` | `559cc991af4540b7…` | `559cc991af4540b7…` | MATCH |
 | `_source/PATENT-CLAIM-8-CRYPTOGRAPHIC-COMPLETION-SEAL.md` | `861db70530686380…` | `861db70530686380…` | MATCH |
 | `_source/PATENT-CLAIM-9-PUBLIC-HASHCHAINED-BLACKBOARD.md` | `11e1fe04deaaecf0…` | `11e1fe04deaaecf0…` | MATCH |
-| `_source/PATENT-CLAIMS-MASTER.md` | `f2a8210e7bb405c4…` | `f2a8210e7bb405c4…` | MATCH |
-| `_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md` | `d45f3aa651a951d6…` | `d45f3aa651a951d6…` | MATCH |
+| `_source/PATENT-CLAIMS-MASTER.md` | `08c818c8260db35c…` | `08c818c8260db35c…` | MATCH |
+| `_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md` | `00e0efb7364a34eb…` | `00e0efb7364a34eb…` | MATCH |
 | `_source/PATENT-PROVISIONAL-SPECIFICATION.md` | `db6303ce8d68ac19…` | `db6303ce8d68ac19…` | MATCH |
 | `_source/RETENTION-PERIODS-VERIFIED.md` | `9b89abf848b6296c…` | `9b89abf848b6296c…` | MATCH |
 
@@ -91,9 +98,10 @@ status: RESOLVED — all files match
 
 | File | Repo (_source) SHA-256 | Vault (top-level) SHA-256 | Match |
 |---|---|---|---|
-| `CITATION-PROVENANCE.md` | `451150eefad21079…` | `451150eefad21079…` | MATCH |
-| `METRICS-PROVENANCE.md` | `86da3b609611f2de…` | `86da3b609611f2de…` | MATCH |
-| `PATENT-CLAIMS-MASTER.md` | `f2a8210e7bb405c4…` | `f2a8210e7bb405c4…` | MATCH |
+| `CITATION-PROVENANCE.md` | `74d9c279c9c2ee23…` | `74d9c279c9c2ee23…` | MATCH |
+| `METRICS-PROVENANCE.md` | `dbb5ca41922524ce…` | `dbb5ca41922524ce…` | MATCH |
+| `PATENT-CLAIMS-MASTER.md` | `08c818c8260db35c…` | `08c818c8260db35c…` | MATCH |
+| `PATENT-APPLICATION-DRAFT.md` | `3720d704b68e95a8…` | `3720d704b68e95a8…` | MATCH |
 
 ---
 
@@ -104,9 +112,11 @@ status: RESOLVED — all files match
 | Total canonical repo files mirrored | 57 |
 | Files in vault/_source matching repo | 57 |
 | Mismatches | 0 |
-| Top-level vault files updated | 3 (CITATION-PROVENANCE, METRICS-PROVENANCE, PATENT-CLAIMS-MASTER) |
+| Top-level vault files updated | 4 (CITATION-PROVENANCE, METRICS-PROVENANCE, PATENT-CLAIMS-MASTER, PATENT-APPLICATION-DRAFT) |
+| **2026-06-04 sprint files synced** | METRICS-PROVENANCE (M-19/M-20/M-12 enriched), CITATION-PROVENANCE (INT-29 resolved), PATENT-CLAIMS-MASTER (C12/C13 Rekor anchors), PATENT-PROVISIONAL-19-CLAIMS-FULL (backbone+terms notes), PATENT-APPLICATION-DRAFT (backbone spine, DB-vs-JSONL, dust/silver, claim links) |
 
 ---
 
 *Generated 2026-06-03. Mission: patent-complete. Agent: patent-complete-agent.*
 *Prior mismatches: 3 top-level vault files lagged behind repo; 0 _source/ subdir (newly created). All resolved.*
+*Updated 2026-06-04. Mission: patent.forensic-backbone.recenter. Agent: claude-sonnet-4-6. 5 files updated (see sprint files synced row above). SHA-256 hashes recomputed. All matches confirmed.*
