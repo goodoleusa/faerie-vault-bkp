@@ -127,3 +127,98 @@ git push origin main
 
 See `reckon/INSTALL.md` for environment setup and `reckon/CHART.md` for the
 repo map.
+
+---
+
+## [Source: VAULT-SYNC-GUIDE.md] Syncthing Setup for Cross-Platform Collaboration
+
+> **TL;DR:**
+> - Syncthing keeps the Obsidian vault in sync across Windows, WSL, and ZimaBoard.
+> - Add both Windows path (`D:\...`) and WSL path (`/mnt/d/...`) as separate Syncthing folders.
+> - Conflict resolution: Windows GUI wins; WSL is read-mostly.
+> - See the Syncthing web UI at `http://127.0.0.1:8384` to monitor sync status.
+> - ZimaBoard is the off-site backup node — always-on, runs headless Syncthing.
+
+Two investigators, two vaults, one shared layer. This guide sets up bidirectional sync of `00-SHARED/` only — private folders (01-PROTECTED/, 30-Evidence/) stay local.
+
+### Architecture Overview
+
+```
+Person A (Windows 11 + WSL2)          Person B (macOS / Linux)
+─────────────────────────────          ──────────────────────────
+CyberOps-UNIFIED\                      ~/CyberOps-Vault/
+  01-PROTECTED\   ← local only           01-PROTECTED/  ← local only
+  30-Evidence\    ← local only           30-Evidence/   ← local only
+  00-SHARED\  ◄─── junction ───►  D:\Syncthing\CyberOps-SHARED\
+                                         ▲
+                                   Syncthing sync
+                                         ▼
+                               ~/Syncthing/CyberOps-SHARED/
+                                         │
+                                  symlink ▼
+                               ~/CyberOps-Vault/00-SHARED/
+```
+
+**Why symlinks/junctions:** Syncthing syncs a flat folder. The junction/symlink lets Obsidian see `00-SHARED/` as part of its vault tree while Syncthing operates on it independently. Neither side's private folders are ever exposed to the sync layer.
+
+### Person A Setup (Windows 11 + WSL2)
+
+Syncthing runs natively on Windows — do not install it inside WSL.
+
+```powershell
+# Install via winget
+winget install Syncthing.Syncthing
+
+# Create sync folder
+New-Item -ItemType Directory -Path "D:\0LOCAL\Syncthing\CyberOps-SHARED" -Force
+
+# Create junction (run as Administrator)
+New-Item -ItemType Junction `
+  -Path "D:\0LOCAL\Syncthing\CyberOps-SHARED\00-SHARED" `
+  -Target "D:\0LOCAL\0-ObsidianTransferring\CyberOps-UNIFIED\00-SHARED"
+```
+
+Add folder in Syncthing UI (`localhost:8384`): Label=`CyberOps-SHARED`, Type=`Send & Receive`, Versioning=`Staggered (30 days)`. Ignore patterns: `.obsidian`, `.trash`, `*.sqlite*`, `__pycache__`, `*.pyc`, `.DS_Store`.
+
+### Person B Setup (macOS / Linux)
+
+```bash
+# macOS
+brew install syncthing && brew services start syncthing
+
+# Linux
+sudo apt install syncthing && systemctl --user enable syncthing
+
+# Create directories and symlink
+mkdir -p ~/CyberOps-Vault/00-SHARED ~/Syncthing/CyberOps-SHARED
+ln -s ~/CyberOps-Vault/00-SHARED ~/Syncthing/CyberOps-SHARED/00-SHARED
+```
+
+Accept the shared folder from Person A in the Syncthing UI; set local path to `~/Syncthing/CyberOps-SHARED`.
+
+### Ownership Protocol (Critical)
+
+**One writer per file — eliminates most conflicts before they happen.**
+
+| Files | Owner |
+|-------|-------|
+| `Agent-Outbox/`, `Human-Inbox/`, `Droplets/`, `Dashboards/` | Person A's agents (write); both humans (read) |
+| `Queue/sprint-queue.md`, `00-Inbox/` | Humans write; agents read |
+| `.ann.md` files | Designated human only |
+
+Annotation convention: `network-map.md` → annotate as `network-map.ann.md` (sibling file). Agents never touch `.ann.md`.
+
+### Conflict Prevention
+
+Syncthing uses last-write-wins and surfaces conflicts as `.sync-conflict-YYYYMMDD-HHMMSS-deviceid` files. Conflicts are rare because agent outputs are write-once. If a conflict appears: open both, merge, save to original filename, delete the conflict file.
+
+### WSL agents
+
+The vault at `D:\0LOCAL\...` is accessible from WSL at `/mnt/d/0LOCAL/...`. Syncthing runs on Windows side, writes to `D:\`. WSL agents read/write at `/mnt/d/` — they see the same files.
+
+### Syncthing Ports
+
+- TCP 22000 — data sync
+- UDP 21027 — local discovery
+
+*Full setup guide with all 9 sections archived at `00-SHARED/docs/archive/VAULT-SYNC-GUIDE.md`.*

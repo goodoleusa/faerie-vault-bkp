@@ -1145,3 +1145,86 @@ philosophy that operational knowledge should travel with the tools that use it.
 - `00-SHARED/HOW-SYNC-WORKS.md` — sync + env vars; **`*.sha256` files** = one-line hash proving the starting doc the agent delivered
 - `00-SHARED/00-SHARED.md` — shared zone vs protected folders
 - CyberTemplate repo: `launch/VAULT-OBSIDIAN-COC-SYNC.md` — short bridge from the repo side
+
+---
+
+## [Source: VAULT-RULES.md] Vault Governance Rules
+
+**Any agent or automation touching this vault MUST read this section before writing anything.**
+
+### Folder numbering policy
+
+Do not require `NN-` numeric prefixes on new folders the human creates for investigations or partners. Use plain names (`Cases/`, `Fieldwork/`) if you like.
+
+**Exceptions (keep obvious in listings & permissions):**
+- **`01-PROTECTED/`** — private / sensitive / human-gated; treat as **protected**.
+- **`00-SHARED/`** — **agent write zone**; hooks and `CT_VAULT_SHARED` assume this path — **do not rename** without updating tooling.
+
+Legacy template roots (`10-Investigations/`, `20-Entities/`, …) may stay numbered for this repo; they are **not** a mandate for your additions.
+
+### Communication Model (CyberOps-UNIFIED)
+
+```
+FOLDER                           DIRECTION           WHO WRITES      WHO READS
+──────────────────────────────────────────────────────────────────────────────────
+00-SHARED/Agent-Inbox/        humans → agents     Humans          Agents poll/claim
+00-SHARED/Agent-Outbox/       agents → humans     Agents          Humans review
+00-SHARED/Human-Inbox/       agents → humans     Agents (flags)  Humans (REVIEW-INBOX)
+00-SHARED/Human-Outbox/      humans → agents     Humans          Agents read (instructions)
+00-SHARED/Inbox/             humans → agents     Humans + agents Task drop
+00-SHARED/Hive/              anyone → anyone     Anyone          Anyone (casual, informal)
+──────────────────────────────────────────────────────────────────────────────────
+01-PROTECTED/                    PRIVATE             Humans          Anyone read (no agent writes)
+```
+
+### Hard Rules for Agents
+
+1. **NEVER write to `01-PROTECTED/`** unless the human has explicitly expanded permissions for a scoped task.
+2. **NEVER write to `00-SHARED/Memories/human/`** — human-only memory space.
+3. **NEVER wholesale replace index files** (VAULT-INDEX.md, KNOWLEDGE-BASE.md, etc.) — read first, then MERGE/INSERT.
+4. **NEVER overwrite `*-FULL-*.md` or `*-BACKUP-*.md`** — verbatim locked snapshots.
+5. **When in doubt:** write to `00-SHARED/Agent-Outbox/` and let the human decide where it belongs.
+
+### Multi-User / Shared Vault Pattern
+
+If this vault is shared via Syncthing or IPFS:
+- Each person's **`01-PROTECTED/`** is their own — only they promote content there.
+- **`00-SHARED/Agent-Inbox/`** and **`00-SHARED/Agent-Outbox/`** are shared.
+- **`00-SHARED/Hive/`** is fully shared — everyone's casual drops land here.
+- Investigation findings: **`00-SHARED/Human-Inbox/`** → human review → promotion.
+
+---
+
+## [Source: TERMINOLOGY.md] Core Terminology — Four Orthogonal Dimensions
+
+The faerie2/Reckon system uses four distinct dimensions to describe work. They are **NOT interchangeable.**
+
+| Term | Definition | Measures |
+|------|-----------|---------|
+| **SPRINT** | Continuous human interaction session (opens Claude Code → `/end` or auto-compact) | Human agency + satisfaction |
+| **SESSION** | Token budget consumption cycle (0 tokens → auto-compact) | Model efficiency + cost |
+| **WAVE** | Discrete cycle of parallel agent dispatch + manifest return (W1 LIFTOFF / W2 CRUISE / W3 INSERTION) | Agent dispatch pressure + compass edges found |
+| **PHASE** | Semantically coherent investigation maturity stage (SEED/DEEPEN/EXTEND/FULL) | Investigation quality + gate progression |
+
+### Wave Types
+- **W1 LIFTOFF** — Context fill ≤25%; 4–5 parallel agents; Haiku; quality gate ≥0.60
+- **W2 CRUISE** — Context fill ≤65%; 2–3 agents; Sonnet; quality gate ≥0.75
+- **W3 INSERTION** — Context fill ≤95%; 1–2 async background; Sonnet; quality gate ≥0.80
+
+### Phase Gates
+- **SEED** — quality ≥0.50, belief ≥0.50 (hypothesis formation)
+- **DEEPEN** — quality ≥0.70, belief ≥0.50 (focused ingest)
+- **EXTEND** — quality ≥0.80, belief ≥0.75 (cross-validation)
+- **FULL** — quality ≥0.85, belief ≥0.75 (production-ready)
+
+### Compass Bearings
+- **N (North)** — unblock predecessor; reverse-dependency work
+- **S (South)** — conclude / move downstream; forward-dependency work
+- **E (East)** — parallel / sister work at the same DAG level
+- **W (West)** — return to genesis / baseline; backtrack to anchor
+
+### FFMx — Force Multiplier Metric
+`FFMx = (Manifests + Quality-Artifacts + Findings) / Tokens-Consumed`
+Drives wave dispatch: high-FFMx sessions spawn more agents.
+
+*Full definitions, anti-patterns, and cross-dimensional interaction maps archived at `_archive-2026-06-04/TERMINOLOGY.md` and `_archive-2026-06-04/VAULT-RULES.md`.*

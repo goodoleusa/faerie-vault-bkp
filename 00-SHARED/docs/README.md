@@ -1,22 +1,27 @@
 ---
 type: index
-status: active
+status: archived-mirror
 created: 2026-04-21
-updated: 2026-04-24
+updated: 2026-06-04
 tags: [index, docs, faerie]
 up: ../README.md
-down: [FOUNDER-GUIDE.md, COMMAND-GUIDE.md, SETUP-CHECKLIST.md, ONBOARDING.md, PHILOSOPHY.md, MODEL-ROUTING.md, MEMORY-AS-SERVICE-ARCHITECTURE.md, SPAWN-BOILERPLATE-INJECTION-ARCHITECTURE.md, business/README.md, design/README.md, narrative/README.md]
+note: "This folder was a mirror of reckon/docs/. Canonical docs live at reckon/docs/. 104 files archived to _archive-2026-06-04/ on 2026-06-04."
 ---
 
 > [↑ Readme](../README.md) · [⌂ Home](../README.md)
 
-# docs/ — Active Documentation
+# docs/ — Archived Mirror (canonical: reckon/docs/)
 
-Current living documents for the faerie orchestration system. Everything here is actively maintained.
-Historical narratives and sprint artifacts are in `docs/ARCHIVE/`.
+> **NOTICE (2026-06-04):** This folder was a legacy mirror of `reckon/docs/`. The 104 docs
+> that lived here have been archived to `_archive-2026-06-04/`. The **canonical source of
+> truth for all Reckon documentation is `reckon/docs/`** (the engine repo).
+>
+> Two files are retained here:
+> - `ARCHITECTURE.md` — vault-specific architecture notes
+> - `README.md` — this notice
 
-**Last updated:** 2026-04-24 (consolidation phase complete)  
-**Total docs:** 28 active (down from 51 pre-consolidation)
+**Active docs:** See [reckon/docs/](../../../../reckon/docs/) — that tree is always current.  
+**Archived (2026-06-04):** 84 files in `_archive-2026-06-04/`
 
 ---
 
