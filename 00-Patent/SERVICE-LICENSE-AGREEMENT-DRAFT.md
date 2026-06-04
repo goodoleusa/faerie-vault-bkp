@@ -12,7 +12,7 @@ citation_style: Footnotes (sparse legal citations inline)
 >
 > Consolidated commercial-contract bundle for the swarmy AI orchestration platform's first enterprise customer engagement. Engage a privacy + commercial attorney for jurisdiction-specific refinement before signature.
 >
-> **Ancestor sources** (originals preserved verbatim at `business/patent/_source/`):
+> **Ancestor sources** (originals preserved verbatim at `docs/patent/_source/`):
 >
 > 1. `ELA-DRAFT.md` — Enterprise License Agreement (242 LOC): reverse-indemnification, as-is warranty, liability cap, IP retention, progenitor assertion, OSS compatibility
 > 2. `ELA-COMPLIANCE-ADDENDUM.md` — 6 compliance recital sections (Data Sovereignty, Key Custody, Conduit Role, BAA reference, DPA reference, Records Retention)
@@ -20,7 +20,7 @@ citation_style: Footnotes (sparse legal citations inline)
 > 4. `DPA-TEMPLATE.md` — GDPR Data Processing Agreement template with Standard Contractual Clauses (Commission Implementing Decision (EU) 2021/914)
 > 5. `RETENTION-PERIODS-VERIFIED.md` — Triple-fact-checked retention reference (HIPAA 6yr, PHIPA Ontario 10yr, PIPEDA/CCPA/Quebec Law 25/GDPR principle-based, IRS 3yr standard with 7yr conventional)
 >
-> **Promoted to `business/patent/` 2026-05-23** from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`.
+> **Promoted to `business/patent/` 2026-05-23, consolidated to `docs/patent/` 2026-06-04** from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`.
 
 ---
 

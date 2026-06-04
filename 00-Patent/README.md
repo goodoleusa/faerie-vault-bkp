@@ -1,5 +1,7 @@
-# 📑 Business / Patent — Consolidated Drafts
+# 📑 Patent — Consolidated Drafts (Canonical)
 
+> **Canonical location: `docs/patent/`** (consolidated 2026-06-04 from `business/patent/`)
+>
 > 2026-05-23 — promoted from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`. Original 11 agent-authored deliverables preserved verbatim at `_source/` (ancestor provenance, not deletion).
 
 ## What's here (3 consolidated drafts + PDFs for sharing)
@@ -15,7 +17,7 @@ PDFs in `pdfs/` are styled at **14pt DejaVu Sans, 0.75in margins, with TOC + col
 ## Folder structure
 
 ```
-business/patent/
+docs/patent/
 ├── README.md                                   ← you are here
 ├── PATENT-APPLICATION-DRAFT.md                 ← consolidated (cites _source/)
 ├── SERVICE-LICENSE-AGREEMENT-DRAFT.md          ← consolidated (cites _source/)
@@ -43,7 +45,7 @@ business/patent/
 
 | # | Claim | Novelty |
 |---|---|---|
-| 1 | Memory orchestration hierarchy (HONEY ↔ NECTAR ↔ pollen ↔ forensics) with mechanical promotion gates | Eliminates stale-memory + context saturation via gates, not LLM judgment |
+| 1 | Memory orchestration hierarchy (GOLD ↔ NECTAR ↔ pollen ↔ forensics) with mechanical promotion gates | Eliminates stale-memory + context saturation via gates, not LLM judgment |
 | 2 | Stigmergic agent coordination via filesystem manifests (w3w mission + compass bearings) | No orchestrator/router; N-agent coordination via filename grammar |
 | 3 | Four-shields enforcement (🛡🧠⛓🪞 cheaper-earlier stack) | Biological-immune-system pattern applied to AI integrity |
 | 4 | Shape-registry mechanical verdict classification | Deterministic + reproducible quality signals; no LLM-as-judge |
@@ -64,12 +66,12 @@ business/patent/
 
 ## Vault mirror
 
-Same structure mirrored at `$VAULT/00-SHARED/Business/Patent/` for Obsidian-curated reading + human-edit promotion to canonical (via authorship signature — see `AGENTS.md` § "Authorship frontmatter — additive contributor list").
+Same structure mirrored at `faerie-vault/00-Patent/` for Obsidian-curated reading + human-edit promotion to canonical (via authorship signature — see `AGENTS.md` § "Authorship frontmatter — additive contributor list").
 
 ## PDF generation command (operator can re-run anytime)
 
 ```bash
-cd business/patent
+cd docs/patent
 for base in PATENT-APPLICATION-DRAFT SERVICE-LICENSE-AGREEMENT-DRAFT SUPPORTING-DOCS; do
   # Pre-render mermaid diagrams via mermaid.ink (public service)
   python3 scripts/render-mermaid-to-png.py "${base}.md" --out-dir pdfs/

@@ -1,5 +1,5 @@
 ---
-title: "MIRROR-MANIFEST — reckon/business/patent ↔ faerie-vault/00-Patent"
+title: "MIRROR-MANIFEST — reckon/docs/patent ↔ faerie-vault/00-Patent"
 date: 2026-06-03
 mission: patent-complete
 agent: patent-complete-agent
@@ -8,9 +8,9 @@ status: RESOLVED — all files match
 
 # MIRROR-MANIFEST
 
-**Canonical authority:** `reckon/business/patent/_source/` (and `_source/citations/` subdir). faerie-vault is the mirror.
+**Canonical authority:** `reckon/docs/patent/_source/` (and `_source/citations/` subdir). faerie-vault is the mirror. [Canonical path moved from reckon/business/patent/ on 2026-06-04]
 
-**Mirror structure created 2026-06-03:** `faerie-vault/00-Patent/_source/` now mirrors `reckon/business/patent/_source/` exactly (57 files, 0 mismatches).
+**Mirror structure created 2026-06-03; canonical path updated 2026-06-04:** `faerie-vault/00-Patent/_source/` mirrors `reckon/docs/patent/_source/` exactly (57 files, 0 mismatches).
 
 **Top-level vault files** (`faerie-vault/00-Patent/CITATION-PROVENANCE.md`, `METRICS-PROVENANCE.md`, `PATENT-CLAIMS-MASTER.md`) also updated to match canonical repo versions.
 

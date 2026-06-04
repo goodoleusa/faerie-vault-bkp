@@ -12,7 +12,7 @@ citation_style: Vancouver endnotes (bibliography at end)
 >
 > This document is a consolidated draft prepared from agent-authored source artifacts. It is intended for review by a registered patent attorney before any USPTO filing. Inventor names + addresses + entity information must be completed before submission.
 >
-> **Ancestor sources** (originals preserved verbatim at `business/patent/_source/`):
+> **Ancestor sources** (originals preserved verbatim at `docs/patent/_source/`):
 >
 > 1. `PATENT-PROVISIONAL-SPECIFICATION.md` — the 487-LOC technical core (Claims 1-6 + overall combination)
 > 2. `PATENT-CLAIM-7-ZERO-KNOWLEDGE.md` — Claim 7 + dependent claims 7a/7b/7c/7d (zero-knowledge customer-key-custody architecture)
@@ -20,7 +20,7 @@ citation_style: Vancouver endnotes (bibliography at end)
 >
 > Citation style: Vancouver numbered endnotes (the bibliography section at the end of this document). For inline reference: `[1]`, `[2]`, etc.
 >
-> **Promoted to `business/patent/` 2026-05-23** from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`.
+> **Promoted to `business/patent/` 2026-05-23, consolidated to `docs/patent/` 2026-06-04** from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`.
 
 ---
 
@@ -97,7 +97,7 @@ Current AI system quality evaluation relies on human judgment or LLM-as-judge ap
 The present invention provides an autonomous multi-agent orchestration system comprising five novel technical modules and a combination claim covering their integration:
 
 **Module 1 — Hierarchical Memory Architecture with Mechanical Promotion Gates**
-A three-tier memory system (pollen → NECTAR → HONEY) with a separate immutable forensic layer (forensics/), in which promotion between tiers is governed by mechanical rules: minimum confidence score (≥0.95), minimum session age (≥3 sessions), and minimum independent cross-session citation count (≥2). Promotion is executed by a canonical script (`scripts/1a_manifest_writer.py`) that writes to an append-only chain-of-custody log (`forensics/coc.jsonl`) with SHA-256 hash linking between entries.
+A three-tier memory system (pollen → NECTAR → GOLD) with a separate immutable forensic layer (forensics/), in which promotion between tiers is governed by mechanical rules: minimum confidence score (≥0.95), minimum session age (≥3 sessions), and minimum independent cross-session citation count (≥2). Promotion is executed by a canonical script (`scripts/1a_manifest_writer.py`) that writes to an append-only chain-of-custody log (`forensics/coc.jsonl`) with SHA-256 hash linking between entries.
 
 **Module 2 — Stigmergic Filesystem Coordination**
 A multi-agent coordination architecture in which agents discover each other's work and self-route to unblocked tasks exclusively through shared filesystem artifacts (manifests). No message-passing, no central orchestrator, no inter-agent API calls. Agents write manifests to a flat daily folder (`forensics/ephemeral/{YYYY-MM-DD}/`) following a deterministic filename grammar. A frontier scanner (`scripts/2d_frontier_scanner_indexed.py`) enables O(1) lookup of unblocked tasks by reading an 8KB daily index rather than scanning all manifests, reducing context cost by approximately 80% versus naive full-manifest scanning.
@@ -139,7 +139,7 @@ flowchart TD
 
     subgraph COGNITIVE["🧠 Shield 2: COGNITIVE (task-start — moderate cost)"]
         C1[".agents/skills/four-shields/SKILL.md\nAuto-loaded on enforcement triggers;\nreminders of cheaper-earlier law"]
-        C2[".agents/skills/forage/SKILL.md\nAlways-loaded; reminds agent\nof 🔬 deep / 🌊 wide / 🌀 both modes"]
+        C2[".agents/skills/survey/SKILL.md\nAlways-loaded; reminds agent\nof 🔬 deep / 🌊 wide / 🌀 both modes"]
         C3[".agents/skills/shape-registry/SKILL.md\nLoaded on 'shape','mutation verdict';\nreminds agent to cite shapes mechanically"]
     end
 
@@ -187,8 +187,8 @@ flowchart TD
         NGATE{"Promotion Gate:\nconfidence ≥ 0.70\nAND age ≥ 1 session"}
     end
 
-    subgraph HONEY["HONEY Layer — Crystallized invariants (permanent)"]
-        H1["~/.claude/HONEY.md (global)\n{repo}/HONEY.md (project)"]
+    subgraph GOLD["GOLD Layer — Crystallized invariants (permanent)"]
+        H1["~/.claude/GOLD.md (global)\n{repo}/GOLD.md (project)"]
         H2["Confidence: ≥ 0.95\nAge: ≥ 3 sessions\nCitations: ≥ 2 independent"]
         HGATE{"Promotion Gate:\nconfidence ≥ 0.95\nAND age ≥ 3 sessions\nAND cross_session_citations ≥ 2"}
     end
@@ -200,9 +200,9 @@ flowchart TD
     end
 
     subgraph MEMBENCH["Membench Probes (shapes that measure memory health)"]
-        M1["M1: Retention ≥ 0.85\nscripts/probes/M1_baseline_retention.py\nFacts in HONEY recalled in session?"]
+        M1["M1: Retention ≥ 0.85\nscripts/probes/M1_baseline_retention.py\nFacts in GOLD recalled in session?"]
         M8["M8: Confabulation ≤ 0.05\nscripts/probes/M8_confabulation_veto.py\nVETO if hallucination rate exceeds 5%"]
-        M11["M11: Bootstrap ≥ 0.70\nscripts/probes/M11_honey_hit_rate.py\nAgents access HONEY successfully?"]
+        M11["M11: Bootstrap ≥ 0.70\nscripts/probes/M11_honey_hit_rate.py\nAgents access GOLD successfully?"]
     end
 
     P1 --> NGATE
@@ -219,12 +219,12 @@ flowchart TD
 
     style POLLEN fill:#f9fbe7,stroke:#827717
     style NECTAR fill:#e8eaf6,stroke:#283593
-    style HONEY fill:#fff8e1,stroke:#f57f17
+    style GOLD fill:#fff8e1,stroke:#f57f17
     style FORENSICS fill:#efebe9,stroke:#3e2723
     style MEMBENCH fill:#e0f2f1,stroke:#004d40
 ```
 
-**Technical improvement:** The mechanical promotion gates eliminate the "stale memory contamination" failure mode. A fact cannot advance to HONEY without surviving 3 independent sessions and achieving 2 cross-session citations at confidence ≥ 0.95. This is not an LLM judgment — it is a mathematical threshold enforced by the `honey-confidence-floor.formula.json` rule evaluated by the canonical writer script. The NECTAR tail window (30 entries, ~21K tokens injection cost) prevents context saturation while maintaining session continuity.
+**Technical improvement:** The mechanical promotion gates eliminate the "stale memory contamination" failure mode. A fact cannot advance to GOLD without surviving 3 independent sessions and achieving 2 cross-session citations at confidence ≥ 0.95. This is not an LLM judgment — it is a mathematical threshold enforced by the `honey-confidence-floor.formula.json` rule evaluated by the canonical writer script. The NECTAR tail window (30 entries, ~21K tokens injection cost) prevents context saturation while maintaining session continuity.
 
 ---
 
@@ -327,13 +327,13 @@ The invention provides a four-tier memory architecture:
 
 *Tier 2 — NECTAR (validated cross-session facts):* A tail-windowed memory store (default: 30 entries, approximately 21,000 tokens injection cost at 700 tokens/entry average). Facts in NECTAR carry confidence scores in the range 0.70–0.94. The tail window (controlled by the `nectar-tail-window.formula.json` parameter, current default: 30 entries) prevents context saturation while maintaining cross-session continuity.
 
-*Tier 3 — HONEY (crystallized permanent invariants):* A write-protected memory store containing only facts that have survived the following mechanical gate: confidence ≥ 0.95, session age ≥ 3 sessions, and independent cross-session citation count ≥ 2. These thresholds are encoded in `forensics/schemas/formulas/honey-confidence-floor.formula.json` and enforced by the canonical writer `scripts/1a_manifest_writer.py`. HONEY is stored at `~/.claude/HONEY.md` (global, all-projects) and `{repo}/HONEY.md` (project-specific). The project HONEY is read before the global HONEY; project-specific invariants take precedence.
+*Tier 3 — GOLD (crystallized permanent invariants):* A write-protected memory store containing only facts that have survived the following mechanical gate: confidence ≥ 0.95, session age ≥ 3 sessions, and independent cross-session citation count ≥ 2. These thresholds are encoded in `forensics/schemas/formulas/honey-confidence-floor.formula.json` and enforced by the canonical writer `scripts/1a_manifest_writer.py`. GOLD is stored at `~/.claude/GOLD.md` (global, all-projects) and `{repo}/GOLD.md` (project-specific). The project GOLD is read before the global GOLD; project-specific invariants take precedence.
 
 *Tier 4 — Forensics (immutable permanent selvage):* The append-only chain-of-custody log (`forensics/coc.jsonl`) stores every memory operation. Each entry carries: SHA-256 hash of the previous entry, SHA-256 hash of the current entry's data, agent identifier, tool call type, file path, bytes changed, and an ed25519 signature from the writing agent's key. The hash formula is: `entry_N.hash = SHA-256(entry_{N-1}.hash || entry_N.data)`. This chain is tamper-evident: modifying any entry breaks all subsequent hashes. The chain is backed up to WORM (Write-Once-Read-Many) cloud storage (`B2 WORM` bucket with 7-year immutable retention policy) via `scripts/5x_b2_realtime_uploader.py` triggered on every manifest write.
 
-**Promotion mechanics:** The canonical writer (`scripts/1a_manifest_writer.py`) evaluates the promotion gate criteria when an agent attempts to promote a pollen observation to NECTAR or a NECTAR entry to HONEY. The writer is the structural shield (🛡) for this discipline — a promotion that fails the confidence/age/citation gate cannot be written; the wrong thing cannot be expressed at the schema level.
+**Promotion mechanics:** The canonical writer (`scripts/1a_manifest_writer.py`) evaluates the promotion gate criteria when an agent attempts to promote a pollen observation to NECTAR or a NECTAR entry to GOLD. The writer is the structural shield (🛡) for this discipline — a promotion that fails the confidence/age/citation gate cannot be written; the wrong thing cannot be expressed at the schema level.
 
-**Technical Effect:** This architecture provides three measurable improvements: (1) elimination of stale-memory contamination by preventing sub-confidence observations from entering HONEY; (2) reduction of context window saturation from approximately 60-80% (naive injection) to approximately 10-15% (NECTAR tail-30 injection) of available token budget; (3) a measurable confabulation rate gate (M8 probe, threshold ≤ 0.05 hallucination rate) that vetoes agent operation if the memory system's accuracy falls below threshold.
+**Technical Effect:** This architecture provides three measurable improvements: (1) elimination of stale-memory contamination by preventing sub-confidence observations from entering GOLD; (2) reduction of context window saturation from approximately 60-80% (naive injection) to approximately 10-15% (NECTAR tail-30 injection) of available token budget; (3) a measurable confabulation rate gate (M8 probe, threshold ≤ 0.05 hallucination rate) that vetoes agent operation if the memory system's accuracy falls below threshold.
 
 **Working demonstration:** `scripts/probes/M1_baseline_retention.py`, `scripts/probes/M8_confabulation_veto.py`, `scripts/probes/M11_honey_hit_rate.py` are operational probe implementations running against the swarmy repository. The membench scorer (`scripts/3k_membench_scorer.py`) computes these metrics deterministically from fixed eval data, enabling reproducible T0 vs T1 comparison.
 
@@ -442,9 +442,9 @@ where `delta = new_state − baseline` and `threshold = noise_threshold × basel
 The invention provides a quality measurement architecture in which evaluation probes are themselves first-class shapes in the shape registry. This means: (1) probes are declared in `_meta/shapes.json` with `membench_probe: true`; (2) probe scores are mechanically classified as beneficial/neutral/harmful using the same `target_direction` mechanism as all other shapes; (3) memory promotion decisions directly affect probe scores; and (4) the same formula composition system that drives all other improvement decisions drives memory architecture decisions.
 
 *M-series probes (canonical):*
-- **M1 (Baseline Retention, threshold ≥ 0.85):** `scripts/probes/M1_baseline_retention.py` — measures what fraction of HONEY facts are correctly recalled in the current session. Score = `found_facts / total_honey_facts`. PASS ≥ 0.85.
+- **M1 (Baseline Retention, threshold ≥ 0.85):** `scripts/probes/M1_baseline_retention.py` — measures what fraction of GOLD facts are correctly recalled in the current session. Score = `found_facts / total_honey_facts`. PASS ≥ 0.85.
 - **M8 (Confabulation Veto, threshold ≤ 0.05):** `scripts/probes/M8_confabulation_veto.py` — measures hallucination rate (claims with zero supporting evidence). Score = `hallucinated_claims / total_claims`. VETO if > 0.05.
-- **M11 (Honey Bootstrap Uptime, threshold ≥ 0.70):** `scripts/probes/M11_honey_hit_rate.py` — measures what fraction of agent sessions successfully accessed HONEY.md without error. Score = `successful_honey_reads / total_honey_read_attempts`. PASS ≥ 0.70.
+- **M11 (Honey Bootstrap Uptime, threshold ≥ 0.70):** `scripts/probes/M11_honey_hit_rate.py` — measures what fraction of agent sessions successfully accessed GOLD.md without error. Score = `successful_honey_reads / total_honey_read_attempts`. PASS ≥ 0.70.
 - **M3 (Wave History / Efficiency):** `scripts/probes/M3_wave_history_sessions.py` — efficiency of session-over-session context reuse.
 
 *F-series internal mirrors:* The F-series (`scripts/probes/F{N}_*.py`) are internal mirrors of the M-series for self-comparison (current version vs. prior version, rather than against external benchmarks). F-metric thresholds are aliased in `_meta/swarmy.config.json::f_metric_aliases`.
@@ -453,7 +453,7 @@ The invention provides a quality measurement architecture in which evaluation pr
 
 *Probe runner:* `scripts/3f_membench_probes.py` is the canonical probe runner for M1/M3/M8/M11 and their F-series mirrors.
 
-**Technical Effect:** The closed-loop architecture creates a direct mechanical link between memory operations and quality measurement. When a HONEY promotion improves M1 retention, the probe score rises, the shape is classified as beneficial (target_direction: increasing), and the improvement is recorded in the shape history with a timestamp. When a HONEY corruption causes M8 confabulation to exceed 0.05, the VETO fires and halts agent operation. No human evaluation is required to detect either event. This enables continuous, automated quality assurance for the memory architecture without manual evaluation overhead.
+**Technical Effect:** The closed-loop architecture creates a direct mechanical link between memory operations and quality measurement. When a GOLD promotion improves M1 retention, the probe score rises, the shape is classified as beneficial (target_direction: increasing), and the improvement is recorded in the shape history with a timestamp. When a GOLD corruption causes M8 confabulation to exceed 0.05, the VETO fires and halts agent operation. No human evaluation is required to detect either event. This enables continuous, automated quality assurance for the memory architecture without manual evaluation overhead.
 
 **Working demonstration:** `scripts/3f_membench_probes.py`, `scripts/3k_membench_scorer.py`, and `scripts/probes/M1_baseline_retention.py`, `M8_confabulation_veto.py`, `M11_honey_hit_rate.py` are all operational probe implementations in the swarmy repository.
 
@@ -467,7 +467,7 @@ The invention provides a quality measurement architecture in which evaluation pr
 
 The five modules are integrated through the following cross-module interactions, each producing technical effects not achievable by any individual module:
 
-*Integration 1 — Memory feeds measurement:* HONEY (Module 1) is the data source for M1 retention probes (Module 5). Changes to the HONEY promotion gate directly and mechanically affect M1 scores. The mechanical verdict classification (Module 4) classifies M1 as a shape with `target_direction: increasing`. An improvement in HONEY promotion quality is automatically detected as a beneficial mutation without manual evaluation.
+*Integration 1 — Memory feeds measurement:* GOLD (Module 1) is the data source for M1 retention probes (Module 5). Changes to the GOLD promotion gate directly and mechanically affect M1 scores. The mechanical verdict classification (Module 4) classifies M1 as a shape with `target_direction: increasing`. An improvement in GOLD promotion quality is automatically detected as a beneficial mutation without manual evaluation.
 
 *Integration 2 — Coordination feeds enforcement:* Manifest filenames (Module 2) are enforced by the structural and reactive shields of Module 3 (`.openhands/hooks/9x_hook-manifest-filename-enforce.py`). The stigmergic substrate is self-enforcing: a manifest written outside the canonical format is blocked at the OS boundary.
 
@@ -479,7 +479,7 @@ The five modules are integrated through the following cross-module interactions,
 
 **Technical Effect of the combination:** The integrated system achieves: (1) f(0) agent_share ≥ 0.90 (queen burden ≤ 10% of context); (2) bearing entropy H ≥ 0.87 bits (emergent mission diversity); (3) M8 confabulation ≤ 0.05 (memory hallucination below veto threshold); (4) mutation fitness rate ≥ 0.85 (85% of agent operations produce beneficial or neutral verdicts); (5) hash-chain integrity = 1.0 (100% verification pass rate on forensic audit trail). These five composite metrics define the system's health and are all mechanically measurable without human evaluation.
 
-**OSS boundary and combination claim:** Under the operator's selected "core-engine-proprietary-rest-open" strategy, the orchestration kernel (Modules 1-4 canonical scripts + formulas) and the memory pipeline (HONEY/NECTAR promotion mechanics) are proprietary. Skills, hook templates, vault patterns, and agent archetypes may be open-sourced. The combination claim covers the integrated system design as described in this specification. Open-sourcing individual modules does not invalidate the combination claim provided the integration architecture (the five cross-module interactions above) remains proprietary.
+**OSS boundary and combination claim:** Under the operator's selected "core-engine-proprietary-rest-open" strategy, the orchestration kernel (Modules 1-4 canonical scripts + formulas) and the memory pipeline (GOLD/NECTAR promotion mechanics) are proprietary. Skills, hook templates, vault patterns, and agent archetypes may be open-sourced. The combination claim covers the integrated system design as described in this specification. Open-sourcing individual modules does not invalidate the combination claim provided the integration architecture (the five cross-module interactions above) remains proprietary.
 
 ---
 
@@ -487,7 +487,7 @@ The five modules are integrated through the following cross-module interactions,
 
 *(Formal claims are optional in provisional applications. The following claim summaries are provided as good practice to establish claim scope for the non-provisional filing. A patent attorney should refine these into formal claims before the non-provisional is filed.)*
 
-**Independent Claim 1:** A computer-implemented method for AI agent memory management comprising: maintaining a first memory tier (pollen) comprising raw session-scoped observations; maintaining a second memory tier (NECTAR) comprising validated cross-session facts subject to a tail window of N entries; maintaining a third memory tier (HONEY) comprising crystallized permanent invariants; and enforcing mechanical promotion gates between tiers comprising a minimum confidence score, a minimum session age, and a minimum independent cross-session citation count, wherein the promotion decision is executed by a canonical writer script that simultaneously appends an entry to an append-only SHA-256 hash-chained audit log.
+**Independent Claim 1:** A computer-implemented method for AI agent memory management comprising: maintaining a first memory tier (pollen) comprising raw session-scoped observations; maintaining a second memory tier (NECTAR) comprising validated cross-session facts subject to a tail window of N entries; maintaining a third memory tier (GOLD) comprising crystallized permanent invariants; and enforcing mechanical promotion gates between tiers comprising a minimum confidence score, a minimum session age, and a minimum independent cross-session citation count, wherein the promotion decision is executed by a canonical writer script that simultaneously appends an entry to an append-only SHA-256 hash-chained audit log.
 
 **Independent Claim 2:** A computer-implemented method for multi-agent AI coordination comprising: writing agent work records to a shared flat filesystem folder as manifests having a deterministic filename grammar encoding mission address, agent type, and timestamp; scanning a pre-computed index of manifests to discover unblocked tasks in a specified mission with a specified bearing; and routing agents to unblocked tasks without message-passing or central orchestration, wherein the filesystem is the exclusive coordination substrate.
 
@@ -503,7 +503,7 @@ The five modules are integrated through the following cross-module interactions,
 
 ### ENABLEMENT STATEMENT
 
-A person having ordinary skill in the field of computer science and AI systems engineering could construct and operate the described invention based on this specification. The working implementation is demonstrated in the `faerie2` repository, which contains all referenced scripts (`scripts/1a_manifest_writer.py`, `scripts/2d_frontier_scanner_indexed.py`, `scripts/3f_membench_probes.py`, `scripts/3k_membench_scorer.py`, `scripts/2a_spawn_pressure.py`, `scripts/shapes/_shapes_lib.py`, `scripts/shapes/audit-shapes.py`), all referenced hooks (`.openhands/hooks/9x_hook-manifest-filename-enforce.py`, `9x_hook-manifest-shape-tracking.py`, `9x_hook-manifest-sign-enforce.py`), all referenced formula JSON files (`forensics/schemas/formulas/honey-confidence-floor.formula.json`, `nectar-tail-window.formula.json`, `ffmx-emergence-quality-score.formula.json`, `sigmoid-spawn-pressure.formula.json`, `mutation-fitness-rate.formula.json`, `hash-chain-integrity.formula.json`), and all referenced skill files (`.agents/skills/four-shields/SKILL.md`, `shape-registry/SKILL.md`, `forage/SKILL.md`, `spawn/SKILL.md`).
+A person having ordinary skill in the field of computer science and AI systems engineering could construct and operate the described invention based on this specification. The working implementation is demonstrated in the `faerie2` repository, which contains all referenced scripts (`scripts/1a_manifest_writer.py`, `scripts/2d_frontier_scanner_indexed.py`, `scripts/3f_membench_probes.py`, `scripts/3k_membench_scorer.py`, `scripts/2a_spawn_pressure.py`, `scripts/shapes/_shapes_lib.py`, `scripts/shapes/audit-shapes.py`), all referenced hooks (`.openhands/hooks/9x_hook-manifest-filename-enforce.py`, `9x_hook-manifest-shape-tracking.py`, `9x_hook-manifest-sign-enforce.py`), all referenced formula JSON files (`forensics/schemas/formulas/honey-confidence-floor.formula.json`, `nectar-tail-window.formula.json`, `ffmx-emergence-quality-score.formula.json`, `sigmoid-spawn-pressure.formula.json`, `mutation-fitness-rate.formula.json`, `hash-chain-integrity.formula.json`), and all referenced skill files (`.agents/skills/four-shields/SKILL.md`, `shape-registry/SKILL.md`, `survey/SKILL.md`, `spawn/SKILL.md`).
 
 ---
 

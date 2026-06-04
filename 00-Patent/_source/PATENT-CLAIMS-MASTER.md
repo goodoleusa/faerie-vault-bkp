@@ -6,9 +6,9 @@ status: DRAFT — attorney review required before USPTO filing
 filing_basis: 35 U.S.C. § 111(b)
 source_authority: >
   Canonical claim language drawn verbatim from:
-  (A) business/patent/_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md [2026-05-25, primary]
-  (B) business/patent/PATENT-APPLICATION-DRAFT.md Appendix A [2026-05-23, reclaimed subclaims]
-  (C) business/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md [2026-05-23, authoritative Claim 7 source]
+  (A) docs/patent/_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md [2026-05-25, primary]
+  (B) docs/patent/PATENT-APPLICATION-DRAFT.md Appendix A [2026-05-23, reclaimed subclaims]
+  (C) docs/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md [2026-05-23, authoritative Claim 7 source]
   Reconciliation reference: docs/patent/CLAIM-NUMBERING-RECONCILED.md [2026-06-02]
   Dependency structure reference: hustle/templates/packages/main-hub/src/pages/patent.html [live badge map]
 ---
@@ -185,7 +185,7 @@ creating an integrated autonomous multi-agent orchestration ecosystem in which a
 ## CLUSTER B — Zero-Knowledge Customer-Key-Custody Architecture
 
 ### CLAIM 7 — Zero-Knowledge Customer-Key-Custody Architecture
-*Source: PATENT-PROVISIONAL-19-CLAIMS-FULL.md §9, Claim 7; verbatim basis: business/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md Part A*
+*Source: PATENT-PROVISIONAL-19-CLAIMS-FULL.md §9, Claim 7; verbatim basis: docs/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md Part A*
 
 **Independent Claim 7.** A computer-implemented system for providing zero-knowledge customer-key-custody in a multi-tenant artificial intelligence service platform for regulated industries, the system comprising:
 
@@ -588,14 +588,14 @@ This master was assembled from these source files. All originals are preserved v
 
 | File | Location | Role | Date |
 |------|----------|------|------|
-| PATENT-PROVISIONAL-19-CLAIMS-FULL.md | `business/patent/_source/` | Primary — 19-claim provisional (Claims 1–19 + 7d) | 2026-05-25 |
-| PATENT-CLAIM-7-ZERO-KNOWLEDGE.md | `business/patent/_source/` | Authoritative Claim 7 + 7a/7b/7c verbatim source | 2026-05-23 |
-| PATENT-PROVISIONAL-SPECIFICATION.md | `business/patent/_source/` | 9-claim draft spec (v9 numbering baseline) | 2026-05-23 |
-| PATENT-APPLICATION-DRAFT.md | `business/patent/` | 108KB comprehensive reference; Appendix A = Claim 7+subclaims | 2026-05-23 |
+| PATENT-PROVISIONAL-19-CLAIMS-FULL.md | `docs/patent/_source/` | Primary — 19-claim provisional (Claims 1–19 + 7d) | 2026-05-25 |
+| PATENT-CLAIM-7-ZERO-KNOWLEDGE.md | `docs/patent/_source/` | Authoritative Claim 7 + 7a/7b/7c verbatim source | 2026-05-23 |
+| PATENT-PROVISIONAL-SPECIFICATION.md | `docs/patent/_source/` | 9-claim draft spec (v9 numbering baseline) | 2026-05-23 |
+| PATENT-APPLICATION-DRAFT.md | `docs/patent/` | 108KB comprehensive reference; Appendix A = Claim 7+subclaims | 2026-05-23 |
 | CLAIM-NUMBERING-RECONCILED.md | `docs/patent/` | Prior EI↔Spec reconciliation (9-claim vs. 13-EI) | 2026-06-02 |
 | patent.html | `hustle/templates/packages/main-hub/src/pages/` | Product-angle 19-claim reference; badge/dep structure | live |
 
 ---
 
 *v1-master prepared 2026-06-03. Mission: patent-reclaim. Agent: patent-reclaim-agent. Assembled by crystallize protocol — all originals preserved, nothing discarded.*
-*v2-finalized prepared 2026-06-03. Mission: patent-finalize. Agent: patent-finalize-agent. Added claim-tree outline at top; ordering verified as correct (each independent claim immediately followed by all its dependents); claim-tree structure annotations added. No claim language modified. See business/patent/_source/citations/ for all copy+COC doctrine artifacts.*
+*v2-finalized prepared 2026-06-03. Mission: patent-finalize. Agent: patent-finalize-agent. Added claim-tree outline at top; ordering verified as correct (each independent claim immediately followed by all its dependents); claim-tree structure annotations added. No claim language modified. See docs/patent/_source/citations/ for all copy+COC doctrine artifacts.*

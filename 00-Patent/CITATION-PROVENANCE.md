@@ -30,8 +30,8 @@ claims corpus as demonstrability evidence or source authority.
 
 | Field | Value |
 |---|---|
-| Repo-relative path | `business/patent/_source/PATENT-CLAIMS-MASTER.md` |
-| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/business/patent/_source/PATENT-CLAIMS-MASTER.md` |
+| Repo-relative path | `docs/patent/_source/PATENT-CLAIMS-MASTER.md` |
+| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/docs/patent/_source/PATENT-CLAIMS-MASTER.md` |
 | SHA-256 (2026-06-03) | `6151422e466659ed51e7ac6026c9c614927cb9e2999773d86066dbed94c1759d` |
 | Role | Canonical 23-claim synthesis. Assembled from sources INT-02 through INT-06. |
 | Date | 2026-06-03 |
@@ -43,8 +43,8 @@ claims corpus as demonstrability evidence or source authority.
 
 | Field | Value |
 |---|---|
-| Repo-relative path | `business/patent/_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md` |
-| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/business/patent/_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md` |
+| Repo-relative path | `docs/patent/_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md` |
+| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/docs/patent/_source/PATENT-PROVISIONAL-19-CLAIMS-FULL.md` |
 | SHA-256 (2026-06-03) | `5747e874bdabc879db8b9b196365100971af64a682c12c5ae2645e63fc50f954` |
 | Role | Primary claim source. 19-claim simplified USPTO provisional filing version. Claims 1–19 + 7d. |
 | Date | 2026-05-25 |
@@ -56,8 +56,8 @@ claims corpus as demonstrability evidence or source authority.
 
 | Field | Value |
 |---|---|
-| Repo-relative path | `business/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md` |
-| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/business/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md` |
+| Repo-relative path | `docs/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md` |
+| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/docs/patent/_source/PATENT-CLAIM-7-ZERO-KNOWLEDGE.md` |
 | SHA-256 (2026-06-03) | `559cc991af4540b73c0a279fe30f7cae5f41a905fdd7c86bbd1b5fc24fa27352` |
 | Role | Authoritative verbatim source for Claim 7 and reclaimed subclaims 7a, 7b, 7c. |
 | Date | 2026-05-23 |
@@ -69,8 +69,8 @@ claims corpus as demonstrability evidence or source authority.
 
 | Field | Value |
 |---|---|
-| Repo-relative path | `business/patent/PATENT-APPLICATION-DRAFT.md` |
-| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/business/patent/PATENT-APPLICATION-DRAFT.md` |
+| Repo-relative path | `docs/patent/PATENT-APPLICATION-DRAFT.md` |
+| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/docs/patent/PATENT-APPLICATION-DRAFT.md` |
 | SHA-256 (2026-06-03) | `c48c18c7ad87a5cc67201deb104d4e13e5f303d4aac115a7e872feefeb1c5bc9` |
 | Role | 108KB comprehensive technical reference. Appendix A = verbatim Claim 7 + 7a/7b/7c/7d. Sections 1–8 = detailed claim descriptions preserved verbatim. |
 | Date | 2026-05-23 |
@@ -82,8 +82,8 @@ claims corpus as demonstrability evidence or source authority.
 
 | Field | Value |
 |---|---|
-| Repo-relative path | `business/patent/_source/PATENT-PROVISIONAL-SPECIFICATION.md` |
-| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/business/patent/_source/PATENT-PROVISIONAL-SPECIFICATION.md` |
+| Repo-relative path | `docs/patent/_source/PATENT-PROVISIONAL-SPECIFICATION.md` |
+| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/docs/patent/_source/PATENT-PROVISIONAL-SPECIFICATION.md` |
 | SHA-256 (2026-06-03) | `db6303ce8d68ac19bcb49b399038f96089d791fd457e4ffac33ae9270e83427b` |
 | Role | First consolidated 9-claim draft (v9 numbering baseline). |
 | Date | 2026-05-23 |
@@ -100,7 +100,7 @@ claims corpus as demonstrability evidence or source authority.
 | Role | Prior EI↔Spec reconciliation (9-claim vs 13-EI numbering schemes). Referenced by PATENT-CLAIMS-MASTER.md front-matter. |
 | Date | 2026-06-02 |
 | Claims supported | Reconciliation reference for all claims via cross-scheme table |
-| Copied to | `business/patent/_source/citations/INT-06__CLAIM-NUMBERING-RECONCILED.md` |
+| Copied to | `docs/patent/_source/citations/INT-06__CLAIM-NUMBERING-RECONCILED.md` |
 
 > **RESOLVED INT-06:** SHA-256 computed 2026-06-03 by patent-finalize-agent. Copy placed in citations/.
 
@@ -129,7 +129,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `f6304de8e95a7791efc8c6950c1da28e3e356254e61989d9a93801879a525164` |
 | Role | Encodes the three-gate promotion thresholds for Claim 1 (confidence >= 0.95, session age >= 3, citation count >= 2). |
 | Claims supported | C1 |
-| Copied to | `business/patent/_source/citations/INT-08__honey-confidence-floor.formula.json` |
+| Copied to | `docs/patent/_source/citations/INT-08__honey-confidence-floor.formula.json` |
 
 > **RESOLVED INT-08:** File confirmed to exist. SHA-256 computed 2026-06-03 by patent-finalize-agent. Copy placed in citations/.
 
@@ -143,7 +143,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `e8ca72948728dee786ec4f28f3a604cfba28a6aee563685ca92b9fea6e185d15` |
 | Role | Canonical writer script that simultaneously enforces gate criteria, appends to COC ledger, and triggers WORM backup. Cited in C1, C2, C3 demonstrability. |
 | Claims supported | C1, C2, C3 |
-| Copied to | `business/patent/_source/citations/INT-09__1a_manifest_writer.py` |
+| Copied to | `docs/patent/_source/citations/INT-09__1a_manifest_writer.py` |
 
 > **RESOLVED INT-09:** SHA-256 computed 2026-06-03 by patent-finalize-agent. Copy placed in citations/.
 
@@ -157,7 +157,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `d7cb1b9ff5454a26fd64db65c36d53583550cf1bd0225cf98845cc7367365742` |
 | Role | Indexed frontier scanner enabling O(1) discovery of unblocked tasks from the manifest index. Cited in C2 demonstrability. |
 | Claims supported | C2 |
-| Copied to | `business/patent/_source/citations/INT-10__2d_frontier_scanner_indexed.py` |
+| Copied to | `docs/patent/_source/citations/INT-10__2d_frontier_scanner_indexed.py` |
 
 > **RESOLVED INT-10:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -171,7 +171,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `04c5cadeb050ee8cc8f7289f8ee75d3effafe22a55e1ccd2c4e7ec34dd8efd71` |
 | Role | Merkle tree implementation cited in C11 demonstrability. |
 | Claims supported | C11 |
-| Copied to | `business/patent/_source/citations/INT-11___merkle_tree.py` |
+| Copied to | `docs/patent/_source/citations/INT-11___merkle_tree.py` |
 
 > **RESOLVED INT-11:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -250,7 +250,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `235bf1eebfb146acbc5542740e1394328e48e21908d3573e66621d1f0f279463` |
 | Role | Subprocess assembler for script-injected bundle context. Cited in C14 demonstrability. |
 | Claims supported | C14 |
-| Copied to | `business/patent/_source/citations/INT-17__spawn.py` |
+| Copied to | `docs/patent/_source/citations/INT-17__spawn.py` |
 
 > **RESOLVED INT-17:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -264,7 +264,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `94c4c761ccf6d742e32d3f3d5378e896e366c6c79f00d325e1f39a12037c8593` |
 | Role | Shape registry with 21 entries as of 2026-05-25. Cited in C4 demonstrability. |
 | Claims supported | C4, C5 |
-| Copied to | `business/patent/_source/citations/INT-18__shapes.json` |
+| Copied to | `docs/patent/_source/citations/INT-18__shapes.json` |
 
 > **RESOLVED INT-18:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -278,7 +278,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `dcdbfcf6d0d15e312f2d58fa420e77dc1330a8ea9a5029331094a5bab63575d6` |
 | Role | The deterministic verdict classifier: computes beneficial/neutral/harmful by arithmetic comparison of count delta vs noise threshold, indexed by target direction. No LLM in the path. Cited in C4. |
 | Claims supported | C4 |
-| Copied to | `business/patent/_source/citations/INT-19___shapes_lib.py` |
+| Copied to | `docs/patent/_source/citations/INT-19___shapes_lib.py` |
 
 > **RESOLVED INT-19:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -308,7 +308,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `dae8fb01612090ecd2de16f4b668811e50c7f227a93a58a0894bd31ccd8c7d7b` |
 | Role | Reference implementation of payment-triggered provisioning and zero-retention key delivery. Cited in C7 demonstrability. |
 | Claims supported | C7 |
-| Copied to | `business/patent/_source/citations/INT-21__0b-b2-provision.py` |
+| Copied to | `docs/patent/_source/citations/INT-21__0b-b2-provision.py` |
 
 > **RESOLVED INT-21:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -322,7 +322,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `58b66055994f2ddaf488861a68b4608c8c6a25554ed9d6c381e9124093367301` |
 | Role | Mission graph CLI. Cited in C10 (branch creation), C11 (merkle-root verb), C12 (merge), C13 (handshake). |
 | Claims supported | C10, C11, C12, C13 |
-| Copied to | `business/patent/_source/citations/INT-22__mission_graph.py` |
+| Copied to | `docs/patent/_source/citations/INT-22__mission_graph.py` |
 
 > **RESOLVED INT-22:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -336,7 +336,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `b0defc0a635d18f9868351f586da08055ce75f3d133832dbc7363a90408c5f7d` |
 | Role | Flags spawn briefs that pre-fill the free_choice field, enforcing the agency split. Cited in C15. |
 | Claims supported | C15 |
-| Copied to | `business/patent/_source/citations/INT-23__9x_spawn_brief_audit.py` |
+| Copied to | `docs/patent/_source/citations/INT-23__9x_spawn_brief_audit.py` |
 
 > **RESOLVED INT-23:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -350,7 +350,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `88660f933fc7dc73397ddb21b5754c6e2d536ff0e91ad84048fb75bf9d19ad77` |
 | Role | Canonical vocabulary for lifecycle_judgment (7 kinds) and free_choice (12 kinds). Original canonization at lines 18 and 51 (referenced in C16). Cited in C15, C16. |
 | Claims supported | C15, C16 |
-| Copied to | `business/patent/_source/citations/INT-24__CANONICAL-SET.md` |
+| Copied to | `docs/patent/_source/citations/INT-24__CANONICAL-SET.md` |
 
 > **RESOLVED INT-24:** SHA-256 computed 2026-06-03 by patent-finalize-agent.
 
@@ -365,7 +365,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `4df39d9e9f33b84027c95e9b00a114fbf56f0b1e434bad480abca9f9a8be1e6e` |
 | Role | Always-loaded skill file encoding the CLAIM-before-edit blackboard discipline. collab/SKILL.md was renamed/merged into blackboard/SKILL.md during skills-consolidation (stigmergic-collab + collab → blackboard). The blackboard skill carries the same always_loaded:true header and identical CLAIM-before-edit doctrine. |
 | Claims supported | C9, C18 |
-| Copied to | `business/patent/_source/citations/INT-25__collab-blackboard-SKILL.md` |
+| Copied to | `docs/patent/_source/citations/INT-25__collab-blackboard-SKILL.md` |
 | Lineage | `collab/SKILL.md` → `blackboard/SKILL.md` (skills-consolidation-agent, 2026-06-03; see collab-realtime__session-missions.jsonl entry "stigmergic-collab + collab → blackboard") |
 | Source repo | reckon (operator confirmed: faerie2 is now reckon, 2026-06-03) |
 
@@ -383,7 +383,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 four-shields (2026-06-03) | `26ae11ca8ecacb44f30ceacae457a1fbf833525bd90d0ad630a4f51f7e483b89` |
 | Role | Always-loaded skill files. Cited in C18 as examples of ambient doctrine inheritance. forage/SKILL.md was folded into navigate/SKILL.md (absorbing compass + mission + survey); navigate/SKILL.md retains "forage" in its triggers list for backward compat. |
 | Claims supported | C18 |
-| Copied to | forage successor: `business/patent/_source/citations/INT-26a__forage-navigate-SKILL.md`; four-shields: `business/patent/_source/citations/INT-26b__four-shields-SKILL.md` |
+| Copied to | forage successor: `docs/patent/_source/citations/INT-26a__forage-navigate-SKILL.md`; four-shields: `docs/patent/_source/citations/INT-26b__four-shields-SKILL.md` |
 | Lineage | `forage/SKILL.md` → `navigate/SKILL.md` (skills-consolidation-agent, 2026-06-03; forage→navigate folded with compass+mission+survey) |
 | Source repo | reckon (operator confirmed: faerie2 is now reckon, 2026-06-03) |
 
@@ -411,7 +411,7 @@ claims corpus as demonstrability evidence or source authority.
 | SHA-256 (2026-06-03) | `4fc73fbbc82b4bf3122b929929215d1b231effdbe6a9fd2211da79946572f013` |
 | Role | Documents the four-link chain of custody for 29 Claude Code session transcripts spanning 2026-04-24 to 2026-05-25. Demonstrates how any claim can be traced to the session that produced its evidence. |
 | Claims supported | All claims (cross-session evidence substrate) |
-| Copied to | `business/patent/_source/citations/INT-28__2026-05-25-PATENT-EVIDENCE-PROVENANCE.md` |
+| Copied to | `docs/patent/_source/citations/INT-28__2026-05-25-PATENT-EVIDENCE-PROVENANCE.md` |
 
 > **RESOLVED INT-28:** File located in faerie-vault repo (not reckon repo). SHA-256 computed 2026-06-03 by patent-finalize-agent. Copy placed in citations/.
 
@@ -440,8 +440,8 @@ claims corpus as demonstrability evidence or source authority.
 
 | Field | Value |
 |---|---|
-| Repo-relative path | `business/patent/_source/BIBLIOGRAPHY-VERIFIED.md` |
-| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/business/patent/_source/BIBLIOGRAPHY-VERIFIED.md` |
+| Repo-relative path | `docs/patent/_source/BIBLIOGRAPHY-VERIFIED.md` |
+| Absolute path (WSL2) | `/mnt/d/0local/gitrepos/reckon/docs/patent/_source/BIBLIOGRAPHY-VERIFIED.md` |
 | SHA-256 (2026-06-03) | `353d1edc7b1f29475876e561824a9c9c326221949e4d5b249394ead6d2eeeb20` |
 | Role | Verified bibliography for the LUMO-cited URLs and USPTO forms. 6 verified, 1 hallucinated (with corrected URL), 1 unverifiable. Verification date 2026-05-23. |
 | Claims supported | C7a (GDPR SCC), C7b (HIPAA) — legal basis citations |
@@ -539,7 +539,7 @@ Each entry records full bibliographic details, DOI/URL, verification status, and
 | Local vault copy | `faerie-vault/00-Patent/context/2026-05-25-arxiv-draft-forensic-stigmergy.md` |
 | Absolute path (WSL2) | `/mnt/d/0local/gitrepos/faerie-vault/00-Patent/context/2026-05-25-arxiv-draft-forensic-stigmergy.md` |
 | SHA-256 of vault copy (2026-06-03) | `678468a1491fe6375d98bbbe8fc973ee76969b28ad8823049d68280b162fade5` |
-| Copied to | `business/patent/_source/citations/EXT-07__2026-05-25-arxiv-draft-forensic-stigmergy.md` |
+| Copied to | `docs/patent/_source/citations/EXT-07__2026-05-25-arxiv-draft-forensic-stigmergy.md` |
 | Verification status | UNVERIFIED (arXiv posting) — local draft confirmed. See OQ-011: attorney must confirm that arxiv public posting date does not start a § 102 bar clock. |
 | Claims cited in | C9 (§5), C10 (§6.2), C11 (§6.3), C12 (§6.4), C13 (§6.5), C14 (§7.1(a)), C15 (§4.3), C16 (§4.4, §7.3), C17 (§7.2), C18 (§4.5) |
 | Why cited | Primary supporting publication. Empirical validation numbers (40 files, 8,533 insertions, zero collisions) are sourced from §7.1. Note: §7.4 of the draft removes +91–149% competitor comparisons per internal audit (hardcoded approximation baselines). |
@@ -629,7 +629,7 @@ Each entry records full bibliographic details, DOI/URL, verification status, and
 
 patent-finalize-agent (2026-06-03 v2): resolved 17 of 20 pending hashes; 4 MISSING-SOURCE remained.
 patent-complete-agent (2026-06-03 v3): resolved all 4 MISSING-SOURCE items; 0 MISSING-SOURCE remain. Lineage for renamed/consolidated skills documented. b52b8bc2 genesis hash confirmed absent — actual genesis entry identified.
-All resolved items have copies in `business/patent/_source/citations/` with SHA-256 in CITATIONS-COC.jsonl.
+All resolved items have copies in `docs/patent/_source/citations/` with SHA-256 in CITATIONS-COC.jsonl.
 
 ## RESOLVED (patent-finalize-agent, 2026-06-03)
 
@@ -710,7 +710,7 @@ All 4 previously-MISSING-SOURCE items are now resolved. See table above.
 | External local vault copy hashed and copied | 1 (EXT-07 arxiv draft) |
 | Claims with complete internal source provenance | All 23 claims have at least one hashed internal source; 4 MISSING-SOURCE items remain open |
 | Claims citing a metric lacking fully reproducible source | 4 — see METRICS-PROVENANCE.md for detail |
-| COC ledger written | `business/patent/_source/citations/CITATIONS-COC.jsonl` (38 entries) |
+| COC ledger written | `docs/patent/_source/citations/CITATIONS-COC.jsonl` (38 entries) |
 
 ---
 

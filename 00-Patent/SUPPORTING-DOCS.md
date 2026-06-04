@@ -12,13 +12,13 @@ citation_style: Mixed; endnotes where applicable
 >
 > Consolidates the supporting materials operator + attorney pair will need alongside the patent-application + service-license-agreement drafts. Not for external sharing without further curation.
 >
-> **Ancestor sources** (originals preserved verbatim at `business/patent/_source/`):
+> **Ancestor sources** (originals preserved verbatim at `docs/patent/_source/`):
 >
 > 1. `OPEN-QUESTIONS.md` — 20 operator questions across 4 priority tiers; what blocks USPTO filing and ELA signature
 > 2. `ASSIGNMENT-AGREEMENT-DRAFT.md` — Patent Assignment Agreement template (future IP transfer; Sections Y.1-Y.4)
 > 3. `BLURBS-BRAINSTORM.md` — 70+ semantic-density blurbs across 12 audiences/tones for patent title, abstract, recital openings, marketing
 >
-> **Promoted to `business/patent/` 2026-05-23** from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`.
+> **Promoted to `business/patent/` 2026-05-23, consolidated to `docs/patent/` 2026-06-04** from `forensics/charters/expeditions/enterprise-patent-foundation/polished-deliverables/`.
 
 ---
 
@@ -137,9 +137,9 @@ These questions block the ELA from being signed.
 | `forensics/schemas/formulas/*.formula.json` | Proprietary | Core formula definitions |
 | `_meta/shapes.json` | Proprietary | Core shape registry |
 | `.openhands/hooks/9x_hook-*.py` | Proprietary | Core reactive enforcement |
-| `HONEY.md`, `NECTAR.md` (format/protocol) | Proprietary | Core memory protocol |
+| `GOLD.md`, `NECTAR.md` (format/protocol) | Proprietary | Core memory protocol |
 | `.agents/skills/*/SKILL.md` | Open source (OSS) | Community building |
-| `.agents/skills/forage/SKILL.md` | Open source (OSS) | Community building |
+| `.agents/skills/survey/SKILL.md` | Open source (OSS) | Community building |
 | `AGENTS.md` (doctrine) | Open source (OSS) | Community building |
 | Agent archetypes (NAVIGATOR, MAKER, etc.) | Open source (OSS) | Community building |
 | Vault patterns, Obsidian structure | Open source (OSS) | Community building |
@@ -360,7 +360,7 @@ authors:
 
 > **Purpose:** the patent application's cover sheet title is constrained to ~2-7 words; the abstract is ~150 words; the marketing one-liner is whatever density you choose. This sidecar mines the system's identity at maximum semantic density, grouped by audience + tone, so the human curator can select / refine for each use surface.
 >
-> **System being described:** multi-agent AI orchestration platform with (1) hierarchical memory promotion (HONEY/NECTAR/pollen), (2) stigmergic filesystem coordination (w3w mission addressing, compass bearings), (3) four-shields enforcement (🛡🧠⛓🪞), (4) shape-registry mechanical verdicts, (5) membench quality substrate, (6) four-bulkheads cyber defense, (7) zero-knowledge customer-key-custody (encryption + signing), (8) customer-side runtime + customer-held cryptographic primitives end-to-end.
+> **System being described:** multi-agent AI orchestration platform with (1) hierarchical memory promotion (GOLD/NECTAR/pollen), (2) stigmergic filesystem coordination (w3w mission addressing, compass bearings), (3) four-shields enforcement (🛡🧠⛓🪞), (4) shape-registry mechanical verdicts, (5) membench quality substrate, (6) four-bulkheads cyber defense, (7) zero-knowledge customer-key-custody (encryption + signing), (8) customer-side runtime + customer-held cryptographic primitives end-to-end.
 
 ---
 
@@ -669,9 +669,9 @@ These questions block the ELA from being signed.
 | `forensics/schemas/formulas/*.formula.json` | Proprietary | Core formula definitions |
 | `_meta/shapes.json` | Proprietary | Core shape registry |
 | `.openhands/hooks/9x_hook-*.py` | Proprietary | Core reactive enforcement |
-| `HONEY.md`, `NECTAR.md` (format/protocol) | Proprietary | Core memory protocol |
+| `GOLD.md`, `NECTAR.md` (format/protocol) | Proprietary | Core memory protocol |
 | `.agents/skills/*/SKILL.md` | Open source (OSS) | Community building |
-| `.agents/skills/forage/SKILL.md` | Open source (OSS) | Community building |
+| `.agents/skills/survey/SKILL.md` | Open source (OSS) | Community building |
 | `AGENTS.md` (doctrine) | Open source (OSS) | Community building |
 | Agent archetypes (NAVIGATOR, MAKER, etc.) | Open source (OSS) | Community building |
 | Vault patterns, Obsidian structure | Open source (OSS) | Community building |
@@ -890,7 +890,7 @@ authors:
 
 > **Purpose:** the patent application's cover sheet title is constrained to ~2-7 words; the abstract is ~150 words; the marketing one-liner is whatever density you choose. This sidecar mines the system's identity at maximum semantic density, grouped by audience + tone, so the human curator can select / refine for each use surface.
 >
-> **System being described:** multi-agent AI orchestration platform with (1) hierarchical memory promotion (HONEY/NECTAR/pollen), (2) stigmergic filesystem coordination (w3w mission addressing, compass bearings), (3) four-shields enforcement (🛡🧠⛓🪞), (4) shape-registry mechanical verdicts, (5) membench quality substrate, (6) four-bulkheads cyber defense, (7) zero-knowledge customer-key-custody (encryption + signing), (8) customer-side runtime + customer-held cryptographic primitives end-to-end.
+> **System being described:** multi-agent AI orchestration platform with (1) hierarchical memory promotion (GOLD/NECTAR/pollen), (2) stigmergic filesystem coordination (w3w mission addressing, compass bearings), (3) four-shields enforcement (🛡🧠⛓🪞), (4) shape-registry mechanical verdicts, (5) membench quality substrate, (6) four-bulkheads cyber defense, (7) zero-knowledge customer-key-custody (encryption + signing), (8) customer-side runtime + customer-held cryptographic primitives end-to-end.
 
 ---
 
