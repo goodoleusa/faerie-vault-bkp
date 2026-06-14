@@ -1,3 +1,10 @@
+> ⚠️ SUPERSEDED 2026-06-14 — This document describes the Syncthing Docker sidecar
+> (heavy; NOT-YET-DEPLOYED; now abandoned). The canonical sync model is:
+> **git-signed commits by the operator** (see `HOW-SYNC-WORKS.md § Operator Sync`).
+> The VPS holds only the git-tracked markdown files; no Obsidian process on VPS.
+> Thin debounced watcher (reckon chart/active/vault-authority-plane P3) replaces
+> the Syncthing container entirely. This file is retained as historical reference only.
+
 # Vault Sidecar Sync — Quick Reference
 
 > **NOT-YET-DEPLOYED / HUMAN-GATED**. This file documents the opt-in Syncthing
