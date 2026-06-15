@@ -1,14 +1,14 @@
 [
-	"blueprint",
-	"breadcrumbs",
-	"dataview",
-	"hive",
-	"juggl",
-	"obsidian-excalidraw-plugin",
-	"obsidian-git",
-	"obsidian-linter",
-	"obsidian-meta-bind-plugin",
-	"obsidian-style-settings",
-	"obsidian42-brat",
-	"quickadd"
+  "blueprint",
+  "breadcrumbs",
+  "dataview",
+  "hive",
+  "juggl",
+  "obsidian-excalidraw-plugin",
+  "obsidian-git",
+  "obsidian-linter",
+  "obsidian-meta-bind-plugin",
+  "obsidian-style-settings",
+  "obsidian42-brat",
+  "quickadd"
 ]

@@ -13,15 +13,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-Publications/F0-ARXIV-SCAN-2026-05-24.md",
+                "file": "PATENT DRAFT 2.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "PATENT DRAFT 2"
+            }
+          },
+          {
+            "id": "468acb0c5b53161f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
+          },
+          {
+            "id": "13ccafbe6b3b9e39",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Patent draft.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "F0-ARXIV-SCAN-2026-05-24"
+              "title": "Patent draft"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -181,12 +210,32 @@
             "state": {
               "type": "juggl_nodes",
               "state": {},
+              "icon": "lucide-ghost",
+              "title": "juggl_nodes"
+            }
+          },
+          {
+            "id": "8bc0c88c38ba65a6",
+            "type": "leaf",
+            "state": {
+              "type": "juggl_style",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "juggl_style"
+            }
+          },
+          {
+            "id": "a6edcae48abf7926",
+            "type": "leaf",
+            "state": {
+              "type": "juggl_nodes",
+              "state": {},
               "icon": "ag-node-list",
               "title": "Juggl nodes"
             }
           },
           {
-            "id": "8bc0c88c38ba65a6",
+            "id": "1b7c4119a1256c31",
             "type": "leaf",
             "state": {
               "type": "juggl_style",
@@ -200,7 +249,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -215,14 +265,15 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
       "juggl:Juggl global graph": false,
-      "obsidian42-brat:BRAT": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "6dafe77d10b34b53",
+  "active": "13ccafbe6b3b9e39",
   "lastOpenFiles": [
+    "PATENT DRAFT 2.md",
+    "Patent draft.md",
+    "Untitled.md",
     "00-Publications/patent/SUPPORTING-DOCS.pdf",
     "00-Publications/patent/SERVICE-LICENSE-AGREEMENT-DRAFT.pdf",
     "00-Publications/patent/PATENT-APPLICATION-DRAFT.pdf",
@@ -245,7 +296,6 @@
     "00-Publications/patent",
     "MOBILE-OBSIDIAN-PREP.md",
     "MOBILE-OBSIDIAN-PREP.md.tmp.1079.fc25cc7fa7ac",
-    "00-SHARED/Emergence-Formulas/sedq8frVK",
     "00-Publications/Ad Hoc Stigmergic System POTEMKIN-FAERIE-FIELD-REPORT.md",
     "00-Publications/00-Anthropic Application STIGMERGY-FOR-AGENT-TEAMS.md",
     "00-Publications/F0-ARXIV-SCAN-2026-05-24.md",
@@ -260,8 +310,6 @@
     "00-Publications/2026-04-28/18-46-45Z_artifact_wire-discovery-execution-pipeline_code-reviewer_001.md",
     "00-Publications/2026-04-28/18-42-38Z_artifact_wire-discovery-execution-pipeline_fixer-architecture_001.md",
     "00-Publications/2026-04-28/18-38-00Z_artifact_wire-formula-gates-w2_fixer-implementation_001.md",
-    "00-Publications/2026-04-28/150200Z_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md",
-    "00-Publications/2026-04-28/150055Z_artifact_blueprint-landscape-audit-findings_documentation-engineer_001.md",
-    "00-Publications/2026-04-28/150045Z_artifact_blueprint-landscape-audit-phase1_documentation-engineer_001.md"
+    "00-Publications/2026-04-28/150200Z_ffmx-formula-breakdown_force-multiplier-index_data-analyst_001.md"
   ]
 }
